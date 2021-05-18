@@ -5,26 +5,32 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    private CharacterController controller; 
+    private CharacterController controller;
 
     private float speed = 6f;
     private float verticalVelocity;
     private float gravity = 9.81f;
     private float jumpForce = 3.5f;
 
-    private void Start() {
+    private void Start()
+    {
         controller = GetComponent<CharacterController>();
     }
 
-    private void Update() {
-        if(controller.isGrounded) {
+    private void Update()
+    {
+        if (controller.isGrounded)
+        {
             verticalVelocity = -gravity * Time.deltaTime;
 
-            if(Input.GetKeyDown(KeyCode.Space)) {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 verticalVelocity = jumpForce;
             }
-            
-        } else {
+
+        }
+        else
+        {
             verticalVelocity -= gravity * Time.deltaTime;
         }
 
@@ -39,9 +45,19 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
 
-        controller.Move(moveVector  * Time.deltaTime);
+        controller.Move(moveVector * Time.deltaTime);
 
     }
+
+    // //While the player is in collision with the trigger, move him forward 
+    // void OnTriggerEnter(Collider other)
+    // {
+    //     var controller = other.GetComponent<CharacterController>();
+    //     if (controller != null)
+    //     {
+    //         controller.SimpleMove(transform.forward * speed);
+    //     }
+    // }
 
     /*
     public CharacterController controller;
