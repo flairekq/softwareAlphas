@@ -151,11 +151,11 @@ public class ThirdPersonMovement : MonoBehaviour
     
     
 
-public float moveSpeed = 0.5f;
+private float moveSpeed;
 public float rotateSpeed = 200f;
 
-private float runSpeed = 7f;
-private float walkSpeed = 1f;
+private float runSpeed = 1.5f;
+private float walkSpeed = 0.5f;
 
 private CharacterController controller;
 private Rigidbody rb;
@@ -167,7 +167,7 @@ private Vector3 direction;
 private Vector3 forward;
 private float verticalVelocity;
 private float gravity = 9.81f;
-private float jumpForce = 13f;
+private float jumpForce = 9f;
 
 private bool front = true;
 private bool left = false;
@@ -230,6 +230,7 @@ void Movement()
            left = false; 
            front = true;
             } else if(right) {
+                //turnLeft();
                 transform.Rotate(Vector3.up, -90);
                 right = false; 
                 front = true;
@@ -238,9 +239,13 @@ void Movement()
 
         } if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S)) {
             Idle();
+        } if(Input.GetKey(KeyCode.LeftShift)) {
+            Run();
+        } if(Input.GetKeyUp(KeyCode.LeftShift)) {
+            WalkForward();
         }
 
-       // rb.MovePosition(transform.position  + moveSpeed * Time.deltaTime* direction);
+       rb.MovePosition(transform.position  + moveSpeed * Time.deltaTime* direction);
         
    // }
 
@@ -270,12 +275,14 @@ void Movement()
 
 private void Idle() {
     anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+    anim.SetFloat("RunSpeed", 1.5f, 0, Time.deltaTime);
 }
 
 private void WalkForward() {
     //0-0.5, 0.5-1
-   // moveSpeed = walkSpeed;
+   moveSpeed = walkSpeed;
     anim.SetFloat("Speed", 0.6f , 0f, Time.deltaTime);
+    anim.SetFloat("RunSpeed", 0, 0, Time.deltaTime);
 }
 
 private void WalkBackwards() {
@@ -290,7 +297,12 @@ private void Jump() {
 
 private void Run() {
     moveSpeed = runSpeed;
-    anim.SetFloat("Speed", 0.8f, 0f, Time.deltaTime);
+    anim.SetFloat("RunSpeed", 0.9f, 0f, Time.deltaTime);
+    anim.SetFloat("Speed", 3.7f, 0, Time.deltaTime);
+}
+
+private void turnLeft() {
+    anim.SetFloat("Speed", 2.7f, 0f, Time.deltaTime);
 }
 
 
