@@ -151,7 +151,7 @@ public class ThirdPersonMovement : MonoBehaviour
     
     
 
-public float moveSpeed = 3f;
+public float moveSpeed = 0.5f;
 public float rotateSpeed = 200f;
 
 private float runSpeed = 7f;
@@ -200,6 +200,10 @@ void Movement()
     
     // if(direction != Vector3.zero) {
 
+        if(move == Vector3.zero && move2 == Vector3.zero) {
+        Idle();
+    } 
+
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W)) {
         transform.rotation = Quaternion.Slerp( transform.rotation, 
         Quaternion.LookRotation(direction), rotateSpeed * Time.deltaTime);
@@ -219,7 +223,7 @@ void Movement()
                 left = false; 
                 right = true; 
             }
-        } else if(Input.GetKeyDown(KeyCode.S)) {
+        } if(Input.GetKeyDown(KeyCode.S)) {
             WalkBackwards();
             if(left) {
            transform.Rotate(Vector3.up, 90);
@@ -230,8 +234,11 @@ void Movement()
                 right = false; 
                 front = true;
             }
+            WalkBackwards();
 
-        } 
+        } if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S)) {
+            Idle();
+        }
 
        // rb.MovePosition(transform.position  + moveSpeed * Time.deltaTime* direction);
         
@@ -259,10 +266,6 @@ void Movement()
     controller.Move(move * moveSpeed * Time.deltaTime);
     controller.Move(move2 *moveSpeed * Time.deltaTime);
 
-    //idle 
-    if(move == Vector3.zero && move2 == Vector3.zero) {
-        Idle();
-    } 
 }
 
 private void Idle() {
@@ -271,7 +274,7 @@ private void Idle() {
 
 private void WalkForward() {
     //0-0.5, 0.5-1
-    moveSpeed = walkSpeed;
+   // moveSpeed = walkSpeed;
     anim.SetFloat("Speed", 0.6f , 0f, Time.deltaTime);
 }
 
