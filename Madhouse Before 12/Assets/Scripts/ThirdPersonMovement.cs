@@ -56,38 +56,66 @@ public class ThirdPersonMovement : MonoBehaviour
 
    private CharacterController controller; 
 
-    private float speed = 4f;
+   private Animator animator;
+
+    private float speed = 0f;
+
+    private float walkSpeed = 2f;
     private float verticalVelocity;
     private float gravity = 9.81f;
-    private float jumpForce = 3.5f;
+    private float jumpForce = 5f;
 
     private void Start() {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update() {
-        if(controller.isGrounded) {
-            verticalVelocity = -gravity * Time.deltaTime;
-
-            if(Input.GetKeyDown(KeyCode.Space)) {
-                verticalVelocity = jumpForce;
-            }   
-        } else {
-            verticalVelocity -= gravity * Time.deltaTime;
-        }
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
-
-        // transform.right takes the direction that the player is facing and goes to the right
-        // transform.forward also takes the direction that the player is facing and goes forward
         Vector3 move = transform.right * x + transform.forward * z;
-        // multiply by Time.deltaTime to be frame rate independent
-        controller.Move(move * speed * Time.deltaTime);
 
+        if(controller.isGrounded) {
+            verticalVelocity = -gravity * Time.deltaTime;
+
+
+            //jump
+            if(Input.GetKeyDown(KeyCode.Space)) 
+            {
+                verticalVelocity = jumpForce;
+    
+            } 
+
+            if(move != Vector3.zero) 
+            {
+                Walk();
+
+            } else {
+                Idle();
+            }
+
+        } else {
+            verticalVelocity -= gravity * Time.deltaTime;
+        }
+        
+        controller.Move(move * speed * Time.deltaTime);
+        
 
         controller.Move(moveVector  * Time.deltaTime);
+    }
+
+
+    private void Idle() 
+    {
+       animator.SetFloat("Speed", 0, 0.01f, Time.deltaTime);
+    }
+
+    private void Walk() 
+    {
+         speed = walkSpeed;
+         animator.SetFloat("Speed", 1f, 0.01f, Time.deltaTime);
     }
 
 }
