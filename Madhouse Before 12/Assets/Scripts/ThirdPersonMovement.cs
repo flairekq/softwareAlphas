@@ -54,11 +54,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
         */
 
+/*
    private CharacterController controller; 
 
    private Animator animator;
 
     private float speed = 0f;
+
+    private float runSpeed = 3f;
 
     private float walkSpeed = 2f;
     private float verticalVelocity;
@@ -90,7 +93,21 @@ public class ThirdPersonMovement : MonoBehaviour
 
             if(move != Vector3.zero) 
             {
-                Walk();
+               
+               //walking backwards animation
+               if(Input.GetKeyDown(KeyCode.S))
+                 {
+                     WalkBackward();
+                 } else {
+                     WalkForward();
+                 }
+                 
+
+                 if(Input.GetKeyDown(KeyCode.LeftAlt)) {
+                     Run();
+                 } else {
+                     WalkForward();
+                 }
 
             } else {
                 Idle();
@@ -98,7 +115,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
         } else {
             verticalVelocity -= gravity * Time.deltaTime;
-        }
+        } 
+
+        move *= speed;
         
         controller.Move(move * speed * Time.deltaTime);
         
@@ -112,11 +131,181 @@ public class ThirdPersonMovement : MonoBehaviour
        animator.SetFloat("Speed", 0, 0.01f, Time.deltaTime);
     }
 
-    private void Walk() 
+    private void WalkForward() 
     {
          speed = walkSpeed;
-         animator.SetFloat("Speed", 1f, 0.01f, Time.deltaTime);
+         animator.SetFloat("Speed", 0.33f, 0.01f, Time.deltaTime);
     }
+
+    private void WalkBackward() 
+    {
+        speed = walkSpeed;
+        //animator.SetFloat("Speed", 1f, 0.01f, Time.deltaTime);
+    }
+
+    private void Run() {
+        speed = runSpeed;
+         animator.SetFloat("Speed", 0.9f, 0.01f, Time.deltaTime);
+    }
+    */
+    
+    
+
+private float moveSpeed;
+public float rotateSpeed = 200f;
+
+private float runSpeed = 1.5f;
+private float walkSpeed = 0.5f;
+
+private CharacterController controller;
+private Rigidbody rb;
+
+private Animator anim;
+
+private Vector3 direction; 
+
+private Vector3 forward;
+private float verticalVelocity;
+private float gravity = 9.81f;
+private float jumpForce = 13f;
+
+private bool front = true;
+private bool left = false;
+private bool right = false;
+
+void Start() 
+{
+    rb = GetComponent<Rigidbody>();
+    controller = GetComponent<CharacterController>();
+    anim = GetComponent<Animator>();
+}
+
+void Update()
+{
+    Movement();
+}
+
+void Movement()
+{
+    float horizontalMove = Input.GetAxisRaw("Horizontal");
+    float verticalMove = Input.GetAxisRaw("Vertical");
+
+    Vector3 move = new Vector3(0,0, verticalMove);
+    Vector3 move2 = new Vector3(horizontalMove, 0, 0);
+
+    direction = new Vector3(horizontalMove, 0.0f, verticalMove);
+    //vector to control jump 
+    Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
+    
+    
+    // if(direction != Vector3.zero) {
+
+        if(move == Vector3.zero && move2 == Vector3.zero) {
+        Idle();
+    } 
+
+        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W)) {
+        transform.rotation = Quaternion.Slerp( transform.rotation, 
+        Quaternion.LookRotation(direction), rotateSpeed * Time.deltaTime);
+        WalkForward();
+            if(Input.GetKeyDown(KeyCode.A)) {
+                front = true;
+                left = false;
+                right = false;
+            } 
+            if(Input.GetKeyDown(KeyCode.A)) {
+                front = false; 
+                left = true;
+                right = false;
+            } 
+            if(Input.GetKeyDown(KeyCode.D)) {
+                front = false; 
+                left = false; 
+                right = true; 
+            }
+        } if(Input.GetKeyDown(KeyCode.S)) {
+            WalkBackwards();
+            if(left) {
+           transform.Rotate(Vector3.up, 90);
+           left = false; 
+           front = true;
+            } else if(right) {
+                //turnLeft();
+                transform.Rotate(Vector3.up, -90);
+                right = false; 
+                front = true;
+            }
+            WalkBackwards();
+
+        } if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S)) {
+            Idle();
+        } if(Input.GetKey(KeyCode.LeftShift)) {
+            Run();
+        } if(Input.GetKeyUp(KeyCode.LeftShift)) {
+            WalkForward();
+        }
+
+       // rb.MovePosition(transform.position  + moveSpeed * Time.deltaTime* direction);
+        
+   // }
+
+    //jump
+    if(controller.isGrounded) {
+            verticalVelocity = -gravity * Time.deltaTime;
+
+            if(Input.GetKeyDown(KeyCode.Space)) 
+            {
+                verticalVelocity = jumpForce;
+               
+            } 
+
+    } else {
+        verticalVelocity -= gravity * Time.deltaTime;
+        
+    }
+    
+
+    controller.Move(moveVector  * Time.deltaTime);
+    move *= moveSpeed;
+    move2 *= moveSpeed;
+    controller.Move(move * moveSpeed * Time.deltaTime);
+    controller.Move(move2 *moveSpeed * Time.deltaTime);
+
+}
+
+private void Idle() {
+    anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+    anim.SetFloat("RunSpeed", 1.5f, 0, Time.deltaTime);
+}
+
+private void WalkForward() {
+    //0-0.5, 0.5-1
+   moveSpeed = walkSpeed;
+    anim.SetFloat("Speed", 0.6f , 0f, Time.deltaTime);
+    anim.SetFloat("RunSpeed", 0, 0, Time.deltaTime);
+}
+
+private void WalkBackwards() {
+    //1-1.5, 1.5-2
+    anim.SetFloat("Speed", 1.7f, 0f, Time.deltaTime);
+}
+
+private void Jump() {
+    //2-2.5, 2.5-3
+    anim.SetFloat("Speed", 2.7f, 0f, Time.deltaTime);
+}
+
+private void Run() {
+    moveSpeed = runSpeed;
+    anim.SetFloat("RunSpeed", 0.9f, 0f, Time.deltaTime);
+    anim.SetFloat("Speed", 3.7f, 0, Time.deltaTime);
+}
+
+private void turnLeft() {
+    anim.SetFloat("Speed", 2.7f, 0f, Time.deltaTime);
+}
+
+
 
 }
 
