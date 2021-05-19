@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JuggernautController : MonoBehaviour
+public class ArachnidControllerOld : MonoBehaviour
 {
     public Animator anim;
     private float speed = 2.5f;
@@ -24,6 +24,7 @@ public class JuggernautController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         enemyToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
         var dist = enemyToPlayer.magnitude;
         if (dist >= 2f)
@@ -66,30 +67,14 @@ public class JuggernautController : MonoBehaviour
 
     void Attack()
     {
-        int n = Random.Range(0, 6);
+        int n = Random.Range(0, 2);
         if (n == 0)
         {
             anim.SetInteger("attack", 1);
         }
-        else if (n == 1)
-        {
-            anim.SetInteger("attack", 2);
-        }
-        else if (n == 2)
-        {
-            anim.SetInteger("attack", 3);
-        }
-        else if (n == 3)
-        {
-            anim.SetInteger("attack", 4);
-        }
-        else if (n == 4)
-        {
-            anim.SetInteger("attack", 5);
-        }
         else
         {
-            anim.SetInteger("attack", 6);
+            anim.SetInteger("attack", 2);
         }
     }
 }

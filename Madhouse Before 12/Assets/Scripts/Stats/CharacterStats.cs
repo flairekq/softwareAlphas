@@ -7,6 +7,7 @@ public class CharacterStats : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth { get; private set; }
     public Stat damage;
+    public bool isDead = false;
 
     void Awake() {
         currentHealth = maxHealth;

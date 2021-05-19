@@ -173,6 +173,17 @@ private bool front = true;
 private bool left = false;
 private bool right = false;
 
+private bool facingBack = false;
+
+private int forwardWalking = Animator.StringToHash("forwardWalking");
+private int backwardsWalk = Animator.StringToHash("backwardsWalk");
+
+private int isIdle = Animator.StringToHash("isIdle");
+
+private int isRunning = Animator.StringToHash("isRunning");
+
+private int backwardsRun = Animator.StringToHash("backwardsRun");
+
 void Start() 
 {
     rb = GetComponent<Rigidbody>();
@@ -203,49 +214,71 @@ void Movement()
         if(move == Vector3.zero && move2 == Vector3.zero) {
         Idle();
     } 
-
+        //controls rotation
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W)) {
         transform.rotation = Quaternion.Slerp( transform.rotation, 
         Quaternion.LookRotation(direction), rotateSpeed * Time.deltaTime);
-        WalkForward();
             if(Input.GetKeyDown(KeyCode.A)) {
                 front = true;
                 left = false;
                 right = false;
+                facingBack = false;
             } 
             if(Input.GetKeyDown(KeyCode.A)) {
                 front = false; 
                 left = true;
                 right = false;
+                facingBack = false;
             } 
             if(Input.GetKeyDown(KeyCode.D)) {
                 front = false; 
                 left = false; 
                 right = true; 
+                facingBack = false;
             }
-        } if(Input.GetKeyDown(KeyCode.S)) {
+        } 
+
+          /* if(Input.GetKey(KeyCode.S) || (Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.A))
+           || (Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.D)) ||
+           (Input.GetKey(KeyCode.A) && Input.GetKeyDown(KeyCode.S)) || (Input.GetKey(KeyCode.D) && Input.GetKeyDown(KeyCode.S)))
+            { */
+
+        if(Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S)) {
             WalkBackwards();
             if(left) {
            transform.Rotate(Vector3.up, 90);
            left = false; 
            front = true;
             } else if(right) {
-                //turnLeft();
                 transform.Rotate(Vector3.up, -90);
                 right = false; 
                 front = true;
             }
             WalkBackwards();
 
-        } if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S)) {
+        }  if(!Input.GetKey(KeyCode.S))
+        {
+            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)  ||Input.GetKeyDown(KeyCode.W))
+            {
+                 WalkForward();
+             }
+         }        
+        
+      
+         if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S)) {
             Idle();
         } if(Input.GetKey(KeyCode.LeftShift)) {
-            Run();
-        } if(Input.GetKeyUp(KeyCode.LeftShift)) {
+            if(facingBack) {
+                RunBackwards();
+            } else {
+                Run();
+            }
+        } 
+        if(Input.GetKeyUp(KeyCode.LeftShift)) {
             WalkForward();
         }
 
-       rb.MovePosition(transform.position  + moveSpeed * Time.deltaTime* direction);
+     //  rb.MovePosition(transform.position  + moveSpeed * Time.deltaTime* direction);
         
    // }
 
@@ -274,20 +307,38 @@ void Movement()
 }
 
 private void Idle() {
-    anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
-    anim.SetFloat("RunSpeed", 1.5f, 0, Time.deltaTime);
+  /*  anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+    anim.SetFloat("RunSpeed", 1.5f, 0, Time.deltaTime);*/
+
+    anim.SetBool(backwardsWalk, false);
+     anim.SetBool(forwardWalking, false);
+     anim.SetBool(isIdle, true);
+     anim.SetBool(isRunning, false);
+     anim.SetBool(backwardsRun, false);
 }
 
 private void WalkForward() {
     //0-0.5, 0.5-1
-   moveSpeed = walkSpeed;
-    anim.SetFloat("Speed", 0.6f , 0f, Time.deltaTime);
-    anim.SetFloat("RunSpeed", 0, 0, Time.deltaTime);
+    facingBack = false; 
+    moveSpeed = walkSpeed;
+   /* anim.SetFloat("Speed", 0.8f , 0f, Time.deltaTime);
+    anim.SetFloat("RunSpeed", 0, 0, Time.deltaTime);*/
+    anim.SetBool(forwardWalking, true);
+    anim.SetBool(backwardsWalk, false);
+    anim.SetBool(isIdle, false);
+    
 }
 
 private void WalkBackwards() {
     //1-1.5, 1.5-2
-    anim.SetFloat("Speed", 1.7f, 0f, Time.deltaTime);
+    facingBack = true;
+   moveSpeed = walkSpeed;
+   anim.SetBool(forwardWalking, false);
+   anim.SetBool(backwardsWalk, true);
+   anim.SetBool(isIdle, false);
+   anim.SetBool(isRunning, false);
+   anim.SetBool(backwardsRun, false);
+   // anim.SetFloat("Speed", 1.8f, 0f, Time.deltaTime);
 }
 
 private void Jump() {
@@ -296,14 +347,26 @@ private void Jump() {
 }
 
 private void Run() {
+    facingBack = false;
     moveSpeed = runSpeed;
-    anim.SetFloat("RunSpeed", 0.9f, 0f, Time.deltaTime);
-    anim.SetFloat("Speed", 3.7f, 0, Time.deltaTime);
+    anim.SetBool(isRunning, true);
+    anim.SetBool(forwardWalking, false);
+    anim.SetBool(backwardsWalk, false);
+    anim.SetBool(isIdle, false);
+}
+
+private void RunBackwards() {
+    facingBack = true;
+    moveSpeed = runSpeed; 
+    anim.SetBool(backwardsRun, true);
+    anim.SetBool(backwardsWalk, false);
 }
 
 private void turnLeft() {
     anim.SetFloat("Speed", 2.7f, 0f, Time.deltaTime);
 }
+
+
 
 
 
