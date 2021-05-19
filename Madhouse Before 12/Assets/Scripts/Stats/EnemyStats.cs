@@ -10,10 +10,16 @@ public class EnemyStats : CharacterStats
     {
         base.Die();
         isDead = true;
-        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        // gameObject.GetComponent<Rigidbody>().isKinematic = true;
         //create an animation event and trigger the Die() after the end of the animation
+        // animator.enabled = false;
+        // animator.enabled = true;
+        // animator.Rebind();
+        // gameObject.GetComponent<Animator>().enabled = false;
+        // gameObject.GetComponent<Animator>().enabled = true;
+        // gameObject.GetComponent<Animator>().SetBool("isDead", true);
+        // animator.Play("Dead");
         animator.SetBool("isDead", true);
-
         StartCoroutine(DestroyEnemy(destroyDelay));
     }
 
@@ -23,9 +29,9 @@ public class EnemyStats : CharacterStats
         Destroy(gameObject);
     }
 
-    public void DieDestroy(AnimationEvent animationEvent)
-    {
-        Debug.Log("destroying");
-        Destroy(gameObject);
-    }
+    // public void DieDestroy(AnimationEvent animationEvent)
+    // {
+    //     Debug.Log("destroying");
+    //     Destroy(gameObject);
+    // }
 }
