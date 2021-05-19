@@ -7,9 +7,10 @@ public class EnemyController : MonoBehaviour
 {
     public float lookRadius = 5f;
     public Animator animator;
-    Transform target;
-    NavMeshAgent agent;
-    CharacterCombat combat;
+    protected Transform target;
+    protected NavMeshAgent agent;
+    protected CharacterCombat combat;
+    protected EnemyStats stats;
 
     // Start is called before the first frame update
     void Start()
@@ -17,26 +18,32 @@ public class EnemyController : MonoBehaviour
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
+        stats = GetComponent<EnemyStats>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
-        if (distance < lookRadius)
+        if (!stats.isDead)
         {
-            // Debug.Log(distance);
-            agent.SetDestination(target.position);
-            animator.SetBool("isChasing", true);
-            if (distance <= agent.stoppingDistance)
+            float distance = Vector3.Distance(target.position, transform.position);
+            if (distance < lookRadius)
             {
-                animator.SetBool("isChasing", false);
-                // attack the target
-                Attack();
-                // face the target
-                FaceTarget();
+                // Debug.Log(distance);
+                agent.SetDestination(target.position);
+                animator.SetBool("isChasing", true);
+                if (distance <= agent.stoppingDistance)
+                {
+                    animator.SetBool("isChasing", false);
+                    // attack the target
+                    Attack();
+                    // face the target
+                    FaceTarget();
+                }
             }
-        } 
+        } else {
+            agent.isStopped = true;
+        }
     }
 
     void FaceTarget()
@@ -48,21 +55,9 @@ public class EnemyController : MonoBehaviour
         // transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    void Attack()
+    public virtual void Attack()
     {
-        int n = Random.Range(0, 2);
-        if (n == 0)
-        {
-            animator.SetInteger("attack", 1);
-        }
-        else
-        {
-            animator.SetInteger("attack", 2);
-        }
-        CharacterStats targetStats = target.GetComponent<CharacterStats>();
-        if (targetStats != null) {
-            combat.Attack(targetStats);
-        }    
+        Debug.Log("Attacking");
     }
 
     void OnDrawGizmosSelected()
