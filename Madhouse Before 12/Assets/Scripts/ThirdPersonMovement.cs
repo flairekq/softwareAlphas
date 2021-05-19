@@ -258,7 +258,7 @@ void Movement()
 
         }  if(!Input.GetKey(KeyCode.S))
         {
-            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)  ||Input.GetKeyDown(KeyCode.W))
+            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)  ||Input.GetKey(KeyCode.W))
             {
                  WalkForward();
              }
@@ -274,10 +274,7 @@ void Movement()
                 Run();
             }
         } 
-        if(Input.GetKeyUp(KeyCode.LeftShift)) {
-            WalkForward();
-        }
-
+       
      //  rb.MovePosition(transform.position  + moveSpeed * Time.deltaTime* direction);
         
    // }
@@ -326,6 +323,7 @@ private void WalkForward() {
     anim.SetBool(forwardWalking, true);
     anim.SetBool(backwardsWalk, false);
     anim.SetBool(isIdle, false);
+    anim.SetBool(isRunning, false);
     
 }
 
@@ -360,6 +358,7 @@ private void RunBackwards() {
     moveSpeed = runSpeed; 
     anim.SetBool(backwardsRun, true);
     anim.SetBool(backwardsWalk, false);
+    
 }
 
 private void turnLeft() {

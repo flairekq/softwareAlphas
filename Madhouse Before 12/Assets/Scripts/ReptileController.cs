@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArachnidController : EnemyController
+public class ReptileController : EnemyController
 {
     public override void Attack()
     {
-        int n = Random.Range(0, 2);
+        int n = Random.Range(0, 3);
         if (n == 0)
         {
             animator.SetInteger("attack", 1);
         }
-        else
+        else if (n == 1)
         {
             animator.SetInteger("attack", 2);
+        }
+        else
+        {
+            animator.SetInteger("attack", 3);
         }
 
         animationLength = animator.GetCurrentAnimatorStateInfo(0).length;

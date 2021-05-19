@@ -31,10 +31,14 @@ public class JuggernautController : EnemyController
         {
             animator.SetInteger("attack", 6);
         }
-        CharacterStats targetStats = target.GetComponent<CharacterStats>();
-        if (targetStats != null)
-        {
-            combat.Attack(targetStats);
-        }
+
+        animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        Debug.Log(gameObject.name + " attack length: " + animationLength);
+        isAttacking = true;
+        // CharacterStats targetStats = target.GetComponent<CharacterStats>();
+        // if (targetStats != null)
+        // {
+        //     combat.Attack(targetStats, animationLength);
+        // }
     }
 }
