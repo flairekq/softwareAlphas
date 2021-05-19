@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // if press left mouse button
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // if press right mouse button
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -46,10 +46,10 @@ public class PlayerController : MonoBehaviour
                 if (interactable != null)
                 {
                     SetFocus(interactable);
-                    CharacterStats targetStats = interactable.GetComponent<CharacterStats>();
-                    if (targetStats != null)
-                    {
-                        combat.Attack(targetStats);
+        
+                    if (interactable is Enemy) {
+                        Enemy e = (Enemy)interactable;
+                        e.Interact();
                     }
                 }
             }

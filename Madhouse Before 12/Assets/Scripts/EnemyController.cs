@@ -11,7 +11,10 @@ public class EnemyController : MonoBehaviour
     protected NavMeshAgent agent;
     protected CharacterCombat combat;
     protected EnemyStats stats;
-
+    private bool isChasing = false;
+    // private bool isDoneAttacking = true;
+    protected float animationLength = 0f;
+    protected bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,21 +30,58 @@ public class EnemyController : MonoBehaviour
         if (!stats.isDead)
         {
             float distance = Vector3.Distance(target.position, transform.position);
+
             if (distance < lookRadius)
             {
-                // Debug.Log(distance);
+                if (!isChasing)
+                {
+                    isChasing = true;
+                    animator.SetBool("isChasing", true);
+                }
                 agent.SetDestination(target.position);
-                animator.SetBool("isChasing", true);
+                FaceTarget();
                 if (distance <= agent.stoppingDistance)
                 {
-                    animator.SetBool("isChasing", false);
-                    // attack the target
-                    Attack();
-                    // face the target
-                    FaceTarget();
+                    if (isChasing)
+                    {
+                        isChasing = false;
+                        animator.SetBool("isChasing", false);
+                    }
+
+                    if (animationLength <= 0)
+                    {
+                        if (isAttacking)
+                        {
+                            isAttacking = false;
+                            CharacterStats targetStats = target.GetComponent<CharacterStats>();
+                            if (targetStats != null)
+                            {
+                                combat.Attack(targetStats);
+                            }
+                        }
+                        Attack();
+                    }
+                    else
+                    {
+                        animationLength -= Time.deltaTime;
+                    }
+                } else {
+                    isAttacking = false;
                 }
             }
-        } else {
+            else if (isChasing)
+            {
+                animator.SetBool("isChasing", false);
+                animator.SetInteger("attack", 0);
+                isChasing = false;
+                isAttacking = false;    
+            }
+            else
+            {
+            }
+        }
+        else
+        {
             agent.isStopped = true;
         }
     }
