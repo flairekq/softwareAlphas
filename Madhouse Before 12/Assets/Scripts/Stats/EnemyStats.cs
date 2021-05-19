@@ -9,14 +9,12 @@ public class EnemyStats : CharacterStats
     public override void Die()
     {
         base.Die();
-        // animator.SetBool("isChasing", false);
-        // animator.SetInteger("attack", 0);
+        isDead = true;
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
         //create an animation event and trigger the Die() after the end of the animation
         animator.SetBool("isDead", true);
-        StartCoroutine(DestroyEnemy(destroyDelay));
-        // Add death animation
-        // animator.SetBool("isDead", true);
 
+        StartCoroutine(DestroyEnemy(destroyDelay));
     }
 
     IEnumerator DestroyEnemy(float delay)
