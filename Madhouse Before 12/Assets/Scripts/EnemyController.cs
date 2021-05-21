@@ -38,8 +38,14 @@ public class EnemyController : MonoBehaviour
                     isChasing = true;
                     animator.SetBool("isChasing", true);
                 }
-                agent.SetDestination(target.position);
+
+                if (!isAttacking)
+                {
+
+                    agent.SetDestination(target.position);
+                }
                 FaceTarget();
+
                 if (distance <= agent.stoppingDistance)
                 {
                     if (isChasing)
@@ -65,8 +71,6 @@ public class EnemyController : MonoBehaviour
                     {
                         animationLength -= Time.deltaTime;
                     }
-                } else {
-                    isAttacking = false;
                 }
             }
             else if (isChasing)
@@ -74,7 +78,7 @@ public class EnemyController : MonoBehaviour
                 animator.SetBool("isChasing", false);
                 animator.SetInteger("attack", 0);
                 isChasing = false;
-                isAttacking = false;    
+                isAttacking = false;
             }
             else
             {
