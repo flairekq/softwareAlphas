@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterStats))]
 public class CharacterCombat : MonoBehaviour
 {
-    public float attackSpeed = 1f;
-    private float attackCooldown = 0f;
-    public float attackDelay = 0.6f;
+    // public float attackSpeed = 1f;
+    // private float attackCooldown = 0f;
+    // public float attackDelay = 0.6f;
     // public event System.Action OnAttack;
     CharacterStats myStats;
 
@@ -15,9 +15,9 @@ public class CharacterCombat : MonoBehaviour
         myStats = GetComponent<CharacterStats>();
     }
 
-    void Update() {
-        attackCooldown -= Time.deltaTime;
-    }
+    // void Update() {
+    //     attackCooldown -= Time.deltaTime;
+    // }
 
     public void Attack(CharacterStats targetStats) {
         // if (attackCooldown <= 0f) {
