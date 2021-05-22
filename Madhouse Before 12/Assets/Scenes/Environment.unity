@@ -2652,6 +2652,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4e415f653a84dbf9beaa516106e762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: GuardRoom
+  roomLocation: 1
+  isClear: 0
+  inRoomTrigger: {fileID: 0}
 --- !u!65 &860533106
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16696,6 +16700,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4e415f653a84dbf9beaa516106e762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: 
+  roomLocation: 0
+  isClear: 0
+  inRoomTrigger: {fileID: 0}
 --- !u!65 &1882197565
 BoxCollider:
   m_ObjectHideFlags: 0
