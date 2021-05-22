@@ -37,7 +37,7 @@ void Start()
 {
     rb = GetComponent<Rigidbody>();
     controller = GetComponent<CharacterController>();
-    anim = GetComponent<Animator>();
+    anim = GetComponentInChildren<Animator>();
 }
 
 void Update()
