@@ -17,17 +17,27 @@ public class DoorController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         bool canOpenDoor = true;
+
+        // if its basement's main door, can only open when clear basement
+        if (roomName == "Basement")
+        {
+            if (!envManager.isClearBasement)
+            {
+                canOpenDoor = false;
+            }
+        }
         // if player has not entered room
         // check if player can enter this room
-        if (!inRoomTriggerController.isInRoom)
+        else if (!inRoomTriggerController.isInRoom)
         {
             if (roomLocation == 1 || roomLocation == 2)
             {
-                if (!envManager.isClearBasement) {
+                if (!envManager.isClearBasement)
+                {
                     canOpenDoor = false;
                 }
             }
-        }
+        } else {}
 
         if (canOpenDoor)
         {
