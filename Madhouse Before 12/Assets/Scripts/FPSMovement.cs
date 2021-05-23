@@ -47,7 +47,58 @@ void Update()
 
 void Movement()
 {
-    float horizontalMove = Input.GetAxisRaw("Horizontal");
+    if (controller.isGrounded)
+    {
+            verticalVelocity = -gravity * Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                verticalVelocity = jumpForce;
+            }
+
+    }
+    else
+        {
+            verticalVelocity -= gravity * Time.deltaTime;
+        }
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
+        Vector3 move = transform.right * x + transform.forward * z;
+        controller.Move(move * moveSpeed * Time.deltaTime);
+        controller.Move(moveVector * Time.deltaTime);
+
+        if(move == Vector3.zero && move == Vector3.zero) {
+        Idle();
+    } 
+
+        if(Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S)) {
+            WalkBackwards();
+        }  if(!Input.GetKey(KeyCode.S))
+        {
+            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W)) {
+                WalkForward();
+            }
+         }        
+        
+         if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S)) {
+            Idle();
+        } if(Input.GetKey(KeyCode.LeftShift)) {
+            if(facingBack) {
+                RunBackwards();
+            } else {
+                Run();
+            }
+        }
+
+        if(Input.GetKey(KeyCode.Mouse0)) {
+            Shoot();
+        }
+ 
+
+
+    /*float horizontalMove = Input.GetAxisRaw("Horizontal");
     float verticalMove = Input.GetAxisRaw("Vertical");
 
     Vector3 move = new Vector3(0,0, verticalMove);
@@ -101,6 +152,7 @@ void Movement()
     move2 *= moveSpeed;
     controller.Move(move * moveSpeed * Time.deltaTime);
     controller.Move(move2 *moveSpeed * Time.deltaTime);
+    */
 
 }
 
@@ -114,6 +166,7 @@ private void Idle() {
      anim.SetBool(isRunning, false);
      anim.SetBool(backwardsRun, false);
      anim.SetBool(isWalkingRight, false);
+     anim.SetBool("isShooting", false);
 }
 
 private void WalkForward() {
@@ -171,6 +224,11 @@ private void RunBackwards() {
     anim.SetBool(backwardsRun, true);
     anim.SetBool(backwardsWalk, false);
     
+}
+
+private void Shoot() {
+    anim.SetBool("isShooting", true);
+    anim.SetBool(isIdle, false);
 }
 
 private void turnLeft() {
