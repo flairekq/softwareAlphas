@@ -15,17 +15,30 @@ public class Weapon : MonoBehaviour
 
     public Transform shootPoint;
 
+    private Animator anim;
+
+    public GameObject scopeOverlay;
+
+    public GameObject weaponCamera;
+
+    private int isShooting = Animator.StringToHash("isShooting");
+   // private int isIdle = Animator.StringToHash("isIdle");
+
+    private bool isScoped= false;
+
     // Start is called before the first frame update
     void Start()
     {
         currentBullets = bulletsPerMag;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Mouse0)) {
+        if(Input.GetMouseButtonDown(0)) {
             Fire();
+            
         }
 
         if(fireTimer < fireRate) {
@@ -34,7 +47,16 @@ public class Weapon : MonoBehaviour
     }
 
     private void Fire() 
-    {
+    {   
+        isScoped = !isScoped;
+        anim.SetBool(isShooting, isScoped);
+
+        if(isScoped) {
+            StartCoroutine(OnScoped());
+        } else {
+            OnUnscoped();
+        }
+
         if(fireTimer < fireRate) {
             return;
         }
@@ -49,5 +71,19 @@ public class Weapon : MonoBehaviour
 
         currentBullets--;
         fireTimer = 0.0f; //Reset fire timer
+    }
+
+    void OnUnscoped() 
+    {
+        scopeOverlay.SetActive(false);
+        weaponCamera.SetActive(true);
+    }
+
+    IEnumerator OnScoped() 
+    {
+        yield return new WaitForSeconds(0.15f);
+
+        scopeOverlay.SetActive(true);
+        weaponCamera.SetActive(false);
     }
 }
