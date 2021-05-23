@@ -37,7 +37,7 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         if(Input.GetMouseButtonDown(0)) {
-            Fire();
+            Aim();
             
         }
 
@@ -46,7 +46,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void Fire() 
+    private void Aim() 
     {   
         isScoped = !isScoped;
         anim.SetBool(isShooting, isScoped);
@@ -56,12 +56,14 @@ public class Weapon : MonoBehaviour
         } else {
             OnUnscoped();
         }
-
+        
+        /*
         if(fireTimer < fireRate) {
             return;
         }
+        */
 
-        RaycastHit hit;
+      /*  RaycastHit hit;
 
         if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, 
         out hit, range))
@@ -71,6 +73,7 @@ public class Weapon : MonoBehaviour
 
         currentBullets--;
         fireTimer = 0.0f; //Reset fire timer
+        */
     }
 
     void OnUnscoped() 
