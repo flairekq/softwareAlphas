@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     // private bool isDoneAttacking = true;
     protected float animationLength = 0f;
     protected bool isAttacking = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,12 +39,17 @@ public class EnemyController : MonoBehaviour
                     isChasing = true;
                     animator.SetBool("isChasing", true);
                 }
-
-                if (!isAttacking)
+                else if (isChasing)
                 {
-
+                    Debug.Log(distance);
                     agent.SetDestination(target.position);
                 }
+
+                // if (!isAttacking)
+                // {
+
+                //     agent.SetDestination(target.position);
+                // }
                 FaceTarget();
 
                 if (distance <= agent.stoppingDistance)
@@ -83,6 +89,13 @@ public class EnemyController : MonoBehaviour
             else
             {
             }
+
+            // if (isChasing && !agent.hasPath && agent.pathStatus == NavMeshPathStatus.PathComplete) {
+            //     Debug.Log("character stuck");
+            //     agent.enabled = false;  
+            //     agent.enabled = true;
+            //     Debug.Log("navmesh re-enabled");
+            // }
         }
         else
         {
