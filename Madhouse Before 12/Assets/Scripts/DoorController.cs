@@ -16,38 +16,48 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        bool canOpenDoor = true;
+        // only player can trigger the opening of door
+        if (other.CompareTag("Player"))
+        {
+            bool canOpenDoor = true;
 
-        // if its basement's main door, can only open when clear basement
-        if (roomName == "Basement")
-        {
-            if (!envManager.isClearBasement)
-            {
-                canOpenDoor = false;
-            }
-        }
-        // if player has not entered room
-        // check if player can enter this room
-        else if (!inRoomTriggerController.isInRoom)
-        {
-            if (roomLocation == 1 || roomLocation == 2)
+            // if its basement's main door, can only open when clear basement
+            if (roomName == "Basement")
             {
                 if (!envManager.isClearBasement)
                 {
                     canOpenDoor = false;
                 }
             }
-        } else {}
+            // if player has not entered room
+            // check if player can enter this room
+            else if (!inRoomTriggerController.isInRoom)
+            {
+                if (roomLocation == 1 || roomLocation == 2)
+                {
+                    if (!envManager.isClearBasement)
+                    {
+                        canOpenDoor = false;
+                    }
+                }
+            }
+            else { }
 
-        if (canOpenDoor)
-        {
-            doorAnim.SetBool("isOpening", true);
+            if (canOpenDoor)
+            {
+                doorAnim.SetBool("isOpening", true);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        doorAnim.SetBool("isOpening", false);
+        // only player can trigger the closing of door
+        if (other.CompareTag("Player"))
+        {
+            doorAnim.SetBool("isOpening", false);
+        }
+
     }
 
     // Start is called before the first frame update

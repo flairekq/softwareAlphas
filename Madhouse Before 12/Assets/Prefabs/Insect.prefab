@@ -1245,7 +1245,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &2448259061682797074
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1257,7 +1257,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.5
-  m_Height: 3
+  m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &2448259061682797085
@@ -1308,7 +1308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 5
-  animator: {fileID: 2354115691751897730}
 --- !u!114 &2448259061682797080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,7 +1324,6 @@ MonoBehaviour:
   damage:
     baseValue: 0
   isDead: 0
-  animator: {fileID: 2354115691751897730}
   destroyDelay: 2.4
 --- !u!114 &2448259061682797081
 MonoBehaviour:
