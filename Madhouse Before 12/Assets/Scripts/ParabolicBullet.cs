@@ -82,7 +82,7 @@ public class ParabolicBullet : MonoBehaviour
         } 
         float currentTime = Time.time - startTime; 
 
-        Vector3 currentPoint = FindPointOnParabola(currentTime);
-        transform.position = currentPoint;
+       Vector3 currentPoint = FindPointOnParabola(currentTime);
+        //transform.position += transform.forward * 2f * Time.deltaTime;
     }
 }

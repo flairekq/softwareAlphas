@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {   
-    public float range = 100f;
+
     public int bulletsPerMag = 30;
     public int bulletsLeft = 200; //total bullets we have 
     public int currentBullets; // current bullets in our magazine
@@ -20,6 +20,11 @@ public class Weapon : MonoBehaviour
     public GameObject scopeOverlay;
 
     public GameObject weaponCamera;
+
+    public Camera mainCamera;
+
+    public float scopedFOV = 15f;
+    private float normalFOV;
 
     private int isShooting = Animator.StringToHash("isShooting");
    // private int isIdle = Animator.StringToHash("isIdle");
@@ -61,9 +66,9 @@ public class Weapon : MonoBehaviour
         if(fireTimer < fireRate) {
             return;
         }
-        */
+        
 
-      /*  RaycastHit hit;
+      RaycastHit hit;
 
         if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, 
         out hit, range))
@@ -80,6 +85,8 @@ public class Weapon : MonoBehaviour
     {
         scopeOverlay.SetActive(false);
         weaponCamera.SetActive(true);
+
+        mainCamera.fieldOfView = normalFOV;
     }
 
     IEnumerator OnScoped() 
@@ -88,5 +95,7 @@ public class Weapon : MonoBehaviour
 
         scopeOverlay.SetActive(true);
         weaponCamera.SetActive(false);
+        normalFOV = mainCamera.fieldOfView;
+        mainCamera.fieldOfView = 15f;
     }
 }

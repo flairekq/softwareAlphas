@@ -5,6 +5,41 @@ using UnityEngine;
 public class RifleManager : MonoBehaviour
 {
 
+    public float damage = 10f;
+    public float range = 100f; 
+    public Transform shootPoint;
+
+    public Camera fpsCamera;
+
+    public CameraShake cameraShake;
+
+    void Update() {
+        if(Input.GetMouseButtonDown(1))
+        {
+            Shoot();
+            StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
+        }
+    }
+
+    void Shoot() 
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
+        {
+            Debug.Log(hit.transform.name);
+            Target target = hit.transform.GetComponent<Target>();
+            if(target != null) {
+                target.TakeDamage(damage);
+            }
+        }
+    }
+
+
+
+
+
+
+    /*
     public GameObject bulletProf;
     public Transform shootPoint;
     float T = 0;
@@ -33,6 +68,7 @@ public class RifleManager : MonoBehaviour
 
     void Shoot() {
         GameObject bullet = Instantiate(bulletProf, shootPoint.position, shootPoint.rotation);
+       // bullet.transform.forward = shootPoint.transform.forward;
         ParabolicBullet bulletScript = bullet.GetComponent<ParabolicBullet>();
         if(bulletScript) 
         {
@@ -40,5 +76,5 @@ public class RifleManager : MonoBehaviour
 
         }
         Destroy(bullet, bulletLifeTime);
-    }
+    } */
 }
