@@ -6,12 +6,14 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {   
 
-    public int bulletsPerMag = 30;
-    public int bulletsLeft = 200; //total bullets we have 
-    public int currentBullets; // current bullets in our magazine
+   /*public int bulletsPerMag = 7;
 
+    public int totalbulletsleft = 200;
+
+    public int currentBullets; // current number of bullets in magazine 
     public float fireRate = 0.1f;
     private float fireTimer;
+    */
 
     public Transform shootPoint;
 
@@ -34,7 +36,7 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentBullets = bulletsPerMag;
+        //currentBullets = bulletsPerMag;
         anim = GetComponent<Animator>();
     }
 
@@ -46,9 +48,19 @@ public class Weapon : MonoBehaviour
             
         }
 
-        if(fireTimer < fireRate) {
-            fireTimer += Time.deltaTime;
-        }
+       /* if(Input.GetMouseButtonDown(1))
+        {
+            if(currentBullets == 0)
+            {
+                Reload();
+                anim.SetBool("isReload", false);
+                currentBullets = bulletsPerMag;
+                totalbulletsleft -= bulletsPerMag;
+
+            } else {
+                currentBullets--;
+            }
+        }*/
     }
 
     private void Aim() 
@@ -62,23 +74,6 @@ public class Weapon : MonoBehaviour
             OnUnscoped();
         }
         
-        /*
-        if(fireTimer < fireRate) {
-            return;
-        }
-        
-
-      RaycastHit hit;
-
-        if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, 
-        out hit, range))
-        {
-            Debug.Log(hit.transform.name + "found!");
-        }
-
-        currentBullets--;
-        fireTimer = 0.0f; //Reset fire timer
-        */
     }
 
     void OnUnscoped() 
@@ -97,5 +92,19 @@ public class Weapon : MonoBehaviour
         weaponCamera.SetActive(false);
         normalFOV = mainCamera.fieldOfView;
         mainCamera.fieldOfView = 15f;
+    }
+
+    void Reload()
+    {
+        
+        if(isScoped) {
+            isScoped = false; 
+            OnUnscoped(); 
+            anim.SetBool("isReload", true);
+            anim.SetBool("isShooting", false);
+        } else {
+            anim.SetBool("isReload", true);
+            anim.SetBool("isShooting", false);
+        }
     }
 }

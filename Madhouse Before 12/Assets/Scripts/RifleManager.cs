@@ -5,6 +5,13 @@ using UnityEngine;
 public class RifleManager : MonoBehaviour
 {
 
+   /* public int bulletspermag = 7;
+
+    public int totalbulletsleft = 200;
+
+    public int currentBullets; // current number of bullets in magazine 
+    */
+
     public float damage = 10f;
     public float range = 100f; 
     public Transform shootPoint;
@@ -13,11 +20,28 @@ public class RifleManager : MonoBehaviour
 
     public CameraShake cameraShake;
 
+    public ParticleSystem muzzleFlash;
+
+    private void Start()
+    {
+        //currentBullets = bulletspermag;
+    }
+
     void Update() {
         if(Input.GetMouseButtonDown(1))
         {
             Shoot();
+            muzzleFlash.Play();
+             StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
+            /*if(currentBullets > 0)
+            {
+            Shoot();
             StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
+            } else 
+            {
+                Reload();
+            }
+            */
         }
     }
 
@@ -25,15 +49,22 @@ public class RifleManager : MonoBehaviour
     {
         RaycastHit hit;
         if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
-        {
+        {   
             Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
             if(target != null) {
                 target.TakeDamage(damage);
             }
         }
+      //  currentBullets--;
     }
 
+/*    void Reload() 
+    {
+        currentBullets = bulletspermag; 
+        totalbulletsleft -= bulletspermag;
+    }
+    */
 
 
 
