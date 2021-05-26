@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
-    public Animator animator;
+    private Animator animator;
     public float destroyDelay = 1.5f;
+
+    private void Start() {
+        animator = GetComponent<Animator>();
+    }
+    
     public override void Die()
     {
         base.Die();

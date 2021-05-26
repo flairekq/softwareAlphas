@@ -6,23 +6,34 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     public float lookRadius = 5f;
-    public Animator animator;
+    protected Animator animator;
     protected Transform target;
     protected NavMeshAgent agent;
+    // protected NavMeshObstacle obstacle;
     protected CharacterCombat combat;
     protected EnemyStats stats;
     private bool isChasing = false;
     // private bool isDoneAttacking = true;
     protected float animationLength = 0f;
     protected bool isAttacking = false;
+    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
         target = PlayerManager.instance.player.transform;
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        // obstacle = GetComponent<NavMeshObstacle>();
         combat = GetComponent<CharacterCombat>();
         stats = GetComponent<EnemyStats>();
+        rb = GetComponent<Rigidbody>();
+
+        // 0 being the most impt
+        // 99 being least impt
+        // int avoidancePriority = Random.Range(0, 100);
+        // agent.avoidancePriority = avoidancePriority;
+        // obstacle.enabled = false;
     }
 
     // Update is called once per frame
@@ -34,22 +45,29 @@ public class EnemyController : MonoBehaviour
 
             if (distance < lookRadius)
             {
-                if (!isChasing)
-                {
-                    isChasing = true;
-                    animator.SetBool("isChasing", true);
-                }
-                else if (isChasing)
-                {
-                    Debug.Log(distance);
-                    agent.SetDestination(target.position);
-                }
+                // if (!isChasing)
+                // {
+                //     isChasing = true;
+                //     animator.SetBool("isChasing", true);
+                // }
+                // else if (isChasing)
+                // {
+                //     // Debug.Log(distance);
+                //     agent.SetDestination(target.position);
+                // }
 
                 // if (!isAttacking)
                 // {
 
                 //     agent.SetDestination(target.position);
                 // }
+                if (!isChasing) {
+                    agent.SetDestination(target.position);
+                    if (agent.hasPath && agent.pathStatus == NavMeshPathStatus.PathComplete) {
+                        isChasing = true;
+                        animator.SetBool("isChasing", true);
+                    }
+                }
                 FaceTarget();
 
                 if (distance <= agent.stoppingDistance)

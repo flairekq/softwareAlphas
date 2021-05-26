@@ -21,7 +21,7 @@ public class ReptileController : EnemyController
         }
 
         animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
-        Debug.Log(gameObject.name + " attack length: " + animationLength);
+        // Debug.Log(gameObject.name + " attack length: " + animationLength);
         isAttacking = true;
         // CharacterStats targetStats = target.GetComponent<CharacterStats>();
         // if (targetStats != null)
