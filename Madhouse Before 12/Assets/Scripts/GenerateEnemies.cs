@@ -24,11 +24,11 @@ public class GenerateEnemies : MonoBehaviour
         while (enemyCount < maxNoOfEnemies)
         {
             int i = Random.Range(0, enemies.Count);
-            float xPos = Random.Range(21.9f, 23.9f);
+            float xPos = Random.Range(22.74f, 23.9f);
             float zPos = Random.Range(-20.3f, -1.65f);
             Instantiate(enemies[i].enemy, new Vector3(xPos, enemies[i].yPos, zPos), Quaternion.identity);
             // yield return new WaitForSeconds(0.1f);
-            yield return new WaitForSeconds(0f);
+            yield return new WaitForSeconds(0.1f);
             enemyCount += 1;
         }
     }

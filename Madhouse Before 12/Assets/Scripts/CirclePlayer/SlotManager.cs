@@ -75,7 +75,8 @@ public class SlotManager : MonoBehaviour
 
     public bool IsSlotStolen(GameObject attacker, int index)
     {
-        if (slots[index] != attacker) {
+        if (slots[index] != attacker)
+        {
             return true;
         }
         return false;
@@ -90,10 +91,24 @@ public class SlotManager : MonoBehaviour
     {
         for (int index = 0; index < count; ++index)
         {
-            if (slots == null || slots.Count <= index || slots[index] == null)
+            // if (slots == null || slots.Count <= index || slots[index] == null)
+            //     Gizmos.color = Color.black;
+            // else
+            //     Gizmos.color = Color.red;
+            // Gizmos.DrawWireSphere(GetSlotPosition(index), 0.5f);
+
+            if (slots == null || slots.Count <= index || (slots[index] == null && IsSlotOnNavMesh(index)))
+            {
+                Gizmos.color = Color.green;
+            }
+            else if (slots[index] != null)
+            {
                 Gizmos.color = Color.black;
-            else
+            }
+            else if (!IsSlotOnNavMesh(index))
+            {
                 Gizmos.color = Color.red;
+            }
             Gizmos.DrawWireSphere(GetSlotPosition(index), 0.5f);
         }
     }
