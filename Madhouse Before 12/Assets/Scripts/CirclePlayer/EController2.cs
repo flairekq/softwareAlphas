@@ -115,6 +115,7 @@ public class EController2 : MonoBehaviour
                         // And move to the player's position (will be handled when chasing animation starts to play)
                         // agent.SetDestination(player.transform.position);
                         isChasing = true;
+                        animator.SetInteger("attack", 0);
                     }
                 }
                 model.position = Vector3.Lerp(model.position, proxy.position, Time.deltaTime * 2);
