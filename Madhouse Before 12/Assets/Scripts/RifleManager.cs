@@ -11,7 +11,7 @@ public class RifleManager : MonoBehaviour
 
     public int currentBullets; // number of bullets left in magazine 
     public float damage = 10f;
-    public float range = 100f; 
+    public float range = 100f;
     public Transform shootPoint;
 
     public Transform shootPointIdle;
@@ -20,6 +20,7 @@ public class RifleManager : MonoBehaviour
     public CameraShake cameraShake;
 
     public ParticleSystem muzzleFlash;
+    public LayerMask enemyMask;
 
     private Animator anim;
 
@@ -69,7 +70,7 @@ public class RifleManager : MonoBehaviour
         } 
     }
 
-    void Shoot() 
+    void Shoot()
     {
         muzzleFlash.Play();
         RaycastHit hit;

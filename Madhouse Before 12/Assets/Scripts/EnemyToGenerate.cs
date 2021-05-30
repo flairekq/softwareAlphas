@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class EnemyToGenerate 
+public class EnemyToGenerate
 {
-   public GameObject enemy;
-   public float yPos;
+    public GameObject enemy;
+    public float yPos;
 }
