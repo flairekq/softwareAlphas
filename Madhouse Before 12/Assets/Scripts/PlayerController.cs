@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Interactable focus;
     public LayerMask movementMask;
+    public LayerMask enemiesMask;
     Camera cam;
     CharacterCombat combat;
 
@@ -38,16 +39,20 @@ public class PlayerController : MonoBehaviour
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 100, enemiesMask))
             {
                 // Check if we hit an interactable
                 // If we did set it as our focus
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
+                Debug.Log(hit.collider);
                 if (interactable != null)
                 {
+                    Debug.Log("player attacking");
+
                     SetFocus(interactable);
-        
-                    if (interactable is Enemy) {
+
+                    if (interactable is Enemy)
+                    {
                         Enemy e = (Enemy)interactable;
                         e.Interact();
                     }
