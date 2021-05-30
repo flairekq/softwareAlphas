@@ -5,15 +5,15 @@ using UnityEngine;
 public class RifleManager : MonoBehaviour
 {
 
-   /* public int bulletspermag = 7;
+    /* public int bulletspermag = 7;
 
-    public int totalbulletsleft = 200;
+     public int totalbulletsleft = 200;
 
-    public int currentBullets; // current number of bullets in magazine 
-    */
+     public int currentBullets; // current number of bullets in magazine 
+     */
 
     public float damage = 10f;
-    public float range = 100f; 
+    public float range = 100f;
     public Transform shootPoint;
 
     public Camera fpsCamera;
@@ -21,18 +21,20 @@ public class RifleManager : MonoBehaviour
     public CameraShake cameraShake;
 
     public ParticleSystem muzzleFlash;
+    public LayerMask enemyMask;
 
     private void Start()
     {
         //currentBullets = bulletspermag;
     }
 
-    void Update() {
-        if(Input.GetMouseButtonDown(1))
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
         {
             Shoot();
             muzzleFlash.Play();
-             StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
+            StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
             /*if(currentBullets > 0)
             {
             Shoot();
@@ -45,26 +47,37 @@ public class RifleManager : MonoBehaviour
         }
     }
 
-    void Shoot() 
+    void Shoot()
     {
         RaycastHit hit;
-        if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
-        {   
-            Debug.Log(hit.transform.name);
-            Target target = hit.transform.GetComponent<Target>();
-            if(target != null) {
-                target.TakeDamage(damage);
+        if (Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range, enemyMask))
+        {
+            // Debug.Log(hit.transform.name);
+            // Target target = hit.transform.GetComponent<Target>();
+            // if(target != null) {
+            //     target.TakeDamage(damage);
+            // }
+            Interactable interactable = hit.collider.GetComponent<Interactable>();
+            // Debug.Log(hit.collider);
+            if (interactable != null)
+            {
+                Debug.Log("player attacking " + interactable.gameObject.name);
+                if (interactable is Enemy)
+                {
+                    Enemy e = (Enemy)interactable;
+                    e.Interact();
+                }
             }
         }
-      //  currentBullets--;
+        //  currentBullets--;
     }
 
-/*    void Reload() 
-    {
-        currentBullets = bulletspermag; 
-        totalbulletsleft -= bulletspermag;
-    }
-    */
+    /*    void Reload() 
+        {
+            currentBullets = bulletspermag; 
+            totalbulletsleft -= bulletspermag;
+        }
+        */
 
 
 
