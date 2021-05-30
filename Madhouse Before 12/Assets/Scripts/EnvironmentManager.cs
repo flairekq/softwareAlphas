@@ -14,8 +14,11 @@ public class EnvironmentManager : MonoBehaviour
     #endregion
 
     public GameObject[] basementRooms;
+    public PositionRange[] basementPositionRange;
     public GameObject[] firstFloorRooms;
+    public PositionRange[] firstFloorPositionRange;
     public GameObject[] secondFloorRooms;
+    public PositionRange[] secondFloorPositionRange;
     public bool isClearBasement = false;
     
 }
