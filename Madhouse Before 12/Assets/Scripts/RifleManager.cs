@@ -5,49 +5,76 @@ using UnityEngine;
 public class RifleManager : MonoBehaviour
 {
 
-   /* public int bulletspermag = 7;
 
-    public int totalbulletsleft = 200;
+    public int bulletspermag = 10;
+    public int totalbulletsleft = 70;
 
-    public int currentBullets; // current number of bullets in magazine 
-    */
-
+    public int currentBullets; // number of bullets left in magazine 
     public float damage = 10f;
     public float range = 100f; 
     public Transform shootPoint;
 
+    public Transform shootPointIdle;
     public Camera fpsCamera;
 
     public CameraShake cameraShake;
 
     public ParticleSystem muzzleFlash;
 
+    private Animator anim;
+
+    public GameObject scopeOverlay;
+
+    public GameObject weaponCamera;
+
+    public Camera mainCamera;
+
+    public float scopedFOV = 15f;
+    private float normalFOV;
+
+    //public GameObject impactEffect;
+
+    private int isShooting = Animator.StringToHash("isShooting");
+   // private int isIdle = Animator.StringToHash("isIdle");
+
+    private bool isScoped= false;
+
+
     private void Start()
-    {
-        //currentBullets = bulletspermag;
+    { 
+        currentBullets = bulletspermag;
+         anim = GetComponent<Animator>();
     }
 
     void Update() {
+         if(Input.GetMouseButtonDown(0)) {
+            Aim();
+            
+        }
         if(Input.GetMouseButtonDown(1))
         {
-            Shoot();
-            muzzleFlash.Play();
-             StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
-            /*if(currentBullets > 0)
-            {
-            Shoot();
-            StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
-            } else 
-            {
+            if(currentBullets <= 0 && totalbulletsleft>0) {
                 Reload();
+                currentBullets = bulletspermag;
+                totalbulletsleft -= bulletspermag;
+            } else {
+            Shoot();
+             StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
             }
-            */
-        }
+           
+        } else {
+            anim.SetBool("isIdle",true);
+            anim.SetBool(isShooting, false);
+            anim.SetBool("isReload", false);
+        } 
     }
 
     void Shoot() 
     {
+        muzzleFlash.Play();
         RaycastHit hit;
+        currentBullets--;
+        if(isScoped) {
         if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
         {   
             Debug.Log(hit.transform.name);
@@ -56,56 +83,67 @@ public class RifleManager : MonoBehaviour
                 target.TakeDamage(damage);
             }
         }
-      //  currentBullets--;
+        } else {
+            if(Physics.Raycast(shootPointIdle.position, shootPointIdle.transform.forward, out hit, range))
+        {   
+            Debug.Log(hit.transform.name);
+            Target target = hit.transform.GetComponent<Target>();
+            if(target != null) {
+                target.TakeDamage(damage);
+            }
+
+            /*GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactGO, 2f);
+            */
+        }
     }
-
-/*    void Reload() 
-    {
-        currentBullets = bulletspermag; 
-        totalbulletsleft -= bulletspermag;
     }
-    */
+     private void Aim() 
+    {   
+        isScoped = !isScoped;
+        anim.SetBool(isShooting, isScoped);
 
-
-
-
-
-    /*
-    public GameObject bulletProf;
-    public Transform shootPoint;
-    float T = 0;
-    float reloadTime = 1f;
-
-    [Space]
-    public float shootSpeed;
-    public float gravityForce;
-    public float bulletLifeTime;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(1)) 
-        {
-            Shoot();
+        if(isScoped) {
+            StartCoroutine(OnScoped());
+        } else {
+            OnUnscoped();
         }
         
     }
 
-    void Shoot() {
-        GameObject bullet = Instantiate(bulletProf, shootPoint.position, shootPoint.rotation);
-       // bullet.transform.forward = shootPoint.transform.forward;
-        ParabolicBullet bulletScript = bullet.GetComponent<ParabolicBullet>();
-        if(bulletScript) 
-        {
-            bulletScript.Initialize(shootPoint, shootSpeed, gravityForce);
+    void OnUnscoped() 
+    {
+        scopeOverlay.SetActive(false);
+        weaponCamera.SetActive(true);
 
+        mainCamera.fieldOfView = normalFOV;
+    }
+
+    IEnumerator OnScoped() 
+    {
+        yield return new WaitForSeconds(0.15f);
+
+        scopeOverlay.SetActive(true);
+        weaponCamera.SetActive(false);
+        normalFOV = mainCamera.fieldOfView;
+        mainCamera.fieldOfView = 15f;
+    }
+
+    void Reload()
+    {
+        
+        if(isScoped) {
+            isScoped = false; 
+            OnUnscoped(); 
+            anim.SetBool("isReload", true);
+            anim.SetBool("isShooting", false);
+            anim.SetBool("isIdle", false);
+        } else {
+            anim.SetBool("isReload", true);
+            anim.SetBool("isShooting", false);
+            anim.SetBool("isIdle", false);
         }
-        Destroy(bullet, bulletLifeTime);
-    } */
+    }
+
+
 }
