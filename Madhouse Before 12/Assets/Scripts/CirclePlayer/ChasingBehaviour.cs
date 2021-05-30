@@ -9,12 +9,15 @@ public class ChasingBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Transform current = animator.gameObject.transform.parent;
-        EController2 controller = current.GetComponent<EController2>();
-        NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
-        if (agent.enabled)
+        if (animator.GetBool("isChasing"))
         {
-            agent.SetDestination(controller.player.transform.position);
+            Transform current = animator.gameObject.transform.parent;
+            EController2 controller = current.GetComponent<EController2>();
+            NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
+            if (agent.enabled)
+            {
+                agent.SetDestination(controller.player.transform.position);
+            }
         }
     }
 
@@ -22,12 +25,15 @@ public class ChasingBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Transform current = animator.gameObject.transform.parent;
-        EController2 controller = current.GetComponent<EController2>();
-        NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
-        if (agent.enabled)
+        if (animator.GetBool("isChasing"))
         {
-            agent.SetDestination(controller.player.transform.position);
+            Transform current = animator.gameObject.transform.parent;
+            EController2 controller = current.GetComponent<EController2>();
+            NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
+            if (agent.enabled)
+            {
+                agent.SetDestination(controller.player.transform.position);
+            }
         }
     }
 

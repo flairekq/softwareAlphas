@@ -1550,12 +1550,15 @@ MonoBehaviour:
   player: {fileID: 0}
   model: {fileID: 1024501398208486364}
   proxy: {fileID: 1024501397630764921}
-  lookRadius: 3.5
+  lookRadius: 4
   attacks:
   - {fileID: 7400000, guid: 714f1c54a3f2fad49ab4dc2d3ba3ec81, type: 3}
   - {fileID: 7400000, guid: 7da3bcb8888212a43b5f806f704a8d21, type: 3}
   - {fileID: 7400000, guid: 405006f5a09aa054e8e9d6f06d24628e, type: 3}
   isAttacking: 0
+  moveSpot: {fileID: 0}
+  startWaitTime: 3
+  startToPathTime: 10
 --- !u!1 &5097517609817435850
 GameObject:
   m_ObjectHideFlags: 0

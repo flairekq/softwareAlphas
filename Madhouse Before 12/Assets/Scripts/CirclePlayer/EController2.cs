@@ -15,18 +15,39 @@ public class EController2 : MonoBehaviour
     public AnimationClip[] attacks;
     private bool isChasing = false;
     public bool isAttacking = false;
+    private bool isPatrolling = false;
     private EnemyStats enemyStats;
     // int slot = -1;
     // private SlotManager slotManager;
 
+    // public Transform[] moveSpots;
+    public Transform moveSpot;
+    // private int randomSpot;
+    private float waitTime;
+    private float toPathTime;
+    public float startWaitTime;
+    public float startToPathTime;
+    EnvironmentManager envManager;
+    private float originalStoppingDistance;
+    public string location;
+
     void Start()
     {
+        envManager = EnvironmentManager.instance;
+
         agent = proxy.GetComponent<NavMeshAgent>();
+        originalStoppingDistance = agent.stoppingDistance;
         obstacle = proxy.GetComponent<NavMeshObstacle>();
         player = GameObject.FindGameObjectWithTag("Player");
         // slotManager = player.GetComponent<SlotManager>();
         animator = model.GetComponent<Animator>();
         enemyStats = model.GetComponentInChildren<EnemyStats>();
+
+        // PositionRange range = envManager.basementPositionRange[Random.Range(0, envManager.basementPositionRange.Length)];
+        // moveSpot.position = new Vector3(Random.Range(range.minX, range.maxX), gameObject.transform.position.y, Random.Range(range.minZ, range.maxZ));
+        RandomnizeMoveSpot();
+        waitTime = startWaitTime;
+        toPathTime = startToPathTime;
     }
 
     void Update()
@@ -90,7 +111,9 @@ public class EController2 : MonoBehaviour
                 //     }
                 // }
                 #endregion
-
+                agent.stoppingDistance = originalStoppingDistance;
+                agent.speed = 10f;
+                isPatrolling = false;
                 // Test if the distance between the agent (which is now the proxy) and the player
                 // is less than the attack range (or the stoppingDistance parameter) 
                 if (Vector3.Distance(player.transform.position, proxy.position) <= agent.stoppingDistance)
@@ -141,19 +164,80 @@ public class EController2 : MonoBehaviour
             else
             {
                 isChasing = false;
-                animator.SetInteger("attack", 0);
+                isPatrolling = true;
+                agent.stoppingDistance = 0;
+                agent.speed = 2f;
+
+                // agent.SetDestination(moveSpot.position);
+                // Debug.Log(Vector3.Distance(proxy.position, moveSpot.position));
+                if (Vector3.Distance(proxy.position, moveSpot.position) < 0.2f)
+                {
+                    if (waitTime <= 0)
+                    {
+                        // PositionRange range = envManager.basementPositionRange[Random.Range(0, envManager.basementPositionRange.Length)];
+                        // moveSpot.position = new Vector3(Random.Range(range.minX, range.maxX), gameObject.transform.position.y, Random.Range(range.minZ, range.maxZ));
+                        RandomnizeMoveSpot();
+                        waitTime = startWaitTime;
+                        // patrol
+                        obstacle.enabled = false;
+                        agent.enabled = true;
+                    }
+                    else
+                    {
+                        agent.enabled = false;
+                        obstacle.enabled = true;
+                        isPatrolling = false;
+                        waitTime -= Time.deltaTime;
+                    }
+
+                }
+                else
+                {
+                    // patrol
+                    obstacle.enabled = false;
+                    agent.enabled = true;
+                    if (toPathTime <= 0)
+                    {
+                        // PositionRange range = envManager.basementPositionRange[Random.Range(0, envManager.basementPositionRange.Length)];
+                        // moveSpot.position = new Vector3(Random.Range(range.minX, range.maxX), gameObject.transform.position.y, Random.Range(range.minZ, range.maxZ));
+                        RandomnizeMoveSpot();
+                        toPathTime = startToPathTime;
+                    }
+                    else
+                    {
+                        toPathTime -= Time.deltaTime;
+                    }
+                }
+                model.position = Vector3.Lerp(model.position, proxy.position, Time.deltaTime * 2);
+
+                // Calculate the orientation based on the velocity of the agent 
+                Vector3 orientation = model.position - lastPosition;
+                // Check if the agent has some minimal velocity 
+                if (orientation.sqrMagnitude > 0.1f)
+                {
+                    // We don't want him to look up or down orientation.y = 0;
+                    // Use Quaternion.LookRotation() to set the model's new rotation and smooth the transition with Quaternion.Lerp();
+                    model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(model.position - lastPosition), Time.deltaTime * 8);
+                }
+                else
+                {
+                    // If the agent is stationary we tell him to assume the proxy's rotation
+                    model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(proxy.forward), Time.deltaTime * 8);
+                }
             }
             // This is needed to calculate the orientation in the next frame 
             lastPosition = model.position;
 
-            if (isChasing)
-            {
-                animator.SetBool("isChasing", isChasing);
-            }
-            else
-            {
-                animator.SetBool("isChasing", isChasing);
-            }
+            // if (isChasing)
+            // {
+            //     animator.SetBool("isChasing", isChasing);
+            // }
+            // else
+            // {
+            //     animator.SetBool("isChasing", isChasing);
+            // }
+            animator.SetBool("isChasing", isChasing);
+            animator.SetBool("isPatrolling", isPatrolling);
         }
     }
 
@@ -162,6 +246,25 @@ public class EController2 : MonoBehaviour
         Vector3 direction = (player.transform.position - model.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         model.rotation = Quaternion.Slerp(model.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+
+    void RandomnizeMoveSpot()
+    {
+        PositionRange range;
+        if (location.Equals("Basement"))
+        {
+            range = envManager.basementPositionRange[Random.Range(0, envManager.basementPositionRange.Length)];
+        }
+        else if (location.Equals("FirstFloor"))
+        {
+            range = envManager.firstFloorPositionRange[Random.Range(0, envManager.firstFloorPositionRange.Length)];
+        }
+        else
+        {
+            range = envManager.secondFloorPositionRange[Random.Range(0, envManager.secondFloorPositionRange.Length)];
+        }
+
+        moveSpot.position = new Vector3(Random.Range(range.minX, range.maxX), gameObject.transform.position.y, Random.Range(range.minZ, range.maxZ));
     }
 
     void Attack()
