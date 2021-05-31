@@ -15,15 +15,19 @@ public class Weapon : MonoBehaviour
     private float fireTimer;
     */
 
-    public Transform shootPoint;
-
     private Animator anim;
+
+    
+
+    public ParticleSystem muzzleFlash;
 
     public GameObject scopeOverlay;
 
     public GameObject weaponCamera;
 
     public Camera mainCamera;
+
+    public Transform shootPointIdle;
 
     public float scopedFOV = 15f;
     private float normalFOV;
@@ -46,6 +50,9 @@ public class Weapon : MonoBehaviour
         if(Input.GetMouseButtonDown(0)) {
             Aim();
             
+        }
+        if(!isScoped && Input.GetMouseButtonDown(1)) {
+
         }
 
        /* if(Input.GetMouseButtonDown(1))
@@ -75,6 +82,8 @@ public class Weapon : MonoBehaviour
         }
         
     }
+
+  
 
     void OnUnscoped() 
     {
