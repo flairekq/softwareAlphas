@@ -61,7 +61,7 @@ private int backwardsRun = Animator.StringToHash("backwardsRun");
             {
                  WalkForward();
              }
-         } else {
+         } if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S)) {
              Idle();
          }   
          
