@@ -16,7 +16,7 @@ public class InventorySlot : MonoBehaviour
         activeChar = character;
         item = newItem;
         details = item.GetComponent<Item>();
-        Debug.Log("add item " + details);
+        // Debug.Log("add item " + details);
         icon.sprite = details.icon;
         icon.enabled = true;
         removeButton.interactable = true;
@@ -47,7 +47,7 @@ public class InventorySlot : MonoBehaviour
 
     public void UseItem()
     {
-        Debug.Log("using item " + details);
+        // Debug.Log("using item " + details);
         if (item != null)
         {
             details.Examine();

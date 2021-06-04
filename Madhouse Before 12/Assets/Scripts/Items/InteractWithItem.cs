@@ -10,6 +10,7 @@ public class InteractWithItem : MonoBehaviour
     [SerializeField] LayerMask layer;
 
     private ItemPickup itemBeingPickedUp;
+    private DisplayUI itemDisplayUI;
     private Inventory inventory;
     private bool isExaminingItem = false;
 
@@ -23,18 +24,35 @@ public class InteractWithItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SelectItemBeingPickedUpFromRay();
+        SelectItemToInteractWithFromRay();
 
         // examine
-        if (Input.GetKeyDown(KeyCode.E) && itemBeingPickedUp != null)
+        if (Input.GetKeyDown(KeyCode.E) && itemDisplayUI != null)
         {
-            // Debug.Log("examine");
-            NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
-            if (note != null)
+            if (itemDisplayUI.type == "Note")
             {
-                note.ToggleNote();
-                isExaminingItem = note.isExaminingNote();
+                NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
+                if (note != null)
+                {
+                    note.ToggleNote();
+                    isExaminingItem = note.isExaminingNote();
+                }
             }
+            else if (itemDisplayUI.type == "DrawerTop")
+            {
+                Animator animator = itemDisplayUI.GetComponent<Animator>();
+                animator.SetBool("isTopOpen", !animator.GetBool("isTopOpen"));
+            }
+            else if (itemDisplayUI.type == "DrawerBtm")
+            {
+                Animator animator = itemDisplayUI.GetComponent<Animator>();
+                animator.SetBool("isBtmOpen", !animator.GetBool("isBtmOpen"));
+            }
+            else
+            {
+
+            }
+
         }
 
         // take
@@ -44,28 +62,37 @@ public class InteractWithItem : MonoBehaviour
         }
     }
 
-    void SelectItemBeingPickedUpFromRay()
+    void SelectItemToInteractWithFromRay()
     {
         ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 1f, layer))
         {
-            // Debug.Log("pick up item " + hit.collider.name);
-            ItemPickup item = hit.collider.GetComponent<ItemPickup>();
-            if (item != null)
+            DisplayUI display = hit.collider.GetComponent<DisplayUI>();
+            if (display != null)
             {
-                itemBeingPickedUp = item;
+                itemDisplayUI = display;
+
+                ItemPickup item = hit.collider.GetComponent<ItemPickup>();
+                if (item != null) {
+                    itemBeingPickedUp = item;
+                }
                 return;
             }
         }
 
         if (itemBeingPickedUp != null)
         {
-            NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
-            if (note != null)
+            if (itemDisplayUI.type == "Note")
             {
-                note.CloseNote();
+                NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
+                if (note != null)
+                {
+                    note.CloseNote();
+                }
             }
+
             itemBeingPickedUp = null;
+            itemDisplayUI = null;
             isExaminingItem = false;
         }
 
