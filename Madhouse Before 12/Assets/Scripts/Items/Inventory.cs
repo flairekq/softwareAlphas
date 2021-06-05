@@ -10,10 +10,7 @@ public class Inventory : MonoBehaviour
     public int space = 6;
     public GameObject inventoryPanel;
     public InventoryUI inventoryUI;
-    public GameObject crossHair;
-    private PlayerMovement movement;
-    private MouseLook mouseLook;
-    private PlayerController playerController;
+    private TogglePlayerCursor togglePlayerCursor;
 
     public List<GameObject> items = new List<GameObject>();
     public bool Add(GameObject item)
@@ -44,9 +41,7 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movement = GetComponent<PlayerMovement>();
-        mouseLook = GetComponentInChildren<MouseLook>();
-        playerController = GetComponent<PlayerController>();
+        togglePlayerCursor = GetComponent<TogglePlayerCursor>();
     }
 
     // Update is called once per frame
@@ -61,25 +56,16 @@ public class Inventory : MonoBehaviour
     void ToggleInventory()
     {
         inventoryPanel.SetActive(!inventoryPanel.activeSelf);
-        crossHair.SetActive(!crossHair.activeSelf);
 
         if (inventoryPanel.activeSelf)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            movement.enabled = false;
-            mouseLook.enabled = false;
-            playerController.enabled = false;
+
+            togglePlayerCursor.ChangeToCursor();
             inventoryUI.ReloadUI(gameObject);
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            movement.enabled = true;
-            mouseLook.enabled = true;
-            playerController.enabled = true;
+            togglePlayerCursor.ChangeToPlayer();
         }
     }
 }

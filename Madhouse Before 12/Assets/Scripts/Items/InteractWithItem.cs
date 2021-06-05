@@ -12,6 +12,7 @@ public class InteractWithItem : MonoBehaviour
     private ItemPickup itemBeingPickedUp;
     private DisplayUI itemDisplayUI;
     private Inventory inventory;
+    private TogglePlayerCursor togglePlayerCursor;
     private bool isExaminingItem = false;
 
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class InteractWithItem : MonoBehaviour
     {
         mainCamera = Camera.main;
         inventory = gameObject.transform.parent.GetComponent<Inventory>();
+        togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
     }
 
     // Update is called once per frame
@@ -47,6 +49,19 @@ public class InteractWithItem : MonoBehaviour
             {
                 Animator animator = itemDisplayUI.GetComponent<Animator>();
                 animator.SetBool("isBtmOpen", !animator.GetBool("isBtmOpen"));
+            }
+            else if (itemDisplayUI.type == "Keypad")
+            {
+                CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
+                if (keypadCanvas.IsCanvasOn()) {
+                    // keypadCanvas.CanvasOff();
+                    // togglePlayerCursor.ChangeToPlayer();
+                    Debug.Log("Other player is using");
+                } else {
+                    itemDisplayUI.transform.parent.GetComponent<KeyController>().ChangeActiveCharacter(gameObject.transform.parent.gameObject);
+                    keypadCanvas.CanvasOn();
+                    togglePlayerCursor.ChangeToCursor();
+                }                
             }
             else
             {
@@ -78,7 +93,8 @@ public class InteractWithItem : MonoBehaviour
                 itemDisplayUI = display;
 
                 ItemPickup item = hit.collider.GetComponent<ItemPickup>();
-                if (item != null) {
+                if (item != null)
+                {
                     itemBeingPickedUp = item;
                 }
                 return;
@@ -94,9 +110,12 @@ public class InteractWithItem : MonoBehaviour
                 {
                     note.CloseNote();
                 }
-            } else if (itemDisplayUI.type != "DrawerTop" && itemDisplayUI.type != "DrawerBtm") {
+            }
+            else if (itemDisplayUI.type != "DrawerTop" && itemDisplayUI.type != "DrawerBtm")
+            {
                 ItemAppear ia = itemBeingPickedUp.GetComponent<ItemAppear>();
-                if (ia != null) {
+                if (ia != null)
+                {
                     ia.CloseItem();
                 }
             }
