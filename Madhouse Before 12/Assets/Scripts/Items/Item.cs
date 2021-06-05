@@ -34,4 +34,8 @@ public class Item : MonoBehaviour
         focusPanelImage.enabled = false;
         displayNameText.enabled = false;
     }
+
+    public Sprite GetExpandIcon() {
+        return onExpandIcon;
+    }
 }

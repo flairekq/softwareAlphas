@@ -88,20 +88,19 @@ public class DisplayUI : MonoBehaviour
                 display.transform.position = new Vector3(display.transform.position.x - 0.344f, display.transform.position.y, display.transform.position.z);
             }
         }
-        // else if (type.Equals("DrawerBtm"))
-        // {
-        //     if (animator.GetBool("isBtmOpen"))
-        //     {
-        //         display.transform.position = new Vector3(display.transform.position.x + 0.344f, display.transform.position.y, display.transform.position.z);
-        //     }
-        //     else
-        //     {
-        //         drawerUIText.text = "Open";
-        //     }
-        // }
         else
         {
 
         }
+    }
+
+    public void HideUI()
+    {
+        display.SetActive(false);
+    }
+
+    public bool IsMouseOvering()
+    {
+        return displayInfo;
     }
 }

@@ -27,7 +27,7 @@ public class InteractWithItem : MonoBehaviour
         SelectItemToInteractWithFromRay();
 
         // examine
-        if (Input.GetKeyDown(KeyCode.E) && itemDisplayUI != null)
+        if (Input.GetKeyDown(KeyCode.E) && itemDisplayUI != null && itemDisplayUI.IsMouseOvering())
         {
             if (itemDisplayUI.type == "Note")
             {
@@ -50,13 +50,18 @@ public class InteractWithItem : MonoBehaviour
             }
             else
             {
-
+                ItemAppear ia = itemDisplayUI.GetComponent<ItemAppear>();
+                if (ia != null)
+                {
+                    ia.ToggleItem();
+                    isExaminingItem = ia.isExaminingItem();
+                }
             }
 
         }
 
         // take
-        if (Input.GetKeyDown(KeyCode.Q) && itemBeingPickedUp != null && !isExaminingItem)
+        if (Input.GetKeyDown(KeyCode.Q) && itemBeingPickedUp != null && !isExaminingItem && itemDisplayUI.IsMouseOvering())
         {
             itemBeingPickedUp.PickUp(inventory);
         }
@@ -65,7 +70,7 @@ public class InteractWithItem : MonoBehaviour
     void SelectItemToInteractWithFromRay()
     {
         ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 1f, layer))
+        if (Physics.Raycast(ray, out hit, 1.2f, layer))
         {
             DisplayUI display = hit.collider.GetComponent<DisplayUI>();
             if (display != null)
@@ -88,6 +93,11 @@ public class InteractWithItem : MonoBehaviour
                 if (note != null)
                 {
                     note.CloseNote();
+                }
+            } else if (itemDisplayUI.type != "DrawerTop" && itemDisplayUI.type != "DrawerBtm") {
+                ItemAppear ia = itemBeingPickedUp.GetComponent<ItemAppear>();
+                if (ia != null) {
+                    ia.CloseItem();
                 }
             }
 

@@ -5,10 +5,12 @@ using UnityEngine;
 public class OpenCloseDrawerBehaviour : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        DisplayUI display = animator.GetComponent<DisplayUI>();
+        display.HideUI();
+        display.enabled = false;
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,8 +21,9 @@ public class OpenCloseDrawerBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       DisplayUI display = animator.GetComponent<DisplayUI>();
-       display.ShiftDisplayUI();
+        DisplayUI display = animator.GetComponent<DisplayUI>();
+        display.ShiftDisplayUI();
+        display.enabled = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
