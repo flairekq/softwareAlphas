@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
                 // // Move our player to what we hit
                 // Debug.Log("We hit " + hit.collider.name + " " + hit.point);
                 // Stop focusing any objects
-                RemoveFocus();
+                // RemoveFocus();
             }
         }
 
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("player attacking");
 
-                    SetFocus(interactable);
+                    // SetFocus(interactable);
 
                     if (interactable is Enemy)
                     {
@@ -61,13 +61,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetFocus(Interactable newFocus)
-    {
-        focus = newFocus;
-    }
+    // void SetFocus(Interactable newFocus)
+    // {
+    //     focus = newFocus;
+    // }
 
-    void RemoveFocus()
-    {
-        focus = null;
-    }
+    // void RemoveFocus()
+    // {
+    //     focus = null;
+    // }
 }
