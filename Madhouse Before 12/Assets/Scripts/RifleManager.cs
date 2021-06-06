@@ -16,8 +16,9 @@ public class RifleManager : MonoBehaviour
 
     public ParticleSystem muzzleFlash;
 
-    //private Animator anim;
+    private Animator anim;
 
+    private bool aiming = false;
 
     private int isShooting = Animator.StringToHash("isShooting");
    // private int isIdle = Animator.StringToHash("isIdle");
@@ -26,16 +27,32 @@ public class RifleManager : MonoBehaviour
     private void Start()
     { 
         currentBullets = bulletspermag;
-         //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     void Update() {
-         if(Input.GetMouseButtonDown(0)) {
-           // Aim();
-            
+
+        // move gun to shooting position
+
+        if(aiming) {
+            Aim();
         }
-        if(Input.GetMouseButtonDown(1))
+         if(Input.GetMouseButtonDown(1)) {
+           if(!aiming) {
+               Aim();
+           } else {
+               aiming = false; 
+               Idle();
+           }  
+        }
+        //Shooting 
+        if(Input.GetMouseButtonDown(0))
         {
+            if(!aiming) {
+                Aim();
+                Shoot();
+            } else {
+
             if(currentBullets <= 0 && totalbulletsleft>0) {
                 //Reload();
                 currentBullets = bulletspermag;
@@ -44,12 +61,22 @@ public class RifleManager : MonoBehaviour
             Shoot();
             // StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
             }
+        }
            
-        }/* else {
-            anim.SetBool("isIdle",true);
-            anim.SetBool(isShooting, false);
-            anim.SetBool("isReload", false);
-        } */
+        } if(!aiming){
+           Idle();
+        } 
+    }
+
+    void Aim() {
+        aiming = true;
+        anim.SetBool("isShooting", true); 
+        anim.SetBool("isIdle", false);
+    }
+
+    void Idle() {
+        anim.SetBool("isIdle", true);
+        anim.SetBool("isShooting", false);
     }
 
     void Shoot()
