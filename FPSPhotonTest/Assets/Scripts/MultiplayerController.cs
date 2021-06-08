@@ -11,6 +11,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     [SerializeField] private float speed = 5f;
     [SerializeField] private float lookSensitivity = 3f;
     [SerializeField] Weapon[] weapons;
+    [SerializeField] Transform[] childrenTransforms;
 
     private int weaponIndex;
     private int previousWeaponIndex = -1;
@@ -36,14 +37,17 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        if (PV.IsMine) {
-            EquipWeapon(0);
-        } else {
-            Destroy(GetComponentInChildren<Camera>().gameObject);
-        }
-
         motor = GetComponent<PlayerMotor>();
         anim = GetComponentInChildren<Animator>();
+
+        if (PV.IsMine)
+        {
+            EquipWeapon(0);
+        }
+        else
+        {
+            Destroy(GetComponentInChildren<Camera>().gameObject);
+        }
     }
 
     void Update()
@@ -118,31 +122,65 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     }
 
-    void EquipWeapon(int _index) {
-        if (_index == previousWeaponIndex) {
+    void EquipWeapon(int _index)
+    {
+        if (_index == previousWeaponIndex)
+        {
             return;
         }
 
         weaponIndex = _index;
         weapons[weaponIndex].itemGameObject.SetActive(true);
 
-        if (previousWeaponIndex != -1) {
+        if (previousWeaponIndex != -1)
+        {
             weapons[previousWeaponIndex].itemGameObject.SetActive(false);
         }
 
         previousWeaponIndex = weaponIndex;
 
-        if (PV.IsMine) {
+        if (PV.IsMine)
+        {
             Hashtable hash = new Hashtable();
             hash.Add("weaponIndex", weaponIndex);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
     }
 
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps) {
-        if (!PV.IsMine && targetPlayer == PV.Owner) {
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        if (!PV.IsMine && targetPlayer == PV.Owner)
+        {
             EquipWeapon((int)changedProps["weaponIndex"]);
         }
     }
+
+    // public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    // {
+    //     if (stream.IsWriting)
+    //     {
+    //         for (int i = 0; i < childrenTransforms.Length; i++)
+    //         {
+    //             if (childrenTransforms[i] != null)
+    //             {
+    //                 stream.SendNext(childrenTransforms[i].localPosition);
+    //                 stream.SendNext(childrenTransforms[i].localRotation);
+    //                 stream.SendNext(childrenTransforms[i].localScale);
+    //             }
+    //         }
+    //     }
+    //     else
+    //     {
+    //         for (int i = 0; i < childrenTransforms.Length; i++)
+    //         {
+    //             if (childrenTransforms[i] != null)
+    //             {
+    //                 childrenTransforms[i].localPosition = (Vector3)stream.ReceiveNext();
+    //                 childrenTransforms[i].localRotation = (Quaternion)stream.ReceiveNext();
+    //                 childrenTransforms[i].localScale = (Vector3)stream.ReceiveNext();
+    //             }
+    //         }
+    //     }
+    // }
 
 }
