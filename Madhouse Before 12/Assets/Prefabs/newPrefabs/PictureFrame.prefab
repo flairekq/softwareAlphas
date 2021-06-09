@@ -1232,6 +1232,7 @@ GameObject:
   - component: {fileID: 6831266514243373512}
   - component: {fileID: 6831266514243373518}
   - component: {fileID: 6831266514243373519}
+  - component: {fileID: -6776335964753425702}
   m_Layer: 12
   m_Name: PictureFrame
   m_TagString: Untagged
@@ -1298,7 +1299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fc3eaee5eeb41d6b14dfe5f2888762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemImage: {fileID: 0}
 --- !u!114 &6831266514243373518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1315,9 +1315,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 5d956fbc6427c45e588daf1098268e46, type: 3}
   content: 
   onExpandIcon: {fileID: 21300000, guid: 5d956fbc6427c45e588daf1098268e46, type: 3}
-  noteText: {fileID: 0}
-  displayNameText: {fileID: 0}
-  focusPanelImage: {fileID: 0}
 --- !u!114 &6831266514243373519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,3 +1327,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1749faec22b9e48aeb288829284aae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6776335964753425702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6831266514243373514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
