@@ -27,7 +27,7 @@ public class RifleManager : MonoBehaviour
 
     void Awake()
     {
-        PV = GetComponent<PhotonView>();
+       PV = GetComponent<PhotonView>();
     }
 
     private void Start()
