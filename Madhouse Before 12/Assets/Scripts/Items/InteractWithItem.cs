@@ -105,7 +105,7 @@ public class InteractWithItem : MonoBehaviour
             {
                 // ignore vertical distance
                 Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.transform.position.y, display.transform.position.z);
-                if (Vector3.Distance(temp, this.transform.parent.transform.position) <= 1.2f) {
+                if (Vector3.Distance(temp, this.transform.parent.transform.position) <= 1.5f) {
                     itemDisplayUI = display;
 
                     ItemPickup item = hit.collider.GetComponent<ItemPickup>();

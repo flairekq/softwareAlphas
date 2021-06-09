@@ -278,16 +278,14 @@ MonoBehaviour:
   name: Note #1
   icon: {fileID: 21300000, guid: 4dac783fa38a24a3fb28e17a4743e374, type: 3}
   content: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Id ornare arcu odio ut sem
-    nulla pharetra diam sit. Viverra accumsan in nisl nisi scelerisque eu ultrices
-    vitae. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate
-    sapien. Mollis aliquam ut porttitor leo a. Eros donec ac odio tempor orci dapibus
-    ultrices in. In nibh mauris cursus mattis molestie a iaculis. Turpis cursus in
-    hac habitasse platea dictumst quisque sagittis purus. In nibh mauris cursus mattis
-    molestie a iaculis at erat. Justo eget magna fermentum iaculis eu non. Eu feugiat
-    pretium nibh ipsum consequat nisl vel. Viverra orci sagittis eu volutpat odio
-    facilisis mauris. In dictum non consectetur a erat nam. In pellentesque massa
-    placerat duis ultricies lacus.
+    tempor incididunt ut labore et dolore magna aliqua. Interdum consectetur libero
+    id faucibus nisl. Volutpat consequat mauris nunc congue nisi vitae suscipit tellus.
+    Volutpat commodo sed egestas egestas fringilla. Nunc sed augue lacus viverra
+    vitae. Sed blandit libero volutpat sed. At risus viverra adipiscing at in. Orci
+    eu lobortis elementum nibh tellus molestie nunc non blandit. Sit amet nisl suscipit
+    adipiscing bibendum. Est ullamcorper eget nulla facilisi etiam. Enim sit amet
+    venenatis urna cursus. Mauris nunc congue nisi vitae. Sed vulputate mi sit amet.
+    Dictum at tempor commodo.
   onExpandIcon: {fileID: 21300000, guid: 2c7b295741aa8433d961e502fa798634, type: 3}
 --- !u!114 &8176423001302087902
 MonoBehaviour:
