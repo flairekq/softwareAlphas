@@ -11,6 +11,11 @@ public class InventorySlot : MonoBehaviour
     GameObject item;
     Item details;
     private GameObject activeChar;
+
+    [SerializeField] private Text noteText = null;
+    [SerializeField] private Text displayNameText = null;
+    [SerializeField] private Image focusPanelImage = null;
+
     public void AddItem(GameObject newItem, GameObject character)
     {
         activeChar = character;
@@ -39,10 +44,10 @@ public class InventorySlot : MonoBehaviour
     public void OnRemoveButton()
     {
         item.transform.position = new Vector3(activeChar.transform.position.x, 0.5f, activeChar.transform.position.z);
-        item.SetActive(true);
+        item.GetComponent<ItemPickup>().MakeVisible();
 
         activeChar.GetComponent<Inventory>().Remove(item);
-        details.OffExamine();
+        details.OffExamine(noteText, displayNameText, focusPanelImage);
     }
 
     public void UseItem()
@@ -50,7 +55,7 @@ public class InventorySlot : MonoBehaviour
         // Debug.Log("using item " + details);
         if (item != null)
         {
-            details.Examine();
+            details.Examine(noteText, displayNameText, focusPanelImage);
         }
     }
 }

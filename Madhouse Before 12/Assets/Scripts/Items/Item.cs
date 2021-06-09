@@ -7,12 +7,16 @@ public class Item : MonoBehaviour
     [SerializeField] public Sprite icon = null;
     [SerializeField] public string content = "";
     [SerializeField] private Sprite onExpandIcon;
-    [SerializeField] private Text noteText = null;
-    [SerializeField] private Text displayNameText = null;
-    [SerializeField] private Image focusPanelImage = null;
+    private Text noteText = null;
+    private Text displayNameText = null;
+    private Image focusPanelImage = null;
 
-    public void Examine()
+    public void Examine(Text nt, Text dnt, Image fpi)
     {
+        noteText = nt;
+        displayNameText = dnt;
+        focusPanelImage = fpi;
+
         if (content != "")
         {
             noteText.text = content;
@@ -29,7 +33,11 @@ public class Item : MonoBehaviour
         displayNameText.enabled = true;
     }
 
-    public void OffExamine() {
+    public void OffExamine(Text nt, Text dnt, Image fpi) {
+        noteText = nt;
+        displayNameText = dnt;
+        focusPanelImage = fpi;
+        
         noteText.enabled = false;
         focusPanelImage.enabled = false;
         displayNameText.enabled = false;

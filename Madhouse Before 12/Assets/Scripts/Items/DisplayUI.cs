@@ -22,15 +22,15 @@ public class DisplayUI : MonoBehaviour
         FadeCanvas();
     }
 
-    void OnMouseOver()
-    {
-        displayInfo = true;
-    }
+    // void OnMouseOver()
+    // {
+    //     displayInfo = true;
+    // }
 
-    void OnMouseExit()
-    {
-        displayInfo = false;
-    }
+    // void OnMouseExit()
+    // {
+    //     displayInfo = false;
+    // }
 
     void FadeCanvas()
     {
@@ -102,5 +102,10 @@ public class DisplayUI : MonoBehaviour
     public bool IsMouseOvering()
     {
         return displayInfo;
+    }
+
+    public void SetDisplayInfo(bool val)
+    {
+        displayInfo = val;
     }
 }

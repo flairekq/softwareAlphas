@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class TogglePlayerCursor : MonoBehaviour
 {
-    public GameObject crossHair;
+    [SerializeField] private GameObject crossHair;
 
-    private PlayerMovement movement;
-    private MouseLook mouseLook;
-    private PlayerController playerController;
+    private PlayerMotor movement;
+    private FPSCamera mouseLook;
+    private MultiplayerController playerController;
+    private RifleManager rifleManager;
 
     void Start()
     {
-        movement = GetComponent<PlayerMovement>();
-        mouseLook = GetComponentInChildren<MouseLook>();
-        playerController = GetComponent<PlayerController>();
+        // crossHair = GameObject.FindGameObjectWithTag("CrossHairCanvas");
+        movement = GetComponent<PlayerMotor>();
+        mouseLook = GetComponent<FPSCamera>();
+        playerController = GetComponent<MultiplayerController>();
+        rifleManager = GetComponentInChildren<RifleManager>();
     }
 
     public void ChangeToCursor()
@@ -25,6 +28,7 @@ public class TogglePlayerCursor : MonoBehaviour
         movement.enabled = false;
         mouseLook.enabled = false;
         playerController.enabled = false;
+        rifleManager.enabled = false;
         crossHair.SetActive(false);
 
     }
@@ -36,6 +40,7 @@ public class TogglePlayerCursor : MonoBehaviour
         movement.enabled = true;
         mouseLook.enabled = true;
         playerController.enabled = true;
+        rifleManager.enabled = true;
         crossHair.SetActive(true);
     }
 }
