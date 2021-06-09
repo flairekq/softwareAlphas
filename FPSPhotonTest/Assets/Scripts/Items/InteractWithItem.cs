@@ -19,6 +19,7 @@ public class InteractWithItem : MonoBehaviour
     [SerializeField] private Image examineCanvasOldPaperImage;
     [SerializeField] private Text examineCanvasOldPaperText;
     [SerializeField] private Image examineCanvasItemImage;
+    [SerializeField] private Image crossHairImage;
 
     // Start is called before the first frame update
     void Start()
@@ -94,7 +95,8 @@ public class InteractWithItem : MonoBehaviour
 
     void SelectItemToInteractWithFromRay()
     {
-        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        // ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        ray = mainCamera.ScreenPointToRay(crossHairImage.transform.position);
         if (Physics.Raycast(ray, out hit, 1.2f, layer))
         {
             DisplayUI display = hit.collider.GetComponent<DisplayUI>();
