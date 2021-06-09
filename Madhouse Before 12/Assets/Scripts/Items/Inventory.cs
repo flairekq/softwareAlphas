@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Inventory : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
     public int space = 6;
-    public GameObject inventoryPanel;
-    public InventoryUI inventoryUI;
+    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private InventoryUI inventoryUI;
     private TogglePlayerCursor togglePlayerCursor;
 
     public List<GameObject> items = new List<GameObject>();
+    private PhotonView PV;
+
     public bool Add(GameObject item)
     {
 
@@ -38,15 +41,27 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        // GameObject inventoryCanvas = GameObject.FindGameObjectWithTag("InventoryCanvas");
+        // inventoryPanel = inventoryCanvas.transform.GetChild(0).gameObject;
+        // inventoryUI = inventoryCanvas.GetComponent<InventoryUI>();
         togglePlayerCursor = GetComponent<TogglePlayerCursor>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.I))
         {
             ToggleInventory();

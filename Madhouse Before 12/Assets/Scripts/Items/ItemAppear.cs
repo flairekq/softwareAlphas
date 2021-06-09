@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class ItemAppear : MonoBehaviour
 {
-    [SerializeField] private Image itemImage;
+    private Image itemImage;
     private Sprite icon;
 
     void Start()
     {
         icon = GetComponent<Item>().GetExpandIcon();
+    }
+
+    public void RetrievePlayerCanvas(Image img)
+    {
+        itemImage = img;
     }
 
     public void ToggleItem()

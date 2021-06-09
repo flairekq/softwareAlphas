@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Photon.Pun;
+using System.IO;
 
 public class PlayerManager : MonoBehaviour
 {
-    #region Singleton
-
-    public static PlayerManager instance;
-
-    void Awake() {
-        instance = this;
+    PhotonView PV;
+    void Awake()
+    {
+        PV = GetComponent<PhotonView>();
     }
 
-    #endregion
+    // Start is called before the first frame update
+    void Start()
+    {
+        if (PV.IsMine)
+        {
+            CreateController();
+        }
+    }
 
-    public GameObject player;
-
-    public void KillPlayer() {
-        // get current scene to restart it  
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    void CreateController()
+    {
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player3"), new Vector3(0, 1, 0), Quaternion.identity);
     }
 }

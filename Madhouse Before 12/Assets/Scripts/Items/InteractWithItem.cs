@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractWithItem : MonoBehaviour
 {
-    Ray ray;
-    RaycastHit hit;
-    Camera mainCamera;
-    [SerializeField] LayerMask layer;
+    private Ray ray;
+    private RaycastHit hit;
+    private Camera mainCamera;
+    [SerializeField] private LayerMask layer;
 
     private ItemPickup itemBeingPickedUp;
     private DisplayUI itemDisplayUI;
@@ -15,10 +16,15 @@ public class InteractWithItem : MonoBehaviour
     private TogglePlayerCursor togglePlayerCursor;
     private bool isExaminingItem = false;
 
+    [SerializeField] private Image examineCanvasOldPaperImage;
+    [SerializeField] private Text examineCanvasOldPaperText;
+    [SerializeField] private Image examineCanvasItemImage;
+    [SerializeField] private Image crossHairImage;
+
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main;
+        mainCamera = GetComponent<Camera>();
         inventory = gameObject.transform.parent.GetComponent<Inventory>();
         togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
     }
@@ -36,6 +42,7 @@ public class InteractWithItem : MonoBehaviour
                 NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
                 if (note != null)
                 {
+                    note.RetrievePlayerCanvas(examineCanvasOldPaperImage, examineCanvasOldPaperText);
                     note.ToggleNote();
                     isExaminingItem = note.isExaminingNote();
                 }
@@ -53,21 +60,25 @@ public class InteractWithItem : MonoBehaviour
             else if (itemDisplayUI.type == "Keypad")
             {
                 CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
-                if (keypadCanvas.IsCanvasOn()) {
+                if (keypadCanvas.IsCanvasOn())
+                {
                     // keypadCanvas.CanvasOff();
                     // togglePlayerCursor.ChangeToPlayer();
                     Debug.Log("Other player is using");
-                } else {
+                }
+                else
+                {
                     itemDisplayUI.transform.parent.GetComponent<KeyController>().ChangeActiveCharacter(gameObject.transform.parent.gameObject);
                     keypadCanvas.CanvasOn();
                     togglePlayerCursor.ChangeToCursor();
-                }                
+                }
             }
             else
             {
                 ItemAppear ia = itemDisplayUI.GetComponent<ItemAppear>();
                 if (ia != null)
                 {
+                    ia.RetrievePlayerCanvas(examineCanvasItemImage);
                     ia.ToggleItem();
                     isExaminingItem = ia.isExaminingItem();
                 }
@@ -84,20 +95,27 @@ public class InteractWithItem : MonoBehaviour
 
     void SelectItemToInteractWithFromRay()
     {
-        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 1.2f, layer))
+        // ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        ray = mainCamera.ScreenPointToRay(crossHairImage.transform.position);
+        if (Physics.Raycast(ray, out hit, 2.5f, layer))
         {
             DisplayUI display = hit.collider.GetComponent<DisplayUI>();
+
             if (display != null)
             {
-                itemDisplayUI = display;
+                // ignore vertical distance
+                Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.transform.position.y, display.transform.position.z);
+                if (Vector3.Distance(temp, this.transform.parent.transform.position) <= 1.2f) {
+                    itemDisplayUI = display;
 
-                ItemPickup item = hit.collider.GetComponent<ItemPickup>();
-                if (item != null)
-                {
-                    itemBeingPickedUp = item;
+                    ItemPickup item = hit.collider.GetComponent<ItemPickup>();
+                    if (item != null)
+                    {
+                        itemBeingPickedUp = item;
+                    }
+                    return;
                 }
-                return;
+                
             }
         }
 
@@ -108,6 +126,7 @@ public class InteractWithItem : MonoBehaviour
                 NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
                 if (note != null)
                 {
+                    note.RetrievePlayerCanvas(examineCanvasOldPaperImage, examineCanvasOldPaperText);
                     note.CloseNote();
                 }
             }
@@ -116,6 +135,7 @@ public class InteractWithItem : MonoBehaviour
                 ItemAppear ia = itemBeingPickedUp.GetComponent<ItemAppear>();
                 if (ia != null)
                 {
+                    ia.RetrievePlayerCanvas(examineCanvasItemImage);
                     ia.CloseItem();
                 }
             }

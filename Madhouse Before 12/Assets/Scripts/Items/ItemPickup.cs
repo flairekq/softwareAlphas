@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class ItemPickup : MonoBehaviour
+public class ItemPickup : MonoBehaviourPunCallbacks
 {
     private Item item;
+    private PhotonView PV;
+
+    void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     void Start()
     {
-        // NoteAppear note = gameObject.GetComponent<NoteAppear>();
-        // if (note != null) {
-        //     item.content = note.GetContent();
-        // }
         item = gameObject.GetComponent<Item>();
     }
 
@@ -22,8 +26,20 @@ public class ItemPickup : MonoBehaviour
         if (wasPickedUp)
         {
             // Destroy(gameObject);
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
+            PV.RPC("RPC_HandleItem", RpcTarget.AllBuffered, false);
         }
+    }
 
+    public void MakeVisible()
+    {
+        PV.RPC("RPC_HandleItem", RpcTarget.AllBuffered, true);
+    }
+
+    [PunRPC]
+    private void RPC_HandleItem(bool active)
+    {
+        GameObject item = PhotonView.Find(PV.ViewID).gameObject;
+        item.SetActive(active);
     }
 }

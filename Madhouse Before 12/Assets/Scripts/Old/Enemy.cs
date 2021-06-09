@@ -8,11 +8,11 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyStats))]
 public class Enemy : Interactable
 {
-    PlayerManager playerManager;
+    PlayerManagerOld playerManagerOld;
     EnemyStats myStats;
 
     void Start() {
-        playerManager = PlayerManager.instance;
+        playerManagerOld = PlayerManagerOld.instance;
         myStats = GetComponent<EnemyStats>();
     }
 
@@ -20,7 +20,7 @@ public class Enemy : Interactable
     {
         // base.Interact();
         // Attack the enemy
-        CharacterCombat playerCombat = playerManager.player.GetComponent<CharacterCombat>();
+        CharacterCombat playerCombat = playerManagerOld.player.GetComponent<CharacterCombat>();
         if (playerCombat != null) {
             playerCombat.Attack(myStats);
         }

@@ -8,6 +8,6 @@ public class PlayerStats : CharacterStats
     {
         base.Die();
         // Kill the player
-        PlayerManager.instance.KillPlayer();
+        PlayerManagerOld.instance.KillPlayer();
     }
 }

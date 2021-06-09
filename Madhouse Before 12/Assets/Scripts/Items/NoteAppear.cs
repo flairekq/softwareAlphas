@@ -5,13 +5,19 @@ using UnityEngine.UI;
 
 public class NoteAppear : MonoBehaviour
 {
-    [SerializeField] private Image noteImage;
-    [SerializeField] private Text text;
+    private Image noteImage;
+    private Text text;
     private string content;
 
     void Start()
     {
         content = GetComponent<Item>().content;
+    }
+
+    public void RetrievePlayerCanvas(Image image, Text txt)
+    {
+        noteImage = image;
+        text = txt;
     }
 
     public void ToggleNote()
