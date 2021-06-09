@@ -33,7 +33,11 @@ public class Item : MonoBehaviour
         displayNameText.enabled = true;
     }
 
-    public void OffExamine() {
+    public void OffExamine(Text nt, Text dnt, Image fpi) {
+        noteText = nt;
+        displayNameText = dnt;
+        focusPanelImage = fpi;
+        
         noteText.enabled = false;
         focusPanelImage.enabled = false;
         displayNameText.enabled = false;

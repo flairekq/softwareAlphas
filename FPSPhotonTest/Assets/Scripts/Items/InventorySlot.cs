@@ -47,7 +47,7 @@ public class InventorySlot : MonoBehaviour
         item.GetComponent<ItemPickup>().MakeVisible();
 
         activeChar.GetComponent<Inventory>().Remove(item);
-        details.OffExamine();
+        details.OffExamine(noteText, displayNameText, focusPanelImage);
     }
 
     public void UseItem()
