@@ -25,6 +25,10 @@ public class RifleManager : MonoBehaviour
     // private int isIdle = Animator.StringToHash("isIdle");
     private PhotonView PV;
 
+    public Transform CameraPos;
+
+   public Transform CharacterPos;
+
     void Awake()
     {
        PV = GetComponent<PhotonView>();
@@ -36,8 +40,16 @@ public class RifleManager : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    void FixedUpdate() 
+    {
+      transform.position = CameraPos.transform.position;
+ 
+      transform.rotation = CameraPos.transform.rotation;
+    }
+
     void Update()
     {
+        transform.rotation = CameraPos.transform.rotation;
 
         // move gun to shooting position
 

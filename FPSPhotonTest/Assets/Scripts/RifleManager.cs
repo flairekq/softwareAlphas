@@ -15,6 +15,8 @@ public class RifleManager : MonoBehaviour
     public Transform shootPoint;
     //public CameraShake cameraShake;
 
+    
+
     public ParticleSystem muzzleFlash;
 
     private Animator anim;
