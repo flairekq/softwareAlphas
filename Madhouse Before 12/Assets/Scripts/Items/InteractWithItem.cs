@@ -62,8 +62,6 @@ public class InteractWithItem : MonoBehaviour
                 CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
                 if (keypadCanvas.IsCanvasOn())
                 {
-                    // keypadCanvas.CanvasOff();
-                    // togglePlayerCursor.ChangeToPlayer();
                     Debug.Log("Other player is using");
                 }
                 else
@@ -72,6 +70,10 @@ public class InteractWithItem : MonoBehaviour
                     keypadCanvas.CanvasOn();
                     togglePlayerCursor.ChangeToCursor();
                 }
+            }
+            else if (itemDisplayUI.type == "Door")
+            {
+                itemDisplayUI.OpenDoor(this.transform.parent.position);
             }
             else
             {
@@ -104,8 +106,9 @@ public class InteractWithItem : MonoBehaviour
             if (display != null)
             {
                 // ignore vertical distance
-                Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.transform.position.y, display.transform.position.z);
-                if (Vector3.Distance(temp, this.transform.parent.transform.position) <= 1.5f) {
+                Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.position.y, display.transform.position.z);
+                if (Vector3.Distance(temp, this.transform.parent.position) <= 1.5f)
+                {
                     itemDisplayUI = display;
 
                     ItemPickup item = hit.collider.GetComponent<ItemPickup>();
@@ -115,7 +118,7 @@ public class InteractWithItem : MonoBehaviour
                     }
                     return;
                 }
-                
+
             }
         }
 

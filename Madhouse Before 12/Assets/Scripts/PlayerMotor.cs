@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-[RequireComponent(typeof(Rigidbody))]
+// [RequireComponent(typeof(Rigidbody))]
 public class PlayerMotor : MonoBehaviour
 {
+    [SerializeField] private float gravity;
     private Camera cam;
     private Transform playerCamera;
 
     private Vector3 velocity = Vector3.zero;
+    private float verticalVelocity;
     private Vector3 rotation = Vector3.zero;
-
     private Vector3 cameraRotation = Vector3.zero;
-    private Rigidbody rb;
+    // private Rigidbody rb;
+    private CharacterController cc;
     private PhotonView PV;
 
     // private float cameraPitch = 0.0f;
@@ -25,7 +27,8 @@ public class PlayerMotor : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        // rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CharacterController>();
         cam = GetComponentInChildren<Camera>();
         playerCamera = cam.transform;
     }
@@ -59,13 +62,27 @@ public class PlayerMotor : MonoBehaviour
     {
         if (velocity != Vector3.zero)
         {
-            rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+            if (cc.isGrounded && verticalVelocity < 0)
+            {
+                verticalVelocity = -2f;
+            }
+            else
+            {
+                verticalVelocity -= gravity * Time.fixedDeltaTime;
+            }
+
+            Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
+
+            cc.Move(velocity * Time.fixedDeltaTime);
+            cc.Move(moveVector * Time.fixedDeltaTime);
+            
+            // rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
     }
 
     void PerformRotation()
     {
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+        // rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
         if (cam != null)
         {
 

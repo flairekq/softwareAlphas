@@ -22,6 +22,7 @@ public class CrosshairDetectItem : MonoBehaviour
                 DisplayUI display = hit.collider.GetComponent<DisplayUI>();
                 if (display != null)
                 {
+                    display.SetPlayerPosition(cam.transform.parent.position);
                     previousItem = currentItem;
                     currentItem = display;
                     currentItem.SetDisplayInfo(true);

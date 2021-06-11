@@ -36,6 +36,7 @@ MonoBehaviour:
   - ClickRpc
   - DestroyRpc
   - RPC_HandleItem
+  - RPC_HandleDoor
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

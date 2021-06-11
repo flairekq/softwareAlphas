@@ -9,7 +9,9 @@ public class DisplayUI : MonoBehaviour
     public bool displayInfo;
     public string type;
     public Text drawerUIText;
-    private Animator animator;
+    protected Animator animator;
+
+    protected Vector3 playerPos = Vector3.zero;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class DisplayUI : MonoBehaviour
     //     displayInfo = false;
     // }
 
-    void FadeCanvas()
+    public virtual void FadeCanvas()
     {
         if (displayInfo)
         {
@@ -99,13 +101,23 @@ public class DisplayUI : MonoBehaviour
         display.SetActive(false);
     }
 
-    public bool IsMouseOvering()
+    public virtual bool IsMouseOvering()
     {
         return displayInfo;
     }
 
-    public void SetDisplayInfo(bool val)
+    public virtual void SetDisplayInfo(bool val)
     {
         displayInfo = val;
+    }
+
+    public void SetPlayerPosition(Vector3 pos)
+    {
+        playerPos = pos;
+    }
+
+    public virtual void OpenDoor(Vector3 pos)
+    {
+        playerPos = pos;
     }
 }
