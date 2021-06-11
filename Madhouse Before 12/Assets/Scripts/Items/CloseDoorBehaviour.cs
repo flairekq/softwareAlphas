@@ -7,11 +7,13 @@ public class CloseDoorBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       DisplayUIDoor displayUIDoor = animator.GetComponent<DisplayUIDoor>();
-       displayUIDoor.meshCollider.enabled = true;
-        if (displayUIDoor.meshCollider2 != null) {
-           displayUIDoor.meshCollider2.enabled = true;
-       }
+        DisplayUIDoor displayUIDoor = animator.GetComponent<DisplayUIDoor>();
+        displayUIDoor.boxCollider.enabled = true;
+        displayUIDoor.meshCollider.enabled = true;
+        if (displayUIDoor.meshCollider2 != null)
+        {
+            displayUIDoor.meshCollider2.enabled = true;
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

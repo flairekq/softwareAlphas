@@ -9,6 +9,7 @@ public class OpenDoorBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         DisplayUIDoor displayUIDoor = animator.GetComponent<DisplayUIDoor>();
+        displayUIDoor.boxCollider.enabled = false;
         displayUIDoor.meshCollider.enabled = false;
         if (displayUIDoor.meshCollider2 != null)
         {

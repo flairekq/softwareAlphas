@@ -947,7 +947,6 @@ GameObject:
   - component: {fileID: 2188052925719210852}
   - component: {fileID: 1741256066}
   - component: {fileID: 1741256065}
-  - component: {fileID: 1893239584989372342}
   - component: {fileID: 6477398928619612648}
   m_Layer: 12
   m_Name: Door_V1
@@ -1026,20 +1025,8 @@ MonoBehaviour:
   behindDoorDisplayInfo: 0
   meshCollider: {fileID: 64354846292301542}
   meshCollider2: {fileID: 0}
+  boxCollider: {fileID: 0}
   PV: {fileID: 0}
---- !u!65 &1893239584989372342
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119892339220620}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2, y: 2.2, z: 0.3}
-  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!114 &6477398928619612648
 MonoBehaviour:
   m_ObjectHideFlags: 0

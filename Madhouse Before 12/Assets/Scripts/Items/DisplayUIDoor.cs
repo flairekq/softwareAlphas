@@ -9,11 +9,14 @@ public class DisplayUIDoor : DisplayUI
     public bool behindDoorDisplayInfo;
     public MeshCollider meshCollider;
     public MeshCollider meshCollider2;
+    public BoxCollider boxCollider;
     public PhotonView PV;
 
     void Awake()
     {
         PV = GetComponent<PhotonView>();
+        boxCollider = GetComponent<BoxCollider>();
+
     }
 
     public override void FadeCanvas()
