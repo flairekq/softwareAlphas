@@ -1314,7 +1314,6 @@ GameObject:
   - component: {fileID: 1544661142120763485}
   - component: {fileID: 1508415507}
   - component: {fileID: 1508415506}
-  - component: {fileID: 8210902984842280509}
   - component: {fileID: 4825765708231264238}
   m_Layer: 12
   m_Name: DoorD_V2
@@ -1394,30 +1393,7 @@ MonoBehaviour:
   behindDoorDisplayInfo: 0
   meshCollider: {fileID: 4742243963111237038}
   meshCollider2: {fileID: 230006024516226581}
---- !u!114 &8210902984842280509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793096737568600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: isOpeningFront
-  - Type: 4
-    SynchronizeType: 1
-    Name: isOpeningBack
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
+  PV: {fileID: 0}
 --- !u!114 &4825765708231264238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,7 +1413,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 8210902984842280509}
   - {fileID: 1312807029}
   - {fileID: 551809602}
   sceneViewId: 0

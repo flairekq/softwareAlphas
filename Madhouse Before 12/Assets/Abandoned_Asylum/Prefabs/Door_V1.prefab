@@ -948,7 +948,6 @@ GameObject:
   - component: {fileID: 1741256066}
   - component: {fileID: 1741256065}
   - component: {fileID: 1893239584989372342}
-  - component: {fileID: 620906944031143817}
   - component: {fileID: 6477398928619612648}
   m_Layer: 12
   m_Name: Door_V1
@@ -1027,6 +1026,7 @@ MonoBehaviour:
   behindDoorDisplayInfo: 0
   meshCollider: {fileID: 64354846292301542}
   meshCollider2: {fileID: 0}
+  PV: {fileID: 0}
 --- !u!65 &1893239584989372342
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1040,30 +1040,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 2.2, z: 0.3}
   m_Center: {x: 0, y: 1.1, z: 0}
---- !u!114 &620906944031143817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119892339220620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: isOpeningFront
-  - Type: 4
-    SynchronizeType: 1
-    Name: isOpeningBack
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
 --- !u!114 &6477398928619612648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,7 +1059,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 620906944031143817}
   - {fileID: 285106262}
   sceneViewId: 0
   InstantiationId: 0
