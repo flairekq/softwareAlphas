@@ -7,6 +7,7 @@ public class SwitchController : MonoBehaviour
 {
     private Animator animator;
     private PhotonView PV;
+    private bool isOn = false;
 
     void Awake()
     {
@@ -32,12 +33,18 @@ public class SwitchController : MonoBehaviour
 
     private void OnSwitch()
     {
+        isOn = true;
         PV.RPC("RPC_HandleSwitch", RpcTarget.All, "isOn", true);
     }
 
     public void OffSwitch()
     {
+        isOn = false;
         PV.RPC("RPC_HandleSwitch", RpcTarget.All, "isOn", false);
+    }
+
+    public bool IsSwitchOn() {
+        return isOn;
     }
 
     [PunRPC]
