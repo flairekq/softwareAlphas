@@ -75,6 +75,11 @@ public class InteractWithItem : MonoBehaviour
             {
                 itemDisplayUI.OpenDoor(this.transform.parent.position);
             }
+            else if (itemDisplayUI.type == "Switch")
+            {
+                SwitchController sc = itemDisplayUI.GetComponent<SwitchController>();
+                sc.ToggleSwitch();
+            }
             else
             {
                 ItemAppear ia = itemDisplayUI.GetComponent<ItemAppear>();
