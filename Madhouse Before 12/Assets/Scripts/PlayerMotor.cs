@@ -6,10 +6,8 @@ using Photon.Pun;
 // [RequireComponent(typeof(Rigidbody))]
 public class PlayerMotor : MonoBehaviour
 {
-    [SerializeField] private float gravity;
     private Camera cam;
     private Transform playerCamera;
-
     private Vector3 velocity = Vector3.zero;
     private float verticalVelocity;
     private Vector3 rotation = Vector3.zero;
@@ -62,19 +60,27 @@ public class PlayerMotor : MonoBehaviour
     {
         if (velocity != Vector3.zero)
         {
-            if (cc.isGrounded && verticalVelocity < 0)
-            {
-                verticalVelocity = -2f;
-            }
-            else
-            {
-                verticalVelocity -= gravity * Time.fixedDeltaTime;
+            // if (cc.isGrounded && verticalVelocity < 0)
+            // {
+            //     verticalVelocity = -2f;
+            // }
+            // else
+            // {
+            //     verticalVelocity -= gravity * Time.fixedDeltaTime;
+            // }
+
+            if (cc.isGrounded) {
+                float groundedGravity = -.05f;
+                verticalVelocity = groundedGravity;
+            } else {
+                float gravity = -9.8f;
+                verticalVelocity += gravity;
             }
 
             Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
 
-            cc.Move(velocity * Time.fixedDeltaTime);
-            cc.Move(moveVector * Time.fixedDeltaTime);
+            cc.Move(velocity * Time.deltaTime);
+            cc.Move(moveVector * Time.deltaTime);
             
             // rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
