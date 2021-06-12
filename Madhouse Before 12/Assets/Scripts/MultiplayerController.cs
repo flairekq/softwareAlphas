@@ -28,6 +28,8 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     private int backwardsRun = Animator.StringToHash("backwardsRun");
 
+    private int isWalkingRight = Animator.StringToHash("isWalkingRight");
+
     private PhotonView PV;
 
     void Awake()
@@ -86,9 +88,17 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         }
         if (!Input.GetKey(KeyCode.S))
         {
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
             {
                 WalkForward();
+            }
+            if(Input.GetKey(KeyCode.D)) 
+            {
+                WalkRight();
+            }
+            if(Input.GetKey(KeyCode.A)) 
+            {
+                WalkLeft();
             }
         }
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S))
@@ -104,6 +114,8 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
         anim.SetBool(backwardsWalk, false);
         anim.SetBool(forwardWalking, false);
+        anim.SetBool(isWalkingRight, false);
+        anim.SetBool("isWalkingLeft", false);
         anim.SetBool(isIdle, true);
     }
 
@@ -122,6 +134,17 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     }
 
+    private void WalkRight() 
+    {
+        anim.SetBool(isIdle, false);
+        anim.SetBool(isWalkingRight, true);
+    }
+
+    private void WalkLeft() 
+    {
+        anim.SetBool(isIdle, false);
+        anim.SetBool("isWalkingLeft", true);
+    }
     void EquipWeapon(int _index)
     {
         if (_index == previousWeaponIndex)

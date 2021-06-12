@@ -22,8 +22,14 @@ public class RifleManager : MonoBehaviour
     private bool aiming = false;
 
     private int isShooting = Animator.StringToHash("isShooting");
+
+    private int isRecoil = Animator.StringToHash("isRecoil");
     // private int isIdle = Animator.StringToHash("isIdle");
     private PhotonView PV;
+
+    public Transform CameraPos;
+
+   public Transform CharacterPos;
 
     void Awake()
     {
@@ -36,8 +42,16 @@ public class RifleManager : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    void FixedUpdate() 
+    {
+      transform.position = CameraPos.transform.position;
+ 
+      transform.rotation = CameraPos.transform.rotation;
+    }
+
     void Update()
     {
+        transform.rotation = CameraPos.transform.rotation;
 
         // move gun to shooting position
 
@@ -82,6 +96,8 @@ public class RifleManager : MonoBehaviour
                 else
                 {
                     Shoot();
+                    Recoil();
+                   // Aim();
                     // StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
                 }
             }
@@ -97,6 +113,7 @@ public class RifleManager : MonoBehaviour
     {
         aiming = true;
         anim.SetBool("isShooting", true);
+        anim.SetBool(isRecoil, false);
         anim.SetBool("isIdle", false);
     }
 
@@ -104,6 +121,13 @@ public class RifleManager : MonoBehaviour
     {
         anim.SetBool("isIdle", true);
         anim.SetBool("isShooting", false);
+    }
+
+    void Recoil() 
+    {
+        anim.SetBool(isRecoil, true);
+        anim.SetBool("isShooting", false);
+        
     }
 
     void Shoot()
