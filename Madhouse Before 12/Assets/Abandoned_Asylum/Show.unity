@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -100,7 +100,8 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 273dff6b7e6831c4aa9e5a8884e509c7,
     type: 2}
-  m_UseShadowmask: 1
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 5c96e51386fa544a09d519d4ddc912c2,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -120,6 +121,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -253,6 +256,11 @@ PrefabInstance:
     - target: {fileID: 4004346039268598, guid: 0f2f9c5303aac26479fc10d223f34183, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366012635953152618, guid: 0f2f9c5303aac26479fc10d223f34183,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f2f9c5303aac26479fc10d223f34183, type: 3}
@@ -1782,6 +1790,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4e415f653a84dbf9beaa516106e762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: 
+  roomLocation: 0
+  isClear: 0
+  inRoomTrigger: {fileID: 0}
 --- !u!65 &445744019
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1810,6 +1822,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1834,6 +1847,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &445744021
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2571,6 +2585,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4e415f653a84dbf9beaa516106e762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: 
+  roomLocation: 0
+  isClear: 0
+  inRoomTrigger: {fileID: 0}
 --- !u!65 &631984466
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2599,6 +2617,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2623,6 +2642,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &631984468
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4587,6 +4607,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4611,6 +4632,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1385929965
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4631,16 +4653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2cca2a823c9a43fea3861b07dc6a423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1385929967}
-  speed: 12
-  gravity: -9.81
-  jumpHeight: 3
-  groundCheck: {fileID: 1759999327}
-  groundDistance: 0.4
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 512
-  jumpRememberTime: 0.2
 --- !u!143 &1385929967
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6916,6 +6928,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642115295640085224, guid: beef3bcde1610f04aa96275436147bb9,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187229625542488729, guid: beef3bcde1610f04aa96275436147bb9,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603256681189195174, guid: beef3bcde1610f04aa96275436147bb9,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7168598914203236052, guid: beef3bcde1610f04aa96275436147bb9,
         type: 3}
@@ -11427,6 +11454,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8604929025111882514, guid: beef3bcde1610f04aa96275436147bb9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8604929270391138644, guid: beef3bcde1610f04aa96275436147bb9,
         type: 3}
       propertyPath: m_Layer
@@ -13846,6 +13878,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605208534724202152, guid: beef3bcde1610f04aa96275436147bb9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605208592609304962, guid: beef3bcde1610f04aa96275436147bb9,
         type: 3}
