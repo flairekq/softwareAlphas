@@ -19,10 +19,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject playerListItemPrefab;
 
     [SerializeField] GameObject startGameButton;
+    private PhotonView PV;
 
     void Awake()
     {
         Instance = this;
+        PV = GetComponent<PhotonView>();
     }
 
     // Start is called before the first frame update
@@ -131,6 +133,14 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         // as 1 is the build index of the game scene which we had set in the build settings
         // PhotonNetwork.LoadLevel(1);
+        
+        // shows loading screen to all players in the same room as host
+        PV.RPC("ShowLoadingScreenToAll", RpcTarget.All);
         PhotonNetwork.LoadLevel(2);
+    }
+
+    [PunRPC]
+    private void ShowLoadingScreenToAll() {
+        MenuManager.Instance.OpenMenu("loading");
     }
 }

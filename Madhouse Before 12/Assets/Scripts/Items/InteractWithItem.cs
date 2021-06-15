@@ -15,6 +15,7 @@ public class InteractWithItem : MonoBehaviour
     private Inventory inventory;
     private TogglePlayerCursor togglePlayerCursor;
     private bool isExaminingItem = false;
+    private DisplayInformation displayInformation;
 
     [SerializeField] private Image examineCanvasOldPaperImage;
     [SerializeField] private Text examineCanvasOldPaperText;
@@ -27,6 +28,7 @@ public class InteractWithItem : MonoBehaviour
         mainCamera = GetComponent<Camera>();
         inventory = gameObject.transform.parent.GetComponent<Inventory>();
         togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
+        displayInformation = gameObject.transform.parent.GetComponentInChildren<DisplayInformation>();
     }
 
     // Update is called once per frame
@@ -96,6 +98,7 @@ public class InteractWithItem : MonoBehaviour
         // take
         if (Input.GetKeyDown(KeyCode.Q) && itemBeingPickedUp != null && !isExaminingItem && itemDisplayUI.IsMouseOvering())
         {
+            // Debug.Log("picking up");
             itemBeingPickedUp.PickUp(inventory);
         }
     }
