@@ -12,16 +12,17 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private InventoryUI inventoryUI;
     private TogglePlayerCursor togglePlayerCursor;
+    private DisplayInformation displayInformation;
 
     public List<GameObject> items = new List<GameObject>();
     private PhotonView PV;
 
     public bool Add(GameObject item)
     {
-
         if (items.Count == space)
         {
-            Debug.Log("Not enough room");
+            // Debug.Log("Not enough room");
+            displayInformation.DisplayText("Your inventory is full");
             return false;
         }
         items.Add(item);
@@ -53,6 +54,7 @@ public class Inventory : MonoBehaviour
         // inventoryPanel = inventoryCanvas.transform.GetChild(0).gameObject;
         // inventoryUI = inventoryCanvas.GetComponent<InventoryUI>();
         togglePlayerCursor = GetComponent<TogglePlayerCursor>();
+        displayInformation = GetComponentInChildren<DisplayInformation>();
     }
 
     // Update is called once per frame
