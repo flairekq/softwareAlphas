@@ -840,7 +840,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4447383728893956
 Transform:
@@ -913,6 +913,7 @@ MonoBehaviour:
   behindDoorDisplayInfo: 0
   meshCollider: {fileID: 64332218561538894}
   meshCollider2: {fileID: 64743008532172070}
+  boxCollider: {fileID: 0}
   PV: {fileID: 0}
 --- !u!114 &1225206881997794716
 MonoBehaviour:
@@ -956,7 +957,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4798718848437718
 Transform:
@@ -1069,7 +1070,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4107808480331818
 Transform:
