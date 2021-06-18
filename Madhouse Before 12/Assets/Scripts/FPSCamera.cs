@@ -44,6 +44,7 @@ public class FPSCamera : MonoBehaviour
         {
             return;
         }
+        
         UpdateMouseLook();
     }
 
