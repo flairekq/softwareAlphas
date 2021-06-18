@@ -145,6 +145,8 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         anim.SetBool(isIdle, false);
         anim.SetBool("isWalkingLeft", true);
     }
+
+    
     void EquipWeapon(int _index)
     {
         if (_index == previousWeaponIndex)
@@ -168,7 +170,9 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             hash.Add("weaponIndex", weaponIndex);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
+        
     }
+    
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
