@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513bd2b429e2d4f869ead737a2f11c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Picture Frame #2
+  name: Childhood Photo
   icon: {fileID: 21300000, guid: 819d349e5d6754a328f4280ff67bf888, type: 3}
   content: 
   onExpandIcon: {fileID: 21300000, guid: 819d349e5d6754a328f4280ff67bf888, type: 3}

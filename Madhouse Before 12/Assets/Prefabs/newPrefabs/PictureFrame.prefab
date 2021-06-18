@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 0.5882353}
+  m_Color: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1311,7 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513bd2b429e2d4f869ead737a2f11c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Picture Frame #1
+  name: Family Photo
   icon: {fileID: 21300000, guid: 5d956fbc6427c45e588daf1098268e46, type: 3}
   content: 
   onExpandIcon: {fileID: 21300000, guid: 5d956fbc6427c45e588daf1098268e46, type: 3}
