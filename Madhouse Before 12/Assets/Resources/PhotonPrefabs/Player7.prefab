@@ -2824,6 +2824,7 @@ GameObject:
   - component: {fileID: 9080577311340249312}
   - component: {fileID: 1389267047401399496}
   - component: {fileID: 1389267047401399497}
+  - component: {fileID: 757415212}
   m_Layer: 0
   m_Name: M1A1
   m_TagString: Untagged
@@ -3018,6 +3019,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 9080577311340249316}
+  - {fileID: 757415212}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3051,6 +3053,22 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &757415212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9080577311340249314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &9080577311376139643
 GameObject:
   m_ObjectHideFlags: 0
@@ -4131,9 +4149,6 @@ MonoBehaviour:
   - {fileID: 9080577311035310811}
   - {fileID: 9080577312497087220}
   - {fileID: 9080577311712747809}
-  gunLayer:
-    serializedVersion: 2
-    m_Bits: 16384
 --- !u!1 &9080577311694683067
 GameObject:
   m_ObjectHideFlags: 0
@@ -12981,6 +12996,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d2131ceff37a42af98a826ad6ee4385, type: 3}
+--- !u!114 &5494282270201926470 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 186330686192214862, guid: 6d2131ceff37a42af98a826ad6ee4385,
+    type: 3}
+  m_PrefabInstance: {fileID: 5668455613338824712}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc12f228bc514c95b38e19330f328ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5494282270201926469 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 186330686192214861, guid: 6d2131ceff37a42af98a826ad6ee4385,
@@ -13005,15 +13032,3 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5668455613338824712}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5494282270201926470 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 186330686192214862, guid: 6d2131ceff37a42af98a826ad6ee4385,
-    type: 3}
-  m_PrefabInstance: {fileID: 5668455613338824712}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc12f228bc514c95b38e19330f328ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
