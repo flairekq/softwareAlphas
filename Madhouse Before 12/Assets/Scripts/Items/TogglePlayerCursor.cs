@@ -31,6 +31,8 @@ public class TogglePlayerCursor : MonoBehaviour
         rifleManager = GetComponentInChildren<RifleManager>();
         crosshairDetectItem = crossHair.GetComponentInChildren<CrosshairDetectItem>();
         reticleScript = reticle.GetComponentInChildren<Reticle>();
+
+        ChangeToPlayer();
     }
 
     // Update is called once per frame
