@@ -40,7 +40,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     void Start()
     {
         motor = GetComponent<PlayerMotor>();
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
 
         if (PV.IsMine)
         {
@@ -181,6 +181,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             EquipWeapon((int)changedProps["weaponIndex"]);
         }
     }
+
 
     // public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     // {

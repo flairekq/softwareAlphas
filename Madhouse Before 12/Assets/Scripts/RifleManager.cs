@@ -51,21 +51,24 @@ public class RifleManager : MonoBehaviour
 
 
         
-        transform.position = CameraPos.transform.position;
+       transform.position = CameraPos.transform.position;
 
         transform.rotation = CameraPos.transform.rotation;
+        
     }
 
     void Update()
     {
         // move gun to shooting position
-       if (!PV.IsMine)
+    if (!PV.IsMine)
         {
             return;
         }
         
+        
         transform.position = CameraPos.transform.position;
         transform.rotation = CameraPos.transform.rotation;
+        
 
         if (aiming)
         {
