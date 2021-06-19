@@ -16,7 +16,7 @@ public class CrosshairDetectItem : MonoBehaviour
         if (cam != null)
         {
             Ray ray = cam.ScreenPointToRay(this.transform.position);
-            if (Physics.Raycast(ray, out hit, 2.5f, layer))
+            if (Physics.Raycast(ray, out hit, 2f, layer))
             {
                 // Debug.Log("hit");
                 DisplayUI display = hit.collider.GetComponent<DisplayUI>();

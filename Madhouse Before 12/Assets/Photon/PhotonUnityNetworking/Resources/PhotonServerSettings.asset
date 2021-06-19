@@ -32,7 +32,13 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList: []
+  RpcList:
+  - ClickRpc
+  - DestroyRpc
+  - RPC_HandleDoor
+  - RPC_HandleItem
+  - RPC_HandleSwitch
+  - ShowLoadingScreenToAll
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

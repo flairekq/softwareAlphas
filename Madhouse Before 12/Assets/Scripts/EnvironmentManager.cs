@@ -20,5 +20,6 @@ public class EnvironmentManager : MonoBehaviour
     public GameObject[] secondFloorRooms;
     public PositionRange[] secondFloorPositionRange;
     public bool isClearBasement = false;
+    public Transform powerGenerator;
     
 }

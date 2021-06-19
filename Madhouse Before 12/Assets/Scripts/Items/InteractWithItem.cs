@@ -21,6 +21,8 @@ public class InteractWithItem : MonoBehaviour
     [SerializeField] private Text examineCanvasOldPaperText;
     [SerializeField] private Image examineCanvasItemImage;
     [SerializeField] private Image crossHairImage;
+    private ZoomingCam zoomingCam;
+    private bool isTooCloseOrFar = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class InteractWithItem : MonoBehaviour
         inventory = gameObject.transform.parent.GetComponent<Inventory>();
         togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
         displayInformation = gameObject.transform.parent.GetComponentInChildren<DisplayInformation>();
+        zoomingCam = GetComponent<ZoomingCam>();
     }
 
     // Update is called once per frame
@@ -37,7 +40,7 @@ public class InteractWithItem : MonoBehaviour
         SelectItemToInteractWithFromRay();
 
         // examine
-        if (Input.GetKeyDown(KeyCode.E) && itemDisplayUI != null && itemDisplayUI.IsMouseOvering())
+        if (Input.GetKeyDown(KeyCode.E) && itemDisplayUI != null && (itemDisplayUI.IsMouseOvering() || (itemDisplayUI.type.Equals("PowerGenerator") && zoomingCam.IsZoomedIn())))
         {
             if (itemDisplayUI.type == "Note")
             {
@@ -64,13 +67,14 @@ public class InteractWithItem : MonoBehaviour
                 CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
                 if (keypadCanvas.IsCanvasOn())
                 {
-                    Debug.Log("Other player is using");
+                    // Debug.Log("Other player is using");
+                    displayInformation.DisplayText("Other player is using");
                 }
                 else
                 {
                     itemDisplayUI.transform.parent.GetComponent<KeyController>().ChangeActiveCharacter(gameObject.transform.parent.gameObject);
-                    keypadCanvas.CanvasOn();
                     togglePlayerCursor.ChangeToCursor();
+                    keypadCanvas.CanvasOn();
                 }
             }
             else if (itemDisplayUI.type == "Door")
@@ -82,6 +86,24 @@ public class InteractWithItem : MonoBehaviour
                 SwitchController sc = itemDisplayUI.GetComponent<SwitchController>();
                 sc.ToggleSwitch();
             }
+            else if (itemDisplayUI.type == "PowerGenerator")
+            {
+                PowerGeneratorController pgc = itemDisplayUI.GetComponent<PowerGeneratorController>();
+                if (pgc.IsInUse() && !zoomingCam.IsZoomedIn())
+                {
+                    displayInformation.DisplayText("Other player is using");
+                }
+                else if (pgc.IsInUse() && zoomingCam.IsZoomedIn())
+                {
+                    zoomingCam.ToggleZoom();
+                    pgc.ToggleActivation(false);
+                }
+                else
+                {
+                    zoomingCam.ToggleZoom();
+                    pgc.ToggleActivation(true);
+                }
+            }
             else
             {
                 ItemAppear ia = itemDisplayUI.GetComponent<ItemAppear>();
@@ -92,8 +114,7 @@ public class InteractWithItem : MonoBehaviour
                     isExaminingItem = ia.isExaminingItem();
                 }
             }
-
-        }
+        } 
 
         // take
         if (Input.GetKeyDown(KeyCode.Q) && itemBeingPickedUp != null && !isExaminingItem && itemDisplayUI.IsMouseOvering())
@@ -101,13 +122,17 @@ public class InteractWithItem : MonoBehaviour
             // Debug.Log("picking up");
             itemBeingPickedUp.PickUp(inventory);
         }
+
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q)) && isTooCloseOrFar) {
+            displayInformation.DisplayText("Too far/close");
+        }
     }
 
     void SelectItemToInteractWithFromRay()
     {
         // ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         ray = mainCamera.ScreenPointToRay(crossHairImage.transform.position);
-        if (Physics.Raycast(ray, out hit, 2.5f, layer))
+        if (Physics.Raycast(ray, out hit, 2f, layer))
         {
             DisplayUI display = hit.collider.GetComponent<DisplayUI>();
 
@@ -115,8 +140,10 @@ public class InteractWithItem : MonoBehaviour
             {
                 // ignore vertical distance
                 Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.position.y, display.transform.position.z);
-                if (Vector3.Distance(temp, this.transform.parent.position) <= 1.5f)
+                float distance = Vector3.Distance(temp, this.transform.parent.position);
+                if ((distance <= 1.8f && !display.type.Equals("PowerGenerator")) || (distance >= 1.4f && distance <= 1.8f && display.type.Equals("PowerGenerator")))
                 {
+                    isTooCloseOrFar = false;
                     itemDisplayUI = display;
 
                     ItemPickup item = hit.collider.GetComponent<ItemPickup>();
@@ -125,7 +152,15 @@ public class InteractWithItem : MonoBehaviour
                         itemBeingPickedUp = item;
                     }
                     return;
+                } else {
+                    // Debug.Log(distance);
+                    itemDisplayUI = null;
+                    isTooCloseOrFar = true;
                 }
+                // else
+                // {
+                //     displayInformation.DisplayText("Too far away");
+                // }
 
             }
         }
@@ -141,6 +176,11 @@ public class InteractWithItem : MonoBehaviour
                     note.CloseNote();
                 }
             }
+            // else if (itemDisplayUI.type == "Keypad")
+            // {
+            //     CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
+            //     keypadCanvas.CanvasOff();
+            // }
             else if (itemDisplayUI.type != "DrawerTop" && itemDisplayUI.type != "DrawerBtm")
             {
                 ItemAppear ia = itemBeingPickedUp.GetComponent<ItemAppear>();
