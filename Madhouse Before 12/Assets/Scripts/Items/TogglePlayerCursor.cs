@@ -25,14 +25,17 @@ public class TogglePlayerCursor : MonoBehaviour
     void Start()
     {
         // crossHair = GameObject.FindGameObjectWithTag("CrossHairCanvas");
-        movement = GetComponent<PlayerMotor>();
-        mouseLook = GetComponent<FPSCamera>();
-        playerController = GetComponent<MultiplayerController>();
-        rifleManager = GetComponentInChildren<RifleManager>();
-        crosshairDetectItem = crossHair.GetComponentInChildren<CrosshairDetectItem>();
-        reticleScript = reticle.GetComponentInChildren<Reticle>();
+        if (PV.IsMine)
+        {
+            movement = GetComponent<PlayerMotor>();
+            mouseLook = GetComponent<FPSCamera>();
+            playerController = GetComponent<MultiplayerController>();
+            rifleManager = GetComponentInChildren<RifleManager>();
+            crosshairDetectItem = crossHair.GetComponentInChildren<CrosshairDetectItem>();
+            reticleScript = reticle.GetComponentInChildren<Reticle>();
 
-        ChangeToPlayer();
+            ChangeToPlayer();
+        }
     }
 
     // Update is called once per frame
