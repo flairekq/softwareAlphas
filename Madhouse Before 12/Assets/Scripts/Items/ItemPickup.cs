@@ -18,7 +18,7 @@ public class ItemPickup : MonoBehaviourPunCallbacks
         item = gameObject.GetComponent<Item>();
     }
 
-    public void PickUp(Inventory inventory)
+    public bool PickUp(Inventory inventory)
     {
         // Debug.Log("picking up " + item.name);
         bool wasPickedUp = inventory.Add(gameObject);
@@ -27,7 +27,9 @@ public class ItemPickup : MonoBehaviourPunCallbacks
             // Destroy(gameObject);
             // gameObject.SetActive(false);
             PV.RPC("RPC_HandleItem", RpcTarget.All, false, this.transform.position);
+            return true;
         }
+        return false;
     }
 
     public void MakeVisible(Vector3 pos)

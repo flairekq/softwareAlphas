@@ -83,21 +83,19 @@ public class DisplayUI : MonoBehaviour
         {
             if (animator.GetBool("isTopOpen") || animator.GetBool("isBtmOpen"))
             {
-                display.transform.position = new Vector3(display.transform.position.x + 0.344f, display.transform.position.y, display.transform.position.z);
+                display.transform.localPosition = new Vector3(display.transform.localPosition.x, display.transform.localPosition.y, display.transform.localPosition.z + 0.344f);
             }
             else
             {
-                display.transform.position = new Vector3(display.transform.position.x - 0.344f, display.transform.position.y, display.transform.position.z);
+                display.transform.localPosition = new Vector3(display.transform.localPosition.x, display.transform.localPosition.y, display.transform.localPosition.z - 0.344f);
             }
-        }
-        else
-        {
-
+            displayInfo = true;
         }
     }
 
     public void HideUI()
     {
+        displayInfo = false;
         display.SetActive(false);
     }
 
