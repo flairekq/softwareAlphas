@@ -78,7 +78,9 @@ public class InteractWithItem : MonoBehaviour
                         togglePlayerCursor.ChangeToCursor();
                         keypadCanvas.CanvasOn();
                     }
-                } else {
+                }
+                else
+                {
                     displayInformation.DisplayText("Power is not on");
                 }
             }
@@ -125,7 +127,14 @@ public class InteractWithItem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && itemBeingPickedUp != null && !isExaminingItem && itemDisplayUI.IsMouseOvering())
         {
             // Debug.Log("picking up");
-            itemBeingPickedUp.PickUp(inventory);
+            if (itemBeingPickedUp.PickUp(inventory))
+            {
+                DrawerItem drawerItem = itemBeingPickedUp.GetComponent<DrawerItem>();
+                if (drawerItem != null)
+                {
+                    drawerItem.isPickedUp = true;
+                }
+            }
         }
 
         if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q)) && isTooCloseOrFar)
@@ -163,6 +172,7 @@ public class InteractWithItem : MonoBehaviour
                 {
                     // Debug.Log(distance);
                     itemDisplayUI = null;
+                    itemBeingPickedUp = null;
                     isTooCloseOrFar = true;
                 }
                 // else

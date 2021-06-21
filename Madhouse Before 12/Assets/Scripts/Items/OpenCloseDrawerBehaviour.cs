@@ -13,10 +13,23 @@ public class OpenCloseDrawerBehaviour : StateMachineBehaviour
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        DrawerItem drawerItem = animator.GetComponentInChildren<DrawerItem>();
+        if (drawerItem != null && !drawerItem.isPickedUp)
+        {
+            if (animator.GetBool("isTopOpen") || animator.GetBool("isBtmOpen"))
+            {
+                // Debug.Log("increasing");
+                drawerItem.item.transform.localPosition = new Vector3(drawerItem.item.transform.localPosition.x, drawerItem.item.transform.localPosition.y, drawerItem.item.transform.localPosition.z + drawerItem.increment);
+            }
+            else
+            {
+                // Debug.Log("decreasing");
+                drawerItem.item.transform.localPosition = new Vector3(drawerItem.item.transform.localPosition.x, drawerItem.item.transform.localPosition.y, drawerItem.item.transform.localPosition.z - drawerItem.increment);
+            }
+        }
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
