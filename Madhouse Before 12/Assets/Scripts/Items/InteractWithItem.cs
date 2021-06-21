@@ -64,17 +64,22 @@ public class InteractWithItem : MonoBehaviour
             }
             else if (itemDisplayUI.type == "Keypad")
             {
-                CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
-                if (keypadCanvas.IsCanvasOn())
+                if (EnvironmentManager.instance.isPowerOn)
                 {
-                    // Debug.Log("Other player is using");
-                    displayInformation.DisplayText("Other player is using");
-                }
-                else
-                {
-                    itemDisplayUI.transform.parent.GetComponent<KeyController>().ChangeActiveCharacter(gameObject.transform.parent.gameObject);
-                    togglePlayerCursor.ChangeToCursor();
-                    keypadCanvas.CanvasOn();
+                    CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
+                    if (keypadCanvas.IsCanvasOn())
+                    {
+                        // Debug.Log("Other player is using");
+                        displayInformation.DisplayText("Other player is using");
+                    }
+                    else
+                    {
+                        itemDisplayUI.transform.parent.GetComponent<KeyController>().ChangeActiveCharacter(gameObject.transform.parent.gameObject);
+                        togglePlayerCursor.ChangeToCursor();
+                        keypadCanvas.CanvasOn();
+                    }
+                } else {
+                    displayInformation.DisplayText("Power is not on");
                 }
             }
             else if (itemDisplayUI.type == "Door")
@@ -96,12 +101,12 @@ public class InteractWithItem : MonoBehaviour
                 else if (pgc.IsInUse() && zoomingCam.IsZoomedIn())
                 {
                     zoomingCam.ToggleZoom();
-                    pgc.ToggleActivation(false);
+                    pgc.ToggleActivation(false, null);
                 }
                 else
                 {
                     zoomingCam.ToggleZoom();
-                    pgc.ToggleActivation(true);
+                    pgc.ToggleActivation(true, mainCamera);
                 }
             }
             else
@@ -114,7 +119,7 @@ public class InteractWithItem : MonoBehaviour
                     isExaminingItem = ia.isExaminingItem();
                 }
             }
-        } 
+        }
 
         // take
         if (Input.GetKeyDown(KeyCode.Q) && itemBeingPickedUp != null && !isExaminingItem && itemDisplayUI.IsMouseOvering())
@@ -123,7 +128,8 @@ public class InteractWithItem : MonoBehaviour
             itemBeingPickedUp.PickUp(inventory);
         }
 
-        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q)) && isTooCloseOrFar) {
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q)) && isTooCloseOrFar)
+        {
             displayInformation.DisplayText("Too far/close");
         }
     }
@@ -152,7 +158,9 @@ public class InteractWithItem : MonoBehaviour
                         itemBeingPickedUp = item;
                     }
                     return;
-                } else {
+                }
+                else
+                {
                     // Debug.Log(distance);
                     itemDisplayUI = null;
                     isTooCloseOrFar = true;
