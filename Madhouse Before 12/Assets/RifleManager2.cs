@@ -7,6 +7,9 @@ public class RifleManager2 : MonoBehaviour
     // Start is called before the first frame update
 
     public Transform CameraPos;
+
+    private float rotx;
+    private float roty;
     void Start()
     {
         
