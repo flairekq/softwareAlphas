@@ -55,7 +55,10 @@ public class RifleManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
+           // Recoil();
             
+        } if(Input.GetMouseButtonUp(0)) {
+            Idle();
         }
        
     }
@@ -71,13 +74,14 @@ public class RifleManager : MonoBehaviour
     void Idle()
     {
         anim.SetBool("isIdle", true);
+        anim.SetBool(isRecoil, false);
         anim.SetBool("isShooting", false);
     }
 
     void Recoil()
     {
         anim.SetBool(isRecoil, true);
-        anim.SetBool("isShooting", false);
+        anim.SetBool("isIdle", false);
 
     }
 
