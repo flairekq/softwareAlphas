@@ -9604,7 +9604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4802847692920367066}
-  - component: {fileID: 2091052447}
+  - component: {fileID: 342443850}
   m_Layer: 0
   m_Name: weaponPivot
   m_TagString: Untagged
@@ -9628,14 +9628,14 @@ Transform:
   m_Father: {fileID: 4369499287431740514}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2091052447
+--- !u!114 &342443850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4802847692920367065}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb9cd687b3a130941b43a076e316968e, type: 3}
   m_Name: 
