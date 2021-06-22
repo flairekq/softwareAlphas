@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunPosition : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Transform CameraPos;
     void Start()
     {
         
@@ -13,6 +14,7 @@ public class GunPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = CameraPos.transform.position;
+        transform.rotation = CameraPos.transform.rotation;
     }
 }
