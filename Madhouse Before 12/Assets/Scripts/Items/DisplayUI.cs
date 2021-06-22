@@ -114,8 +114,9 @@ public class DisplayUI : MonoBehaviour
         playerPos = pos;
     }
 
-    public virtual void OpenDoor(Vector3 pos)
+    public virtual string OpenDoor(Vector3 pos, Inventory inventory)
     {
         playerPos = pos;
+        return "successful";
     }
 }

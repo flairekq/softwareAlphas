@@ -18,6 +18,7 @@ public class OpenCloseDrawerBehaviour : StateMachineBehaviour
         DrawerItem drawerItem = animator.GetComponentInChildren<DrawerItem>();
         if (drawerItem != null && !drawerItem.isPickedUp)
         {
+            drawerItem.UpdateFrames();
             if (animator.GetBool("isTopOpen") || animator.GetBool("isBtmOpen"))
             {
                 // Debug.Log("increasing");

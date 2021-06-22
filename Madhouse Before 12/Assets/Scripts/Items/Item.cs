@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] new private string name = "";
+    [SerializeField] new public string name = "";
     [SerializeField] public Sprite icon = null;
     [SerializeField] public string content = "";
     [SerializeField] private Sprite onExpandIcon;

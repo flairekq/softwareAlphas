@@ -27,6 +27,9 @@ public class EnvironmentManager : MonoBehaviour
     public bool isClearBasement = false;
     public Transform powerGenerator;
     public bool isPowerOn = false;
+    public bool isDayroomUnlocked = false;
+    public bool isClassroomUnlocked = false;
+    public bool isBasementMainUnlocked = false;
 
     public void TogglePower(bool val)
     {
@@ -37,5 +40,27 @@ public class EnvironmentManager : MonoBehaviour
     private void RPC_HandlePowerOnOff(bool val)
     {
         EnvironmentManager.instance.isPowerOn = val;
+    }
+
+    public void UnlockDoor(string name) {
+        EnvironmentManager.instance.PV.RPC("RPC_UnlockDoor", RpcTarget.All, name);
+    }
+
+    [PunRPC]
+    private void RPC_UnlockDoor(string name)
+    {
+        switch (name)
+        {
+            case "dayroom":
+                EnvironmentManager.instance.isDayroomUnlocked = true;
+                break;
+            case "classroom":
+                EnvironmentManager.instance.isClassroomUnlocked = true;
+                break;
+            case "basement":
+                EnvironmentManager.instance.isBasementMainUnlocked = true;
+                break;
+            default: break;
+        }
     }
 }
