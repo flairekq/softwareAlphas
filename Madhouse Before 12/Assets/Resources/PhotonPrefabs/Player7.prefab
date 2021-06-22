@@ -245,7 +245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -90}
   m_SizeDelta: {x: 800, y: 56.8179}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8236483808314799079
@@ -3010,8 +3010,6 @@ MonoBehaviour:
   range: 100
   shootPoint: {fileID: 9080577310920788830}
   muzzleFlash: {fileID: 9080577312431395610}
-  CameraPos: {fileID: 5703341589221989094}
-  CharacterPos: {fileID: 5703341589221989094}
 --- !u!114 &9080577311340249312
 MonoBehaviour:
   m_ObjectHideFlags: 0

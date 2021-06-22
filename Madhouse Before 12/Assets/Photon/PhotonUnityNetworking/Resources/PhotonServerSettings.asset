@@ -42,6 +42,7 @@ MonoBehaviour:
   - RPC_HandlePowerGenerator
   - RPC_HandlePowerOnOff
   - RPC_UnlockDoor
+  - RPC_HandleDrawer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
