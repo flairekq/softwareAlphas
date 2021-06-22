@@ -133,14 +133,54 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         // as 1 is the build index of the game scene which we had set in the build settings
         // PhotonNetwork.LoadLevel(1);
-        
+
         // shows loading screen to all players in the same room as host
         PV.RPC("ShowLoadingScreenToAll", RpcTarget.All);
         PhotonNetwork.LoadLevel(2);
     }
 
     [PunRPC]
-    private void ShowLoadingScreenToAll() {
+    private void ShowLoadingScreenToAll()
+    {
         MenuManager.Instance.OpenMenu("loading");
+    }
+    
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        if (this.CanRecoverFromDisconnect(cause))
+        {
+            this.Recover();
+        }
+    }
+
+    private bool CanRecoverFromDisconnect(DisconnectCause cause)
+    {
+        switch (cause)
+        {
+            // the list here may be non exhaustive and is subject to review
+            case DisconnectCause.Exception:
+            case DisconnectCause.ServerTimeout:
+            case DisconnectCause.ClientTimeout:
+            case DisconnectCause.DisconnectByServerLogic:
+            case DisconnectCause.DisconnectByServerReasonUnknown:
+                return true;
+        }
+        return false;
+    }
+
+    private void Recover()
+    {
+        if (!PhotonNetwork.ReconnectAndRejoin())
+        {
+            Debug.LogError("ReconnectAndRejoin failed, trying Reconnect");
+            if (!PhotonNetwork.Reconnect())
+            {
+                Debug.LogError("Reconnect failed, trying ConnectUsingSettings");
+                if (!PhotonNetwork.ConnectUsingSettings())
+                {
+                    Debug.LogError("ConnectUsingSettings failed");
+                }
+            }
+        }
     }
 }

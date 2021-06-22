@@ -9,10 +9,8 @@ public class KeyPadController : MonoBehaviour
     [SerializeField] private string validCode;
     public int characterLim;
     public InputField codeText;
-
-    // [SerializeField] private GameObject door;
     [SerializeField] private GameObject keypadModel;
-
+    [SerializeField] private string roomName;
     [SerializeField] private AudioClip beep;
     [SerializeField] private AudioClip denied;
     public Text text;
@@ -32,10 +30,9 @@ public class KeyPadController : MonoBehaviour
     {
         if (codeText.text == validCode)
         {
-            // door.GetComponent<OpenDoor>().open = true;
-            // keypadModel.tag = "Untagged"; 
-            Debug.Log("correct code");
-            text.color =  new Color(25f/255f, 137f/255f, 8f/255f, 255f);;
+            // Debug.Log("correct code");
+            text.color =  new Color(25f/255f, 137f/255f, 8f/255f, 255f);
+            EnvironmentManager.instance.UnlockDoor(roomName);
         }
 
         else

@@ -42,6 +42,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public bool isItemPicked(string name) {
+        for (int i = 0; i < items.Count; i++) {
+            Item item = items[i].GetComponent<Item>();
+            if (item.name.Equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void Awake()
     {
         PV = GetComponent<PhotonView>();

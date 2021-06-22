@@ -86,7 +86,11 @@ public class InteractWithItem : MonoBehaviour
             }
             else if (itemDisplayUI.type == "Door")
             {
-                itemDisplayUI.OpenDoor(this.transform.parent.position);
+                string msg = itemDisplayUI.OpenDoor(this.transform.parent.position, inventory);
+                if (!msg.Equals("successful"))
+                {
+                    displayInformation.DisplayText(msg);
+                }
             }
             else if (itemDisplayUI.type == "Switch")
             {
@@ -119,6 +123,14 @@ public class InteractWithItem : MonoBehaviour
                     ia.RetrievePlayerCanvas(examineCanvasItemImage);
                     ia.ToggleItem();
                     isExaminingItem = ia.isExaminingItem();
+                    if (isExaminingItem)
+                    {
+                        togglePlayerCursor.ChangeToCursor();
+                    }
+                    else
+                    {
+                        togglePlayerCursor.ChangeToPlayer();
+                    }
                 }
             }
         }

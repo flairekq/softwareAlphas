@@ -5,6 +5,7 @@ using Photon.Pun;
 
 public class DisplayUIDoor : DisplayUI
 {
+    public string roomName;
     public GameObject behindDoorDisplay;
     public bool behindDoorDisplayInfo;
     public MeshCollider meshCollider;
@@ -16,7 +17,6 @@ public class DisplayUIDoor : DisplayUI
     {
         PV = GetComponent<PhotonView>();
         boxCollider = GetComponent<BoxCollider>();
-
     }
 
     public override void FadeCanvas()
@@ -83,23 +83,52 @@ public class DisplayUIDoor : DisplayUI
         return false;
     }
 
-    public override void OpenDoor(Vector3 pos)
+    public override string OpenDoor(Vector3 pos, Inventory inventory)
     {
-        base.OpenDoor(pos);
+        base.OpenDoor(pos, inventory);
+
+        if (roomName.Equals("dayroom") && !EnvironmentManager.instance.isDayroomUnlocked)
+        {
+            return "You need to enter the correct code";
+        }
+
+        if (roomName.Equals("classroom")
+            && !EnvironmentManager.instance.isClassroomUnlocked)
+        {
+            if (inventory.isItemPicked("Classroom Key"))
+            {
+                EnvironmentManager.instance.UnlockDoor("classroom");
+            }
+            else
+            {
+                return "You need a key";
+            }
+        }
+
+        if (roomName.Equals("basement")
+            && !EnvironmentManager.instance.isBasementMainUnlocked)
+        {
+            if (inventory.isItemPicked("Basement Key"))
+            {
+                EnvironmentManager.instance.UnlockDoor("basement");
+            }
+            else
+            {
+                return "You need a key";
+            }
+        }
 
         Vector3 doorRelative = this.transform.InverseTransformPoint(playerPos);
         if ((doorRelative.z > 0 && meshCollider2 == null) || (doorRelative.z < 0 && meshCollider2 != null))
         {
-            // animator.SetBool("isOpeningFront", true);
             PV.RPC("RPC_HandleDoor", RpcTarget.All, "isOpeningFront", true);
-
         }
         else
         {
-            // animator.SetBool("isOpeningBack", true);
             PV.RPC("RPC_HandleDoor", RpcTarget.All, "isOpeningBack", true);
         }
         playerPos = Vector3.zero;
+        return "successful";
     }
 
     public void CloseDoor(string animationName)

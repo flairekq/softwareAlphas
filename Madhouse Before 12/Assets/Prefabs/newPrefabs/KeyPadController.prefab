@@ -428,7 +428,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1701668507835895571
 Transform:
@@ -463,6 +463,7 @@ MonoBehaviour:
   characterLim: 4
   codeText: {fileID: 1587668515802181481}
   keypadModel: {fileID: 5046975248939020277}
+  roomName: 
   beep: {fileID: 8300000, guid: 972b3ad727a0c364cbe16b402305c631, type: 3}
   denied: {fileID: 8300000, guid: edd81f165f7bb7c4081b474c521ef968, type: 3}
   text: {fileID: 1587668495096710889}

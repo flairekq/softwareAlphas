@@ -822,7 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513bd2b429e2d4f869ead737a2f11c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Rust Key
+  name: Basement Key
   icon: {fileID: 21300000, guid: 0619712b77f9b42629a52f178c65c36b, type: 3}
   content: 
   onExpandIcon: {fileID: 21300000, guid: 1b6568d46b13c49229223ab2d1bf11e5, type: 3}
@@ -868,8 +868,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 0}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
