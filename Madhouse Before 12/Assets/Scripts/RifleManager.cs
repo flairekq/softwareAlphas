@@ -44,59 +44,20 @@ public class RifleManager : MonoBehaviour
 
     void Update()
     {
+
         // move gun to shooting position
     if (!PV.IsMine)
         {
             return;
         }
 
-        if (aiming)
-        {
-            Aim();
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (!aiming)
-            {
-                Aim();
-            }
-            else
-            {
-                aiming = false;
-                Idle();
-            }
-        }
         //Shooting 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!aiming)
-            {
-                Aim();
-                Shoot();
-            }
-            else
-            {
-
-                if (currentBullets <= 0 && totalbulletsleft > 0)
-                {
-                    //Reload();
-                    currentBullets = bulletspermag;
-                    totalbulletsleft -= bulletspermag;
-                }
-                else
-                {
-                    Shoot();
-                    Recoil();
-                    // Aim();
-                    // StartCoroutine(cameraShake.Shake(0.15f, 0.05f));
-                }
-            }
-
+            Shoot();
+            
         }
-        if (!aiming)
-        {
-            Idle();
-        }
+       
     }
 
     void Aim()
