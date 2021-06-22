@@ -101,7 +101,12 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
                 WalkLeft();
             }
         }
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S))
+
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            Jump();
+        }
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S) || 
+            Input.GetKeyUp(KeyCode.Space))
         {
             Idle();
         }
@@ -117,6 +122,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         anim.SetBool(isWalkingRight, false);
         anim.SetBool("isWalkingLeft", false);
         anim.SetBool(isIdle, true);
+        anim.SetBool("isJumping", false);
     }
 
     private void WalkForward()
@@ -144,6 +150,12 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     {
         anim.SetBool(isIdle, false);
         anim.SetBool("isWalkingLeft", true);
+    }
+
+    private void Jump()
+    {
+        anim.SetBool(isIdle, false);
+        anim.SetBool("isJumping", true);
     }
 
     
