@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using Photon.Pun;
 
 public class AimWeapon : MonoBehaviour
 {
@@ -12,24 +13,32 @@ public class AimWeapon : MonoBehaviour
 
     public Rig aimLayer;
 
+    private PhotonView PV;
+    void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //right mouse click to aim
-        if(Input.GetMouseButtonDown(1))
+        if (!PV.IsMine)
         {
-            shootLayer.weight = shootLayer.weight == 0 ? 1 : 0;;
-            aimLayer.weight = shootLayer.weight == 0? 1 : 0;
-        } 
-            
-        
-        
+            return;
+        }
+
+        //right mouse click to aim
+        if (Input.GetMouseButtonDown(1))
+        {
+            shootLayer.weight = shootLayer.weight == 0 ? 1 : 0; ;
+            aimLayer.weight = shootLayer.weight == 0 ? 1 : 0;
+        }
+
     }
 }

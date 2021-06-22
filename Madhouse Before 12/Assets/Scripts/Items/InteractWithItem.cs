@@ -54,13 +54,17 @@ public class InteractWithItem : MonoBehaviour
             }
             else if (itemDisplayUI.type == "DrawerTop")
             {
-                Animator animator = itemDisplayUI.GetComponent<Animator>();
-                animator.SetBool("isTopOpen", !animator.GetBool("isTopOpen"));
+                // Animator animator = itemDisplayUI.GetComponent<Animator>();
+                // animator.SetBool("isTopOpen", !animator.GetBool("isTopOpen"));
+                DisplayUIDrawer drawer = itemDisplayUI.GetComponent<DisplayUIDrawer>();
+                drawer.ToggleDrawer("isTopOpen");
             }
             else if (itemDisplayUI.type == "DrawerBtm")
             {
-                Animator animator = itemDisplayUI.GetComponent<Animator>();
-                animator.SetBool("isBtmOpen", !animator.GetBool("isBtmOpen"));
+                // Animator animator = itemDisplayUI.GetComponent<Animator>();
+                // animator.SetBool("isBtmOpen", !animator.GetBool("isBtmOpen"));
+                DisplayUIDrawer drawer = itemDisplayUI.GetComponent<DisplayUIDrawer>();
+                drawer.ToggleDrawer("isBtmOpen");
             }
             else if (itemDisplayUI.type == "Keypad")
             {
@@ -168,7 +172,7 @@ public class InteractWithItem : MonoBehaviour
                 // ignore vertical distance
                 Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.position.y, display.transform.position.z);
                 float distance = Vector3.Distance(temp, this.transform.parent.position);
-                if ((distance <= 1.8f && !display.type.Equals("PowerGenerator")) || (distance >= 1.4f && distance <= 1.8f && display.type.Equals("PowerGenerator")))
+                if ((distance <= 1.8f && !display.type.Equals("PowerGenerator")) || (distance >= 1.2f && distance <= 1.8f && display.type.Equals("PowerGenerator")))
                 {
                     isTooCloseOrFar = false;
                     itemDisplayUI = display;

@@ -27,9 +27,9 @@ public class RifleManager : MonoBehaviour
     // private int isIdle = Animator.StringToHash("isIdle");
     private PhotonView PV;
 
-   // public Transform CameraPos;
+    // public Transform CameraPos;
 
-   // public Transform CharacterPos;
+    // public Transform CharacterPos;
 
     void Awake()
     {
@@ -46,7 +46,7 @@ public class RifleManager : MonoBehaviour
     {
 
         // move gun to shooting position
-    if (!PV.IsMine)
+        if (!PV.IsMine)
         {
             return;
         }
