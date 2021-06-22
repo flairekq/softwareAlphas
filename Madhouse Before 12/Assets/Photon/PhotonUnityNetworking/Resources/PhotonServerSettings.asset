@@ -36,13 +36,13 @@ MonoBehaviour:
   - ClickRpc
   - DestroyRpc
   - RPC_HandleDoor
+  - RPC_HandleDrawer
   - RPC_HandleItem
-  - RPC_HandleSwitch
-  - ShowLoadingScreenToAll
   - RPC_HandlePowerGenerator
   - RPC_HandlePowerOnOff
+  - RPC_HandleSwitch
   - RPC_UnlockDoor
-  - RPC_HandleDrawer
+  - ShowLoadingScreenToAll
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1

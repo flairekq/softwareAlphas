@@ -19,10 +19,10 @@ public class BodyAim : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if (PV.IsMine)
-        {
+       if (PV.IsMine)
+        { 
             foreach (MultiAimConstraint component in GetComponentsInChildren<MultiAimConstraint>())
             {
                 var data = component.data.sourceObjects;
