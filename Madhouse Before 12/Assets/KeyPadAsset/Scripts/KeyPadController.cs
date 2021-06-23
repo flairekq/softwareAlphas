@@ -32,13 +32,14 @@ public class KeyPadController : MonoBehaviour
         {
             // Debug.Log("correct code");
             text.color =  new Color(25f/255f, 137f/255f, 8f/255f, 255f);
-            EnvironmentManager.instance.UnlockDoor(roomName);
+            EnvironmentManager.instance.ToggleLockUnlockDoor(roomName, true);
         }
 
         else
         {
             mainAudio.PlayOneShot(denied, 0.2f);
             text.color = Color.red;
+            EnvironmentManager.instance.ToggleLockUnlockDoor(roomName, false);
         }
     }
 }

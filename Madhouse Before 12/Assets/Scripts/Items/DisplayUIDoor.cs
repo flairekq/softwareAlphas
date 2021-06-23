@@ -97,7 +97,7 @@ public class DisplayUIDoor : DisplayUI
         {
             if (inventory.isItemPicked("Classroom Key"))
             {
-                EnvironmentManager.instance.UnlockDoor("classroom");
+                EnvironmentManager.instance.ToggleLockUnlockDoor("classroom", true);
             }
             else
             {
@@ -110,7 +110,7 @@ public class DisplayUIDoor : DisplayUI
         {
             if (inventory.isItemPicked("Basement Key"))
             {
-                EnvironmentManager.instance.UnlockDoor("basement");
+                EnvironmentManager.instance.ToggleLockUnlockDoor("basement", true);
             }
             else
             {
