@@ -32,21 +32,7 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList:
-  - ClickRpc
-  - DestroyRpc
-  - RPC_HandleDoor
-  - RPC_HandleDrawer
-  - RPC_HandleItem
-  - RPC_HandlePowerGenerator
-  - RPC_HandlePowerOnOff
-  - RPC_HandleSwitch
-  - RPC_UnlockDoor
-  - ShowLoadingScreenToAll
-  - RPC_ToggleLockUnlockDoor
-  - RPC_HandlePlayer
-  - RPC_HandleWord
-  - RPC_HandleDiaryClue
+  RpcList: []
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0

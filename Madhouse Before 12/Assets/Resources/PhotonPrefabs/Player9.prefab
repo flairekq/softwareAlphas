@@ -664,6 +664,8 @@ MonoBehaviour:
   examineCanvasOldPaperText: {fileID: 1125061172303296905}
   examineCanvasItemImage: {fileID: 1125061171364620477}
   crossHairImage: {fileID: 3830523277477046171}
+  examineCanvasDiaryClueImage: {fileID: 0}
+  examineCanvasDiaryClueText: {fileID: 0}
 --- !u!114 &224929604412464570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9683,8 +9685,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6526765347841032342}
-  - {fileID: 6526765347832915321}
-  - {fileID: 6526765347527686113}
   m_Father: {fileID: 4851267593247794846}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9770,11 +9770,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6526765347527686114}
   m_LocalRotation: {x: 0.32077178, y: -0.37316442, z: 0.6232242, w: 0.6078203}
-  m_LocalPosition: {x: -0.049200002, y: 0.0036001205, z: 0.13620001}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.29999998}
+  m_LocalPosition: {x: -0.19199999, y: -0.044999912, z: -0.46999997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6526765346355356101}
-  m_RootOrder: 2
+  m_Father: {fileID: 6526765347841032342}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 58.768, y: -5.957, z: 88.078}
 --- !u!1 &6526765347832915322
 GameObject:
@@ -9800,11 +9800,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6526765347832915322}
   m_LocalRotation: {x: 0.08564017, y: 0.40340847, z: -0.7407776, w: 0.53026026}
-  m_LocalPosition: {x: -0.033377245, y: 0.08973527, z: 0.2871236}
-  m_LocalScale: {x: 0.30000004, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: -0.13925748, y: 0.24211723, z: 0.03307859}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6526765346355356101}
-  m_RootOrder: 1
+  m_Father: {fileID: 6526765347841032342}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 43.511, y: 24.516, z: -98.898}
 --- !u!95 &6526765347976242015
 Animator:
