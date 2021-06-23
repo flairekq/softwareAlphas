@@ -13,9 +13,9 @@ public class TogglePlayerCursor : MonoBehaviour
     private FPSCamera mouseLook;
     private MultiplayerController playerController;
     private RifleManager rifleManager;
+    private Flashlight flashlight;
+    private Inventory inventory;
     private PhotonView PV;
-    // private CrosshairDetectItem crosshairDetectItem;
-    // private Reticle reticleScript;
 
     void Awake()
     {
@@ -24,40 +24,28 @@ public class TogglePlayerCursor : MonoBehaviour
 
     void Start()
     {
-        // crossHair = GameObject.FindGameObjectWithTag("CrossHairCanvas");
         if (PV.IsMine)
         {
             movement = GetComponent<PlayerMotor>();
             mouseLook = GetComponent<FPSCamera>();
             playerController = GetComponent<MultiplayerController>();
             rifleManager = GetComponentInChildren<RifleManager>();
-            // crosshairDetectItem = crossHair.GetComponentInChildren<CrosshairDetectItem>();
-            // reticleScript = reticle.GetComponentInChildren<Reticle>();
+            inventory = GetComponent<Inventory>();
+            flashlight = GetComponentInChildren<Flashlight>();
 
+            GameController.instance.AddPlayer(PV.ViewID);
             ChangeToPlayer();
         }
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     if (!PV.IsMine)
-    //     {
-    //         return;
-    //     }
-    // }
-
     public void ChangeToCursor()
     {
-        // Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         movement.enabled = false;
         mouseLook.enabled = false;
         playerController.enabled = false;
         rifleManager.enabled = false;
-        // crosshairDetectItem.enabled = false;
-        // reticleScript.enabled = false;
         crossHair.SetActive(false);
         reticle.SetActive(false);
     }
@@ -93,8 +81,6 @@ public class TogglePlayerCursor : MonoBehaviour
         mouseLook.enabled = true;
         playerController.enabled = true;
         rifleManager.enabled = true;
-        // crosshairDetectItem.enabled = true;
-        // reticleScript.enabled = true;
         crossHair.SetActive(true);
         reticle.SetActive(true);
     }
@@ -104,5 +90,15 @@ public class TogglePlayerCursor : MonoBehaviour
     {
         this.ChangeToPlayer();
         this.OnRenderer();
+    }
+
+    public void GameOver()
+    {
+        if (PV.IsMine)
+        {
+            this.ChangeToCursor();
+            inventory.enabled = false;
+            flashlight.enabled = false;
+        }
     }
 }

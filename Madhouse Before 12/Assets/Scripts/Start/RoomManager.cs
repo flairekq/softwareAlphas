@@ -13,7 +13,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (Instance) // checks if another room manager already exists
         {
-            Destroy(gameObject); // there can only be one
+            Destroy(RoomManager.Instance.gameObject); // there can only be one
             return;
         }
         DontDestroyOnLoad(gameObject); // The only one

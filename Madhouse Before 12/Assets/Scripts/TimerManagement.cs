@@ -66,7 +66,6 @@ public class TimerManagement : MonoBehaviour
     [SerializeField] double elapsedTimeForDisplay = 41400;
     double startTime;
     // in seconds
-    // [SerializeField] double timer = 1800;
     [SerializeField] double timer = 20;
 
     ExitGames.Client.Photon.Hashtable CustomValue;
@@ -89,6 +88,8 @@ public class TimerManagement : MonoBehaviour
                 //Timer Completed
                 //Do What Ever You What to Do Here
                 Debug.Log("time up");
+                GameController.instance.GameOver();
+                this.enabled = false;
             }
             else
             {
@@ -118,7 +119,6 @@ public class TimerManagement : MonoBehaviour
             object propsTime;
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("StartTime", out propsTime))
             {
-                // startTime = double.Parse(PhotonNetwork.CurrentRoom.CustomProperties["StartTime"].ToString());
                 startTime = (double) propsTime;
                 startTimer = true;
             }
