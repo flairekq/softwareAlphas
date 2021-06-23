@@ -14,7 +14,7 @@ public class GunPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = CameraPos.transform.position;
+        
         transform.rotation = CameraPos.transform.rotation;
     }
 }

@@ -9,6 +9,32 @@ public class AimWeapon : MonoBehaviour
     public float turnSpeed = 15f;
     public float aimDuration = 0.5f;
 
+    public Animator RigController; 
+
+    /*
+    private PhotonView PV;
+
+    void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
+     void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!PV.IsMine)
+        {
+            return;
+        }
+
+
+    } */
+
+
     public Rig shootLayer;
 
     public Rig aimLayer;
@@ -41,4 +67,5 @@ public class AimWeapon : MonoBehaviour
         }
 
     }
+    
 }
