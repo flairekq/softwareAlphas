@@ -9,13 +9,24 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private Text infoText;
     private float displayTime = 3f;
     private bool isDisplay = true;
+    private List<string> msges = new List<string>();
 
     void Update()
     {
         if (isDisplay) {
+            if (msges.Count > 0) {
+                infoText.text = msges[0];
+            }
+            
             if (displayTime <= 0f) {
-                panel.SetActive(false);
-                isDisplay = false;
+                if (msges.Count > 0) {
+                    msges.RemoveAt(0);
+                }
+                
+                if (msges.Count == 0) {
+                    panel.SetActive(false);
+                    isDisplay = false;
+                }
                 displayTime = 3f;
             } else {
                 displayTime -= Time.deltaTime;
@@ -25,7 +36,8 @@ public class DisplayInformation : MonoBehaviour
 
     public void DisplayText(string text)
     {
-        infoText.text = text;
+        msges.Add(text);
+        // infoText.text = text;
         panel.SetActive(true);
         isDisplay = true;
     }

@@ -45,6 +45,8 @@ MonoBehaviour:
   - ShowLoadingScreenToAll
   - RPC_ToggleLockUnlockDoor
   - RPC_HandlePlayer
+  - RPC_HandleWord
+  - RPC_HandleDiaryClue
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
