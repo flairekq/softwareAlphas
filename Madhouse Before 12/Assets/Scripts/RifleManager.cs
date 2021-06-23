@@ -55,19 +55,24 @@ public class RifleManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
-           // Recoil();
-            
-        } if(Input.GetMouseButtonUp(0)) {
-            Idle();
+            Recoil();   
+        } if(Input.GetMouseButtonDown(1))
+        {
+            if(aiming) {
+                aiming = false;
+                Idle();
+            } else 
+            {
+                Aim();
+            }
         }
-       
     }
 
     void Aim()
     {
         aiming = true;
         anim.SetBool("isShooting", true);
-        anim.SetBool(isRecoil, false);
+        //anim.SetBool(isRecoil, false);
         anim.SetBool("isIdle", false);
     }
 
