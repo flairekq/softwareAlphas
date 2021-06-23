@@ -11,6 +11,7 @@ public class InventoryUI : MonoBehaviour
     private GameObject character;
     private Inventory inventory;
     [SerializeField] private Text noteText = null;
+    [SerializeField] private Text clueText = null;
     [SerializeField] private Text displayNameText = null;
     [SerializeField] private Image focusPanelImage = null;
 
@@ -21,12 +22,6 @@ public class InventoryUI : MonoBehaviour
             ReloadUI(character);
         }
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void UpdateUI()
@@ -47,6 +42,7 @@ public class InventoryUI : MonoBehaviour
 
         displayNameText.enabled = false;
         noteText.enabled = false;
+        clueText.enabled = false;
         focusPanelImage.enabled = false;
     }
 

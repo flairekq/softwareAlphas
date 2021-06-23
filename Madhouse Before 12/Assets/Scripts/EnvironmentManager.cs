@@ -42,23 +42,23 @@ public class EnvironmentManager : MonoBehaviour
         EnvironmentManager.instance.isPowerOn = val;
     }
 
-    public void UnlockDoor(string name) {
-        EnvironmentManager.instance.PV.RPC("RPC_UnlockDoor", RpcTarget.All, name);
+    public void ToggleLockUnlockDoor(string name, bool val) {
+        EnvironmentManager.instance.PV.RPC("RPC_ToggleLockUnlockDoor", RpcTarget.All, name, val);
     }
 
     [PunRPC]
-    private void RPC_UnlockDoor(string name)
+    private void RPC_ToggleLockUnlockDoor(string name, bool isLocked)
     {
         switch (name)
         {
             case "dayroom":
-                EnvironmentManager.instance.isDayroomUnlocked = true;
+                EnvironmentManager.instance.isDayroomUnlocked = isLocked;
                 break;
             case "classroom":
-                EnvironmentManager.instance.isClassroomUnlocked = true;
+                EnvironmentManager.instance.isClassroomUnlocked = isLocked;
                 break;
             case "basement":
-                EnvironmentManager.instance.isBasementMainUnlocked = true;
+                EnvironmentManager.instance.isBasementMainUnlocked = isLocked;
                 break;
             default: break;
         }

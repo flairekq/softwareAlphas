@@ -21,6 +21,8 @@ public class InteractWithItem : MonoBehaviour
     [SerializeField] private Text examineCanvasOldPaperText;
     [SerializeField] private Image examineCanvasItemImage;
     [SerializeField] private Image crossHairImage;
+    [SerializeField] private Image examineCanvasDiaryClueImage;
+    [SerializeField] private Text examineCanvasDiaryClueText;
     private ZoomingCam zoomingCam;
     private bool isTooCloseOrFar = false;
 
@@ -42,14 +44,29 @@ public class InteractWithItem : MonoBehaviour
         // examine
         if (Input.GetKeyDown(KeyCode.E) && itemDisplayUI != null && (itemDisplayUI.IsMouseOvering() || (itemDisplayUI.type.Equals("PowerGenerator") && zoomingCam.IsZoomedIn())))
         {
-            if (itemDisplayUI.type == "Note")
+            if (itemDisplayUI.type == "Note" || itemDisplayUI.type == "DiaryClue")
             {
                 NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
                 if (note != null)
                 {
-                    note.RetrievePlayerCanvas(examineCanvasOldPaperImage, examineCanvasOldPaperText);
+                    if (itemDisplayUI.type == "Note")
+                    {
+                        note.RetrievePlayerCanvas(examineCanvasOldPaperImage, examineCanvasOldPaperText);
+                    }
+                    else
+                    {
+                        note.RetrievePlayerCanvas(examineCanvasDiaryClueImage, examineCanvasDiaryClueText);
+                    }
                     note.ToggleNote();
                     isExaminingItem = note.isExaminingNote();
+                    if (isExaminingItem)
+                    {
+                        togglePlayerCursor.ChangeToCursor();
+                    }
+                    else
+                    {
+                        togglePlayerCursor.ChangeToPlayer();
+                    }
                 }
             }
             else if (itemDisplayUI.type == "DrawerTop")
@@ -142,13 +159,21 @@ public class InteractWithItem : MonoBehaviour
         // take
         if (Input.GetKeyDown(KeyCode.Q) && itemBeingPickedUp != null && !isExaminingItem && itemDisplayUI.IsMouseOvering())
         {
-            // Debug.Log("picking up");
             if (itemBeingPickedUp.PickUp(inventory))
             {
                 DrawerItem drawerItem = itemBeingPickedUp.GetComponent<DrawerItem>();
                 if (drawerItem != null)
                 {
                     drawerItem.isPickedUp = true;
+                }
+
+                DiaryClue diaryClue = itemBeingPickedUp.GetComponent<DiaryClue>();
+                if (diaryClue != null && !diaryClue.isPickedBefore)
+                {
+                    diaryClue.Picked();
+                    SecretDiary.instance.AddWord(diaryClue.word);
+                    displayInformation.DisplayText("Strangely, words has started to appear on the scroll.");
+                    displayInformation.DisplayText("I should try and find more.");
                 }
             }
         }
@@ -201,12 +226,19 @@ public class InteractWithItem : MonoBehaviour
 
         if (itemBeingPickedUp != null)
         {
-            if (itemDisplayUI.type == "Note")
+            if (itemDisplayUI.type == "Note" || itemDisplayUI.type == "DiaryClue")
             {
                 NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
                 if (note != null)
                 {
-                    note.RetrievePlayerCanvas(examineCanvasOldPaperImage, examineCanvasOldPaperText);
+                    if (itemDisplayUI.type == "Note")
+                    {
+                        note.RetrievePlayerCanvas(examineCanvasOldPaperImage, examineCanvasOldPaperText);
+                    }
+                    else
+                    {
+                        note.RetrievePlayerCanvas(examineCanvasDiaryClueImage, examineCanvasDiaryClueText);
+                    }
                     note.CloseNote();
                 }
             }

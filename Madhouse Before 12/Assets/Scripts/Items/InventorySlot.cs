@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour
     private GameObject activeChar;
 
     [SerializeField] private Text noteText = null;
+    [SerializeField] private Text clueText = null;
     [SerializeField] private Text displayNameText = null;
     [SerializeField] private Image focusPanelImage = null;
 
@@ -52,10 +53,16 @@ public class InventorySlot : MonoBehaviour
 
     public void UseItem()
     {
-        // Debug.Log("using item " + details);
         if (item != null)
         {
-            details.Examine(noteText, displayNameText, focusPanelImage);
+            if (item.GetComponent<DisplayUI>().type.Equals("DiaryClue"))
+            {
+                details.Examine(clueText, displayNameText, focusPanelImage);
+            }
+            else
+            {
+                details.Examine(noteText, displayNameText, focusPanelImage);
+            }
         }
     }
 }
