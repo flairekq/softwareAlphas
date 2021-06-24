@@ -7,7 +7,7 @@ public class DisplayInformation : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
     [SerializeField] private Text infoText;
-    private float displayTime = 3f;
+    private float displayTime = 2.5f;
     private bool isDisplay = true;
     private List<string> msges = new List<string>();
 
@@ -16,6 +16,7 @@ public class DisplayInformation : MonoBehaviour
         if (isDisplay) {
             if (msges.Count > 0) {
                 infoText.text = msges[0];
+                panel.SetActive(true);
             }
             
             if (displayTime <= 0f) {
@@ -27,7 +28,7 @@ public class DisplayInformation : MonoBehaviour
                     panel.SetActive(false);
                     isDisplay = false;
                 }
-                displayTime = 3f;
+                displayTime = 2.5f;
             } else {
                 displayTime -= Time.deltaTime;
             }
@@ -38,7 +39,7 @@ public class DisplayInformation : MonoBehaviour
     {
         msges.Add(text);
         // infoText.text = text;
-        panel.SetActive(true);
+        // panel.SetActive(true);
         isDisplay = true;
     }
 }
