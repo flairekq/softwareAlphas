@@ -91,6 +91,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             if (Input.GetKey(KeyCode.W))
             {
                 WalkForward();
+                
             }
             if(Input.GetKey(KeyCode.D)) 
             {
@@ -120,9 +121,16 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         anim.SetBool(backwardsWalk, false);
         anim.SetBool(forwardWalking, false);
         anim.SetBool(isWalkingRight, false);
+        anim.SetBool("startWalking", false);
         anim.SetBool("isWalkingLeft", false);
         anim.SetBool(isIdle, true);
         anim.SetBool("isJumping", false);
+    }
+
+    private void StartWalking() 
+    {
+        anim.SetBool("startWalking", true);
+        anim.SetBool(isIdle, false);
     }
 
     private void WalkForward()
