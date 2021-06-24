@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
         GameController.instance.players.Add(playerID);
     }
 
-    public void GameOver()
+    public void GameOver(bool isTimeup)
     {
         foreach (int id in players)
         {
@@ -37,6 +37,6 @@ public class GameController : MonoBehaviour
             PhotonView playerPV = PhotonView.Find(id);
             playerPV.GetComponent<TogglePlayerCursor>().GameOver();
         }
-        gameOverScreen.Show();
+        gameOverScreen.Show(isTimeup);
     }
 }

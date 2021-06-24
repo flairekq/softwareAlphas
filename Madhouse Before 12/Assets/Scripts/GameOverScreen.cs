@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviourPunCallbacks
 {
-    public void Show()
+    [SerializeField] Text displayText;
+    public void Show(bool isTimeup)
     {
+        if (!isTimeup) {
+            displayText.text = "Congratulations you managed to escape in time!";
+        }
         gameObject.SetActive(true);
     }
 

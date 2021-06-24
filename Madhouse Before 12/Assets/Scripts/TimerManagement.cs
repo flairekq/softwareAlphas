@@ -87,8 +87,8 @@ public class TimerManagement : MonoBehaviour
             {
                 //Timer Completed
                 //Do What Ever You What to Do Here
-                Debug.Log("time up");
-                GameController.instance.GameOver();
+                // Debug.Log("time up");
+                GameController.instance.GameOver(true);
                 this.enabled = false;
             }
             else
