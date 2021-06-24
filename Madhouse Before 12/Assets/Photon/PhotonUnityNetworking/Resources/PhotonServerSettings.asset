@@ -18,7 +18,7 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: asia
+    FixedRegion: 
     Server: 
     Port: 0
     ProxyServer: 
@@ -27,12 +27,25 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: asia
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList: []
+  RpcList:
+  - ClickRpc
+  - DestroyRpc
+  - RPC_HandleDiaryClue
+  - RPC_HandleDoor
+  - RPC_HandleDrawer
+  - RPC_HandleItem
+  - RPC_HandlePlayer
+  - RPC_HandlePowerGenerator
+  - RPC_HandlePowerOnOff
+  - RPC_HandleSwitch
+  - RPC_HandleWord
+  - RPC_ToggleLockUnlockDoor
+  - ShowLoadingScreenToAll
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
+  ShowSettings: 0
   DevRegionSetOnce: 0
