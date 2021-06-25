@@ -51,8 +51,9 @@ public class RifleManager : MonoBehaviour
             return;
         }
 
-        if(Input.GetMouseButtonDown(0)) {
+       if(Input.GetMouseButtonDown(0)) {
                 Shoot();
+                Recoil();
                  
         } if(Input.GetMouseButtonDown(1))
         {
@@ -69,7 +70,33 @@ public class RifleManager : MonoBehaviour
         } else if(!aiming)
         {
             Idle();
-        }
+        } 
+
+        /*
+        if(aiming)
+        {
+            if(Input.GetMouseButtonDown(0)) {
+                Shoot();
+                Recoil();
+            } if(Input.GetMouseButtonDown(1))
+            {
+                aiming = false;
+               Idle();
+            } else {
+                Aim();
+            }
+        } if(!aiming) {
+            if(Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+                Recoil();
+            } if(Input.GetMouseButtonDown(1))
+            {
+                Aim(); 
+            } else {
+                Idle();
+            }
+        }*/
     }
 
     void Aim()
@@ -89,18 +116,19 @@ public class RifleManager : MonoBehaviour
 
     void Recoil()
     {
+        anim.SetBool(isRecoil, true);
         anim.SetBool("isShooting", false);
         anim.SetBool("isIdle", false);
-        anim.SetBool(isRecoil, true);
         
     }
 
     void Shoot()
     {
         muzzleFlash.Play();
-        anim.SetBool("isShooting", false);
+      /*  anim.SetBool("isShooting", false);
         anim.SetBool("isIdle", false); 
         anim.SetBool(isRecoil, true);
+        */
         RaycastHit hit;
         currentBullets--;
         if (Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
