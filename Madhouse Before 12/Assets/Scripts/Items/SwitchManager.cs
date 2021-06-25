@@ -4,28 +4,36 @@ using UnityEngine;
 
 public class SwitchManager : MonoBehaviour
 {
+    // public static SwitchManager instance;
+    // [SerializeField] private int noOfSwitchesToBeOn = 0;
+
+    public static SwitchManager instance;
     [SerializeField] private SwitchController[] switches;
     private bool isPartiallyOn = false;
-    private float timeCounter = 5f;
+    private float timeCounter = 10f;
     private List<SwitchController> switchesThatAreOn = new List<SwitchController>();
+
+    void Awake() {
+        instance = this;
+    }
 
     // Update is called once per frame
     void Update()
     {
         int noOfSwitchOn = 0;
-        switchesThatAreOn.Clear();
-        for (int i = 0; i < switches.Length; i++)
+        instance.switchesThatAreOn.Clear();
+        for (int i = 0; i < instance.switches.Length; i++)
         {
-            if (switches[i].IsSwitchOn())
+            if (instance.switches[i].IsSwitchOn())
             {
                 noOfSwitchOn++;
-                switchesThatAreOn.Add(switches[i]);
+                instance.switchesThatAreOn.Add(instance.switches[i]);
             }
         }
 
-        if (noOfSwitchOn == switches.Length)
+        if (noOfSwitchOn == instance.switches.Length)
         {
-            isPartiallyOn = false;
+            instance.isPartiallyOn = false;
             if (!EnvironmentManager.instance.isProjectorOn)
             {
                 EnvironmentManager.instance.ToggleProjector(true);
@@ -33,7 +41,7 @@ public class SwitchManager : MonoBehaviour
         }
         else if (noOfSwitchOn == 0)
         {
-            isPartiallyOn = false;
+            instance.isPartiallyOn = false;
             if (EnvironmentManager.instance.isProjectorOn)
             {
                 EnvironmentManager.instance.ToggleProjector(false);
@@ -42,7 +50,7 @@ public class SwitchManager : MonoBehaviour
         }
         else
         {
-            isPartiallyOn = true;
+            instance.isPartiallyOn = true;
             if (EnvironmentManager.instance.isProjectorOn)
             {
                 EnvironmentManager.instance.ToggleProjector(false);
@@ -50,18 +58,18 @@ public class SwitchManager : MonoBehaviour
             }
         }
 
-        if (isPartiallyOn && timeCounter <= 0)
+        if (instance.isPartiallyOn && instance.timeCounter <= 0)
         {
             Debug.Log("time is up");
-            timeCounter = 5f;
-            foreach (SwitchController sc in switchesThatAreOn)
+            instance.timeCounter = 10f;
+            foreach (SwitchController sc in instance.switchesThatAreOn)
             {
                 sc.OffSwitch();
             }
         }
-        else if (isPartiallyOn)
+        else if (instance.isPartiallyOn)
         {
-            timeCounter -= Time.deltaTime;
+            instance.timeCounter -= Time.deltaTime;
         }
     }
 }

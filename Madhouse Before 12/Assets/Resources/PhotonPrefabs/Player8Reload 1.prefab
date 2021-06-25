@@ -359,6 +359,7 @@ MonoBehaviour:
   icon: {fileID: 1677914220370077828}
   removeButton: {fileID: 1677914220000364335}
   noteText: {fileID: 0}
+  clueText: {fileID: 0}
   displayNameText: {fileID: 6137951130941484519}
   focusPanelImage: {fileID: 0}
 --- !u!1 &1677914220370077834
@@ -793,7 +794,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 6608709275626697263}
   - {fileID: 6608709275626697251}
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &6608709275626697263
@@ -6763,6 +6764,7 @@ MonoBehaviour:
   icon: {fileID: 3112539906492872298}
   removeButton: {fileID: 3112539906861357505}
   noteText: {fileID: 0}
+  clueText: {fileID: 0}
   displayNameText: {fileID: 6137951130941484519}
   focusPanelImage: {fileID: 0}
 --- !u!1 &3112539906861357501
@@ -7285,6 +7287,7 @@ MonoBehaviour:
   icon: {fileID: 5169783330617590518}
   removeButton: {fileID: 5169783330182032733}
   noteText: {fileID: 0}
+  clueText: {fileID: 0}
   displayNameText: {fileID: 6137951130941484519}
   focusPanelImage: {fileID: 0}
 --- !u!1 &5169783330617590520
@@ -8362,6 +8365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsParent: {fileID: 6137951131001595482}
   noteText: {fileID: 6137951130941484519}
+  clueText: {fileID: 0}
   displayNameText: {fileID: 6137951132695469956}
   focusPanelImage: {fileID: 6137951132412289552}
 --- !u!1 &6137951132412289566
@@ -8782,6 +8786,7 @@ MonoBehaviour:
   icon: {fileID: 6242081012936050592}
   removeButton: {fileID: 6242081011963619339}
   noteText: {fileID: 0}
+  clueText: {fileID: 0}
   displayNameText: {fileID: 6137951130941484519}
   focusPanelImage: {fileID: 0}
 --- !u!1 &6242081012700383960
@@ -9102,6 +9107,8 @@ MonoBehaviour:
   examineCanvasOldPaperText: {fileID: 5485174587095893743}
   examineCanvasItemImage: {fileID: 5485174588031948763}
   crossHairImage: {fileID: 8550792757428574461}
+  examineCanvasDiaryClueImage: {fileID: 0}
+  examineCanvasDiaryClueText: {fileID: 0}
 --- !u!114 &4655974749935526620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9568,6 +9575,7 @@ MonoBehaviour:
   icon: {fileID: 6518012508962753735}
   removeButton: {fileID: 6518012509600473964}
   noteText: {fileID: 0}
+  clueText: {fileID: 0}
   displayNameText: {fileID: 6137951130941484519}
   focusPanelImage: {fileID: 0}
 --- !u!1 &6608709274204572168
@@ -12439,7 +12447,6 @@ MonoBehaviour:
   lookSensitivity: 0.1
   weapons:
   - {fileID: 6608709275626697262}
-  childrenTransforms: []
 --- !u!114 &7427929342725080337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12460,7 +12467,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 7427929342725080341}
-  sceneViewId: 2
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &7427929342725080341
@@ -14210,6 +14217,7 @@ MonoBehaviour:
   icon: {fileID: 9000449908577198586}
   removeButton: {fileID: 9000449908410289745}
   noteText: {fileID: 0}
+  clueText: {fileID: 0}
   displayNameText: {fileID: 6137951130941484519}
   focusPanelImage: {fileID: 0}
 --- !u!1 &9000449908410289709

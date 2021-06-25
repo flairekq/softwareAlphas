@@ -33,13 +33,13 @@ public class SwitchController : MonoBehaviour
 
     private void OnSwitch()
     {
-        isOn = true;
+        // isOn = true;
         PV.RPC("RPC_HandleSwitch", RpcTarget.All, "isOn", true);
     }
 
     public void OffSwitch()
     {
-        isOn = false;
+        // isOn = false;
         PV.RPC("RPC_HandleSwitch", RpcTarget.All, "isOn", false);
     }
 
@@ -50,6 +50,7 @@ public class SwitchController : MonoBehaviour
     [PunRPC]
     private void RPC_HandleSwitch(string animationName, bool val)
     {
+        isOn = val;
         animator.SetBool(animationName, val);
     }
 }
