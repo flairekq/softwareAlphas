@@ -6,6 +6,7 @@ public class GunPosition : MonoBehaviour
 {
     // Start is called before the first frame update
     public Transform CameraPos;
+   
     void Start()
     {
         

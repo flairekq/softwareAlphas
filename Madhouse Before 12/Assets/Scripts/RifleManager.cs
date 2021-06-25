@@ -51,48 +51,56 @@ public class RifleManager : MonoBehaviour
             return;
         }
 
-        //Shooting 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Shoot();
-            Recoil();   
+        if(Input.GetMouseButtonDown(0)) {
+                Shoot();
+                 
         } if(Input.GetMouseButtonDown(1))
         {
-            if(aiming) {
-                aiming = false;
-                Idle();
-            } else 
+            if(!aiming)
             {
                 Aim();
+            } else {
+                aiming = false;
+                Idle();
             }
+        } else if(aiming) 
+        {
+            Aim();
+        } else if(!aiming)
+        {
+            Idle();
         }
     }
 
     void Aim()
     {
         aiming = true;
-        anim.SetBool("isShooting", true);
-        //anim.SetBool(isRecoil, false);
         anim.SetBool("isIdle", false);
+        anim.SetBool(isRecoil, false);
+        anim.SetBool("isShooting", true);
     }
 
     void Idle()
     {
-        anim.SetBool("isIdle", true);
         anim.SetBool(isRecoil, false);
         anim.SetBool("isShooting", false);
+        anim.SetBool("isIdle", true);
     }
 
     void Recoil()
     {
-        anim.SetBool(isRecoil, true);
+        anim.SetBool("isShooting", false);
         anim.SetBool("isIdle", false);
-
+        anim.SetBool(isRecoil, true);
+        
     }
 
     void Shoot()
     {
         muzzleFlash.Play();
+        anim.SetBool("isShooting", false);
+        anim.SetBool("isIdle", false); 
+        anim.SetBool(isRecoil, true);
         RaycastHit hit;
         currentBullets--;
         if (Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
