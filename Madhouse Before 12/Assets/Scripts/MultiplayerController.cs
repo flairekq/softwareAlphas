@@ -84,22 +84,21 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
         if (Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S))
         {
-            WalkBackwards();
+            // WalkBackwards();
         }
         if (!Input.GetKey(KeyCode.S))
         {
             if (Input.GetKey(KeyCode.W))
             {
-                WalkForward();
-                
+                // WalkForward();
             }
             if(Input.GetKey(KeyCode.D)) 
             {
-                WalkRight();
+                // WalkRight();
             }
             if(Input.GetKey(KeyCode.A)) 
             {
-                WalkLeft();
+                // WalkLeft();
             }
         }
 
@@ -109,7 +108,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S) || 
             Input.GetKeyUp(KeyCode.Space))
         {
-            Idle();
+            // Idle();
         }
 
 

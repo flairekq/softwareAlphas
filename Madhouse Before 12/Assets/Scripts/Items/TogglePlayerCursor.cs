@@ -16,6 +16,7 @@ public class TogglePlayerCursor : MonoBehaviour
     private Flashlight flashlight;
     private Inventory inventory;
     private PhotonView PV;
+    private bool isInCursorMode = false;
 
     void Awake()
     {
@@ -48,6 +49,7 @@ public class TogglePlayerCursor : MonoBehaviour
         rifleManager.enabled = false;
         crossHair.SetActive(false);
         reticle.SetActive(false);
+        isInCursorMode = true;
     }
 
     // this method is for power generator 
@@ -83,6 +85,7 @@ public class TogglePlayerCursor : MonoBehaviour
         rifleManager.enabled = true;
         crossHair.SetActive(true);
         reticle.SetActive(true);
+        isInCursorMode = false;
     }
 
     // this method is for power generator 
@@ -100,5 +103,10 @@ public class TogglePlayerCursor : MonoBehaviour
             inventory.enabled = false;
             flashlight.enabled = false;
         }
+    }
+
+    public bool IsInCursorMode()
+    {
+        return isInCursorMode;
     }
 }

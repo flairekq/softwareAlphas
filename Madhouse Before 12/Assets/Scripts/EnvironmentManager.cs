@@ -30,6 +30,8 @@ public class EnvironmentManager : MonoBehaviour
     public bool isDayroomUnlocked = false;
     public bool isClassroomUnlocked = false;
     public bool isBasementMainUnlocked = false;
+    public bool isMainDoorUnlocked = false;
+    public bool isProjectorOn = false;
 
     public void TogglePower(bool val)
     {
@@ -42,7 +44,19 @@ public class EnvironmentManager : MonoBehaviour
         EnvironmentManager.instance.isPowerOn = val;
     }
 
-    public void ToggleLockUnlockDoor(string name, bool val) {
+    public void ToggleProjector(bool val)
+    {
+        EnvironmentManager.instance.PV.RPC("RPC_HandleProjectorOnOff", RpcTarget.All, val);
+    }
+
+    [PunRPC]
+    private void RPC_HandleProjectorOnOff(bool val)
+    {
+        EnvironmentManager.instance.isProjectorOn = val;
+    }
+
+    public void ToggleLockUnlockDoor(string name, bool val)
+    {
         EnvironmentManager.instance.PV.RPC("RPC_ToggleLockUnlockDoor", RpcTarget.All, name, val);
     }
 
@@ -59,6 +73,9 @@ public class EnvironmentManager : MonoBehaviour
                 break;
             case "basement":
                 EnvironmentManager.instance.isBasementMainUnlocked = isLocked;
+                break;
+            case "main":
+                EnvironmentManager.instance.isMainDoorUnlocked = isLocked;
                 break;
             default: break;
         }

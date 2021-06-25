@@ -41,7 +41,7 @@ public class InteractWithItem : MonoBehaviour
     {
         SelectItemToInteractWithFromRay();
 
-        // examine
+        // examine or use
         if (Input.GetKeyDown(KeyCode.E) && itemDisplayUI != null && (itemDisplayUI.IsMouseOvering() || (itemDisplayUI.type.Equals("PowerGenerator") && zoomingCam.IsZoomedIn())))
         {
             if (itemDisplayUI.type == "Note" || itemDisplayUI.type == "DiaryClue")
@@ -88,6 +88,13 @@ public class InteractWithItem : MonoBehaviour
                 if (EnvironmentManager.instance.isPowerOn)
                 {
                     CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
+                    if (togglePlayerCursor.IsInCursorMode() && keypadCanvas.IsCanvasOn())
+                    {
+                        keypadCanvas.CanvasOff();
+                        togglePlayerCursor.ChangeToPlayer();
+                        return;
+                    }
+
                     if (keypadCanvas.IsCanvasOn())
                     {
                         // Debug.Log("Other player is using");
@@ -105,7 +112,7 @@ public class InteractWithItem : MonoBehaviour
                     displayInformation.DisplayText("Power is not on");
                 }
             }
-            else if (itemDisplayUI.type == "Door")
+            else if (itemDisplayUI.type == "Door" || itemDisplayUI.type == "MainDoor")
             {
                 string msg = itemDisplayUI.OpenDoor(this.transform.parent.position, inventory);
                 if (!msg.Equals("successful"))
@@ -134,6 +141,17 @@ public class InteractWithItem : MonoBehaviour
                 {
                     zoomingCam.ToggleZoom();
                     pgc.ToggleActivation(true, mainCamera);
+                }
+            }
+            else if (itemDisplayUI.type == "Projector")
+            {
+                if (EnvironmentManager.instance.isProjectorOn)
+                {
+                    // Projector projector = itemDisplayUI.GetComponent<Projector>();
+                    // projector.ToggleProjectorDisplay();
+                    Projector.instance.ToggleProjectorDisplay();
+                } else {
+                    displayInformation.DisplayText("Projector is not on");
                 }
             }
             else
@@ -197,7 +215,7 @@ public class InteractWithItem : MonoBehaviour
                 // ignore vertical distance
                 Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.position.y, display.transform.position.z);
                 float distance = Vector3.Distance(temp, this.transform.parent.position);
-                if ((distance <= 1.8f && !display.type.Equals("PowerGenerator")) || (distance >= 1.2f && distance <= 1.8f && display.type.Equals("PowerGenerator")))
+                if ((distance <= 1.8f && !display.type.Equals("PowerGenerator")) || (distance >= 1.2f && distance <= 2f && display.type.Equals("PowerGenerator")))
                 {
                     isTooCloseOrFar = false;
                     itemDisplayUI = display;
