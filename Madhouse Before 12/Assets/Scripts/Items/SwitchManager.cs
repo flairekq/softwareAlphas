@@ -6,14 +6,8 @@ public class SwitchManager : MonoBehaviour
 {
     [SerializeField] private SwitchController[] switches;
     private bool isPartiallyOn = false;
-    private float timeCounter = 30f;
+    private float timeCounter = 5f;
     private List<SwitchController> switchesThatAreOn = new List<SwitchController>();
-
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-
-    // }
 
     // Update is called once per frame
     void Update()
@@ -59,7 +53,7 @@ public class SwitchManager : MonoBehaviour
         if (isPartiallyOn && timeCounter <= 0)
         {
             Debug.Log("time is up");
-            timeCounter = 30f;
+            timeCounter = 5f;
             foreach (SwitchController sc in switchesThatAreOn)
             {
                 sc.OffSwitch();
