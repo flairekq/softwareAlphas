@@ -28,17 +28,21 @@ public class OpenDoorBehaviour : StateMachineBehaviour
     {
         DisplayUIDoor displayUIDoor = animator.GetComponent<DisplayUIDoor>();
 
-        if (animator.GetBool("isOpeningFront"))
+        // if (animator.GetBool("isOpeningFront"))
+        if (animator.GetBool(displayUIDoor.isOpeningFrontId))
         {
-            animator.SetBool("isOpeningFront", false);
-            displayUIDoor.CloseDoor("isOpeningFront");
+            // animator.SetBool("isOpeningFront", false);
+            // displayUIDoor.CloseDoor("isOpeningFront");
+            displayUIDoor.CloseDoor(displayUIDoor.isOpeningFrontId);
             return;
         }
 
-        if (animator.GetBool("isOpeningBack"))
+        // if (animator.GetBool("isOpeningBack"))
+        if (animator.GetBool(displayUIDoor.isOpeningBackId))
         {
-            animator.SetBool("isOpeningBack", false);
-            displayUIDoor.CloseDoor("isOpeningBack");
+            // animator.SetBool("isOpeningBack", false);
+            // displayUIDoor.CloseDoor("isOpeningBack");
+            displayUIDoor.CloseDoor(displayUIDoor.isOpeningBackId);
             return;
         }
     }

@@ -10,16 +10,19 @@ public class DisplayUIDrawer : DisplayUI
     void Awake()
     {
         PV = GetComponent<PhotonView>();
+        animator = GetComponent<Animator>();
+        isTopOpenId = Animator.StringToHash("isTopOpen");
+        isBtmOpenId = Animator.StringToHash("isBtmOpen");
     }
 
-    public void ToggleDrawer(string animationName)
+    public void ToggleDrawer(int animationId)
     {
-        PV.RPC("RPC_HandleDrawer", RpcTarget.All, animationName);
+        PV.RPC("RPC_HandleDrawer", RpcTarget.All, animationId);
     }
 
     [PunRPC]
-    private void RPC_HandleDrawer(string animationName)
+    private void RPC_HandleDrawer(int animationId)
     {
-        animator.SetBool(animationName, !animator.GetBool(animationName));
+        animator.SetBool(animationId, !animator.GetBool(animationId));
     }
 }

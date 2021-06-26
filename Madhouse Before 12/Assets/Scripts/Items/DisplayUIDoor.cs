@@ -12,16 +12,28 @@ public class DisplayUIDoor : DisplayUI
     public MeshCollider meshCollider2;
     public BoxCollider boxCollider;
     public PhotonView PV;
+    public int isOpeningFrontId = 0;
+    public int isOpeningBackId = 0;
 
     void Awake()
     {
         PV = GetComponent<PhotonView>();
         boxCollider = GetComponent<BoxCollider>();
+        animator = GetComponent<Animator>();
+        isOpeningFrontId = Animator.StringToHash("isOpeningFront");
+        isOpeningBackId = Animator.StringToHash("isOpeningBack");
+        // Debug.Log(isOpeningFrontId);
     }
 
     public override void FadeCanvas()
     {
-        if (animator.GetBool("isOpeningFront"))
+        // // if (animator.GetBool("isOpeningFront"))
+        // if (isOpeningFrontId != 0 && isOpeningBackId != 0)
+        // {
+        //     Debug.Log(isOpeningFrontId);
+        //     Debug.Log(animator);
+        // Debug.Log(animator.GetBool(isOpeningFrontId));
+        if (animator.GetBool(isOpeningFrontId))
         {
             display.SetActive(false);
         }
@@ -30,7 +42,8 @@ public class DisplayUIDoor : DisplayUI
             display.SetActive(displayInfo);
         }
 
-        if (animator.GetBool("isOpeningBack"))
+        // if (animator.GetBool("isOpeningBack"))
+        if (animator.GetBool(isOpeningBackId))
         {
             behindDoorDisplay.SetActive(false);
         }
@@ -38,6 +51,8 @@ public class DisplayUIDoor : DisplayUI
         {
             behindDoorDisplay.SetActive(behindDoorDisplayInfo);
         }
+        // }
+
     }
 
     public override void SetDisplayInfo(bool val)
@@ -121,25 +136,28 @@ public class DisplayUIDoor : DisplayUI
         Vector3 doorRelative = this.transform.InverseTransformPoint(playerPos);
         if ((doorRelative.z > 0 && meshCollider2 == null) || (doorRelative.z < 0 && meshCollider2 != null))
         {
-            PV.RPC("RPC_HandleDoor", RpcTarget.All, "isOpeningFront", true);
+            // PV.RPC("RPC_HandleDoor", RpcTarget.All, "isOpeningFront", true);
+            PV.RPC("RPC_HandleDoor", RpcTarget.All, isOpeningFrontId, true);
         }
         else
         {
-            PV.RPC("RPC_HandleDoor", RpcTarget.All, "isOpeningBack", true);
+            // PV.RPC("RPC_HandleDoor", RpcTarget.All, "isOpeningBack", true);
+            PV.RPC("RPC_HandleDoor", RpcTarget.All, isOpeningBackId, true);
         }
         playerPos = Vector3.zero;
         return "successful";
     }
 
-    public void CloseDoor(string animationName)
+    // public void CloseDoor(string animationName)
+    public void CloseDoor(int animationId)
     {
-        PV.RPC("RPC_HandleDoor", RpcTarget.All, animationName, false);
+        PV.RPC("RPC_HandleDoor", RpcTarget.All, animationId, false);
     }
 
     [PunRPC]
-    private void RPC_HandleDoor(string animationName, bool val)
+    private void RPC_HandleDoor(int animationId, bool val)
     {
-        animator.SetBool(animationName, val);
+        animator.SetBool(animationId, val);
     }
 
 }

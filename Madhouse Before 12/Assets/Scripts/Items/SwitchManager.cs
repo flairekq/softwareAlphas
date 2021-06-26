@@ -60,7 +60,7 @@ public class SwitchManager : MonoBehaviour
 
         if (instance.isPartiallyOn && instance.timeCounter <= 0)
         {
-            Debug.Log("time is up");
+            // Debug.Log("time is up");
             instance.timeCounter = 10f;
             foreach (SwitchController sc in instance.switchesThatAreOn)
             {

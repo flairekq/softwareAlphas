@@ -19,16 +19,32 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     private PlayerMotor motor;
     private Animator anim;
 
-    private int forwardWalking = Animator.StringToHash("forwardWalking");
-    private int backwardsWalk = Animator.StringToHash("backwardsWalk");
+    // private int forwardWalking = Animator.StringToHash("forwardWalking");
+    // private int backwardsWalk = Animator.StringToHash("backwardsWalk");
 
-    private int isIdle = Animator.StringToHash("isIdle");
+    // private int isIdle = Animator.StringToHash("isIdle");
 
-    private int isRunning = Animator.StringToHash("isRunning");
+    // private int isRunning = Animator.StringToHash("isRunning");
 
-    private int backwardsRun = Animator.StringToHash("backwardsRun");
+    // private int backwardsRun = Animator.StringToHash("backwardsRun");
 
-    private int isWalkingRight = Animator.StringToHash("isWalkingRight");
+    // private int isWalkingRight = Animator.StringToHash("isWalkingRight");
+    // private int startWalking = Animator.StringToHash("startWalking");
+    // private int isWalkingLeft = Animator.StringToHash("isWalkingLeft");
+    // private int isJumping = Animator.StringToHash("isJumping");
+    private int forwardWalking;
+    private int backwardsWalk;
+
+    private int isIdle;
+
+    private int isRunning;
+
+    private int backwardsRun;
+
+    private int isWalkingRight;
+    private int startWalking;
+    private int isWalkingLeft;
+    private int isJumping;
 
     private PhotonView PV;
 
@@ -45,6 +61,19 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         if (PV.IsMine)
         {
             EquipWeapon(0);
+            forwardWalking = Animator.StringToHash("forwardWalking");
+            backwardsWalk = Animator.StringToHash("backwardsWalk");
+
+            isIdle = Animator.StringToHash("isIdle");
+
+            isRunning = Animator.StringToHash("isRunning");
+
+            backwardsRun = Animator.StringToHash("backwardsRun");
+
+            isWalkingRight = Animator.StringToHash("isWalkingRight");
+            startWalking = Animator.StringToHash("startWalking");
+            isWalkingLeft = Animator.StringToHash("isWalkingLeft");
+            isJumping = Animator.StringToHash("isJumping");
         }
         else
         {
@@ -92,20 +121,21 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             {
                 WalkForward();
             }
-            if(Input.GetKey(KeyCode.D)) 
+            if (Input.GetKey(KeyCode.D))
             {
                 WalkRight();
             }
-            if(Input.GetKey(KeyCode.A)) 
+            if (Input.GetKey(KeyCode.A))
             {
                 WalkLeft();
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             Jump();
         }
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S) || 
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S) ||
             Input.GetKeyUp(KeyCode.Space))
         {
             Idle();
@@ -120,15 +150,19 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         anim.SetBool(backwardsWalk, false);
         anim.SetBool(forwardWalking, false);
         anim.SetBool(isWalkingRight, false);
-        anim.SetBool("startWalking", false);
-        anim.SetBool("isWalkingLeft", false);
+        // anim.SetBool("startWalking", false);
+        // anim.SetBool("isWalkingLeft", false);
+        anim.SetBool(startWalking, false);
+        anim.SetBool(isWalkingLeft, false);
         anim.SetBool(isIdle, true);
-        anim.SetBool("isJumping", false);
+        // anim.SetBool("isJumping", false);
+        anim.SetBool(isJumping, false);
     }
 
-    private void StartWalking() 
+    private void StartWalking()
     {
-        anim.SetBool("startWalking", true);
+        // anim.SetBool("startWalking", true);
+        anim.SetBool(startWalking, false);
         anim.SetBool(isIdle, false);
     }
 
@@ -147,25 +181,27 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     }
 
-    private void WalkRight() 
+    private void WalkRight()
     {
         anim.SetBool(isIdle, false);
         anim.SetBool(isWalkingRight, true);
     }
 
-    private void WalkLeft() 
+    private void WalkLeft()
     {
         anim.SetBool(isIdle, false);
-        anim.SetBool("isWalkingLeft", true);
+        // anim.SetBool("isWalkingLeft", true);
+        anim.SetBool(isWalkingLeft, true);
     }
 
     private void Jump()
     {
         anim.SetBool(isIdle, false);
-        anim.SetBool("isJumping", true);
+        // anim.SetBool("isJumping", true);
+        anim.SetBool(isJumping, true);
     }
 
-    
+
     void EquipWeapon(int _index)
     {
         if (_index == previousWeaponIndex)
@@ -189,9 +225,9 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             hash.Add("weaponIndex", weaponIndex);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
-        
+
     }
-    
+
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {

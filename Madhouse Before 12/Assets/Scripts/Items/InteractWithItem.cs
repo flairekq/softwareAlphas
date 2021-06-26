@@ -74,14 +74,16 @@ public class InteractWithItem : MonoBehaviour
                 // Animator animator = itemDisplayUI.GetComponent<Animator>();
                 // animator.SetBool("isTopOpen", !animator.GetBool("isTopOpen"));
                 DisplayUIDrawer drawer = itemDisplayUI.GetComponent<DisplayUIDrawer>();
-                drawer.ToggleDrawer("isTopOpen");
+                // drawer.ToggleDrawer("isTopOpen");
+                drawer.ToggleDrawer(drawer.isTopOpenId);
             }
             else if (itemDisplayUI.type == "DrawerBtm")
             {
                 // Animator animator = itemDisplayUI.GetComponent<Animator>();
                 // animator.SetBool("isBtmOpen", !animator.GetBool("isBtmOpen"));
                 DisplayUIDrawer drawer = itemDisplayUI.GetComponent<DisplayUIDrawer>();
-                drawer.ToggleDrawer("isBtmOpen");
+                // drawer.ToggleDrawer("isBtmOpen");
+                drawer.ToggleDrawer(drawer.isBtmOpenId);
             }
             else if (itemDisplayUI.type == "Keypad")
             {
@@ -150,7 +152,9 @@ public class InteractWithItem : MonoBehaviour
                     // Projector projector = itemDisplayUI.GetComponent<Projector>();
                     // projector.ToggleProjectorDisplay();
                     Projector.instance.ToggleProjectorDisplay();
-                } else {
+                }
+                else
+                {
                     displayInformation.DisplayText("Projector is not on");
                 }
             }
