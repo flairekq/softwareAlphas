@@ -139,7 +139,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         // shows loading screen to all players in the same room as host
         PV.RPC("ShowLoadingScreenToAll", RpcTarget.All);
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(1);
     }
 
     [PunRPC]
