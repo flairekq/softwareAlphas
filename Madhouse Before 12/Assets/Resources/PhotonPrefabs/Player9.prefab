@@ -1815,7 +1815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c6b9a7b1d0ea0489f5a658fd32f14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 3.5
+  mouseSensitivity: 3
   lockCursor: 1
   mouseSmoothTime: 0.03
 --- !u!114 &2636587603112327801
@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ea3ed765576ed4790d98f1c6f3b859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   lookSensitivity: 0.1
   weapons:
   - {fileID: 1744192708918889800}
@@ -4584,7 +4584,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Escape from the asylum
+  m_Text: Escape from the asylum before 12
 --- !u!1 &4176741852707866482
 GameObject:
   m_ObjectHideFlags: 0

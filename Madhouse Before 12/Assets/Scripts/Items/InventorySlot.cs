@@ -48,21 +48,22 @@ public class InventorySlot : MonoBehaviour
         item.GetComponent<ItemPickup>().MakeVisible(new Vector3(activeChar.transform.localPosition.x, activeChar.transform.localPosition.y, activeChar.transform.localPosition.z));
 
         activeChar.GetComponent<Inventory>().Remove(item);
-        details.OffExamine(noteText, displayNameText, focusPanelImage);
+        details.OffExamine(noteText, clueText, displayNameText, focusPanelImage);
     }
 
     public void UseItem()
     {
         if (item != null)
         {
-            if (item.GetComponent<DisplayUI>().type.Equals("DiaryClue"))
-            {
-                details.Examine(clueText, displayNameText, focusPanelImage);
-            }
-            else
-            {
-                details.Examine(noteText, displayNameText, focusPanelImage);
-            }
+            // if (type.Equals("DiaryClue"))
+            // {
+            //     details.Examine(noteText, clueText, displayNameText, focusPanelImage, "clue");
+            // }
+            // else
+            // {
+            //     details.Examine(noteText, displayNameText, focusPanelImage);
+            // }
+            details.Examine(noteText, clueText, displayNameText, focusPanelImage, item.GetComponent<DisplayUI>().type);
         }
     }
 }
