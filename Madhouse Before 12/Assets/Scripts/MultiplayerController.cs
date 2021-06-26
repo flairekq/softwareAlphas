@@ -108,7 +108,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S) || 
             Input.GetKeyUp(KeyCode.Space))
         {
-            // Idle();
+            Idle();
         }
 
 
