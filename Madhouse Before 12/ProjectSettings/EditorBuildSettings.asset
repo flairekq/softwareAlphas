@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MultiplayerStartSceneV1.unity
     guid: f855be9357bb248348783e34610b9f61
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MultiplayerTest.unity
     guid: 2392e9a18d0054bf29dcf25f066b1ccd
   - enabled: 1
