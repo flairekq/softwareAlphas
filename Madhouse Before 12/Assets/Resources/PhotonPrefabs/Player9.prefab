@@ -741,6 +741,7 @@ MonoBehaviour:
   examineCanvasOldPaperText: {fileID: 8460239688321761715}
   examineCanvasItemImage: {fileID: 8460239689266860167}
   crossHairImage: {fileID: 9096480827009400464}
+  crosshairDetectItem: {fileID: 6411430737702940136}
   examineCanvasDiaryClueImage: {fileID: 1135004252707758815}
   examineCanvasDiaryClueText: {fileID: 3763091016627016070}
 --- !u!114 &224929604412464570
@@ -1934,11 +1935,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Head'\n\tTransform 'Spine'\n\tTransform 'Spine1'\n\tTransform
-    'LeftHand'\n\tTransform 'RightHand'\n\tTransform 'Neck'\n\tTransform 'RightForeArm'\n\tTransform
-    'Hips'\n\tTransform 'LeftArm'\n\tTransform 'RightArm'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1956,10 +1953,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RigLayers:
   - m_Rig: {fileID: 1744192710721781617}
-    m_Active: 1
-  - m_Rig: {fileID: 0}
-    m_Active: 1
-  - m_Rig: {fileID: 0}
     m_Active: 1
   - m_Rig: {fileID: 2636587603006324990}
     m_Active: 1
@@ -10260,6 +10253,8 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 4096
+  previousItem: {fileID: 0}
+  currentItem: {fileID: 0}
 --- !u!1001 &908871323955448780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10489,6 +10484,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d2131ceff37a42af98a826ad6ee4385, type: 3}
+--- !u!1 &4063250856015428375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 186330686521024818, guid: 6d2131ceff37a42af98a826ad6ee4385,
+    type: 3}
+  m_PrefabInstance: {fileID: 4248701932158245413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4063250855845116264 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 186330686192214861, guid: 6d2131ceff37a42af98a826ad6ee4385,
@@ -10507,12 +10508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc12f228bc514c95b38e19330f328ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4063250856015428375 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 186330686521024818, guid: 6d2131ceff37a42af98a826ad6ee4385,
-    type: 3}
-  m_PrefabInstance: {fileID: 4248701932158245413}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6036980975141936537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10688,6 +10683,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6526765347840907798}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6526765347840941236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: cd8d56469cf64654eaa21e15c6ae7c18,
+    type: 3}
+  m_PrefabInstance: {fileID: 6526765347840907798}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6526765347838739062 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: cd8d56469cf64654eaa21e15c6ae7c18,
+    type: 3}
+  m_PrefabInstance: {fileID: 6526765347840907798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6526765347840941234 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: cd8d56469cf64654eaa21e15c6ae7c18,
@@ -10709,18 +10716,6 @@ GameObject:
 --- !u!23 &6526765347838739058 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2300004, guid: cd8d56469cf64654eaa21e15c6ae7c18,
-    type: 3}
-  m_PrefabInstance: {fileID: 6526765347840907798}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6526765347840941236 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: cd8d56469cf64654eaa21e15c6ae7c18,
-    type: 3}
-  m_PrefabInstance: {fileID: 6526765347840907798}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6526765347838739062 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: cd8d56469cf64654eaa21e15c6ae7c18,
     type: 3}
   m_PrefabInstance: {fileID: 6526765347840907798}
   m_PrefabAsset: {fileID: 0}

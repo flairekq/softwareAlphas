@@ -268,43 +268,43 @@ public class InteractWithItem : MonoBehaviour
             }
         }
 
-        if (itemBeingPickedUp != null)
-        {
-            if (itemDisplayUI.type == "Note" || itemDisplayUI.type == "DiaryClue")
-            {
-                NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
-                if (note != null)
-                {
-                    if (itemDisplayUI.type == "Note")
-                    {
-                        note.RetrievePlayerCanvas(examineCanvasOldPaperImage, examineCanvasOldPaperText);
-                    }
-                    else
-                    {
-                        note.RetrievePlayerCanvas(examineCanvasDiaryClueImage, examineCanvasDiaryClueText);
-                    }
-                    note.CloseNote();
-                }
-            }
-            // else if (itemDisplayUI.type == "Keypad")
-            // {
-            //     CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
-            //     keypadCanvas.CanvasOff();
-            // }
-            else if (itemDisplayUI.type != "DrawerTop" && itemDisplayUI.type != "DrawerBtm")
-            {
-                ItemAppear ia = itemBeingPickedUp.GetComponent<ItemAppear>();
-                if (ia != null)
-                {
-                    ia.RetrievePlayerCanvas(examineCanvasItemImage);
-                    ia.CloseItem();
-                }
-            }
+        // if (itemBeingPickedUp != null)
+        // {
+        //     if (itemDisplayUI.type == "Note" || itemDisplayUI.type == "DiaryClue")
+        //     {
+        //         NoteAppear note = itemBeingPickedUp.GetComponent<NoteAppear>();
+        //         if (note != null)
+        //         {
+        //             if (itemDisplayUI.type == "Note")
+        //             {
+        //                 note.RetrievePlayerCanvas(examineCanvasOldPaperImage, examineCanvasOldPaperText);
+        //             }
+        //             else
+        //             {
+        //                 note.RetrievePlayerCanvas(examineCanvasDiaryClueImage, examineCanvasDiaryClueText);
+        //             }
+        //             note.CloseNote();
+        //         }
+        //     }
+        //     // else if (itemDisplayUI.type == "Keypad")
+        //     // {
+        //     //     CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
+        //     //     keypadCanvas.CanvasOff();
+        //     // }
+        //     else if (itemDisplayUI.type != "DrawerTop" && itemDisplayUI.type != "DrawerBtm")
+        //     {
+        //         ItemAppear ia = itemBeingPickedUp.GetComponent<ItemAppear>();
+        //         if (ia != null)
+        //         {
+        //             ia.RetrievePlayerCanvas(examineCanvasItemImage);
+        //             ia.CloseItem();
+        //         }
+        //     }
 
-            itemBeingPickedUp = null;
-            itemDisplayUI = null;
-            isExaminingItem = false;
-        }
+        //     itemBeingPickedUp = null;
+        //     itemDisplayUI = null;
+        //     isExaminingItem = false;
+        // }
 
     }
 }

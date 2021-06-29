@@ -14,6 +14,7 @@ public class DisplayUIDoor : DisplayUI
     public PhotonView PV;
     public int isOpeningFrontId = 0;
     public int isOpeningBackId = 0;
+    // [SerializeField] Renderer m_Renderer;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class DisplayUIDoor : DisplayUI
         animator = GetComponent<Animator>();
         isOpeningFrontId = Animator.StringToHash("isOpeningFront");
         isOpeningBackId = Animator.StringToHash("isOpeningBack");
+        // m_Renderer = GetComponent<Renderer>();
         // Debug.Log(isOpeningFrontId);
     }
 
@@ -33,6 +35,10 @@ public class DisplayUIDoor : DisplayUI
         //     Debug.Log(isOpeningFrontId);
         //     Debug.Log(animator);
         // Debug.Log(animator.GetBool(isOpeningFrontId));
+
+        // if (m_Renderer.isVisible)
+        // {
+        // animator.enabled = true;
         if (animator.GetBool(isOpeningFrontId))
         {
             display.SetActive(false);
@@ -51,6 +57,10 @@ public class DisplayUIDoor : DisplayUI
         {
             behindDoorDisplay.SetActive(behindDoorDisplayInfo);
         }
+        // } else {
+        //     animator.enabled = false;
+        // }
+
         // }
 
     }

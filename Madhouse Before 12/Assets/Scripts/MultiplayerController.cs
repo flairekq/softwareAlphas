@@ -60,7 +60,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
         if (PV.IsMine)
         {
-            EquipWeapon(0);
+            // EquipWeapon(0);
             forwardWalking = Animator.StringToHash("forwardWalking");
             backwardsWalk = Animator.StringToHash("backwardsWalk");
 
@@ -94,7 +94,8 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         Vector3 _movHorizontal = transform.right * _xMov;
         Vector3 _movVertical = transform.forward * _zMov;
 
-        Vector3 _velocity = (_movHorizontal + _movVertical).normalized * speed;
+        // Vector3 _velocity = (_movHorizontal + _movVertical).normalized * speed;
+        Vector3 _velocity = (_movHorizontal + _movVertical) * speed;
 
         motor.Move(_velocity);
 
@@ -202,40 +203,40 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     }
 
 
-    void EquipWeapon(int _index)
-    {
-        if (_index == previousWeaponIndex)
-        {
-            return;
-        }
+    // void EquipWeapon(int _index)
+    // {
+    //     if (_index == previousWeaponIndex)
+    //     {
+    //         return;
+    //     }
 
-        weaponIndex = _index;
-        weapons[weaponIndex].itemGameObject.SetActive(true);
+    //     weaponIndex = _index;
+    //     weapons[weaponIndex].itemGameObject.SetActive(true);
 
-        if (previousWeaponIndex != -1)
-        {
-            weapons[previousWeaponIndex].itemGameObject.SetActive(false);
-        }
+    //     if (previousWeaponIndex != -1)
+    //     {
+    //         weapons[previousWeaponIndex].itemGameObject.SetActive(false);
+    //     }
 
-        previousWeaponIndex = weaponIndex;
+    //     previousWeaponIndex = weaponIndex;
 
-        if (PV.IsMine)
-        {
-            Hashtable hash = new Hashtable();
-            hash.Add("weaponIndex", weaponIndex);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-        }
+    //     if (PV.IsMine)
+    //     {
+    //         Hashtable hash = new Hashtable();
+    //         hash.Add("weaponIndex", weaponIndex);
+    //         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+    //     }
 
-    }
+    // }
 
 
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
-    {
-        if (!PV.IsMine && targetPlayer == PV.Owner)
-        {
-            EquipWeapon((int)changedProps["weaponIndex"]);
-        }
-    }
+    // public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    // {
+    //     if (!PV.IsMine && targetPlayer == PV.Owner)
+    //     {
+    //         EquipWeapon((int)changedProps["weaponIndex"]);
+    //     }
+    // }
 
 
     // public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

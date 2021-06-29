@@ -1352,7 +1352,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2aa4dcd8ecc9d498a995436c2e8b038f, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -1389,12 +1389,18 @@ MonoBehaviour:
   displayInfo: 0
   type: Door
   drawerUIText: {fileID: 0}
+  isTopOpenId: 0
+  isBtmOpenId: 0
+  roomName: 
   behindDoorDisplay: {fileID: 356483347}
   behindDoorDisplayInfo: 0
   meshCollider: {fileID: 4742243963111237038}
   meshCollider2: {fileID: 230006024516226581}
   boxCollider: {fileID: 0}
   PV: {fileID: 0}
+  isOpeningFrontId: 0
+  isOpeningBackId: 0
+  m_Renderer: {fileID: 23862595882093406}
 --- !u!114 &4825765708231264238
 MonoBehaviour:
   m_ObjectHideFlags: 0
