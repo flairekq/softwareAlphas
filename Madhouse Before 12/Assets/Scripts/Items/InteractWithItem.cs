@@ -21,6 +21,7 @@ public class InteractWithItem : MonoBehaviour
     [SerializeField] private Text examineCanvasOldPaperText;
     [SerializeField] private Image examineCanvasItemImage;
     [SerializeField] private Image crossHairImage;
+    [SerializeField] private CrosshairDetectItem crosshairDetectItem;
     [SerializeField] private Image examineCanvasDiaryClueImage;
     [SerializeField] private Text examineCanvasDiaryClueText;
     private ZoomingCam zoomingCam;
@@ -209,40 +210,61 @@ public class InteractWithItem : MonoBehaviour
     void SelectItemToInteractWithFromRay()
     {
         // ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        ray = mainCamera.ScreenPointToRay(crossHairImage.transform.position);
-        if (Physics.Raycast(ray, out hit, 2f, layer))
+        // ray = mainCamera.ScreenPointToRay(crossHairImage.transform.position);
+        // if (Physics.Raycast(ray, out hit, 2f, layer))
+        // {
+        //     DisplayUI display = hit.collider.GetComponent<DisplayUI>();
+
+        //     if (display != null)
+        //     {
+        //         // ignore vertical distance
+        //         Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.position.y, display.transform.position.z);
+        //         float distance = Vector3.Distance(temp, this.transform.parent.position);
+        //         if ((distance <= 1.8f && !display.type.Equals("PowerGenerator")) || (distance >= 1.2f && distance <= 2f && display.type.Equals("PowerGenerator")))
+        //         {
+        //             isTooCloseOrFar = false;
+        //             itemDisplayUI = display;
+
+        //             ItemPickup item = hit.collider.GetComponent<ItemPickup>();
+        //             if (item != null)
+        //             {
+        //                 itemBeingPickedUp = item;
+        //             }
+        //             return;
+        //         }
+        //         else
+        //         {
+        //             itemDisplayUI = null;
+        //             itemBeingPickedUp = null;
+        //             isTooCloseOrFar = true;
+        //         }
+        //     }
+        // }
+
+        if (crosshairDetectItem.currentItem != null)
         {
-            DisplayUI display = hit.collider.GetComponent<DisplayUI>();
-
-            if (display != null)
+            DisplayUI display = crosshairDetectItem.currentItem;
+            // ignore vertical distance
+            Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.position.y, display.transform.position.z);
+            float distance = Vector3.Distance(temp, this.transform.parent.position);
+            if ((distance <= 1.8f && !display.type.Equals("PowerGenerator")) || (distance >= 1.2f && distance <= 2f && display.type.Equals("PowerGenerator")))
             {
-                // ignore vertical distance
-                Vector3 temp = new Vector3(display.transform.position.x, this.transform.parent.position.y, display.transform.position.z);
-                float distance = Vector3.Distance(temp, this.transform.parent.position);
-                if ((distance <= 1.8f && !display.type.Equals("PowerGenerator")) || (distance >= 1.2f && distance <= 2f && display.type.Equals("PowerGenerator")))
-                {
-                    isTooCloseOrFar = false;
-                    itemDisplayUI = display;
+                isTooCloseOrFar = false;
+                itemDisplayUI = display;
 
-                    ItemPickup item = hit.collider.GetComponent<ItemPickup>();
-                    if (item != null)
-                    {
-                        itemBeingPickedUp = item;
-                    }
-                    return;
-                }
-                else
+                // ItemPickup item = hit.collider.GetComponent<ItemPickup>();
+                ItemPickup item = display.GetComponent<ItemPickup>();
+                if (item != null)
                 {
-                    // Debug.Log(distance);
-                    itemDisplayUI = null;
-                    itemBeingPickedUp = null;
-                    isTooCloseOrFar = true;
+                    itemBeingPickedUp = item;
                 }
-                // else
-                // {
-                //     displayInformation.DisplayText("Too far away");
-                // }
-
+                return;
+            }
+            else
+            {
+                itemDisplayUI = null;
+                itemBeingPickedUp = null;
+                isTooCloseOrFar = true;
             }
         }
 

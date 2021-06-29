@@ -7,18 +7,28 @@ public class CrosshairDetectItem : MonoBehaviour
     [SerializeField] private Camera cam;
     private RaycastHit hit;
     [SerializeField] private LayerMask layer;
-    private DisplayUI previousItem;
-    private DisplayUI currentItem;
+    public DisplayUI previousItem;
+    public DisplayUI currentItem;
+    private Ray ray;
+    // in seconds
+    private float interval = 0.4f; 
+    private float timer = 1f;
 
     // Update is called once per frame
     void Update()
     {
-        if (cam != null)
+        // don't allow an interval smaller than the frame
+        float usedInterval = interval;
+        if (Time.deltaTime > usedInterval) {
+            usedInterval = Time.deltaTime;
+        }
+        
+        if (timer >= usedInterval && cam != null)
         {
-            Ray ray = cam.ScreenPointToRay(this.transform.position);
+            timer = 0;
+            ray = cam.ScreenPointToRay(this.transform.position);
             if (Physics.Raycast(ray, out hit, 2f, layer))
             {
-                // Debug.Log("hit");
                 DisplayUI display = hit.collider.GetComponent<DisplayUI>();
                 if (display != null)
                 {
@@ -41,5 +51,6 @@ public class CrosshairDetectItem : MonoBehaviour
                 }
             }
         }
+        timer += Time.deltaTime;
     }
 }
