@@ -15,6 +15,7 @@ public class RifleManager : MonoBehaviour
     public Transform shootPoint;
     //public CameraShake cameraShake;
 
+    public GameObject muzzleFlashObject;
     public ParticleSystem muzzleFlash;
 
     private Animator anim;
@@ -56,7 +57,11 @@ public class RifleManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+       if(Input.GetMouseButtonDown(0)) {
+                Shoot();
+              //  Recoil();
+                 
+        } if(Input.GetMouseButtonDown(1))
         {
             Shoot();
             Recoil();
@@ -73,13 +78,28 @@ public class RifleManager : MonoBehaviour
                 aiming = false;
                 Idle();
             }
-        }
-        else if (aiming)
+        } /* if(!muzzleFlash.isPlaying)
         {
+            muzzleFlashObject.SetActive(false);
+        } */
+        else if(aiming) 
+        {
+            /*
+            if(!muzzleFlash.isPlaying)
+            {
+             muzzleFlashObject.SetActive(false);
+            }
+            */
             Aim();
         }
         else if (!aiming)
         {
+            /*
+            if(!muzzleFlash.isPlaying)
+            {
+             muzzleFlashObject.SetActive(false);
+            }
+            */
             Idle();
         }
 
@@ -137,11 +157,22 @@ public class RifleManager : MonoBehaviour
 
     void Shoot()
     {
-        muzzleFlash.Play();
-        /*  anim.SetBool("isShooting", false);
-          anim.SetBool("isIdle", false); 
-          anim.SetBool(isRecoil, true);
-          */
+       muzzleFlashObject.SetActive(true); 
+      
+    
+           muzzleFlash.Clear();
+            muzzleFlash.time = 0;
+           muzzleFlash.Simulate(0f, true, true);
+          
+          // muzzleFlash.Emit(5);
+           muzzleFlash.Play();
+           
+       
+           
+      /*  anim.SetBool("isShooting", false);
+        anim.SetBool("isIdle", false); 
+        anim.SetBool(isRecoil, true);
+        */
         RaycastHit hit;
         currentBullets--;
         if (Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
