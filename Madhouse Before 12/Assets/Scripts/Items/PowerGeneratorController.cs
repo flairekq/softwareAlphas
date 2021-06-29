@@ -13,6 +13,9 @@ public class PowerGeneratorController : MonoBehaviour
     private string combi = "";
     private PhotonView PV;
 
+    public int isOnId = 0;
+    public int isSuccessId = 0;
+
     void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -24,6 +27,8 @@ public class PowerGeneratorController : MonoBehaviour
         displayUI = GetComponent<DisplayUI>();
         examineUI.enabled = false;
         animator = GetComponent<Animator>();
+        isOnId = Animator.StringToHash("isOn");
+        isSuccessId = Animator.StringToHash("isSuccess");
     }
 
     public void ToggleActivation(bool isActivate, Camera cam)
@@ -50,13 +55,13 @@ public class PowerGeneratorController : MonoBehaviour
 
     public void YellowButtonPressed()
     {
-        Debug.Log("yellow pressed");
+        // Debug.Log("yellow pressed");
         combi += "Y";
     }
 
     public void BlueButtonPressed()
     {
-        Debug.Log("blue pressed");
+        // Debug.Log("blue pressed");
         combi += "B";
     }
 
@@ -64,17 +69,21 @@ public class PowerGeneratorController : MonoBehaviour
     {
         if (animator.GetBool("isOn"))
         {
-            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isOn", false);
+            // PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isOn", false);
+            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, isOnId, false);
             EnvironmentManager.instance.TogglePower(false);
             // EnvironmentManager.instance.isPowerOn = false;
             // animator.SetBool("isOn", false);
             return;
         }
 
-        if (combi.Equals(correctCombi) && !animator.GetBool("isSuccess"))
+        // if (combi.Equals(correctCombi) && !animator.GetBool("isSuccess"))
+        if (combi.Equals(correctCombi) && !animator.GetBool(isSuccessId))
         {
-            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isSuccess", true);
-            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isOn", true);
+            // PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isSuccess", true);
+            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, isSuccessId, true);
+            // PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isOn", true);
+            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, isOnId, true);
             EnvironmentManager.instance.TogglePower(true);
             // EnvironmentManager.instance.isPowerOn = true;
             // animator.SetBool("isSuccess", true);
@@ -82,8 +91,10 @@ public class PowerGeneratorController : MonoBehaviour
         }
         else if (!combi.Equals(correctCombi))
         {
-            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isSuccess", false);
-            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isOn", true);
+            // PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isSuccess", false);
+            // PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isOn", true);
+            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, isSuccessId, false);
+            PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, isOnId, true);
             EnvironmentManager.instance.TogglePower(false);
             // EnvironmentManager.instance.isPowerOn = false;
             // animator.SetBool("isSuccess", false);
@@ -93,8 +104,8 @@ public class PowerGeneratorController : MonoBehaviour
     }
 
     [PunRPC]
-    private void RPC_HandlePowerGenerator(string animationName, bool val)
+    private void RPC_HandlePowerGenerator(int animationId, bool val)
     {
-        animator.SetBool(animationName, val);
+        animator.SetBool(animationId, val);
     }
 }

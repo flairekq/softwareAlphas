@@ -21,14 +21,14 @@ public class Target : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    void Start()
-    {
+    // void Start()
+    // {
         
-    }
+    // }
 
-    // Update is called once per frame
-    void Update()
-    {
+    // // Update is called once per frame
+    // void Update()
+    // {
         
-    }
+    // }
 }

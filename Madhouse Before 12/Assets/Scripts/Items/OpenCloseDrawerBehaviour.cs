@@ -15,11 +15,13 @@ public class OpenCloseDrawerBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        DisplayUIDrawer drawer = animator.GetComponent<DisplayUIDrawer>();
         DrawerItem drawerItem = animator.GetComponentInChildren<DrawerItem>();
         if (drawerItem != null && !drawerItem.isPickedUp)
         {
             drawerItem.UpdateFrames();
-            if (animator.GetBool("isTopOpen") || animator.GetBool("isBtmOpen"))
+            // if (animator.GetBool("isTopOpen") || animator.GetBool("isBtmOpen"))
+            if (animator.GetBool(drawer.isTopOpenId) || animator.GetBool(drawer.isBtmOpenId))
             {
                 // Debug.Log("increasing");
                 drawerItem.item.transform.localPosition = new Vector3(drawerItem.item.transform.localPosition.x, drawerItem.item.transform.localPosition.y, drawerItem.item.transform.localPosition.z + drawerItem.increment);

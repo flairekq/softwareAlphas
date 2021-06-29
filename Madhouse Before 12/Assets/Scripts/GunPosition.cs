@@ -14,10 +14,10 @@ public class GunPosition : MonoBehaviour
         PV = gameObject.transform.parent.transform.parent.GetComponent<PhotonView>();
     }
 
-    void Start()
-    {
+    // void Start()
+    // {
 
-    }
+    // }
 
     // Update is called once per frame
     void Update()

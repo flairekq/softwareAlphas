@@ -22,10 +22,10 @@ public class ParabolicBullet : MonoBehaviour
         isInitialized = true;
     }
 
-    void Start()
-    {
+    // void Start()
+    // {
         
-    }
+    // }
 
     private Vector3 FindPointOnParabola(float time) 
     {

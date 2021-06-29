@@ -10,10 +10,10 @@ public class RifleManager2 : MonoBehaviour
 
     private float rotx;
     private float roty;
-    void Start()
-    {
+    // void Start()
+    // {
         
-    }
+    // }
 
     // Update is called once per frame
     void Update()

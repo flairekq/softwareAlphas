@@ -4,20 +4,20 @@ using UnityEngine;
 
 
 public class Weapon : MonoBehaviour
-{   
+{
 
-   /*public int bulletsPerMag = 7;
+    /*public int bulletsPerMag = 7;
 
-    public int totalbulletsleft = 200;
+     public int totalbulletsleft = 200;
 
-    public int currentBullets; // current number of bullets in magazine 
-    public float fireRate = 0.1f;
-    private float fireTimer;
-    */
+     public int currentBullets; // current number of bullets in magazine 
+     public float fireRate = 0.1f;
+     private float fireTimer;
+     */
 
     private Animator anim;
 
-    
+
 
     public ParticleSystem muzzleFlash;
 
@@ -32,60 +32,68 @@ public class Weapon : MonoBehaviour
     public float scopedFOV = 15f;
     private float normalFOV;
 
-    private int isShooting = Animator.StringToHash("isShooting");
-   // private int isIdle = Animator.StringToHash("isIdle");
+    private int isShooting;
+    private int isReload;
+    // private int isIdle = Animator.StringToHash("isIdle");
 
-    private bool isScoped= false;
+    private bool isScoped = false;
 
     // Start is called before the first frame update
     void Start()
     {
         //currentBullets = bulletsPerMag;
         anim = GetComponent<Animator>();
+        isShooting = Animator.StringToHash("isShooting");
+        isReload = Animator.StringToHash("isReload");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)) {
-            Aim();
-            
-        }
-        if(!isScoped && Input.GetMouseButtonDown(1)) {
-
-        }
-
-       /* if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
-            if(currentBullets == 0)
-            {
-                Reload();
-                anim.SetBool("isReload", false);
-                currentBullets = bulletsPerMag;
-                totalbulletsleft -= bulletsPerMag;
+            Aim();
 
-            } else {
-                currentBullets--;
-            }
-        }*/
+        }
+        if (!isScoped && Input.GetMouseButtonDown(1))
+        {
+
+        }
+
+        /* if(Input.GetMouseButtonDown(1))
+         {
+             if(currentBullets == 0)
+             {
+                 Reload();
+                 anim.SetBool("isReload", false);
+                 currentBullets = bulletsPerMag;
+                 totalbulletsleft -= bulletsPerMag;
+
+             } else {
+                 currentBullets--;
+             }
+         }*/
     }
 
-    private void Aim() 
-    {   
+    private void Aim()
+    {
         isScoped = !isScoped;
         anim.SetBool(isShooting, isScoped);
 
-        if(isScoped) {
+        if (isScoped)
+        {
             StartCoroutine(OnScoped());
-        } else {
+        }
+        else
+        {
             OnUnscoped();
         }
-        
+
     }
 
-  
 
-    void OnUnscoped() 
+
+    void OnUnscoped()
     {
         scopeOverlay.SetActive(false);
         weaponCamera.SetActive(true);
@@ -93,7 +101,7 @@ public class Weapon : MonoBehaviour
         mainCamera.fieldOfView = normalFOV;
     }
 
-    IEnumerator OnScoped() 
+    IEnumerator OnScoped()
     {
         yield return new WaitForSeconds(0.15f);
 
@@ -105,15 +113,18 @@ public class Weapon : MonoBehaviour
 
     void Reload()
     {
-        
-        if(isScoped) {
-            isScoped = false; 
-            OnUnscoped(); 
-            anim.SetBool("isReload", true);
-            anim.SetBool("isShooting", false);
-        } else {
-            anim.SetBool("isReload", true);
-            anim.SetBool("isShooting", false);
+
+        if (isScoped)
+        {
+            isScoped = false;
+            OnUnscoped();
+            anim.SetBool(isReload, true);
+            anim.SetBool(isShooting, false);
+        }
+        else
+        {
+            anim.SetBool(isReload, true);
+            anim.SetBool(isShooting, false);
         }
     }
 }

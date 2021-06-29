@@ -19,7 +19,8 @@ public class PowerGeneratorOnFail : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       animator.SetBool("isOn", false);
+        //    animator.SetBool("isOn", false);
+        animator.SetBool(animator.GetComponent<PowerGeneratorController>().isOnId, false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -14,11 +14,11 @@ public class NewBehaviourScript : MonoBehaviour
         spawnFood();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if need to respawn
-    }
+    // // Update is called once per frame
+    // void Update()
+    // {
+    //     //if need to respawn
+    // }
 
     public void spawnFood()
     {

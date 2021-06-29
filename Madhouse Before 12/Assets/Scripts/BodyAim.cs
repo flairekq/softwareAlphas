@@ -13,10 +13,10 @@ public class BodyAim : MonoBehaviour
         PV = GetComponent<PhotonView>();
     }
     
-    void Start()
-    {
+    // void Start()
+    // {
 
-    }
+    // }
 
     // Update is called once per frame
     void LateUpdate()

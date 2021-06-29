@@ -10,56 +10,11 @@ public class TimerManagement : MonoBehaviour
 {
     public static TimerManagement instance;
     [SerializeField] Text timeDisplay;
-    // [SerializeField] string startTime;
-    // [SerializeField] float startTimeInSecs;
-    // [SerializeField] float endTimeInSecs;
-    // private float elapsedTime;
-    // private PhotonView PV;
-    // private bool timerGoing = false;
-    // private TimeSpan timePlaying;
 
     void Awake()
     {
         instance = this;
     }
-
-    // void Start()
-    // {
-    //     timeDisplay.text = startTime;
-    //     BeginTimer();
-    // }
-
-    // public void BeginTimer()
-    // {
-    //     timerGoing = true;
-    //     elapsedTime = startTimeInSecs;
-    //     StartCoroutine(UpdateTimer());
-    // }
-
-    // public void EndTimer()
-    // {
-    //     timerGoing = false;
-    // }
-
-    // private void Update()
-    // {
-    //     if (elapsedTime >= endTimeInSecs)
-    //     {
-    //         EndTimer();
-    //         Debug.Log("Time's up");
-    //     }
-    // }
-
-    // private IEnumerator UpdateTimer()
-    // {
-    //     while (timerGoing)
-    //     {
-    //         elapsedTime += Time.deltaTime;
-    //         timePlaying = TimeSpan.FromSeconds(elapsedTime);
-    //         timeDisplay.text = timePlaying.ToString("hh':'mm':'ss");
-    //         yield return null;
-    //     }
-    // }
 
     bool startTimer = false;
     double timerIncrementValue;

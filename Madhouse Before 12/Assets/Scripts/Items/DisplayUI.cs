@@ -12,14 +12,32 @@ public class DisplayUI : MonoBehaviour
     protected Animator animator;
 
     protected Vector3 playerPos = Vector3.zero;
+    public int isTopOpenId = 0;
+    public int isBtmOpenId = 0;
 
-    void Start()
+    void Awake()
     {
         if (!type.Equals("MainDoor"))
         {
             animator = GetComponent<Animator>();
+            // if (type.Equals("DrawerTop") || type.Equals("DrawerBtm"))
+            // {
+            //     isTopOpenId = Animator.StringToHash("isTopOpen");
+            //     isBtmOpenId = Animator.StringToHash("isBtmOpen");
+            // }
+            // else if (type.Equals("Door"))
+            // {
+            //     isOpeningFrontId = Animator.StringToHash("isOpeningFront");
+            //     isOpeningBackId = Animator.StringToHash("isOpeningBack");
+            //     Debug.Log(isOpeningFrontId);
+            // }
         }
     }
+
+    // void Start()
+    // {
+
+    // }
 
     // Update is called once per frame
     void Update()
@@ -54,7 +72,8 @@ public class DisplayUI : MonoBehaviour
     {
         if (type.Equals("DrawerTop"))
         {
-            if (animator.GetBool("isTopOpen"))
+            // if (animator.GetBool("isTopOpen"))
+            if (animator.GetBool(isTopOpenId))
             {
                 drawerUIText.text = "Close";
             }
@@ -65,7 +84,8 @@ public class DisplayUI : MonoBehaviour
         }
         else if (type.Equals("DrawerBtm"))
         {
-            if (animator.GetBool("isBtmOpen"))
+            // if (animator.GetBool("isBtmOpen"))
+            if (animator.GetBool(isBtmOpenId))
             {
                 drawerUIText.text = "Close";
             }
@@ -74,17 +94,14 @@ public class DisplayUI : MonoBehaviour
                 drawerUIText.text = "Open";
             }
         }
-        else
-        {
-
-        }
     }
 
     public void ShiftDisplayUI()
     {
         if (type.Equals("DrawerTop") || type.Equals("DrawerBtm"))
         {
-            if (animator.GetBool("isTopOpen") || animator.GetBool("isBtmOpen"))
+            // if (animator.GetBool("isTopOpen") || animator.GetBool("isBtmOpen"))
+            if (animator.GetBool(isTopOpenId) || animator.GetBool(isBtmOpenId))
             {
                 display.transform.localPosition = new Vector3(display.transform.localPosition.x, display.transform.localPosition.y, display.transform.localPosition.z + 0.344f);
             }
