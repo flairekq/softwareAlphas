@@ -6,23 +6,30 @@ using UnityEngine;
 // such that when the player interacts with it (be it mouse or key)
 // the monster will be attacked by the player
 [RequireComponent(typeof(EnemyStats))]
-public class Enemy : Interactable
+// public class Enemy : Interactable
+public class Enemy : MonoBehaviour
 {
-    PlayerManagerOld playerManagerOld;
+    // PlayerManagerOld playerManagerOld;
     EnemyStats myStats;
 
-    void Start() {
-        playerManagerOld = PlayerManagerOld.instance;
+    void Start()
+    {
+        // playerManagerOld = PlayerManagerOld.instance;
         myStats = GetComponent<EnemyStats>();
     }
 
-    public override void Interact()
+    // public override void Interact()
+    // {
+    // base.Interact();
+    // Attack the enemy
+    // CharacterCombat playerCombat = playerManagerOld.player.GetComponent<CharacterCombat>();
+    // if (playerCombat != null) {
+    //     playerCombat.Attack(myStats);
+    // }
+    // }
+
+    public void Attacked(CharacterCombat player)
     {
-        // base.Interact();
-        // Attack the enemy
-        CharacterCombat playerCombat = playerManagerOld.player.GetComponent<CharacterCombat>();
-        if (playerCombat != null) {
-            playerCombat.Attack(myStats);
-        }
+        player.Attack(myStats);
     }
 }

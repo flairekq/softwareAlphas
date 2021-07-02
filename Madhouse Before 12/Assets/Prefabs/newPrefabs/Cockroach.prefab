@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da09707ecf7a46149ae9b0b12df14fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   damage:
     baseValue: 1
   isDead: 0
@@ -155,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521da0cb3e4674573942225b7286308c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
 --- !u!114 &201132396533719380
 MonoBehaviour:
   m_ObjectHideFlags: 0
