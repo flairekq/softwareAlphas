@@ -28,20 +28,17 @@ public class EController2 : MonoBehaviour
     public float startWaitTime;
     public float startToPathTime;
     EnvironmentManager envManager;
-    GameController gameController;
-
     private float originalStoppingDistance;
     public string location;
 
     void Start()
     {
         envManager = EnvironmentManager.instance;
-        gameController = GameController.instance;
 
         agent = proxy.GetComponent<NavMeshAgent>();
         originalStoppingDistance = agent.stoppingDistance;
         obstacle = proxy.GetComponent<NavMeshObstacle>();
-        // player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         // slotManager = player.GetComponent<SlotManager>();
         animator = model.GetComponent<Animator>();
         enemyStats = model.GetComponentInChildren<EnemyStats>();
@@ -58,7 +55,7 @@ public class EController2 : MonoBehaviour
         if (!enemyStats.isDead)
         {
             // if (IsPlayerWithinDistance(slotManager))
-            if (player != null && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius)
+            if (Vector3.Distance(player.transform.position, proxy.position) <= lookRadius)
             {
                 #region Attack Slot System
                 // // check if reserved slot is still on navmesh
@@ -166,7 +163,6 @@ public class EController2 : MonoBehaviour
             }
             else
             {
-                FindNearestPlayer();
                 isChasing = false;
                 isPatrolling = true;
                 agent.stoppingDistance = 0;
@@ -247,10 +243,9 @@ public class EController2 : MonoBehaviour
 
     void FaceTarget()
     {
-        // Vector3 direction = (player.transform.position - model.position).normalized;
-        // Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        // model.rotation = Quaternion.Slerp(model.rotation, lookRotation, Time.deltaTime * 5f);
-        model.LookAt(player.transform);
+        Vector3 direction = (player.transform.position - model.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        model.rotation = Quaternion.Slerp(model.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     void RandomnizeMoveSpot()
@@ -282,20 +277,6 @@ public class EController2 : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(proxy.position, lookRadius);
-    }
-
-    void FindNearestPlayer()
-    {
-        float leastDistance = 1000000000f;
-        foreach (GameObject p in gameController.gameObjectPlayers)
-        {
-            float currentDistance = Vector3.Distance(p.transform.position, proxy.position);
-            if (currentDistance < leastDistance)
-            {
-                leastDistance = currentDistance;
-                player = p;
-            }
-        }
     }
 
     // bool IsPlayerWithinDistance(SlotManager s)

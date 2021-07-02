@@ -21,7 +21,7 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(int damage) {
         currentHealth -= damage;
-        // Debug.Log(transform.name + " takes " + damage + " damage.");
+        Debug.Log(transform.name + " takes " + damage + " damage.");
 
         if (currentHealth <= 0) {
             Die();

@@ -275,8 +275,6 @@ MonoBehaviour:
   displayInfo: 0
   type: PowerGeneratorManual
   drawerUIText: {fileID: 0}
-  isTopOpenId: 0
-  isBtmOpenId: 0
 --- !u!114 &519449462274252433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,8 +464,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519449462661012828}
   m_LocalRotation: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
-  m_LocalPosition: {x: -0.072, y: 11.1, z: 0.287}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.072, y: 8.3, z: 0.287}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 519449462628069601}
   m_Father: {fileID: 519449462274252430}

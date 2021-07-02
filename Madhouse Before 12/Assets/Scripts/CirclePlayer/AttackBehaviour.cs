@@ -6,10 +6,10 @@ public class AttackBehaviour : StateMachineBehaviour
 {
     // Start
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    // override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    // {
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
       //   Debug.Log(animator.gameObject.transform.parent.name + " attacking");
-    // }
+    }
 
     // Update
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,11 +24,11 @@ public class AttackBehaviour : StateMachineBehaviour
     {
         Transform current = animator.gameObject.transform.parent;
         EController2 currentController = current.GetComponent<EController2>();
-        // CharacterStats targetStats = currentController.player.GetComponent<CharacterStats>();
-        // if (targetStats != null)
-        // {
-        //     animator.gameObject.GetComponentInChildren<CharacterCombat>().Attack(targetStats);
-        // }
+        CharacterStats targetStats = currentController.player.GetComponent<CharacterStats>();
+        if (targetStats != null)
+        {
+            animator.gameObject.GetComponentInChildren<CharacterCombat>().Attack(targetStats);
+        }
         currentController.isAttacking = false;
       //   Debug.Log(current.name + " attack finish");
     }

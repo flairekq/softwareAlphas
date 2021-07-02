@@ -12,7 +12,7 @@ public class EnemyStats : CharacterStats
     
     public override void Die()
     {
-        // base.Die();
+        base.Die();
         isDead = true;
         animator.SetBool("isDead", true);
     }
