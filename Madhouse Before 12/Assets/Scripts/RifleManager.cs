@@ -28,6 +28,8 @@ public class RifleManager : MonoBehaviour
     private int isShooting;
     private int isRecoil;
     private int isIdle;
+
+   // public Transform CameraPos;
     private PhotonView PV;
 
     // public Transform CameraPos;
@@ -56,7 +58,9 @@ public class RifleManager : MonoBehaviour
         {
             return;
         }
-
+      /*  transform.position = CameraPos.transform.position;
+       transform.rotation = CameraPos.transform.rotation;
+    */
        if(Input.GetMouseButtonDown(0)) {
                 Shoot();
               //  Recoil();
