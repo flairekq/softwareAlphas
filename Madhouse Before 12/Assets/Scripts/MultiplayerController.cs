@@ -10,11 +10,11 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float lookSensitivity = 3f;
-    // [SerializeField] WeaponItem[] weapons;
+    [SerializeField] WeaponItem[] weapons;
     // [SerializeField] Transform[] childrenTransforms;
 
-    // private int weaponIndex;
-    // private int previousWeaponIndex = -1;
+    private int weaponIndex;
+    private int previousWeaponIndex = -1;
 
     private PlayerMotor motor;
     private Animator anim;

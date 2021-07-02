@@ -407,7 +407,7 @@ Transform:
   m_GameObject: {fileID: 422561380659719833}
   m_LocalRotation: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
   m_LocalPosition: {x: -0.072, y: 8.3, z: 0.287}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 422561379811152193}
   m_Father: {fileID: 422561380807111694}
@@ -609,8 +609,6 @@ MonoBehaviour:
   displayInfo: 0
   type: PowerGeneratorManual
   drawerUIText: {fileID: 0}
-  isTopOpenId: 0
-  isBtmOpenId: 0
 --- !u!114 &422561380807111685
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -194,8 +194,6 @@ MonoBehaviour:
   displayInfo: 0
   type: Facts
   drawerUIText: {fileID: 0}
-  isTopOpenId: 0
-  isBtmOpenId: 0
 --- !u!114 &4871741845343469216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,8 +547,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4871741846136763626}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.054, y: 0.254, z: 51.7}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -0.054, y: 0.319, z: 51.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4871741845601213171}
   m_Father: {fileID: 4871741845343469247}

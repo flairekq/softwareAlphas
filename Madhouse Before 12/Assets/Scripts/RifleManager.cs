@@ -29,7 +29,6 @@ public class RifleManager : MonoBehaviour
     private int isRecoil;
     private int isIdle;
     private PhotonView PV;
-    [SerializeField] private CharacterCombat characterCombat;
 
     // public Transform CameraPos;
 
@@ -179,15 +178,10 @@ public class RifleManager : MonoBehaviour
         if (Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
         {
             // Debug.Log(hit.transform.name);
-            // Target target = hit.transform.GetComponent<Target>();
-            // if (target != null)
-            // {
-            //     target.TakeDamage(damage);
-            // }
-
-            Enemy enemy = hit.transform.GetComponent<Enemy>();
-            if (enemy != null) {
-                enemy.Attacked(characterCombat);
+            Target target = hit.transform.GetComponent<Target>();
+            if (target != null)
+            {
+                target.TakeDamage(damage);
             }
         }
     }
