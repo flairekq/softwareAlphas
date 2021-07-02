@@ -1293,6 +1293,7 @@ MonoBehaviour:
   damage:
     baseValue: 1
   isDead: 0
+  animator: {fileID: 1024501398208486365}
 --- !u!114 &5097392888348603989
 MonoBehaviour:
   m_ObjectHideFlags: 0

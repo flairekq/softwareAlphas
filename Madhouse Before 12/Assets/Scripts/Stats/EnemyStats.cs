@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
-    private Animator animator;
-    private void Start() {
-        animator = gameObject.transform.parent.GetComponent<Animator>();
-        // animator = GetComponent<Animator>();
-    }
+    [SerializeField] private Animator animator;
+    // private void Start() {
+    //     // animator = gameObject.transform.parent.GetComponent<Animator>();
+    //     // animator = GetComponent<Animator>();
+    // }
     
     public override void Die()
     {
