@@ -43,20 +43,20 @@ public class PlayerController : MonoBehaviour
             {
                 // Check if we hit an interactable
                 // If we did set it as our focus
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-                Debug.Log(hit.collider);
-                if (interactable != null)
-                {
-                    Debug.Log("player attacking");
+                // Interactable interactable = hit.collider.GetComponent<Interactable>();
+                // Debug.Log(hit.collider);
+                // if (interactable != null)
+                // {
+                //     Debug.Log("player attacking");
 
-                    // SetFocus(interactable);
+                //     // SetFocus(interactable);
 
-                    if (interactable is Enemy)
-                    {
-                        Enemy e = (Enemy)interactable;
-                        e.Interact();
-                    }
-                }
+                //     if (interactable is Enemy)
+                //     {
+                //         Enemy e = (Enemy)interactable;
+                //         e.Interact();
+                //     }
+                // }
             }
         }
     }

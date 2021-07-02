@@ -1070,6 +1070,7 @@ GameObject:
   - component: {fileID: 1695029708911368015}
   - component: {fileID: 1695029708911368012}
   - component: {fileID: 1695029708911368013}
+  - component: {fileID: 5765031321219482538}
   m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
@@ -1181,7 +1182,7 @@ MeshCollider:
   m_GameObject: {fileID: 1695029708911368002}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -1198,7 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da09707ecf7a46149ae9b0b12df14fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   damage:
     baseValue: 1
   isDead: 0
@@ -1214,7 +1215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521da0cb3e4674573942225b7286308c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
 --- !u!114 &1695029708911368013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1227,6 +1227,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cdd468d9598f45c1ad2b0d5933052bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &5765031321219482538
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695029708911368002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 2.3330636
+  m_Direction: 1
+  m_Center: {x: -0.0000015095334, y: 1.4783003, z: -0.03251934}
 --- !u!1 &1695065147382094586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1697352925052679308}
   - component: {fileID: 1695065147382094565}
+  - component: {fileID: 4548243131736747812}
   m_Layer: 10
   m_Name: Insect
   m_TagString: Enemies
@@ -1284,6 +1299,30 @@ MonoBehaviour:
   moveSpot: {fileID: 0}
   startWaitTime: 3
   startToPathTime: 10
+  location: 
+--- !u!114 &4548243131736747812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695065147382094586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 4071084475635365720}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1695343262187789916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,7 +1689,7 @@ MeshCollider:
   m_GameObject: {fileID: 1695526268126474842}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -1798,6 +1837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3925141425350080725}
   - component: {fileID: 3925141425350080724}
+  - component: {fileID: 4071084475635365720}
   m_Layer: 10
   m_Name: model
   m_TagString: Untagged
@@ -1843,3 +1883,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4071084475635365720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925141425350080746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 0
+    Name: isDead
+  - Type: 4
+    SynchronizeType: 0
+    Name: isChasing
+  - Type: 3
+    SynchronizeType: 0
+    Name: attack
+  - Type: 4
+    SynchronizeType: 0
+    Name: isPatrolling
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0

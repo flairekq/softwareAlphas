@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
     private List<int> players = new List<int>();
+    public List<GameObject> gameObjectPlayers = new List<GameObject>();
     private PhotonView PV;
     public bool isGameOver = false;
     [SerializeField] GameOverScreen gameOverScreen;
@@ -32,11 +33,18 @@ public class GameController : MonoBehaviour
     {
         foreach (int id in players)
         {
-            // TogglePlayerCursor tgc = o.GetComponent<TogglePlayerCursor>();
-            // tgc.ChangeToCursor();
             PhotonView playerPV = PhotonView.Find(id);
             playerPV.GetComponent<TogglePlayerCursor>().GameOver();
         }
         gameOverScreen.Show(isTimeup);
+    }
+
+    public void GetAllPlayers()
+    {
+        foreach (int id in players)
+        {
+            PhotonView playerPV = PhotonView.Find(id);
+            GameController.instance.gameObjectPlayers.Add(playerPV.gameObject);
+        }
     }
 }

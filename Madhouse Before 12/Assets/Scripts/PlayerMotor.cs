@@ -45,7 +45,8 @@ public class PlayerMotor : MonoBehaviour
     {
         cameraRotation = _cameraRotation;
     }
-    void FixedUpdate()
+    // void FixedUpdate()
+    void Update()
     {
         if (!PV.IsMine)
         {

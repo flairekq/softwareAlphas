@@ -14,6 +14,9 @@ public class GenerateEnemies : MonoBehaviour
     GameObject moveSpot;
     EnvironmentManager envManager;
 
+    private float countdownTimer = 3f;
+    private bool generated = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,22 @@ public class GenerateEnemies : MonoBehaviour
         // StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, "Basement"));
         // StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, "FirstFloor"));
         // StartCoroutine(EnemyDrop(secondFloorEnemies, noOfSecondFloorEnemies, envManager.secondFloorPositionRange, "SecondFloor"));
+    }
+
+    void Update()
+    {
+        if (countdownTimer <= 0 && !generated)
+        {
+            GameController.instance.GetAllPlayers();
+            StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, "Basement"));
+            StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, "FirstFloor"));
+            StartCoroutine(EnemyDrop(secondFloorEnemies, noOfSecondFloorEnemies, envManager.secondFloorPositionRange, "SecondFloor"));
+            generated = true;
+        }
+        else
+        {
+            countdownTimer -= Time.deltaTime;
+        }
     }
 
     IEnumerator EnemyDrop(List<EnemyToGenerate> enemies, int maxNoOfEnemies, PositionRange[] positionsRange, string location)
