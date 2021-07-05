@@ -63,15 +63,15 @@ public class RifleManager : MonoBehaviour
        transform.rotation = CameraPos.transform.rotation;
     */
        if(Input.GetMouseButtonDown(0)) {
+           if(!aiming)
+           {
+               Aim();
+           }
                 Shoot();
               //  Recoil();
                  
-        } if(Input.GetMouseButtonDown(1))
-        {
-            Shoot();
-            Recoil();
-
         }
+        
         if (Input.GetMouseButtonDown(1))
         {
             if (!aiming)
