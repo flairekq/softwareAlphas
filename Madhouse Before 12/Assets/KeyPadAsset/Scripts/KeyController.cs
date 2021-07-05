@@ -17,13 +17,16 @@ public class KeyController : MonoBehaviour
 
     public void KeyPressNum(int keyNumber)
     {
-        kpController.SingleBeep();
-        kpController.text.color = Color.black;
-
-        if (kpController.codeText.characterLimit <= (kpController.characterLim - 1))
+        if (keyNumber >= 0 && keyNumber <= 9)
         {
-            kpController.codeText.characterLimit++;
-            kpController.codeText.text = kpController.codeText.text + keyNumber;
+            kpController.SingleBeep();
+            kpController.text.color = Color.black;
+
+            if (kpController.codeText.characterLimit <= (kpController.characterLim - 1))
+            {
+                kpController.codeText.characterLimit++;
+                kpController.codeText.text = kpController.codeText.text + keyNumber;
+            }
         }
     }
 
