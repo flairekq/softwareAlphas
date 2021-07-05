@@ -24,6 +24,7 @@ public class TimerManagement : MonoBehaviour
     [SerializeField] double timer = 20;
 
     ExitGames.Client.Photon.Hashtable CustomValue;
+    private float updateTimerCooldown = 1f;
 
     void Start()
     {
@@ -48,7 +49,12 @@ public class TimerManagement : MonoBehaviour
             }
             else
             {
-                UpdateTimer();
+                if (updateTimerCooldown <= 0f) {
+                    UpdateTimer();
+                    updateTimerCooldown = 1f;
+                } else {
+                    updateTimerCooldown -= Time.deltaTime;
+                }
             }
         }
     }

@@ -39,23 +39,39 @@ public class DisplayUIDoor : DisplayUI
         // if (m_Renderer.isVisible)
         // {
         // animator.enabled = true;
-        if (animator.GetBool(isOpeningFrontId))
+        if (animator.GetBool(isOpeningFrontId) && display.activeSelf)
         {
             display.SetActive(false);
         }
-        else
+        else if (!animator.GetBool(isOpeningFrontId))
         {
-            display.SetActive(displayInfo);
+            if (displayInfo && !display.activeSelf)
+            {
+                display.SetActive(true);
+            }
+            else if (!displayInfo && display.activeSelf)
+            {
+                display.SetActive(false);
+            }
+            // display.SetActive(displayInfo);
         }
 
         // if (animator.GetBool("isOpeningBack"))
-        if (animator.GetBool(isOpeningBackId))
+        if (animator.GetBool(isOpeningBackId) && behindDoorDisplay.activeSelf)
         {
             behindDoorDisplay.SetActive(false);
         }
-        else
+        else if (!animator.GetBool(isOpeningBackId))
         {
-            behindDoorDisplay.SetActive(behindDoorDisplayInfo);
+            // behindDoorDisplay.SetActive(behindDoorDisplayInfo);
+            if (behindDoorDisplayInfo && !behindDoorDisplay.activeSelf)
+            {
+                behindDoorDisplay.SetActive(true);
+            }
+            else if (!behindDoorDisplayInfo && behindDoorDisplay.activeSelf)
+            {
+                behindDoorDisplay.SetActive(false);
+            }
         }
         // } else {
         //     animator.enabled = false;

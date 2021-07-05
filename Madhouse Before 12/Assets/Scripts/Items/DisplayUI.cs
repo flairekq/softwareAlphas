@@ -57,12 +57,12 @@ public class DisplayUI : MonoBehaviour
 
     public virtual void FadeCanvas()
     {
-        if (displayInfo)
+        if (displayInfo && !display.activeSelf)
         {
             display.SetActive(true);
             ToggleDrawerText();
         }
-        else
+        else if (!displayInfo && display.activeSelf)
         {
             display.SetActive(false);
         }

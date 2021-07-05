@@ -11,6 +11,7 @@ public class ZoomingCam : MonoBehaviour
     private Camera cam;
     private TogglePlayerCursor togglePlayerCursor;
     private bool hasChanged = true;
+    private float countdown = 5f;
 
     void Start()
     {
@@ -22,9 +23,19 @@ public class ZoomingCam : MonoBehaviour
     {
         if (isZoomed)
         {
-            transform.LookAt(EnvironmentManager.instance.powerGenerator);
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoom, Time.deltaTime * smooth);
-            if (!hasChanged)
+            // transform.LookAt(EnvironmentManager.instance.powerGenerator);
+            // cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoom, Time.deltaTime * smooth);
+            if (hasChanged && countdown <= 0f)
+            {
+                countdown = 5f;
+            }
+            else if (hasChanged && countdown > 0f)
+            {
+                countdown -= Time.deltaTime;
+                transform.LookAt(EnvironmentManager.instance.powerGenerator);
+                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoom, Time.deltaTime * smooth);
+            }
+            else if (!hasChanged)
             {
                 togglePlayerCursor.ChangeToCursorZoomIn();
                 hasChanged = true;
@@ -32,8 +43,16 @@ public class ZoomingCam : MonoBehaviour
         }
         else
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, normal, Time.deltaTime * smooth);
-            if (!hasChanged)
+            if (hasChanged && countdown <= 0f)
+            {
+                countdown = 5f;
+            }
+            else if (hasChanged && countdown > 0f)
+            {
+                countdown -= Time.deltaTime;
+                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, normal, Time.deltaTime * smooth);
+            }
+            else if (!hasChanged)
             {
                 togglePlayerCursor.ChangeToPlayerZoomOut();
                 hasChanged = true;
@@ -48,7 +67,8 @@ public class ZoomingCam : MonoBehaviour
         hasChanged = false;
     }
 
-    public bool IsZoomedIn() {
+    public bool IsZoomedIn()
+    {
         return isZoomed;
     }
 }
