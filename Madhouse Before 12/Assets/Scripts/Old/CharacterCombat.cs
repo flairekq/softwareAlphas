@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterStats))]
+// [RequireComponent(typeof(CharacterStats))]
 public class CharacterCombat : MonoBehaviour
 {
     // public float attackSpeed = 1f;
@@ -10,16 +10,27 @@ public class CharacterCombat : MonoBehaviour
     // public float attackDelay = 0.6f;
     // public event System.Action OnAttack;
     CharacterStats myStats;
+    [SerializeField] private string type = "E";
 
-    void Start(){
+    void Start()
+    {
         myStats = GetComponent<CharacterStats>();
+        // if (type.Equals("P"))
+        // {
+        //     myStats = GetComponent<CharacterStats>();
+        // }
+        // else
+        // {
+        //     myStats = gameObject.transform.parent.transform.parent.GetComponent<CharacterStats>();
+        // }
     }
 
     // void Update() {
     //     attackCooldown -= Time.deltaTime;
     // }
 
-    public void Attack(CharacterStats targetStats) {
+    public void Attack(EnemyStats targetStats)
+    {
         // if (attackCooldown <= 0f) {
         //     StartCoroutine(DoDamage(targetStats, attackDelay));
         //     if (OnAttack != null) {

@@ -9,32 +9,41 @@ public class PatrolBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetBool("isPatrolling"))
+        Transform current = animator.gameObject.transform.parent;
+        EController2 controller = current.GetComponent<EController2>();
+
+        if (controller.PV.IsMine)
         {
-            Transform current = animator.gameObject.transform.parent;
-            EController2 controller = current.GetComponent<EController2>();
-            NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
-            if (agent.enabled)
+            if (animator.GetBool("isPatrolling"))
             {
-                agent.SetDestination(controller.moveSpot.position);
+                NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
+                if (agent.enabled)
+                {
+                    agent.SetDestination(controller.moveSpot.position);
+                }
             }
         }
     }
 
     // Update
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    // // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetBool("isPatrolling"))
+        Transform current = animator.gameObject.transform.parent;
+        EController2 controller = current.GetComponent<EController2>();
+
+        if (controller.PV.IsMine)
         {
-            Transform current = animator.gameObject.transform.parent;
-            EController2 controller = current.GetComponent<EController2>();
-            NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
-            if (agent.enabled)
+            if (animator.GetBool("isPatrolling"))
             {
-                agent.SetDestination(controller.moveSpot.position);
+                NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
+                if (agent.enabled)
+                {
+                    agent.SetDestination(controller.moveSpot.position);
+                }
             }
         }
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

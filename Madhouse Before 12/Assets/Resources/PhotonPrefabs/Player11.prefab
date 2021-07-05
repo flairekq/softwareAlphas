@@ -2834,6 +2834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   damage:
     baseValue: 10
   isDead: 0
@@ -2849,6 +2850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cdd468d9598f45c1ad2b0d5933052bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: P
 --- !u!1 &2523508918608305157
 GameObject:
   m_ObjectHideFlags: 0

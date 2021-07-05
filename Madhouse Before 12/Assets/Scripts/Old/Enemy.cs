@@ -5,7 +5,7 @@ using UnityEngine;
 // This class is used to identify the monster as an enemy
 // such that when the player interacts with it (be it mouse or key)
 // the monster will be attacked by the player
-[RequireComponent(typeof(EnemyStats))]
+// [RequireComponent(typeof(EnemyStats))]
 // public class Enemy : Interactable
 public class Enemy : MonoBehaviour
 {
@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     {
         // playerManagerOld = PlayerManagerOld.instance;
         myStats = GetComponent<EnemyStats>();
+        // myStats = gameObject.transform.parent.transform.parent.GetComponent<EnemyStats>();
     }
 
     // public override void Interact()

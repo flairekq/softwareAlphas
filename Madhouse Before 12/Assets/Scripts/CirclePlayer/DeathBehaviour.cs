@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class DeathBehaviour : StateMachineBehaviour
 {
@@ -18,7 +19,17 @@ public class DeathBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Destroy(animator.gameObject);
+        // Destroy(animator.gameObject);
+        // GameObject parent = animator.gameObject.transform.parent.gameObject;
+        // if (parent.GetComponent<PhotonView>().IsMine) {
+        // if (PhotonNetwork.IsMasterClient)
+        // {
+        EController2 currentController = animator.gameObject.transform.parent.GetComponent<EController2>();
+        if (currentController.PV.IsMine)
+        {
+            PhotonNetwork.Destroy(currentController.PV);
+        }
+        // }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

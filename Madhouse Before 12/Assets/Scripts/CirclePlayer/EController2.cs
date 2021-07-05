@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
+
 public class EController2 : MonoBehaviour
 {
     public GameObject player = null;
@@ -33,28 +35,44 @@ public class EController2 : MonoBehaviour
     private float originalStoppingDistance;
     public string location;
 
+    public PhotonView PV;
+
+    void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
+
     void Start()
     {
-        envManager = EnvironmentManager.instance;
-        gameController = GameController.instance;
+        if (PV.IsMine)
+        {
+            envManager = EnvironmentManager.instance;
+            gameController = GameController.instance;
 
-        agent = proxy.GetComponent<NavMeshAgent>();
-        originalStoppingDistance = agent.stoppingDistance;
-        obstacle = proxy.GetComponent<NavMeshObstacle>();
-        // player = GameObject.FindGameObjectWithTag("Player");
-        // slotManager = player.GetComponent<SlotManager>();
-        animator = model.GetComponent<Animator>();
-        enemyStats = model.GetComponentInChildren<EnemyStats>();
+            agent = proxy.GetComponent<NavMeshAgent>();
+            originalStoppingDistance = agent.stoppingDistance;
+            obstacle = proxy.GetComponent<NavMeshObstacle>();
+            // player = GameObject.FindGameObjectWithTag("Player");
+            // slotManager = player.GetComponent<SlotManager>();
+            animator = model.GetComponent<Animator>();
+            enemyStats = model.GetComponentInChildren<EnemyStats>();
+            // enemyStats = model.parent.GetComponent<EnemyStats>();
 
-        // PositionRange range = envManager.basementPositionRange[Random.Range(0, envManager.basementPositionRange.Length)];
-        // moveSpot.position = new Vector3(Random.Range(range.minX, range.maxX), gameObject.transform.position.y, Random.Range(range.minZ, range.maxZ));
-        RandomnizeMoveSpot();
-        waitTime = startWaitTime;
-        toPathTime = startToPathTime;
+            // PositionRange range = envManager.basementPositionRange[Random.Range(0, envManager.basementPositionRange.Length)];
+            // moveSpot.position = new Vector3(Random.Range(range.minX, range.maxX), gameObject.transform.position.y, Random.Range(range.minZ, range.maxZ));
+            RandomnizeMoveSpot();
+            waitTime = startWaitTime;
+            toPathTime = startToPathTime;
+        }
     }
 
     void Update()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
+
         if (!enemyStats.isDead)
         {
             // if (IsPlayerWithinDistance(slotManager))
@@ -115,7 +133,7 @@ public class EController2 : MonoBehaviour
                 // }
                 #endregion
                 agent.stoppingDistance = originalStoppingDistance;
-                agent.speed = 10f;
+                // agent.speed = 10f;
                 isPatrolling = false;
                 // Test if the distance between the agent (which is now the proxy) and the player
                 // is less than the attack range (or the stoppingDistance parameter) 
@@ -170,7 +188,7 @@ public class EController2 : MonoBehaviour
                 isChasing = false;
                 isPatrolling = true;
                 agent.stoppingDistance = 0;
-                agent.speed = 2f;
+                // agent.speed = 2f;
 
                 // agent.SetDestination(moveSpot.position);
                 // Debug.Log(Vector3.Distance(proxy.position, moveSpot.position));

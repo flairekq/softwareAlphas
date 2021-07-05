@@ -6,5 +6,6 @@ using UnityEngine;
 public class EnemyToGenerate
 {
     public GameObject enemy;
+    public string prefabName;
     public float yPos;
 }

@@ -83,11 +83,11 @@ public class EnemyController : MonoBehaviour
                         if (isAttacking)
                         {
                             isAttacking = false;
-                            CharacterStats targetStats = target.GetComponent<CharacterStats>();
-                            if (targetStats != null)
-                            {
-                                combat.Attack(targetStats);
-                            }
+                            // CharacterStats targetStats = target.GetComponent<CharacterStats>();
+                            // if (targetStats != null)
+                            // {
+                            //     combat.Attack(targetStats);
+                            // }
                         }
                         Attack();
                     }
