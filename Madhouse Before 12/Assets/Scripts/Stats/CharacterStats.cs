@@ -8,7 +8,7 @@ public class CharacterStats : MonoBehaviour
     public int maxHealth = 100;
     // public int currentHealth { get; private set; }
     public int currentHealth;
-    public Stat damage;
+    public int damage;
     public bool isDead = false;
     private PhotonView PV;
     // [SerializeField] private string type = "E";

@@ -44,7 +44,7 @@ public class CharacterCombat : MonoBehaviour
         //     // StartCoroutine(DoDamage(targetStats, animationLength));
         //     attackCooldown = 1f / attackSpeed;
         // }
-        targetStats.TakeDamage(myStats.damage.GetValue());
+        targetStats.TakeDamage(myStats.damage);
     }
 
     // IEnumerator DoDamage(CharacterStats stats, float delay) {

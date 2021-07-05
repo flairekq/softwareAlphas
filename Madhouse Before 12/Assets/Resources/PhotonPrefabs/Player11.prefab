@@ -2835,8 +2835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  damage:
-    baseValue: 10
+  damage: 15
   isDead: 0
 --- !u!114 &144474405278782113
 MonoBehaviour:
