@@ -11,7 +11,7 @@ public class GunPosition : MonoBehaviour
 
     void Awake()
     {
-        PV = gameObject.transform.parent.transform.parent.GetComponent<PhotonView>();
+        PV = GetComponent<PhotonView>();
     }
 
     // void Start()
