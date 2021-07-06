@@ -1325,8 +1325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  damage:
-    baseValue: 1
+  damage: 0
   isDead: 0
   animator: {fileID: 1024501398208486365}
 --- !u!114 &6369730033285248682
