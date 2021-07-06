@@ -212,6 +212,8 @@ MonoBehaviour:
   startToPathTime: 10
   location: 
   PV: {fileID: 0}
+  isChasingId: 0
+  isPatrollingId: 0
 --- !u!114 &7196935597234128528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,8 +867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  damage:
-    baseValue: 1
+  damage: 0
   isDead: 0
   animator: {fileID: 6680085698947568579}
 --- !u!114 &4802317041991941627

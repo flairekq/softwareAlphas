@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class ChasingBehaviour : StateMachineBehaviour
 {
+    private float countdown = 1f;
     // Start
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -14,7 +15,7 @@ public class ChasingBehaviour : StateMachineBehaviour
 
         if (controller.PV.IsMine)
         {
-            if (animator.GetBool("isChasing"))
+            if (animator.GetBool(controller.isChasingId))
             {
                 NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
                 if (agent.enabled)
@@ -34,12 +35,20 @@ public class ChasingBehaviour : StateMachineBehaviour
 
         if (controller.PV.IsMine)
         {
-            if (animator.GetBool("isChasing"))
+            if (animator.GetBool(controller.isChasingId))
             {
-                NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
-                if (agent.enabled)
+                if (countdown <= 0f)
                 {
-                    agent.SetDestination(controller.player.transform.position);
+                    countdown = 1f;
+                    NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
+                    if (agent.enabled)
+                    {
+                        agent.SetDestination(controller.player.transform.position);
+                    }
+                }
+                else
+                {
+                    countdown -= Time.deltaTime;
                 }
             }
         }

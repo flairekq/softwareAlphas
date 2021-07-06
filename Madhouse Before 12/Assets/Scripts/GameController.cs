@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoBehaviourPunCallbacks
 {
     public static GameController instance;
     private List<int> players = new List<int>();
@@ -34,17 +35,68 @@ public class GameController : MonoBehaviour
         foreach (int id in players)
         {
             PhotonView playerPV = PhotonView.Find(id);
-            playerPV.GetComponent<TogglePlayerCursor>().GameOver();
+            if (playerPV != null)
+            {
+                playerPV.GetComponent<TogglePlayerCursor>().GameOver();
+            }
         }
         gameOverScreen.Show(isTimeup);
     }
 
     public void GetAllPlayers()
     {
+        GameController.instance.gameObjectPlayers.Clear();
         foreach (int id in players)
         {
             PhotonView playerPV = PhotonView.Find(id);
-            GameController.instance.gameObjectPlayers.Add(playerPV.gameObject);
+            if (playerPV != null)
+            {
+                GameController.instance.gameObjectPlayers.Add(playerPV.gameObject);
+            }
+        }
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        if (this.CanRecoverFromDisconnect(cause))
+        {
+            this.Recover();
+        }
+        else
+        {
+            GameController.instance.GetAllPlayers();
+        }
+    }
+
+    private bool CanRecoverFromDisconnect(DisconnectCause cause)
+    {
+        switch (cause)
+        {
+            // the list here may be non exhaustive and is subject to review
+            case DisconnectCause.Exception:
+            case DisconnectCause.ServerTimeout:
+            case DisconnectCause.ClientTimeout:
+            case DisconnectCause.DisconnectByServerLogic:
+            case DisconnectCause.DisconnectByServerReasonUnknown:
+                return true;
+        }
+        return false;
+    }
+
+    private void Recover()
+    {
+        if (!PhotonNetwork.ReconnectAndRejoin())
+        {
+            // Debug.LogError("ReconnectAndRejoin failed, trying Reconnect");
+            if (!PhotonNetwork.Reconnect())
+            {
+                // Debug.LogError("Reconnect failed, trying ConnectUsingSettings");
+                if (!PhotonNetwork.ConnectUsingSettings())
+                {
+                    // Debug.LogError("ConnectUsingSettings failed");
+                    GameController.instance.GetAllPlayers();
+                }
+            }
         }
     }
 }
