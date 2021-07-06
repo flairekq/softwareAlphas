@@ -27,7 +27,8 @@ public class DeathBehaviour : StateMachineBehaviour
         EController2 currentController = animator.gameObject.transform.parent.GetComponent<EController2>();
         if (currentController.PV.IsMine)
         {
-            PhotonNetwork.Destroy(currentController.PV);
+            // PhotonNetwork.Destroy(currentController.PV);
+            currentController.StartDelayDeath();
         }
         // }
     }

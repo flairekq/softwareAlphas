@@ -523,6 +523,8 @@ MonoBehaviour:
   startToPathTime: 10
   location: 
   PV: {fileID: 0}
+  isChasingId: 0
+  isPatrollingId: 0
 --- !u!114 &6128561803342929704
 MonoBehaviour:
   m_ObjectHideFlags: 0

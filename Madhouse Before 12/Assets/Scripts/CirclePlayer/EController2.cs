@@ -36,6 +36,9 @@ public class EController2 : MonoBehaviour
     public string location;
 
     public PhotonView PV;
+    // private float countdown = 0.4f;
+    public int isChasingId;
+    public int isPatrollingId;
 
     void Awake()
     {
@@ -46,6 +49,9 @@ public class EController2 : MonoBehaviour
     {
         if (PV.IsMine)
         {
+            isChasingId = Animator.StringToHash("isChasing");
+            isPatrollingId = Animator.StringToHash("isPatrolling");
+
             envManager = EnvironmentManager.instance;
             gameController = GameController.instance;
 
@@ -75,6 +81,17 @@ public class EController2 : MonoBehaviour
 
         if (!enemyStats.isDead)
         {
+            // if (countdown <= 0f)
+            // {
+            //     countdown = 0.4f;
+
+            //     // animator.SetBool("isChasing", isChasing);
+            //     // animator.SetBool("isPatrolling", isPatrolling);
+            // }
+            // else
+            // {
+            //     countdown -= Time.deltaTime;
+            // }
             // if (IsPlayerWithinDistance(slotManager))
             if (player != null && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius)
             {
@@ -258,8 +275,8 @@ public class EController2 : MonoBehaviour
             // {
             //     animator.SetBool("isChasing", isChasing);
             // }
-            animator.SetBool("isChasing", isChasing);
-            animator.SetBool("isPatrolling", isPatrolling);
+            animator.SetBool(isChasingId, isChasing);
+            animator.SetBool(isPatrollingId, isPatrolling);
         }
     }
 
@@ -334,4 +351,15 @@ public class EController2 : MonoBehaviour
     //     }
     //     return false;
     // }
+
+    public void StartDelayDeath()
+    {
+        StartCoroutine(DelayDeath(this));
+    }
+
+    IEnumerator DelayDeath(EController2 currentController)
+    {
+        yield return new WaitForSeconds(1f);
+        PhotonNetwork.Destroy(currentController.PV);
+    }
 }

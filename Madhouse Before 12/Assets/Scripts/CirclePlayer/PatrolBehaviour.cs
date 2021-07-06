@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class PatrolBehaviour : StateMachineBehaviour
 {
+    private float countdown = 1f;
+
     // Start
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -14,7 +16,7 @@ public class PatrolBehaviour : StateMachineBehaviour
 
         if (controller.PV.IsMine)
         {
-            if (animator.GetBool("isPatrolling"))
+            if (animator.GetBool(controller.isPatrollingId))
             {
                 NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
                 if (agent.enabled)
@@ -34,12 +36,20 @@ public class PatrolBehaviour : StateMachineBehaviour
 
         if (controller.PV.IsMine)
         {
-            if (animator.GetBool("isPatrolling"))
+            if (animator.GetBool(controller.isPatrollingId))
             {
-                NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
-                if (agent.enabled)
+                if (countdown <= 0f)
                 {
-                    agent.SetDestination(controller.moveSpot.position);
+                    countdown = 1f;
+                    NavMeshAgent agent = controller.proxy.GetComponent<NavMeshAgent>();
+                    if (agent.enabled)
+                    {
+                        agent.SetDestination(controller.moveSpot.position);
+                    }
+                }
+                else
+                {
+                    countdown -= Time.deltaTime;
                 }
             }
         }

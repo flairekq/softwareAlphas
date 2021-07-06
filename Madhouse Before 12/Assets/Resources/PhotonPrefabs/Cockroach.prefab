@@ -1494,6 +1494,8 @@ MonoBehaviour:
   startToPathTime: 10
   location: 
   PV: {fileID: 0}
+  isChasingId: 0
+  isPatrollingId: 0
 --- !u!114 &7834346656034917012
 MonoBehaviour:
   m_ObjectHideFlags: 0
