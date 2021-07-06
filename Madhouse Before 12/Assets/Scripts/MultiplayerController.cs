@@ -46,6 +46,8 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     private int isWalkingLeft;
     private int isJumping;
 
+    private CharacterController cc;
+
     private PhotonView PV;
 
     void Awake()
@@ -55,6 +57,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     void Start()
     {
+         cc = GetComponent<CharacterController>();
         motor = GetComponent<PlayerMotor>();
         anim = GetComponent<Animator>();
 
@@ -104,6 +107,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
         motor.Rotate(_rotation);
 
+
         //camera 
         float _xRot = Input.GetAxisRaw("Mouse Y");
         Vector3 _cameraRotation = new Vector3(_xRot, 0f, 0f) * lookSensitivity;
@@ -134,8 +138,12 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            if(cc.isGrounded)
+            {
+                Jump();
+            }
         }
+        
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S) ||
             Input.GetKeyUp(KeyCode.Space))
         {
