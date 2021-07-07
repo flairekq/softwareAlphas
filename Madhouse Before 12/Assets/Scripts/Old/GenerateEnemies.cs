@@ -74,7 +74,7 @@ public class GenerateEnemies : MonoBehaviour
 
     public void InitialSpawnEnemies()
     {
-        GenerateEnemies.instance.PV("RPC_HandleInitialSpawnEnemies", RpcTarget.All);
+        GenerateEnemies.instance.PV.RPC("RPC_HandleInitialSpawnEnemies", RpcTarget.All);
     }
 
     [PunRPC]
