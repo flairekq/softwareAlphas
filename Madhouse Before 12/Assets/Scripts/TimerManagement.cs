@@ -67,16 +67,16 @@ public class TimerManagement : MonoBehaviour
                     updateTimerCooldown -= Time.deltaTime;
                 }
 
-                if (isDisplayAdjustTiming)
+                if (TimerManagement.instance.isDisplayAdjustTiming)
                 {
-                    if (displayAdjustTimingCounter <= 0f)
+                    if (TimerManagement.instance.displayAdjustTimingCounter <= 0f)
                     {
-                        adjustTimingText.enabled = false;
-                        displayAdjustTimingCounter = 2f;
+                        TimerManagement.instance.adjustTimingText.enabled = false;
+                        TimerManagement.instance.displayAdjustTimingCounter = 2f;
                     }
                     else
                     {
-                        displayAdjustTimingCounter -= Time.deltaTime;
+                        TimerManagement.instance.displayAdjustTimingCounter -= Time.deltaTime;
                     }
                 }
             }
@@ -86,7 +86,7 @@ public class TimerManagement : MonoBehaviour
     void UpdateTimer()
     {
         timerIncrementValue = PhotonNetwork.Time - startTime;
-        timeDisplay.text = TimeSpan.FromSeconds(elapsedTimeForDisplay + timerIncrementValue).ToString("hh':'mm':'ss");
+        timeDisplay.text = TimeSpan.FromSeconds(TimerManagement.instance.elapsedTimeForDisplay + timerIncrementValue).ToString("hh':'mm':'ss");
     }
 
     void SetStartTimer()
