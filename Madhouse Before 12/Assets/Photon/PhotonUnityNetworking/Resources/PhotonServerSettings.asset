@@ -32,27 +32,7 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList:
-  - ClickRpc
-  - DestroyRpc
-  - RPC_HandleDiaryClue
-  - RPC_HandleDoor
-  - RPC_HandleDrawer
-  - RPC_HandleItem
-  - RPC_HandlePlayer
-  - RPC_HandlePowerGenerator
-  - RPC_HandlePowerOnOff
-  - RPC_HandleSwitch
-  - RPC_HandleWord
-  - RPC_ToggleLockUnlockDoor
-  - ShowLoadingScreenToAll
-  - RPC_HandleProjectorOnOff
-  - RPC_HandleProjectorDisplay
-  - RPC_HandleProjectorDisplayOff
-  - RPC_HandleDamage
-  - TakeDamage
-  - RPC_HandleAdjustTime
-  - RPC_HandleEnemyKilled
+  RpcList: []
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0
