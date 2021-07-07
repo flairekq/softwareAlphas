@@ -12,6 +12,8 @@ public class GameController : MonoBehaviourPunCallbacks
     private PhotonView PV;
     public bool isGameOver = false;
     [SerializeField] GameOverScreen gameOverScreen;
+    private bool isAllPlayersIn = false;
+    private bool hasInitialSpawn = false;
 
     void Awake()
     {
@@ -24,6 +26,17 @@ public class GameController : MonoBehaviourPunCallbacks
         EnvironmentManager.instance.PV.RPC("RPC_HandlePlayer", RpcTarget.All, playerID);
     }
 
+    void Update()
+    {
+        if (!GameController.instance.hasInitialSpawn)
+        {
+            if (GameController.instance.isAllPlayersIn && PhotonNetwork.IsMasterClient)
+            {
+                GameController.instance.PV.RPC("RPC_CallInitialSpawn", RpcTarget.All);
+            }
+        }
+    }
+
     [PunRPC]
     private void RPC_HandlePlayer(int playerID)
     {
@@ -31,8 +44,16 @@ public class GameController : MonoBehaviourPunCallbacks
         Player[] players = PhotonNetwork.PlayerList;
         if (players.Length == GameController.instance.players.Count)
         {
-            GenerateEnemies.instance.InitialSpawnEnemies();
+            GameController.instance.isAllPlayersIn = true;
+            // GenerateEnemies.instance.InitialSpawnEnemies();
         }
+    }
+
+    [PunRPC]
+    private void RPC_CallInitialSpawn()
+    {
+        GameController.instance.hasInitialSpawn = true;
+        GenerateEnemies.instance.InitialSpawnEnemies();
     }
 
     public void GameOver(bool isTimeup)
