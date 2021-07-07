@@ -74,6 +74,12 @@ public class GenerateEnemies : MonoBehaviour
 
     public void InitialSpawnEnemies()
     {
+        GenerateEnemies.instance.PV("RPC_HandleInitialSpawnEnemies", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void RPC_HandleInitialSpawnEnemies() 
+    {
         GameController.instance.GetAllPlayers();
         StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, 0));
         StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, 1));
