@@ -15,6 +15,8 @@ public class RifleManager : MonoBehaviour
     public Transform shootPoint;
     //public CameraShake cameraShake;
 
+    private AudioSource gunAudio;
+
     public GameObject muzzleFlashObject;
     public ParticleSystem muzzleFlash;
 
@@ -46,6 +48,7 @@ public class RifleManager : MonoBehaviour
     {
         currentBullets = bulletspermag;
         anim = GetComponent<Animator>();
+        gunAudio = GetComponent<AudioSource>();
         isShooting = Animator.StringToHash("isShooting");
         isRecoil = Animator.StringToHash("isRecoil");
         isIdle = Animator.StringToHash("isIdle");
@@ -67,6 +70,7 @@ public class RifleManager : MonoBehaviour
            {
                Aim();
            }
+                gunAudio.Play();
                 Shoot();
               //  Recoil();
                  
