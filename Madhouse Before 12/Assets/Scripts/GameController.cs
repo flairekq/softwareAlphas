@@ -28,6 +28,11 @@ public class GameController : MonoBehaviourPunCallbacks
     private void RPC_HandlePlayer(int playerID)
     {
         GameController.instance.players.Add(playerID);
+        Player[] players = PhotonNetwork.PlayerList;
+        if (players.Length == GameController.instance.players.Count)
+        {
+            GenerateEnemies.instance.InitialSpawnEnemies();
+        }
     }
 
     public void GameOver(bool isTimeup)

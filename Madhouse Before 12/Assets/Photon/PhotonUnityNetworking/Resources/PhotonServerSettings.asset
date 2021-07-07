@@ -51,6 +51,8 @@ MonoBehaviour:
   - RPC_HandleProjectorDisplayOff
   - RPC_HandleDamage
   - TakeDamage
+  - RPC_HandleAdjustTime
+  - RPC_HandleEnemyKilled
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
