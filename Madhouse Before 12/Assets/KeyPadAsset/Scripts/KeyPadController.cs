@@ -40,6 +40,7 @@ public class KeyPadController : MonoBehaviour
             mainAudio.PlayOneShot(denied, 0.2f);
             text.color = Color.red;
             EnvironmentManager.instance.ToggleLockUnlockDoor(roomName, false);
+            TimerManagement.instance.AdjustTime(60, false);
         }
     }
 }
