@@ -1650,7 +1650,7 @@ MonoBehaviour:
   moveSpot: {fileID: 0}
   startWaitTime: 3
   startToPathTime: 10
-  location: 
+  location: 0
   PV: {fileID: 3689880959859383698}
   isChasingId: 0
   isPatrollingId: 0

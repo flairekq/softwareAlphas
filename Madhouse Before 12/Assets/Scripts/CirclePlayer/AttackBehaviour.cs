@@ -26,6 +26,7 @@ public class AttackBehaviour : StateMachineBehaviour
         EController2 currentController = current.GetComponent<EController2>();
         if (currentController.PV.IsMine)
         {
+            TimerManagement.instance.AdjustTime(5, false);
             currentController.isAttacking = false;
         }
         // CharacterStats targetStats = currentController.player.GetComponent<CharacterStats>();

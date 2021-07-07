@@ -31,10 +31,8 @@ public class EController2 : MonoBehaviour
     public float startToPathTime;
     EnvironmentManager envManager;
     GameController gameController;
-
     private float originalStoppingDistance;
-    public string location;
-
+    public int location;
     public PhotonView PV;
     // private float countdown = 0.4f;
     public int isChasingId;
@@ -291,17 +289,31 @@ public class EController2 : MonoBehaviour
     void RandomnizeMoveSpot()
     {
         PositionRange range;
-        if (location.Equals("Basement"))
+        // if (location.Equals("Basement"))
+        if (location == 0) // basement
         {
             range = envManager.basementPositionRange[Random.Range(0, envManager.basementPositionRange.Length)];
         }
-        else if (location.Equals("FirstFloor"))
+        // else if (location.Equals("FirstFloor"))
+        else if (location == 1) // first floor 
         {
             range = envManager.firstFloorPositionRange[Random.Range(0, envManager.firstFloorPositionRange.Length)];
         }
-        else
+        else if (location == 2) // 2nd floor
         {
             range = envManager.secondFloorPositionRange[Random.Range(0, envManager.secondFloorPositionRange.Length)];
+        }
+        else if (location == 3)
+        { // classroom
+            range = envManager.classroomPositionRange[Random.Range(0, envManager.classroomPositionRange.Length)];
+        }
+        else if (location == 4)
+        { // bedroom
+            range = envManager.bedroomPositionRange[Random.Range(0, envManager.bedroomPositionRange.Length)];
+        }
+        else
+        { // dayroom
+            range = envManager.dayroomPositionRange[Random.Range(0, envManager.dayroomPositionRange.Length)];
         }
 
         moveSpot.position = new Vector3(Random.Range(range.minX, range.maxX), gameObject.transform.position.y, Random.Range(range.minZ, range.maxZ));

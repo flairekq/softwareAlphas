@@ -28,6 +28,8 @@ public class DeathBehaviour : StateMachineBehaviour
         if (currentController.PV.IsMine)
         {
             // PhotonNetwork.Destroy(currentController.PV);
+            TimerManagement.instance.AdjustTime(-30, true);
+            GenerateEnemies.instance.EnemyKilled(currentController.location);
             currentController.StartDelayDeath();
         }
         // }

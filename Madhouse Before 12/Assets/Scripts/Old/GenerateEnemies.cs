@@ -10,10 +10,22 @@ public class GenerateEnemies : MonoBehaviour
     public int noOfBasementEnemies;
     public int noOfFirstFloorEnemies;
     public int noOfSecondFloorEnemies;
+    public int noOfClassroomEnemies;
+    public int noOfBedroomEnemies;
+    public int noOfDayroomEnemies;
+    private int noOfRemainingBasementEnemies;
+    private int noOfRemainingFirstFloorEnemies;
+    private int noOfRemainingSecondFloorEnemies;
+    private int noOfRemainingClassroomEnemies;
+    private int noOfRemainingBedroomEnemies;
+    private int noOfRemainingDayroomEnemies;
 
     public List<EnemyToGenerate> basementEnemies;
     public List<EnemyToGenerate> firstFloorEnemies;
     public List<EnemyToGenerate> secondFloorEnemies;
+    public List<EnemyToGenerate> classroomEnemies;
+    public List<EnemyToGenerate> bedroomEnemies;
+    public List<EnemyToGenerate> dayroomEnemies;
     GameObject moveSpot;
     EnvironmentManager envManager;
 
@@ -28,33 +40,113 @@ public class GenerateEnemies : MonoBehaviour
         // instance.moveSpot = new GameObject();
         instance.envManager = EnvironmentManager.instance;
         instance.PV = GetComponent<PhotonView>();
+        instance.noOfRemainingBasementEnemies = noOfBasementEnemies;
+        instance.noOfRemainingFirstFloorEnemies = noOfFirstFloorEnemies;
+        instance.noOfRemainingSecondFloorEnemies = noOfSecondFloorEnemies;
+        instance.noOfRemainingClassroomEnemies = noOfClassroomEnemies;
+        instance.noOfRemainingBedroomEnemies = noOfBedroomEnemies;
+        instance.noOfRemainingDayroomEnemies = noOfDayroomEnemies;
         // StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, "Basement"));
         // StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, "FirstFloor"));
         // StartCoroutine(EnemyDrop(secondFloorEnemies, noOfSecondFloorEnemies, envManager.secondFloorPositionRange, "SecondFloor"));
     }
 
-    void Update()
-    {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            return;
-        }
+    // void Update()
+    // {
+    //     if (!PhotonNetwork.IsMasterClient)
+    //     {
+    //         return;
+    //     }
 
-        if (countdownTimer <= 0 && !generated)
+    //     // if (countdownTimer <= 0 && !generated)
+    //     // {
+    //     //     GameController.instance.GetAllPlayers();
+    //     //     StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, "Basement"));
+    //     //     StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, "FirstFloor"));
+    //     //     StartCoroutine(EnemyDrop(secondFloorEnemies, noOfSecondFloorEnemies, envManager.secondFloorPositionRange, "SecondFloor"));
+    //     //     generated = true;
+    //     // }
+    //     // else
+    //     // {
+    //     //     countdownTimer -= Time.deltaTime;
+    //     // }
+    // }
+
+    public void InitialSpawnEnemies()
+    {
+        GameController.instance.GetAllPlayers();
+        StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, 0));
+        StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, 1));
+        StartCoroutine(EnemyDrop(secondFloorEnemies, noOfSecondFloorEnemies, envManager.secondFloorPositionRange, 2));
+        StartCoroutine(EnemyDrop(classroomEnemies, noOfClassroomEnemies, envManager.classroomPositionRange, 3));
+        StartCoroutine(EnemyDrop(bedroomEnemies, noOfBedroomEnemies, envManager.bedroomPositionRange, 4));
+        StartCoroutine(EnemyDrop(dayroomEnemies, noOfDayroomEnemies, envManager.dayroomPositionRange, 5));
+    }
+
+    public void EnemyKilled(int location)
+    {
+        GenerateEnemies.instance.PV.RPC("RPC_HandleEnemyKilled", RpcTarget.All, location);
+    }
+
+    [PunRPC]
+    private void RPC_HandleEnemyKilled(int location)
+    {
+        switch (location)
         {
-            GameController.instance.GetAllPlayers();
-            StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, "Basement"));
-            StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, "FirstFloor"));
-            StartCoroutine(EnemyDrop(secondFloorEnemies, noOfSecondFloorEnemies, envManager.secondFloorPositionRange, "SecondFloor"));
-            generated = true;
-        }
-        else
-        {
-            countdownTimer -= Time.deltaTime;
+            case 0:
+                GenerateEnemies.instance.noOfRemainingBasementEnemies -= 1;
+                if (GenerateEnemies.instance.noOfRemainingBasementEnemies <= 0)
+                {
+                    GenerateEnemies.instance.noOfRemainingBasementEnemies = noOfBasementEnemies;
+                    StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, 0));
+                }
+                break;
+            case 1:
+                GenerateEnemies.instance.noOfRemainingFirstFloorEnemies -= 1;
+                if (GenerateEnemies.instance.noOfRemainingFirstFloorEnemies <= 0)
+                {
+                    GenerateEnemies.instance.noOfRemainingFirstFloorEnemies = noOfFirstFloorEnemies;
+                    StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, 1));
+                }
+                break;
+            case 2:
+                GenerateEnemies.instance.noOfRemainingSecondFloorEnemies -= 1;
+                if (GenerateEnemies.instance.noOfRemainingSecondFloorEnemies <= 0)
+                {
+                    GenerateEnemies.instance.noOfRemainingSecondFloorEnemies = noOfSecondFloorEnemies;
+                    StartCoroutine(EnemyDrop(secondFloorEnemies, noOfSecondFloorEnemies, envManager.secondFloorPositionRange, 2));
+                }
+                break;
+            case 3:
+                GenerateEnemies.instance.noOfRemainingClassroomEnemies -= 1;
+                if (GenerateEnemies.instance.noOfRemainingClassroomEnemies <= 0)
+                {
+                    GenerateEnemies.instance.noOfRemainingClassroomEnemies = noOfClassroomEnemies;
+                    StartCoroutine(EnemyDrop(classroomEnemies, noOfClassroomEnemies, envManager.classroomPositionRange, 3));
+                }
+                break;
+            case 4:
+                GenerateEnemies.instance.noOfRemainingBedroomEnemies -= 1;
+                if (GenerateEnemies.instance.noOfRemainingBedroomEnemies <= 0)
+                {
+                    GenerateEnemies.instance.noOfRemainingBedroomEnemies = noOfBedroomEnemies;
+                    StartCoroutine(EnemyDrop(bedroomEnemies, noOfBedroomEnemies, envManager.bedroomPositionRange, 4));
+                }
+                break;
+            case 5:
+                GenerateEnemies.instance.noOfRemainingDayroomEnemies -= 1;
+                if (GenerateEnemies.instance.noOfRemainingDayroomEnemies <= 0)
+                {
+                    GenerateEnemies.instance.noOfRemainingDayroomEnemies = noOfDayroomEnemies;
+                    StartCoroutine(EnemyDrop(dayroomEnemies, noOfDayroomEnemies, envManager.dayroomPositionRange, 5));
+                }
+                break;
+            default:
+                break;
         }
     }
 
-    IEnumerator EnemyDrop(List<EnemyToGenerate> enemies, int maxNoOfEnemies, PositionRange[] positionsRange, string location)
+    IEnumerator EnemyDrop(List<EnemyToGenerate> enemies, int maxNoOfEnemies, PositionRange[] positionsRange, int location)
     {
         int enemyCount = 0;
         while (enemyCount < maxNoOfEnemies)
