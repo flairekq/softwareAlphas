@@ -28,7 +28,7 @@ public class PlayerMotor : MonoBehaviour
     void Awake()
     {
         PV = GetComponent<PhotonView>();
-        
+
     }
 
     void Start()
@@ -69,7 +69,7 @@ public class PlayerMotor : MonoBehaviour
     void PerformMovement()
     {
         if (velocity != Vector3.zero)
-        
+
             // if (cc.isGrounded && verticalVelocity < 0)
             // {
             //     verticalVelocity = -2f;
@@ -79,22 +79,24 @@ public class PlayerMotor : MonoBehaviour
             //     verticalVelocity -= gravity * Time.fixedDeltaTime;
             // }
 
-            if (cc.isGrounded) {
+            if (cc.isGrounded)
+            {
                 verticalVelocity = -gravity * Time.deltaTime;
-                Debug.Log("isgrounded");
-
-            } else {
-                Debug.Log("notGrounded");
-               verticalVelocity -= gravity * Time.deltaTime * 2;
+                // Debug.Log("isgrounded");
+            }
+            else
+            {
+                // Debug.Log("notGrounded");
+                verticalVelocity -= gravity * Time.deltaTime * 2;
             }
 
-            Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
+        Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
 
-            cc.Move(velocity * Time.deltaTime);
-            cc.Move(moveVector * Time.deltaTime);
-            
-            // rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
-        
+        cc.Move(velocity * Time.deltaTime);
+        cc.Move(moveVector * Time.deltaTime);
+
+        // rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+
     }
 
     void PerformRotation()

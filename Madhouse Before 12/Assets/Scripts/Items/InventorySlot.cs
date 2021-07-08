@@ -45,7 +45,7 @@ public class InventorySlot : MonoBehaviour
     public void OnRemoveButton()
     {
         // item.transform.position = new Vector3(activeChar.transform.position.x, 0.5f, activeChar.transform.position.z);
-        item.GetComponent<ItemPickup>().MakeVisible(new Vector3(activeChar.transform.localPosition.x, activeChar.transform.localPosition.y, activeChar.transform.localPosition.z));
+        item.GetComponent<ItemPickup>().MakeVisible(new Vector3(activeChar.transform.localPosition.x, activeChar.transform.localPosition.y + 0.1f, activeChar.transform.localPosition.z));
 
         activeChar.GetComponent<Inventory>().Remove(item);
         details.OffExamine(noteText, clueText, displayNameText, focusPanelImage);
