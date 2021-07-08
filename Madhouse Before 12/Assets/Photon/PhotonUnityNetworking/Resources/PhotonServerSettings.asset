@@ -53,6 +53,9 @@ MonoBehaviour:
   - RPC_ToggleLockUnlockDoor
   - ShowLoadingScreenToAll
   - TakeDamage
+  - RPC_HandleInitialSpawnEnemies
+  - RPC_CallInitialSpawn
+  - RPC_HandleRespawn
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

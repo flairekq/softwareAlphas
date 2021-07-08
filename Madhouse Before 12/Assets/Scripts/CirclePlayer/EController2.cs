@@ -336,11 +336,14 @@ public class EController2 : MonoBehaviour
         float leastDistance = 1000000000f;
         foreach (GameObject p in gameController.gameObjectPlayers)
         {
-            float currentDistance = Vector3.Distance(p.transform.position, proxy.position);
-            if (currentDistance < leastDistance)
+            if (p != null)
             {
-                leastDistance = currentDistance;
-                player = p;
+                float currentDistance = Vector3.Distance(p.transform.position, proxy.position);
+                if (currentDistance < leastDistance)
+                {
+                    leastDistance = currentDistance;
+                    player = p;
+                }
             }
         }
     }
