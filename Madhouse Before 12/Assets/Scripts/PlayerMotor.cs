@@ -11,7 +11,7 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
     private float gravity = 14.81f;
-    private float jumpForce = 3.5f;
+    private float jumpForce = 7f;
     private float verticalVelocity;
     private Vector3 rotation = Vector3.zero;
     private Vector3 cameraRotation = Vector3.zero;
@@ -82,7 +82,15 @@ public class PlayerMotor : MonoBehaviour
             if (cc.isGrounded)
             {
                 verticalVelocity = -gravity * Time.deltaTime;
-                // Debug.Log("isgrounded");
+                Debug.Log("isgrounded");
+                if (Input.GetKeyDown(KeyCode.Space))
+            {
+                verticalVelocity = jumpForce;
+            }
+
+            } else {
+                Debug.Log("notGrounded");
+               verticalVelocity -= gravity * Time.deltaTime;
             }
             else
             {

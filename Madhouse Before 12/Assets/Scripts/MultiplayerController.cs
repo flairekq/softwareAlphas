@@ -19,19 +19,12 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     private PlayerMotor motor;
     private Animator anim;
 
-    // private int forwardWalking = Animator.StringToHash("forwardWalking");
-    // private int backwardsWalk = Animator.StringToHash("backwardsWalk");
+    public AudioClip footStepsAudio;
+    public AudioClip jumpAudio;
 
-    // private int isIdle = Animator.StringToHash("isIdle");
+    private AudioSource footStepsSource; 
+    private AudioSource jumpAudioSource; 
 
-    // private int isRunning = Animator.StringToHash("isRunning");
-
-    // private int backwardsRun = Animator.StringToHash("backwardsRun");
-
-    // private int isWalkingRight = Animator.StringToHash("isWalkingRight");
-    // private int startWalking = Animator.StringToHash("startWalking");
-    // private int isWalkingLeft = Animator.StringToHash("isWalkingLeft");
-    // private int isJumping = Animator.StringToHash("isJumping");
     private int forwardWalking;
     private int backwardsWalk;
 
@@ -60,6 +53,9 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
          cc = GetComponent<CharacterController>();
         motor = GetComponent<PlayerMotor>();
         anim = GetComponent<Animator>();
+        footStepsSource = AddAudio(false, false, footStepsAudio, 1.5f);
+        jumpAudioSource = AddAudio(false, false, jumpAudio, 1.5f);
+
 
         if (PV.IsMine)
         {
@@ -114,15 +110,14 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
         motor.RotateCamera(_cameraRotation);
 
-
-
         if (Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S))
         {
             WalkBackwards();
         }
         if (!Input.GetKey(KeyCode.S))
         {
-            if (Input.GetKey(KeyCode.W))
+          
+                if (Input.GetKey(KeyCode.W))
             {
                 WalkForward();
             }
@@ -134,20 +129,57 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             {
                 WalkLeft();
             }
+
+            
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(cc.isGrounded)
+            if(AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp"))
             {
+            }
                 Jump();
+                jumpAudioSource.Play();
+            
+        }
+
+        if(Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W)
+         || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A) 
+        || Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.D)
+        || Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
+        {
+            if(!footStepsSource.isPlaying)
+            {
+                footStepsSource.Play();
             }
         }
+
         
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S) ||
-            Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S))
         {
             Idle();
+       
+        }
+
+     /*   if(!Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W)
+         && !Input.GetKeyDown(KeyCode.A) && !Input.GetKey(KeyCode.A) 
+        && !Input.GetKeyDown(KeyCode.D) && !Input.GetKey(KeyCode.D)
+        && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) )
+        {
+            if(!AnimatorIsPlaying())
+            {
+                Idle();
+            }
+        } */
+
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp") &&
+        !AnimatorIsPlaying() && cc.isGrounded &&
+        !Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W)
+         && !Input.GetKeyDown(KeyCode.A) && !Input.GetKey(KeyCode.A) 
+        && !Input.GetKeyDown(KeyCode.D) && !Input.GetKey(KeyCode.D)
+        && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) )
+        { 
+                Idle();
         }
 
 
@@ -155,6 +187,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     private void Idle()
     {
+        footStepsSource.Stop();
 
         anim.SetBool(backwardsWalk, false);
         anim.SetBool(forwardWalking, false);
@@ -179,6 +212,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     {
         anim.SetBool(forwardWalking, true);
         anim.SetBool(backwardsWalk, false);
+        anim.SetBool(isJumping, false);
         anim.SetBool(isIdle, false);
     }
 
@@ -186,6 +220,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     {
         anim.SetBool(forwardWalking, false);
         anim.SetBool(backwardsWalk, true);
+        anim.SetBool(isJumping, false);
         anim.SetBool(isIdle, false);
 
     }
@@ -193,14 +228,15 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     private void WalkRight()
     {
         anim.SetBool(isIdle, false);
+        anim.SetBool(isJumping, false);
         anim.SetBool(isWalkingRight, true);
     }
 
     private void WalkLeft()
     {
         anim.SetBool(isIdle, false);
-        // anim.SetBool("isWalkingLeft", true);
         anim.SetBool(isWalkingLeft, true);
+        anim.SetBool(isJumping, false);
     }
 
     private void Jump()
@@ -208,7 +244,30 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         anim.SetBool(isIdle, false);
         // anim.SetBool("isJumping", true);
         anim.SetBool(isJumping, true);
+        anim.SetBool(forwardWalking, false); 
+        anim.SetBool(isWalkingLeft, false);
+        anim.SetBool(isWalkingRight, false);
+        anim.SetBool(backwardsWalk, false);
     }
+
+    public AudioSource AddAudio(bool loop, bool playAwake, AudioClip clip, float vol) 
+    { 
+        AudioSource newAudio = gameObject.AddComponent<AudioSource>();
+        newAudio.loop = loop;
+        newAudio.playOnAwake = playAwake;
+        newAudio.volume = vol; 
+        newAudio.clip = clip;
+        return newAudio; 
+    }
+
+    public bool AnimatorIsPlaying(){
+     return anim.GetCurrentAnimatorStateInfo(0).length - 2.0f>
+            anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+  }
+
+   public bool AnimatorIsPlaying(string stateName){
+     return AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+  }
 
 
     // void EquipWeapon(int _index)

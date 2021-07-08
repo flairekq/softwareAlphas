@@ -5442,7 +5442,7 @@ PrefabInstance:
     - target: {fileID: 2596495684167311400, guid: ce52567f107acdf4abfe844f8de9d5ff,
         type: 3}
       propertyPath: sceneViewId
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6488609427237829521, guid: ce52567f107acdf4abfe844f8de9d5ff,
         type: 3}
@@ -5499,6 +5499,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6488609427237829524, guid: ce52567f107acdf4abfe844f8de9d5ff,
+        type: 3}
+      propertyPath: jumpAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 45bc125cb8cb195408490bec63fde615, type: 3}
+    - target: {fileID: 6488609427237829524, guid: ce52567f107acdf4abfe844f8de9d5ff,
+        type: 3}
+      propertyPath: footStepsAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: f0f794c67e9233d468a38d165590d253, type: 3}
     - target: {fileID: 6488609427237829531, guid: ce52567f107acdf4abfe844f8de9d5ff,
         type: 3}
       propertyPath: sceneViewId
@@ -5512,7 +5522,12 @@ PrefabInstance:
     - target: {fileID: 7399343367527091366, guid: ce52567f107acdf4abfe844f8de9d5ff,
         type: 3}
       propertyPath: sceneViewId
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424401116560847568, guid: ce52567f107acdf4abfe844f8de9d5ff,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce52567f107acdf4abfe844f8de9d5ff, type: 3}
@@ -5529,12 +5544,12 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8424401116560847567}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b796f7e3b1a4d7344b7ee8d6c077a68f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.33
   m_Pitch: 1
   Loop: 0
   Mute: 0
