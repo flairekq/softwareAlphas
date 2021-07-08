@@ -138,7 +138,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             if(AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp"))
             {
             }
-                Jump();
+                //Jump();
                 jumpAudioSource.Play();
             
         }

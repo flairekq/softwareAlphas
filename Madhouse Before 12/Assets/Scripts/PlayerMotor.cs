@@ -10,17 +10,14 @@ public class PlayerMotor : MonoBehaviour
     private Transform playerCamera;
     private Vector3 velocity = Vector3.zero;
 
-    private float gravity = 14.81f;
-    private float jumpForce = 7f;
+    private float gravity = 9.81f;
+    private float jumpForce = 20f;
     private float verticalVelocity;
     private Vector3 rotation = Vector3.zero;
     private Vector3 cameraRotation = Vector3.zero;
     // private Rigidbody rb;
     private CharacterController cc;
     private PhotonView PV;
-    private int isIdle = Animator.StringToHash("isIdle");
-
-    private int isJumping = Animator.StringToHash("isJumping");
     private Animator anim;
 
     // private float cameraPitch = 0.0f;
@@ -82,21 +79,18 @@ public class PlayerMotor : MonoBehaviour
             if (cc.isGrounded)
             {
                 verticalVelocity = -gravity * Time.deltaTime;
-                Debug.Log("isgrounded");
+               Debug.Log("isgrounded");
                 if (Input.GetKeyDown(KeyCode.Space))
-            {
-                verticalVelocity = jumpForce;
-            }
+                {
+                    Debug.Log("jump");
+                  //  verticalVelocity = jumpForce;
+                }
 
             } else {
-                Debug.Log("notGrounded");
+               // Debug.Log("notGrounded");
                verticalVelocity -= gravity * Time.deltaTime;
             }
-            else
-            {
-                // Debug.Log("notGrounded");
-                verticalVelocity -= gravity * Time.deltaTime * 2;
-            }
+          
 
         Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
 
