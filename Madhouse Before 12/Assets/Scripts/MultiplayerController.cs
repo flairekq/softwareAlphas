@@ -41,6 +41,13 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     private CharacterController cc;
 
+     private Vector3 velocity = Vector3.zero;
+
+    private float gravity = 9.81f;
+    private float jumpForce = 4f;
+    private float verticalVelocity;
+
+
     private PhotonView PV;
 
     void Awake()
@@ -103,7 +110,6 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
         motor.Rotate(_rotation);
 
-
         //camera 
         float _xRot = Input.GetAxisRaw("Mouse Y");
         Vector3 _cameraRotation = new Vector3(_xRot, 0f, 0f) * lookSensitivity;
@@ -132,16 +138,35 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
             
         }
+         if(cc.isGrounded)
+            {
+                verticalVelocity = -gravity * Time.deltaTime;
 
          if (Input.GetKeyDown(KeyCode.Space))
         {
             if(AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp"))
             {
             }
-                //Jump();
+                 verticalVelocity = jumpForce;
+              
+                Jump();
                 jumpAudioSource.Play();
             
         }
+          }
+
+        if(!cc.isGrounded)
+        {
+            Debug.Log("notgrounded");
+            verticalVelocity -= gravity * Time.deltaTime;
+        }
+
+              
+
+        Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
+
+        cc.Move(velocity * Time.deltaTime);
+        cc.Move(moveVector * Time.deltaTime);
 
         if(Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W)
          || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A) 
@@ -173,7 +198,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         } */
 
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp") &&
-        !AnimatorIsPlaying() && cc.isGrounded &&
+        !AnimatorIsPlaying() &&
         !Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W)
          && !Input.GetKeyDown(KeyCode.A) && !Input.GetKey(KeyCode.A) 
         && !Input.GetKeyDown(KeyCode.D) && !Input.GetKey(KeyCode.D)
