@@ -46,7 +46,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        MenuManager.Instance.OpenMenu("title");
+        MenuManager.Instance.OpenMenu("main");
         // Debug.Log("Joined Lobby");
         PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
     }
@@ -99,10 +99,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu("loading");
     }
 
-    public override void OnLeftRoom()
-    {
-        MenuManager.Instance.OpenMenu("title");
-    }
+    // public override void OnLeftRoom()
+    // {
+    //     MenuManager.Instance.OpenMenu("loading");
+    // }
 
     public void JoinRoom(RoomInfo info)
     {

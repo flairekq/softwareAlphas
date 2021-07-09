@@ -35,6 +35,7 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
+  - RPC_CallInitialSpawn
   - RPC_HandleAdjustTime
   - RPC_HandleDamage
   - RPC_HandleDiaryClue
@@ -48,13 +49,12 @@ MonoBehaviour:
   - RPC_HandleProjectorDisplay
   - RPC_HandleProjectorDisplayOff
   - RPC_HandleProjectorOnOff
+  - RPC_HandleRespawn
   - RPC_HandleSwitch
   - RPC_HandleWord
   - RPC_ToggleLockUnlockDoor
   - ShowLoadingScreenToAll
   - TakeDamage
-  - RPC_HandleInitialSpawnEnemies
-  - RPC_CallInitialSpawn
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
