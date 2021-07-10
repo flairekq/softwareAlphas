@@ -44,8 +44,10 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
      private Vector3 velocity = Vector3.zero;
 
     private float gravity = 9.81f;
-    private float jumpForce = 4f;
+    private float jumpForce = 5f;
     private float verticalVelocity;
+
+    private bool isGroundedPrivate;
 
 
     private PhotonView PV;
@@ -80,6 +82,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             startWalking = Animator.StringToHash("startWalking");
             isWalkingLeft = Animator.StringToHash("isWalkingLeft");
             isJumping = Animator.StringToHash("isJumping");
+            isGroundedPrivate = true;
         }
         else
         {
@@ -138,12 +141,13 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
             
         }
-         if(cc.isGrounded)
+         if(cc.isGrounded || isGroundedPrivate)
             {
                 verticalVelocity = -gravity * Time.deltaTime;
 
          if (Input.GetKeyDown(KeyCode.Space))
         {
+            isGroundedPrivate = false; 
             if(AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp"))
             {
             }
@@ -158,7 +162,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         if(!cc.isGrounded)
         {
             Debug.Log("notgrounded");
-            verticalVelocity -= gravity * Time.deltaTime;
+            verticalVelocity -= gravity * Time.deltaTime * 3;
         }
 
               
@@ -214,6 +218,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     {
         footStepsSource.Stop();
 
+        isGroundedPrivate = true;
         anim.SetBool(backwardsWalk, false);
         anim.SetBool(forwardWalking, false);
         anim.SetBool(isWalkingRight, false);
