@@ -202,7 +202,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 7399343367527091365}
   - {fileID: 7399343367527091369}
-  sceneViewId: 0
+  sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &7399343367527091369
@@ -418,7 +418,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 2596495684167311403}
-  sceneViewId: 0
+  sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &2596495684167311403
@@ -8629,7 +8629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   lookSensitivity: 0.1
-  footStepsAudio: {fileID: 8300000, guid: f0f794c67e9233d468a38d165590d253, type: 3}
+  footStepsAudio: {fileID: 8300000, guid: 4d11813f5983ce047873c94858e6a6c1, type: 3}
   jumpAudio: {fileID: 8300000, guid: 45bc125cb8cb195408490bec63fde615, type: 3}
 --- !u!114 &6488609427237829531
 MonoBehaviour:
@@ -8652,7 +8652,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 6488609427237829535}
   - {fileID: 3009455427136552307}
-  sceneViewId: 0
+  sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &6488609427237829535

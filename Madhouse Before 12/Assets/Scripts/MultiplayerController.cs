@@ -62,7 +62,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
          cc = GetComponent<CharacterController>();
         motor = GetComponent<PlayerMotor>();
         anim = GetComponent<Animator>();
-        footStepsSource = AddAudio(false, false, footStepsAudio, 1.5f);
+        footStepsSource = AddAudio(false, false, footStepsAudio, 0.15f);
         jumpAudioSource = AddAudio(false, false, jumpAudio, 1.5f);
 
 
