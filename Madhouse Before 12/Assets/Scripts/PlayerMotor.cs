@@ -7,6 +7,8 @@ using Photon.Pun;
 public class PlayerMotor : MonoBehaviour
 {
     private Camera cam;
+
+   // public Camera gunCam;
     private Transform playerCamera;
     private Vector3 velocity = Vector3.zero;
 
@@ -106,7 +108,7 @@ public class PlayerMotor : MonoBehaviour
         // rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
         if (cam != null)
         {
-
+           // gunCam.transform.Rotate(-cameraRotation);
             cam.transform.Rotate(-cameraRotation);
         }
     }
