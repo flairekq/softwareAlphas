@@ -17,7 +17,7 @@ public class EscMenu : MonoBehaviour
     [SerializeField] private float multipler = 30f;
 
     private TogglePlayerCursor togglePlayerCursor;
-
+    private bool isAlreadyCursorMode = false;
     // private float bgmVol;
     // private float effectsVol;
 
@@ -43,7 +43,7 @@ public class EscMenu : MonoBehaviour
         {
             if (menu.activeSelf)
             {
-                if (!togglePlayerCursor.IsInCursorMode())
+                if (!isAlreadyCursorMode)
                 {
                     togglePlayerCursor.ChangeToPlayer();
                 }
@@ -51,6 +51,7 @@ public class EscMenu : MonoBehaviour
             }
             else
             {
+                isAlreadyCursorMode = togglePlayerCursor.IsInCursorMode();
                 togglePlayerCursor.ChangeToCursor();
                 menu.SetActive(true);
             }
