@@ -7,6 +7,8 @@ using Photon.Pun;
 public class PlayerNameTag : MonoBehaviourPun
 {
     [SerializeField] private InputField nameInpunField;
+
+  
     private void Start() 
     {
        if(!PlayerPrefs.HasKey("PlayerName"))
