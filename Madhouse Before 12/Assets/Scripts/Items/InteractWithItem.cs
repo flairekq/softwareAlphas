@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class InteractWithItem : MonoBehaviour
 {
@@ -26,20 +27,34 @@ public class InteractWithItem : MonoBehaviour
     [SerializeField] private Text examineCanvasDiaryClueText;
     private ZoomingCam zoomingCam;
     private bool isTooCloseOrFar = false;
+    private PhotonView PV;
+
+    void Awake()
+    {
+        PV = gameObject.transform.parent.GetComponent<PhotonView>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = GetComponent<Camera>();
-        inventory = gameObject.transform.parent.GetComponent<Inventory>();
-        togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
-        displayInformation = gameObject.transform.parent.GetComponentInChildren<DisplayInformation>();
-        zoomingCam = GetComponent<ZoomingCam>();
+        if (PV.IsMine)
+        {
+            mainCamera = GetComponent<Camera>();
+            inventory = gameObject.transform.parent.GetComponent<Inventory>();
+            togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
+            displayInformation = gameObject.transform.parent.GetComponentInChildren<DisplayInformation>();
+            zoomingCam = GetComponent<ZoomingCam>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
+
         SelectItemToInteractWithFromRay();
 
         // examine or use
