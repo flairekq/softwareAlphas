@@ -138,6 +138,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         // PhotonNetwork.LoadLevel(1);
 
         // shows loading screen to all players in the same room as host
+        PhotonNetwork.CurrentRoom.RemovedFromList = true;
         PV.RPC("ShowLoadingScreenToAll", RpcTarget.All);
         PhotonNetwork.LoadLevel(1);
     }
