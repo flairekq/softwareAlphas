@@ -6,13 +6,15 @@ using UnityEngine.UI;
 
 public class RoomListItem : MonoBehaviour
 {
-    [SerializeField] Text text;
+    [SerializeField] Text roomName;
+    [SerializeField] Text playerCountText;
 
     RoomInfo info;
     public void SetUp(RoomInfo _info)
     {
         info = _info;
-        text.text = info.Name;
+        roomName.text = info.Name;
+        playerCountText.text = info.PlayerCount.ToString() + "/4 players";
     }
 
     public void OnClick()
