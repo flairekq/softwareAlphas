@@ -43,7 +43,10 @@ public class EscMenu : MonoBehaviour
         {
             if (menu.activeSelf)
             {
-                togglePlayerCursor.ChangeToPlayer();
+                if (!togglePlayerCursor.IsInCursorMode())
+                {
+                    togglePlayerCursor.ChangeToPlayer();
+                }
                 menu.SetActive(false);
             }
             else
