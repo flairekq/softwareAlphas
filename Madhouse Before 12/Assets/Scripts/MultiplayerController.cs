@@ -22,8 +22,8 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     public AudioClip footStepsAudio;
     public AudioClip jumpAudio;
 
-    private AudioSource footStepsSource; 
-    private AudioSource jumpAudioSource; 
+    [SerializeField] private AudioSource footStepsSource;
+    [SerializeField] private AudioSource jumpAudioSource;
 
     private int forwardWalking;
     private int backwardsWalk;
@@ -41,7 +41,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     private CharacterController cc;
 
-     private Vector3 velocity = Vector3.zero;
+    private Vector3 velocity = Vector3.zero;
 
     private float gravity = 9.81f;
     private float jumpForce = 5f;
@@ -59,11 +59,11 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
     void Start()
     {
-         cc = GetComponent<CharacterController>();
+        cc = GetComponent<CharacterController>();
         motor = GetComponent<PlayerMotor>();
         anim = GetComponent<Animator>();
-        footStepsSource = AddAudio(false, false, footStepsAudio, 1.5f);
-        jumpAudioSource = AddAudio(false, false, jumpAudio, 1.5f);
+        // footStepsSource = AddAudio(false, false, footStepsAudio, 1.5f);
+        // jumpAudioSource = AddAudio(false, false, jumpAudio, 1.5f);
 
 
         if (PV.IsMine)
@@ -125,8 +125,8 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         }
         if (!Input.GetKey(KeyCode.S))
         {
-          
-                if (Input.GetKey(KeyCode.W))
+
+            if (Input.GetKey(KeyCode.W))
             {
                 WalkForward();
             }
@@ -139,76 +139,76 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
                 WalkLeft();
             }
 
-            
-        }
-         if(cc.isGrounded || isGroundedPrivate)
-            {
-                verticalVelocity = -gravity * Time.deltaTime;
 
-         if (Input.GetKeyDown(KeyCode.Space))
+        }
+        if (cc.isGrounded || isGroundedPrivate)
         {
-            isGroundedPrivate = false; 
-            if(AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp"))
+            verticalVelocity = -gravity * Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-            }
-                 verticalVelocity = jumpForce;
-              
+                isGroundedPrivate = false;
+                if (AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp"))
+                {
+                }
+                verticalVelocity = jumpForce;
+
                 Jump();
                 jumpAudioSource.Play();
-            
-        }
-          }
 
-        if(!cc.isGrounded)
+            }
+        }
+
+        if (!cc.isGrounded)
         {
             Debug.Log("notgrounded");
             verticalVelocity -= gravity * Time.deltaTime * 3;
         }
 
-              
+
 
         Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
 
         cc.Move(velocity * Time.deltaTime);
         cc.Move(moveVector * Time.deltaTime);
 
-        if(Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W)
-         || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A) 
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W)
+         || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A)
         || Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.D)
         || Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
         {
-            if(!footStepsSource.isPlaying)
+            if (!footStepsSource.isPlaying)
             {
                 footStepsSource.Play();
             }
         }
 
-        
+
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S))
         {
             Idle();
-       
+
         }
 
-     /*   if(!Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W)
-         && !Input.GetKeyDown(KeyCode.A) && !Input.GetKey(KeyCode.A) 
-        && !Input.GetKeyDown(KeyCode.D) && !Input.GetKey(KeyCode.D)
-        && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) )
-        {
-            if(!AnimatorIsPlaying())
-            {
-                Idle();
-            }
-        } */
+        /*   if(!Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W)
+            && !Input.GetKeyDown(KeyCode.A) && !Input.GetKey(KeyCode.A) 
+           && !Input.GetKeyDown(KeyCode.D) && !Input.GetKey(KeyCode.D)
+           && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) )
+           {
+               if(!AnimatorIsPlaying())
+               {
+                   Idle();
+               }
+           } */
 
-        if(anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp") &&
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BaseLayer.JumpUp") &&
         !AnimatorIsPlaying() &&
         !Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W)
-         && !Input.GetKeyDown(KeyCode.A) && !Input.GetKey(KeyCode.A) 
+         && !Input.GetKeyDown(KeyCode.A) && !Input.GetKey(KeyCode.A)
         && !Input.GetKeyDown(KeyCode.D) && !Input.GetKey(KeyCode.D)
-        && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) )
-        { 
-                Idle();
+        && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S))
+        {
+            Idle();
         }
 
 
@@ -274,30 +274,32 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         anim.SetBool(isIdle, false);
         // anim.SetBool("isJumping", true);
         anim.SetBool(isJumping, true);
-        anim.SetBool(forwardWalking, false); 
+        anim.SetBool(forwardWalking, false);
         anim.SetBool(isWalkingLeft, false);
         anim.SetBool(isWalkingRight, false);
         anim.SetBool(backwardsWalk, false);
     }
 
-    public AudioSource AddAudio(bool loop, bool playAwake, AudioClip clip, float vol) 
-    { 
+    public AudioSource AddAudio(bool loop, bool playAwake, AudioClip clip, float vol)
+    {
         AudioSource newAudio = gameObject.AddComponent<AudioSource>();
         newAudio.loop = loop;
         newAudio.playOnAwake = playAwake;
-        newAudio.volume = vol; 
+        newAudio.volume = vol;
         newAudio.clip = clip;
-        return newAudio; 
+        return newAudio;
     }
 
-    public bool AnimatorIsPlaying(){
-     return anim.GetCurrentAnimatorStateInfo(0).length - 2.0f>
-            anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-  }
+    public bool AnimatorIsPlaying()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).length - 2.0f >
+               anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
 
-   public bool AnimatorIsPlaying(string stateName){
-     return AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName(stateName);
-  }
+    public bool AnimatorIsPlaying(string stateName)
+    {
+        return AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    }
 
 
     // void EquipWeapon(int _index)
