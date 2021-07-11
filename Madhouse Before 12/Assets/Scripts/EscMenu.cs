@@ -59,12 +59,26 @@ public class EscMenu : MonoBehaviour
         if (type == 0)
         {
             PlayerPrefs.SetFloat("bgm", bgmSlider.value);
-            mixer.SetFloat("MusicVolume", Mathf.Log10(bgmSlider.value) * multipler);
+            if (bgmSlider.value > 0.001)
+            {
+                mixer.SetFloat("MusicVolume", Mathf.Log10(bgmSlider.value) * multipler);
+            }
+            else
+            {
+                mixer.SetFloat("MusicVolume", -80.0f);
+            }
         }
         else
         {
             PlayerPrefs.SetFloat("effects", effectsSlider.value);
-            mixer.SetFloat("SFXVolume", Mathf.Log10(effectsSlider.value) * multipler);
+            if (effectsSlider.value > 0.001)
+            {
+                mixer.SetFloat("SFXVolume", Mathf.Log10(effectsSlider.value) * multipler);
+            }
+            else
+            {
+                mixer.SetFloat("SFXVolume", -80.0f);
+            }
         }
     }
 }
