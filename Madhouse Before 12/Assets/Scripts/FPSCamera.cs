@@ -7,6 +7,7 @@ public class FPSCamera : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform playerCamera;
+
     [SerializeField] float mouseSensitivity = 3.5f;
 
     [SerializeField] bool lockCursor = true;
