@@ -29,31 +29,31 @@ public class InteractWithItem : MonoBehaviour
     private bool isTooCloseOrFar = false;
     private PhotonView PV;
 
-    void Awake()
-    {
-        PV = gameObject.transform.parent.GetComponent<PhotonView>();
-    }
+    // void Awake()
+    // {
+    //     PV = gameObject.transform.parent.GetComponent<PhotonView>();
+    // }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (PV.IsMine)
-        {
-            mainCamera = GetComponent<Camera>();
-            inventory = gameObject.transform.parent.GetComponent<Inventory>();
-            togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
-            displayInformation = gameObject.transform.parent.GetComponentInChildren<DisplayInformation>();
-            zoomingCam = GetComponent<ZoomingCam>();
-        }
+        // if (PV.IsMine)
+        // {
+        mainCamera = GetComponent<Camera>();
+        inventory = gameObject.transform.parent.GetComponent<Inventory>();
+        togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
+        displayInformation = gameObject.transform.parent.GetComponentInChildren<DisplayInformation>();
+        zoomingCam = GetComponent<ZoomingCam>();
+        // }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!PV.IsMine)
-        {
-            return;
-        }
+        // if (!PV.IsMine)
+        // {
+        //     return;
+        // }
 
         SelectItemToInteractWithFromRay();
 
