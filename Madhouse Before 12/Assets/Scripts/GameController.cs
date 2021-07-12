@@ -73,6 +73,25 @@ public class GameController : MonoBehaviour
         gameOverScreen.Show(isTimeup);
     }
 
+    public void KeypadGameOver()
+    {
+        GameController.instance.PV.RPC("RPC_HandleGameOver", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void RPC_HandleGameOver()
+    {
+        foreach (int id in players)
+        {
+            PhotonView playerPV = PhotonView.Find(id);
+            if (playerPV != null)
+            {
+                playerPV.GetComponent<TogglePlayerCursor>().GameOver();
+            }
+        }
+        gameOverScreen.Show(false);
+    }
+
     public void GetAllPlayers()
     {
         GameController.instance.gameObjectPlayers.Clear();

@@ -10,7 +10,8 @@ public class GameOverScreen : MonoBehaviourPunCallbacks
     [SerializeField] Text displayText;
     public void Show(bool isTimeup)
     {
-        if (!isTimeup) {
+        if (!isTimeup)
+        {
             displayText.text = "Congratulations you managed to escape in time!";
         }
         gameObject.SetActive(true);
@@ -26,10 +27,13 @@ public class GameOverScreen : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         // MenuManager.Instance.OpenMenu("title");
+        Debug.Log("destroying");
         if (RoomManager.Instance)
         {
+            Debug.Log("destroyed");
             Destroy(RoomManager.Instance.gameObject); // there can only be one
         }
+
         PhotonNetwork.LoadLevel(0);
     }
 }

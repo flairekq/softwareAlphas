@@ -15,6 +15,7 @@ public class TogglePlayerCursor : MonoBehaviour
     private RifleManager rifleManager;
     private Flashlight flashlight;
     private Inventory inventory;
+    private EscMenu escMenu;
     private PhotonView PV;
     private bool isInCursorMode = false;
 
@@ -33,6 +34,7 @@ public class TogglePlayerCursor : MonoBehaviour
             rifleManager = GetComponentInChildren<RifleManager>();
             inventory = GetComponent<Inventory>();
             flashlight = GetComponentInChildren<Flashlight>();
+            escMenu = GetComponent<EscMenu>();
 
             GameController.instance.AddPlayer(PV.ViewID);
             ChangeToPlayer();
@@ -102,6 +104,7 @@ public class TogglePlayerCursor : MonoBehaviour
             this.ChangeToCursor();
             inventory.enabled = false;
             flashlight.enabled = false;
+            escMenu.enabled = false;
         }
     }
 

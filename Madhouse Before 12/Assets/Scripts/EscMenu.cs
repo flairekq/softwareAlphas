@@ -5,7 +5,7 @@ using Photon.Pun;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
-public class EscMenu : MonoBehaviour
+public class EscMenu : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
     private PhotonView PV;
@@ -18,6 +18,7 @@ public class EscMenu : MonoBehaviour
 
     private TogglePlayerCursor togglePlayerCursor;
     private bool isAlreadyCursorMode = false;
+    private GameObject leaveGameObject;
     // private float bgmVol;
     // private float effectsVol;
 
@@ -29,6 +30,7 @@ public class EscMenu : MonoBehaviour
         float effectsVol = PlayerPrefs.GetFloat("effects", 1);
         bgmSlider.value = bgmVol;
         effectsSlider.value = effectsVol;
+        leaveGameObject = GameObject.FindGameObjectWithTag("LeaveGame");
     }
 
     // Update is called once per frame
@@ -83,6 +85,14 @@ public class EscMenu : MonoBehaviour
             {
                 mixer.SetFloat("SFXVolume", -80.0f);
             }
+        }
+    }
+
+    public void GoToMainMenu()
+    {
+        if (leaveGameObject != null)
+        {
+            leaveGameObject.GetComponent<LeaveGame>().GoToMainMenu();
         }
     }
 }
