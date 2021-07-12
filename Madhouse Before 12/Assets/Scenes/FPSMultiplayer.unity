@@ -5311,12 +5311,12 @@ PrefabInstance:
     - target: {fileID: 3241320681340205471, guid: 1bd0fa0aa20581f4b83d8223e33e1937,
         type: 3}
       propertyPath: sceneViewId
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3325137147793644329, guid: 1bd0fa0aa20581f4b83d8223e33e1937,
         type: 3}
       propertyPath: sceneViewId
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5980722068495966758, guid: 1bd0fa0aa20581f4b83d8223e33e1937,
         type: 3}
@@ -5381,7 +5381,7 @@ PrefabInstance:
     - target: {fileID: 5980722068495966764, guid: 1bd0fa0aa20581f4b83d8223e33e1937,
         type: 3}
       propertyPath: sceneViewId
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7952336024004203793, guid: 1bd0fa0aa20581f4b83d8223e33e1937,
         type: 3}
