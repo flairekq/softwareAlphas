@@ -57,12 +57,13 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void inputName() 
     {
        
-        if (string.IsNullOrEmpty(roomNameInputField.text))
+        if (string.IsNullOrEmpty(playerNameInputField.text))
         {
             return;
         }
 
         PhotonNetwork.NickName = playerNameInputField.text;
+        MenuManager.Instance.OpenMenu("play");
     }
 
     public void CreateRoom()
