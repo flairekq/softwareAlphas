@@ -126,7 +126,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Debug.Log("updating");
+        // Debug.Log("updating");
         // clear the list
         foreach (Transform trans in roomListContent)
         {
@@ -136,11 +136,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             if (!roomList[i].RemovedFromList)
             {
-                Debug.Log(roomList[i].Name + " is available");
+                // Debug.Log(roomList[i].Name + " is available");
                 Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
-            } else {
-                Debug.Log(roomList[i].Name + " removed from list");
             }
+            // else {
+            //     Debug.Log(roomList[i].Name + " removed from list");
+            // }
         }
     }
 
