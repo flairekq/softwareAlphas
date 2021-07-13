@@ -51,12 +51,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         MenuManager.Instance.OpenMenu("main");
         // Debug.Log("Joined Lobby");
-       // PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
+        // PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
     }
 
-    public void inputName() 
+    public void inputName()
     {
-       
         if (string.IsNullOrEmpty(playerNameInputField.text))
         {
             return;
@@ -127,6 +126,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        // Debug.Log("updating");
         // clear the list
         foreach (Transform trans in roomListContent)
         {
@@ -134,11 +134,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         for (int i = 0; i < roomList.Count; i++)
         {
-            if (roomList[i].RemovedFromList)
+            if (!roomList[i].RemovedFromList)
             {
-                continue;
+                // Debug.Log(roomList[i].Name + " is available");
+                Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
             }
-            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+            // else {
+            //     Debug.Log(roomList[i].Name + " removed from list");
+            // }
         }
     }
 
@@ -154,6 +157,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         // shows loading screen to all players in the same room as host
         PhotonNetwork.CurrentRoom.RemovedFromList = true;
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
         PV.RPC("ShowLoadingScreenToAll", RpcTarget.All);
         PhotonNetwork.LoadLevel(1);
     }

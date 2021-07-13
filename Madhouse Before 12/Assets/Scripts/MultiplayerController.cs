@@ -161,7 +161,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
 
         if (!cc.isGrounded)
         {
-            Debug.Log("notgrounded");
+            // Debug.Log("notgrounded");
             verticalVelocity -= gravity * Time.deltaTime * 3;
         }
 

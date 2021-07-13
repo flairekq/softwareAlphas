@@ -8,7 +8,7 @@ public class PlayerMotor : MonoBehaviour
 {
     private Camera cam;
 
-   // public Camera gunCam;
+    // public Camera gunCam;
     private Transform playerCamera;
     private Vector3 velocity = Vector3.zero;
 
@@ -81,18 +81,20 @@ public class PlayerMotor : MonoBehaviour
             if (cc.isGrounded)
             {
                 verticalVelocity = -gravity * Time.deltaTime;
-               Debug.Log("isgrounded");
+                // Debug.Log("isgrounded");
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Debug.Log("jump");
-                  //  verticalVelocity = jumpForce;
+                    // Debug.Log("jump");
+                    //  verticalVelocity = jumpForce;
                 }
 
-            } else {
-               // Debug.Log("notGrounded");
-               verticalVelocity -= gravity * Time.deltaTime;
             }
-          
+            else
+            {
+                // Debug.Log("notGrounded");
+                verticalVelocity -= gravity * Time.deltaTime;
+            }
+
 
         Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
 
@@ -108,7 +110,7 @@ public class PlayerMotor : MonoBehaviour
         // rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
         if (cam != null)
         {
-           // gunCam.transform.Rotate(-cameraRotation);
+            // gunCam.transform.Rotate(-cameraRotation);
             cam.transform.Rotate(-cameraRotation);
         }
     }

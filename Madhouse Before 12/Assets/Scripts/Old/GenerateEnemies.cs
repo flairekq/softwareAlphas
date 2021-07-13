@@ -234,10 +234,10 @@ public class GenerateEnemies : MonoBehaviour
             float xPos = Random.Range(positionsRange[rangeIndex].minX, positionsRange[rangeIndex].maxX);
             float zPos = Random.Range(positionsRange[rangeIndex].minZ, positionsRange[rangeIndex].maxZ);
             // GameObject enemy = Instantiate(enemies[i].enemy, new Vector3(xPos, enemies[i].yPos, zPos), Quaternion.identity);
-            GameObject enemy = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", enemies[i].prefabName), new Vector3(xPos, enemies[i].yPos, zPos), Quaternion.identity);
+            GameObject enemy = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", enemies[i].prefabName), new Vector3(xPos, enemies[i].yPos, zPos), Quaternion.identity);
 
             enemy.GetComponent<EController2>().location = location;
-            enemy.GetComponent<EController2>().moveSpot = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MoveSpot"), new Vector3(xPos, enemies[i].yPos, zPos), Quaternion.identity).transform;
+            enemy.GetComponent<EController2>().moveSpot = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "MoveSpot"), new Vector3(xPos, enemies[i].yPos, zPos), Quaternion.identity).transform;
             // yield return new WaitForSeconds(0.1f);
             yield return new WaitForSeconds(0.1f);
             enemyCount += 1;

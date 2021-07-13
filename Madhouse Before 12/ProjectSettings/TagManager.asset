@@ -7,6 +7,7 @@ TagManager:
   - Enemies
   - KeyPad
   - CinemachineTarget
+  - LeaveGame
   layers:
   - Default
   - TransparentFX

@@ -47,7 +47,7 @@ public class TimerManagement : MonoBehaviour
         }
         else
         {
-            if (timerIncrementValue >= timer)
+            if (TimerManagement.instance.elapsedTimeForDisplay + timerIncrementValue >= timer)
             {
                 //Timer Completed
                 //Do What Ever You What to Do Here

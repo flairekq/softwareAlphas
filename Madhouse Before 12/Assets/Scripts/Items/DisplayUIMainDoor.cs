@@ -11,7 +11,7 @@ public class DisplayUIMainDoor : DisplayUI
             return "You need to enter the correct code";
         }
 
-        GameController.instance.GameOver(false);
+        GameController.instance.KeypadGameOver();
         return "successful";
     }
 }
