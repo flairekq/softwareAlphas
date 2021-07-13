@@ -16,6 +16,8 @@ public class EscMenu : MonoBehaviourPunCallbacks
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private float multipler = 30f;
 
+    [SerializeField] private GameObject confirmDialog;
+
     private TogglePlayerCursor togglePlayerCursor;
     private bool isAlreadyCursorMode = false;
     private GameObject leaveGameObject;
@@ -86,6 +88,11 @@ public class EscMenu : MonoBehaviourPunCallbacks
                 mixer.SetFloat("SFXVolume", -80.0f);
             }
         }
+    }
+
+    public void ToggleConfirmDialog(bool isShow)
+    {
+        confirmDialog.SetActive(isShow);
     }
 
     public void GoToMainMenu()
