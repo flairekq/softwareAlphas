@@ -5393,7 +5393,8 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1779977363, guid: 1bd0fa0aa20581f4b83d8223e33e1937, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1bd0fa0aa20581f4b83d8223e33e1937, type: 3}
 --- !u!1 &1979066642
 GameObject:

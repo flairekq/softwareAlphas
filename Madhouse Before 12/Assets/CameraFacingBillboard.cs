@@ -5,12 +5,17 @@ using UnityEngine;
 public class CameraFacingBillboard : MonoBehaviour
 {
 
+    private Transform mainCameraTransform;
     // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
-        Camera cam = Camera.main;
-        transform.LookAt(transform.position = cam.transform.rotation * Vector3.forward, 
-            cam.transform.rotation * Vector3.up);
+        mainCameraTransform = Camera.main.transform;
+    }
+    void LateUpdate()
+    {
+        transform.LookAt(transform.position + mainCameraTransform.rotation 
+        * Vector3.forward, mainCameraTransform.rotation * Vector3.up);
         
     }
 }
