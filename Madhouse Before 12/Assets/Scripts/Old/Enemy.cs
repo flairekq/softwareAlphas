@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     public void Attacked(CharacterCombat player)
     {
         player.Attack(myStats);
+        Debug.Log("attacked enemy");
         enemyController.AttackedByPlayer(player.gameObject);
     }
 }

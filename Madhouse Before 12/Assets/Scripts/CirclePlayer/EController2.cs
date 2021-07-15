@@ -328,6 +328,7 @@ public class EController2 : MonoBehaviour
     {
         int n = Random.Range(0, attacks.Length);
         animator.SetInteger(attackId, n + 1);
+        AttackedPlayer();
     }
 
     void OnDrawGizmosSelected()
@@ -355,8 +356,10 @@ public class EController2 : MonoBehaviour
 
     public void AttackedByPlayer(GameObject p)
     {
+        Debug.Log("triggered on enemy side, isAttacking: " + isAttacking);
         if (!isAttacking)
         {
+            Debug.Log(p.transform.position);
             player = p;
             isAttacked = true;
         }
@@ -364,8 +367,10 @@ public class EController2 : MonoBehaviour
 
     public void AttackedPlayer()
     {
+        Debug.Log("triggered attacked player");
         if (player != null)
         {
+            Debug.Log("show canvas");
             player.GetComponent<PlayerStats>().Show();
         }
     }
