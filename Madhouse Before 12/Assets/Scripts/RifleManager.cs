@@ -31,9 +31,11 @@ public class RifleManager : MonoBehaviour
     private int isRecoil;
     private int isIdle;
 
-   // public Transform CameraPos;
+    // public Transform CameraPos;
     private PhotonView PV;
     [SerializeField] private CharacterCombat characterCombat;
+
+    // [SerializeField] private GameObject blood;
 
     // public Transform CameraPos;
 
@@ -52,6 +54,7 @@ public class RifleManager : MonoBehaviour
         isShooting = Animator.StringToHash("isShooting");
         isRecoil = Animator.StringToHash("isRecoil");
         isIdle = Animator.StringToHash("isIdle");
+        // blood = GameObject.FindGameObjectWithTag("blood");
     }
 
     void Update()
@@ -62,20 +65,21 @@ public class RifleManager : MonoBehaviour
         {
             return;
         }
-      /*  transform.position = CameraPos.transform.position;
-       transform.rotation = CameraPos.transform.rotation;
-    */
-       if(Input.GetMouseButtonDown(0)) {
-           if(!aiming)
-           {
-               Aim();
-           }
-                gunAudio.Play();
-                Shoot();
-              //  Recoil();
-                 
+        /*  transform.position = CameraPos.transform.position;
+         transform.rotation = CameraPos.transform.rotation;
+      */
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!aiming)
+            {
+                Aim();
+            }
+            gunAudio.Play();
+            Shoot();
+            //  Recoil();
+
         }
-        
+
         if (Input.GetMouseButtonDown(1))
         {
             if (!aiming)
@@ -91,7 +95,7 @@ public class RifleManager : MonoBehaviour
         {
             muzzleFlashObject.SetActive(false);
         } */
-        else if(aiming) 
+        else if (aiming)
         {
             /*
             if(!muzzleFlash.isPlaying)
@@ -166,22 +170,22 @@ public class RifleManager : MonoBehaviour
 
     void Shoot()
     {
-       muzzleFlashObject.SetActive(true); 
-      
-    
-           muzzleFlash.Clear();
-            muzzleFlash.time = 0;
-           muzzleFlash.Simulate(0f, true, true);
-          
-          // muzzleFlash.Emit(5);
-           muzzleFlash.Play();
-           
-       
-           
-      /*  anim.SetBool("isShooting", false);
-        anim.SetBool("isIdle", false); 
-        anim.SetBool(isRecoil, true);
-        */
+        muzzleFlashObject.SetActive(true);
+
+
+        muzzleFlash.Clear();
+        muzzleFlash.time = 0;
+        muzzleFlash.Simulate(0f, true, true);
+
+        // muzzleFlash.Emit(5);
+        muzzleFlash.Play();
+
+
+
+        /*  anim.SetBool("isShooting", false);
+          anim.SetBool("isIdle", false); 
+          anim.SetBool(isRecoil, true);
+          */
         RaycastHit hit;
         currentBullets--;
         if (Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
@@ -194,10 +198,26 @@ public class RifleManager : MonoBehaviour
             // }
 
             Enemy enemy = hit.transform.GetComponent<Enemy>();
-            if (enemy != null) {
+            if (enemy != null)
+            {
+                // Instantiate(blood, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                GameObject blood = ObjectPooling.SharedInstance.GetPooledObject();
+                if (blood != null)
+                {
+                    blood.transform.position = hit.point;
+                    blood.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    blood.SetActive(true);
+                    blood.GetComponentInChildren<ParticleSystem>().Play();
+                }
+                StartCoroutine(DeactivateBlood(blood));
                 enemy.Attacked(characterCombat);
             }
         }
     }
 
+    IEnumerator DeactivateBlood(GameObject blood)
+    {
+        yield return new WaitForSeconds(1f);
+        blood.SetActive(false);
+    }
 }

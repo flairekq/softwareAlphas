@@ -11,11 +11,13 @@ public class Enemy : MonoBehaviour
 {
     // PlayerManagerOld playerManagerOld;
     EnemyStats myStats;
+    EController2 enemyController;
 
     void Start()
     {
         // playerManagerOld = PlayerManagerOld.instance;
         myStats = GetComponent<EnemyStats>();
+        enemyController = transform.parent.transform.parent.GetComponent<EController2>();
         // myStats = gameObject.transform.parent.transform.parent.GetComponent<EnemyStats>();
     }
 
@@ -32,5 +34,6 @@ public class Enemy : MonoBehaviour
     public void Attacked(CharacterCombat player)
     {
         player.Attack(myStats);
+        enemyController.AttackedByPlayer(player.gameObject);
     }
 }

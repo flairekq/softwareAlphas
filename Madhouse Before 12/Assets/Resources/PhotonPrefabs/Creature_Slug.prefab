@@ -1654,6 +1654,7 @@ MonoBehaviour:
   PV: {fileID: 3689880959859383698}
   isChasingId: 0
   isPatrollingId: 0
+  attackId: 0
 --- !u!114 &3689880959859383698
 MonoBehaviour:
   m_ObjectHideFlags: 0

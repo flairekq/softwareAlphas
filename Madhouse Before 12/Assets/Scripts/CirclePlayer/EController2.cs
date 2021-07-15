@@ -18,6 +18,7 @@ public class EController2 : MonoBehaviour
     private bool isChasing = false;
     public bool isAttacking = false;
     private bool isPatrolling = false;
+    private bool isAttacked = false;
     private EnemyStats enemyStats;
     // int slot = -1;
     // private SlotManager slotManager;
@@ -37,6 +38,7 @@ public class EController2 : MonoBehaviour
     // private float countdown = 0.4f;
     public int isChasingId;
     public int isPatrollingId;
+    public int attackId;
 
     void Awake()
     {
@@ -49,6 +51,7 @@ public class EController2 : MonoBehaviour
         {
             isChasingId = Animator.StringToHash("isChasing");
             isPatrollingId = Animator.StringToHash("isPatrolling");
+            attackId = Animator.StringToHash("attack");
 
             envManager = EnvironmentManager.instance;
             gameController = GameController.instance;
@@ -91,7 +94,8 @@ public class EController2 : MonoBehaviour
             //     countdown -= Time.deltaTime;
             // }
             // if (IsPlayerWithinDistance(slotManager))
-            if (player != null && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius)
+            if ((player != null && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius)
+                || (player != null && isAttacked))
             {
                 #region Attack Slot System
                 // // check if reserved slot is still on navmesh
@@ -159,6 +163,7 @@ public class EController2 : MonoBehaviour
                     agent.enabled = false;
                     obstacle.enabled = true;
                     isChasing = false;
+                    isAttacked = false;
                     if (!isAttacking)
                     {
                         Attack();
@@ -174,7 +179,7 @@ public class EController2 : MonoBehaviour
                         // And move to the player's position (will be handled when chasing animation starts to play)
                         // agent.SetDestination(player.transform.position);
                         isChasing = true;
-                        animator.SetInteger("attack", 0);
+                        animator.SetInteger(attackId, 0);
                     }
                 }
                 model.position = Vector3.Lerp(model.position, proxy.position, Time.deltaTime * 2);
@@ -322,7 +327,7 @@ public class EController2 : MonoBehaviour
     void Attack()
     {
         int n = Random.Range(0, attacks.Length);
-        animator.SetInteger("attack", n + 1);
+        animator.SetInteger(attackId, n + 1);
     }
 
     void OnDrawGizmosSelected()
@@ -345,6 +350,23 @@ public class EController2 : MonoBehaviour
                     player = p;
                 }
             }
+        }
+    }
+
+    public void AttackedByPlayer(GameObject p)
+    {
+        if (!isAttacking)
+        {
+            player = p;
+            isAttacked = true;
+        }
+    }
+
+    public void AttackedPlayer()
+    {
+        if (player != null)
+        {
+            player.GetComponent<PlayerStats>().Show();
         }
     }
 
