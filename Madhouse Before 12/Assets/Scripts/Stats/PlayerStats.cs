@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class PlayerStats : CharacterStats
 {
@@ -14,12 +15,32 @@ public class PlayerStats : CharacterStats
     [SerializeField] private GameObject damageCanvas;
     [SerializeField] private Image bloodImage;
     public float fadeRate = 1f;
+    private PhotonView PV;
+    private bool isShow = false;
+
+    void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
+
+    void Update()
+    {
+        if (!PV.IsMine)
+        {
+            return;
+        }
+
+        if (isShow)
+        {
+            damageCanvas.SetActive(true);
+            StartCoroutine(FadeIn());
+            isShow = false;
+        }
+    }
 
     public void Show()
     {
-        // bloodImage.color = bloodImage.;
-        damageCanvas.SetActive(true);
-        StartCoroutine(FadeIn());
+        isShow = true;
     }
 
     IEnumerator FadeIn()
