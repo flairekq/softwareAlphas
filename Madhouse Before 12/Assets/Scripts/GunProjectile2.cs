@@ -153,17 +153,39 @@ public class GunProjectile : MonoBehaviour
     
            muzzleFlash.Play();
            
-       
-
+       //ray through middle of screen 
+        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
+        //check if ray hits something
     
+        Vector3 targetPoint;
         if (Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
         {
-        
+            targetPoint = hit.point;
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             if (enemy != null) {
                 enemy.Attacked(characterCombat);
             }
+    } else {
+        targetPoint = ray.GetPoint(75);
     }
+
+    //calculate direction from attackPoint to targetPoint
+    Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+
+    //calculate spread
+    float x = Random.Range(-spread, spread);
+    float y = Random.Range(-spread, spread);
+
+    //Calculate new direction with spread 
+    Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x,y,0);
+
+    //Instantiate bullet/projectile 
+    GameObject currentBullet = Instantiate( bullet, attackPoint.position, Quaternion.identity);
+    currentBullet.transform.forward = directionWithSpread.normalized;
+
+    //add force to bullet 
+    currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+   
     }
 }
