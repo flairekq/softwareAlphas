@@ -44,7 +44,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     private Vector3 velocity = Vector3.zero;
 
     private float gravity = 9.81f;
-    private float jumpForce = 5f;
+    private float jumpForce = 14f;
     private float verticalVelocity;
 
     private bool isGroundedPrivate;
@@ -162,7 +162,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         if (!cc.isGrounded)
         {
             // Debug.Log("notgrounded");
-            verticalVelocity -= gravity * Time.deltaTime * 3;
+            verticalVelocity -= gravity * Time.deltaTime * 8;
         }
 
 
