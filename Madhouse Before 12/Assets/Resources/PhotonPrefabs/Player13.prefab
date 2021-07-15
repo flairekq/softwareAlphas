@@ -7352,7 +7352,6 @@ GameObject:
   - component: {fileID: 5980722068495966760}
   - component: {fileID: 2804501030712243728}
   - component: {fileID: 5980722068495966766}
-  - component: {fileID: 2217701540835193679}
   - component: {fileID: 5980722068495966763}
   - component: {fileID: 5980722068495966762}
   - component: {fileID: 7952336025432940554}
@@ -7361,6 +7360,7 @@ GameObject:
   - component: {fileID: 8357484921941850892}
   - component: {fileID: 333941379}
   - component: {fileID: 333941380}
+  - component: {fileID: 3336535862192435895}
   m_Layer: 0
   m_Name: Player13
   m_TagString: Untagged
@@ -7530,19 +7530,6 @@ MonoBehaviour:
   - {fileID: 3241320683346467373}
   - {fileID: 3241320683346467375}
   - {fileID: 3241320683346467369}
---- !u!114 &2217701540835193679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5980722068495966761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04e046d4c383a094d991bbb78134a25a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 5441199498494724285}
 --- !u!95 &5980722068495966763
 Animator:
   serializedVersion: 3
@@ -7879,6 +7866,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3336535862192435895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980722068495966761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9013e0c532f3a88409c1ceddf543aeca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameText: {fileID: 5441199498494724285}
 --- !u!1 &5980722068505214553
 GameObject:
   m_ObjectHideFlags: 0
@@ -9865,8 +9865,8 @@ GameObject:
   - component: {fileID: 8612202539652595830}
   - component: {fileID: 7942208006431120668}
   - component: {fileID: 8738400456365625796}
-  - component: {fileID: 1555013104}
   - component: {fileID: 5007391249538535534}
+  - component: {fileID: 1779977363}
   m_Layer: 0
   m_Name: NameCanvas
   m_TagString: Untagged
@@ -9891,7 +9891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.03, y: 2.05}
+  m_AnchoredPosition: {x: 0.03, y: 1.91}
   m_SizeDelta: {x: 1171.486, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8612202539652595830
@@ -9955,20 +9955,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1555013104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7572543064006870319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9013e0c532f3a88409c1ceddf543aeca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameText: {fileID: 5441199498494724285}
-  player: {fileID: 5980722068495966754}
 --- !u!114 &5007391249538535534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9981,6 +9967,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddeb66f7b7fdd324da1f6b1d34ee03ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1779977363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572543064006870319}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57105cacf37b62a4f81fb09d05f1457b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameText: {fileID: 5441199498494724285}
+  player: {fileID: 5980722068495966754}
 --- !u!1 &7853074880554391851
 GameObject:
   m_ObjectHideFlags: 0
