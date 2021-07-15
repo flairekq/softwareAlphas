@@ -10,7 +10,7 @@ public class GunProjectile2 : MonoBehaviour
     public GameObject bullet;
 
     public float shootForce;
-    public float upwardForce; 
+    public float upwardForce;
 
     public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
 
@@ -18,15 +18,15 @@ public class GunProjectile2 : MonoBehaviour
 
     public bool allowButtonHold;
 
-    int bulletsLeft, bulletsShot; 
+    int bulletsLeft, bulletsShot;
 
     bool shooting, readyToShoot, reloading;
 
     public Camera fpsCam;
 
-    public Transform attackPoint; 
+    public Transform attackPoint;
 
-    public bool allowInvoke = true; 
+    public bool allowInvoke = true;
 
     public float damage = 10f;
     public float range = 100f;
@@ -49,14 +49,14 @@ public class GunProjectile2 : MonoBehaviour
     private int isRecoil;
     private int isIdle;
 
-   // public Transform CameraPos;
+    // public Transform CameraPos;
     private PhotonView PV;
     [SerializeField] private CharacterCombat characterCombat;
 
     private void Awake()
     {
         bulletsLeft = magazineSize;
-        readyToShoot = true; 
+        readyToShoot = true;
         PV = GetComponent<PhotonView>();
     }
 
@@ -79,17 +79,18 @@ public class GunProjectile2 : MonoBehaviour
             return;
         }
 
-       if(Input.GetMouseButtonDown(0)) {
-           if(!aiming)
-           {
-               Aim();
-           }
-                gunAudio.Play();
-                Shoot();
-              //  Recoil();
-                 
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!aiming)
+            {
+                Aim();
+            }
+            gunAudio.Play();
+            Shoot();
+            //  Recoil();
+
         }
-        
+
         if (Input.GetMouseButtonDown(1))
         {
             if (!aiming)
@@ -101,20 +102,20 @@ public class GunProjectile2 : MonoBehaviour
                 aiming = false;
                 Idle();
             }
-        } 
-        else if(aiming) 
+        }
+        else if (aiming)
         {
-            
+
             Aim();
         }
         else if (!aiming)
         {
-            
+
             Idle();
         }
 
-        
- 
+
+
     }
 
     void Aim()
@@ -144,49 +145,73 @@ public class GunProjectile2 : MonoBehaviour
 
     void Shoot()
     {
-     /*  muzzleFlashObject.SetActive(true); 
-      
-    
-           muzzleFlash.Clear();
-            muzzleFlash.time = 0;
-           muzzleFlash.Simulate(0f, true, true);
-    
-           muzzleFlash.Play();
-           */
-           
-       //ray through middle of screen 
+        /*  muzzleFlashObject.SetActive(true); 
+
+
+              muzzleFlash.Clear();
+               muzzleFlash.time = 0;
+              muzzleFlash.Simulate(0f, true, true);
+
+              muzzleFlash.Play();
+              */
+
+        //ray through middle of screen 
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         //check if ray hits something
-    
+
         Vector3 targetPoint;
         if (Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
         {
             targetPoint = hit.point;
+            // Enemy enemy = hit.transform.GetComponent<Enemy>();
+            // if (enemy != null)
+            // {
+            //     enemy.Attacked(characterCombat);
+            // }
             Enemy enemy = hit.transform.GetComponent<Enemy>();
-            if (enemy != null) {
-                enemy.Attacked(characterCombat);
+            if (enemy != null)
+            {
+                // Instantiate(blood, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                GameObject blood = ObjectPooling.SharedInstance.GetPooledObject();
+                if (blood != null)
+                {
+                    blood.transform.position = hit.point;
+                    blood.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    blood.SetActive(true);
+                    blood.GetComponentInChildren<ParticleSystem>().Play();
+                }
+                StartCoroutine(DeactivateBlood(blood));
+                enemy.Attacked(characterCombat, PV.ViewID);
             }
-    } else {
-        targetPoint = ray.GetPoint(75);
+        }
+        else
+        {
+            targetPoint = ray.GetPoint(75);
+        }
+
+        //calculate direction from attackPoint to targetPoint
+        Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+
+        //calculate spread
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+
+        //Calculate new direction with spread 
+        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
+
+        //Instantiate bullet/projectile 
+        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+        currentBullet.transform.forward = directionWithSpread.normalized;
+
+        //add force to bullet 
+        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+
     }
 
-    //calculate direction from attackPoint to targetPoint
-    Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
-
-    //calculate spread
-    float x = Random.Range(-spread, spread);
-    float y = Random.Range(-spread, spread);
-
-    //Calculate new direction with spread 
-    Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x,y,0);
-
-    //Instantiate bullet/projectile 
-    GameObject currentBullet = Instantiate( bullet, attackPoint.position, Quaternion.identity);
-    currentBullet.transform.forward = directionWithSpread.normalized;
-
-    //add force to bullet 
-    currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
-   
+    IEnumerator DeactivateBlood(GameObject blood)
+    {
+        yield return new WaitForSeconds(1f);
+        blood.SetActive(false);
     }
 }

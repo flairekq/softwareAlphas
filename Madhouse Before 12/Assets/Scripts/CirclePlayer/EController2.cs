@@ -82,17 +82,6 @@ public class EController2 : MonoBehaviour
 
         if (!enemyStats.isDead)
         {
-            // if (countdown <= 0f)
-            // {
-            //     countdown = 0.4f;
-
-            //     // animator.SetBool("isChasing", isChasing);
-            //     // animator.SetBool("isPatrolling", isPatrolling);
-            // }
-            // else
-            // {
-            //     countdown -= Time.deltaTime;
-            // }
             // if (IsPlayerWithinDistance(slotManager))
             if ((player != null && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius)
                 || (player != null && isAttacked))
@@ -270,14 +259,6 @@ public class EController2 : MonoBehaviour
             // This is needed to calculate the orientation in the next frame 
             lastPosition = model.position;
 
-            // if (isChasing)
-            // {
-            //     animator.SetBool("isChasing", isChasing);
-            // }
-            // else
-            // {
-            //     animator.SetBool("isChasing", isChasing);
-            // }
             animator.SetBool(isChasingId, isChasing);
             animator.SetBool(isPatrollingId, isPatrolling);
         }
@@ -331,11 +312,11 @@ public class EController2 : MonoBehaviour
         AttackedPlayer();
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(proxy.position, lookRadius);
-    }
+    // void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.color = Color.blue;
+    //     Gizmos.DrawWireSphere(proxy.position, lookRadius);
+    // }
 
     void FindNearestPlayer()
     {
@@ -354,14 +335,38 @@ public class EController2 : MonoBehaviour
         }
     }
 
-    public void AttackedByPlayer(GameObject p)
+    // public void AttackedByPlayer(GameObject p)
+    public void AttackedByPlayer(int pvID)
     {
         Debug.Log("triggered on enemy side, isAttacking: " + isAttacking);
         if (!isAttacking)
         {
-            Debug.Log(p.transform.position);
-            player = p;
-            isAttacked = true;
+            PV.RPC("RPC_HandleAttackedByPlayer", RpcTarget.MasterClient, pvID);
+            // Debug.Log(p.transform.position);
+            // player = p;
+            // isAttacked = true;
+        }
+    }
+
+    [PunRPC]
+    private void RPC_HandleAttackedByPlayer(int pvID)
+    {
+        Debug.Log("calling rpc on master");
+        GetPlayer(pvID);
+        isAttacked = true;
+    }
+
+    void GetPlayer(int pvID)
+    {
+        foreach (GameObject p in gameController.gameObjectPlayers)
+        {
+            if (p != null)
+            {
+                if (p.GetPhotonView().ViewID == pvID)
+                {
+                    player = p;
+                }
+            }
         }
     }
 

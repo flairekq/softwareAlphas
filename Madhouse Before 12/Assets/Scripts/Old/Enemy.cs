@@ -31,10 +31,10 @@ public class Enemy : MonoBehaviour
     // }
     // }
 
-    public void Attacked(CharacterCombat player)
+    public void Attacked(CharacterCombat player, int pvID)
     {
         player.Attack(myStats);
         Debug.Log("attacked enemy");
-        enemyController.AttackedByPlayer(player.gameObject);
+        enemyController.AttackedByPlayer(pvID);
     }
 }
