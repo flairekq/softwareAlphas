@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class CustomBullet : MonoBehaviour
 {
-    //Assignables
-
     //bullet rb
     public Rigidbody rb;
    // public GameObject explosion;
