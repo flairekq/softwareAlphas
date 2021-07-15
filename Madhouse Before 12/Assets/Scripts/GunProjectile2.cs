@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
-public class GunProjectile : MonoBehaviour
+public class GunProjectile2 : MonoBehaviour
 {
 
     public GameObject bullet;
@@ -144,7 +144,7 @@ public class GunProjectile : MonoBehaviour
 
     void Shoot()
     {
-       muzzleFlashObject.SetActive(true); 
+     /*  muzzleFlashObject.SetActive(true); 
       
     
            muzzleFlash.Clear();
@@ -152,6 +152,7 @@ public class GunProjectile : MonoBehaviour
            muzzleFlash.Simulate(0f, true, true);
     
            muzzleFlash.Play();
+           */
            
        //ray through middle of screen 
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
