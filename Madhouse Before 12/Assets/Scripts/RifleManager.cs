@@ -196,7 +196,7 @@ public class RifleManager : MonoBehaviour
             // {
             //     target.TakeDamage(damage);
             // }
-
+/*
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
@@ -211,8 +211,9 @@ public class RifleManager : MonoBehaviour
                 }
                 StartCoroutine(DeactivateBlood(blood));
                 enemy.Attacked(characterCombat);
-            }
+            } */
         }
+        
     }
 
     IEnumerator DeactivateBlood(GameObject blood)
