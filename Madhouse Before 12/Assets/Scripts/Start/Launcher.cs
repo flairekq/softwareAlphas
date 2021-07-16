@@ -22,6 +22,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject playerListItemPrefab;
 
     [SerializeField] GameObject startGameButton;
+    [SerializeField] GameObject warningDialog;
+    [SerializeField] Text warningDialogText;
+    [SerializeField] int maxPlayerPerRoom;
     private PhotonView PV;
 
     void Awake()
@@ -58,6 +61,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         if (string.IsNullOrEmpty(playerNameInputField.text))
         {
+            warningDialogText.text = "Player name cannot be empty";
+            ToggleConfirmDialog(true);
             return;
         }
 
@@ -69,6 +74,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         if (string.IsNullOrEmpty(roomNameInputField.text))
         {
+            warningDialogText.text = "Room name cannot be empty";
+            ToggleConfirmDialog(true);
             return;
         }
         PhotonNetwork.CreateRoom(roomNameInputField.text);
@@ -92,6 +99,11 @@ public class Launcher : MonoBehaviourPunCallbacks
             Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
 
+        if (players.Length == maxPlayerPerRoom)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+
         // only able to see if its the host
         startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
@@ -103,12 +115,19 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        errorText.text = "Room Creation Failed: " + message;
-        MenuManager.Instance.OpenMenu("error");
+        warningDialogText.text = "Room Creation Failed: " + message;
+        ToggleConfirmDialog(true);
+        // MenuManager.Instance.OpenMenu("error");
+    }
+
+    public void ToggleConfirmDialog(bool isShow)
+    {
+        warningDialog.SetActive(isShow);
     }
 
     public void LeaveRoom()
     {
+        PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.LeaveRoom();
         MenuManager.Instance.OpenMenu("loading");
     }
@@ -120,8 +139,16 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void JoinRoom(RoomInfo info)
     {
-        PhotonNetwork.JoinRoom(info.Name);
-        MenuManager.Instance.OpenMenu("loading");
+        if (info.IsOpen)
+        {
+            PhotonNetwork.JoinRoom(info.Name);
+            MenuManager.Instance.OpenMenu("loading");
+        }
+        else
+        {
+            warningDialogText.text = "Room is full";
+            ToggleConfirmDialog(true);
+        }
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)

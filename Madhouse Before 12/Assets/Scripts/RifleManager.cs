@@ -196,22 +196,22 @@ public class RifleManager : MonoBehaviour
             // {
             //     target.TakeDamage(damage);
             // }
-/*
-            Enemy enemy = hit.transform.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                // Instantiate(blood, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-                GameObject blood = ObjectPooling.SharedInstance.GetPooledObject();
-                if (blood != null)
-                {
-                    blood.transform.position = hit.point;
-                    blood.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                    blood.SetActive(true);
-                    blood.GetComponentInChildren<ParticleSystem>().Play();
-                }
-                StartCoroutine(DeactivateBlood(blood));
-                enemy.Attacked(characterCombat);
-            } */
+
+            // Enemy enemy = hit.transform.GetComponent<Enemy>();
+            // if (enemy != null)
+            // {
+            //     // Instantiate(blood, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+            //     GameObject blood = ObjectPooling.SharedInstance.GetPooledObject();
+            //     if (blood != null)
+            //     {
+            //         blood.transform.position = hit.point;
+            //         blood.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            //         blood.SetActive(true);
+            //         blood.GetComponentInChildren<ParticleSystem>().Play();
+            //     }
+            //     StartCoroutine(DeactivateBlood(blood));
+            //     enemy.Attacked(characterCombat);
+            // }
         }
         
     }

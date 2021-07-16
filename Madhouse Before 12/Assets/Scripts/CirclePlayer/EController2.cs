@@ -338,7 +338,7 @@ public class EController2 : MonoBehaviour
     // public void AttackedByPlayer(GameObject p)
     public void AttackedByPlayer(int pvID)
     {
-        Debug.Log("triggered on enemy side, isAttacking: " + isAttacking);
+        // Debug.Log("triggered on enemy side, isAttacking: " + isAttacking);
         if (!isAttacking)
         {
             PV.RPC("RPC_HandleAttackedByPlayer", RpcTarget.MasterClient, pvID);
@@ -351,7 +351,7 @@ public class EController2 : MonoBehaviour
     [PunRPC]
     private void RPC_HandleAttackedByPlayer(int pvID)
     {
-        Debug.Log("calling rpc on master");
+        // Debug.Log("calling rpc on master");
         GetPlayer(pvID);
         isAttacked = true;
     }
@@ -372,11 +372,11 @@ public class EController2 : MonoBehaviour
 
     public void AttackedPlayer()
     {
-        Debug.Log("triggered attacked player");
+        // Debug.Log("triggered attacked player");
         if (player != null)
         {
-            Debug.Log("show canvas");
-            player.GetComponent<PlayerStats>().Show();
+            // Debug.Log("trigger show canvas for player at: " + player.transform.position);
+            player.GetComponent<PlayerStats>().Show(player.GetPhotonView());
         }
     }
 
