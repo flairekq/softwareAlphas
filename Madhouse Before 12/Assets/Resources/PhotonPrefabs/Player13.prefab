@@ -2802,7 +2802,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3241320681340205468}
-  sceneViewId: 4
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3241320681340205468
@@ -7971,7 +7971,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 7952336024004203794}
   - {fileID: 7952336024004203806}
-  sceneViewId: 3
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &7952336024004203794
@@ -8154,7 +8154,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 2
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &3355085338394822110
@@ -11058,7 +11058,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.1, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5980722068495966753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11125,7 +11125,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 5980722068495966760}
   - {fileID: 2391511637007803588}
-  sceneViewId: 5
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &5980722068495966760
@@ -15498,7 +15498,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &8951062423882978182

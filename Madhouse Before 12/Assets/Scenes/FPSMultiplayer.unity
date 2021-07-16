@@ -413,12 +413,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899114062}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &920276535 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: b23585e768656574b9986986076db46b,
-    type: 3}
-  m_PrefabInstance: {fileID: 944985487}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &944985487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5381,10 +5375,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 32382017, guid: 1bd0fa0aa20581f4b83d8223e33e1937, type: 3}
-      propertyPath: projectile
-      value: 
-      objectReference: {fileID: 920276535}
     - target: {fileID: 3241320681340205471, guid: 1bd0fa0aa20581f4b83d8223e33e1937,
         type: 3}
       propertyPath: sceneViewId
