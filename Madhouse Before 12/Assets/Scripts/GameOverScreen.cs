@@ -27,10 +27,10 @@ public class GameOverScreen : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         // MenuManager.Instance.OpenMenu("title");
-        Debug.Log("destroying");
+        // Debug.Log("destroying");
         if (RoomManager.Instance)
         {
-            Debug.Log("destroyed");
+            // Debug.Log("destroyed");
             Destroy(RoomManager.Instance.gameObject); // there can only be one
         }
 
