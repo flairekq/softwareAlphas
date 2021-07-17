@@ -12,7 +12,9 @@ public class TogglePlayerCursor : MonoBehaviour
     private PlayerMotor movement;
     private FPSCamera mouseLook;
     private MultiplayerController playerController;
-    private RifleManager rifleManager;
+    // private RifleManager rifleManager;
+    private GunProjectile2 gunProjectile;
+    private SpawnProjectile spawnProjectile;
     private Flashlight flashlight;
     private Inventory inventory;
     private EscMenu escMenu;
@@ -31,7 +33,9 @@ public class TogglePlayerCursor : MonoBehaviour
             movement = GetComponent<PlayerMotor>();
             mouseLook = GetComponent<FPSCamera>();
             playerController = GetComponent<MultiplayerController>();
-            rifleManager = GetComponentInChildren<RifleManager>();
+            // rifleManager = GetComponentInChildren<RifleManager>();
+            gunProjectile = GetComponentInChildren<GunProjectile2>();
+            spawnProjectile = GetComponentInChildren<SpawnProjectile>();
             inventory = GetComponent<Inventory>();
             flashlight = GetComponentInChildren<Flashlight>();
             escMenu = GetComponent<EscMenu>();
@@ -48,7 +52,9 @@ public class TogglePlayerCursor : MonoBehaviour
         movement.enabled = false;
         mouseLook.enabled = false;
         playerController.enabled = false;
-        rifleManager.enabled = false;
+        // rifleManager.enabled = false;
+        gunProjectile.enabled = false;
+        spawnProjectile.enabled = false;
         crossHair.SetActive(false);
         reticle.SetActive(false);
         isInCursorMode = true;
@@ -84,7 +90,9 @@ public class TogglePlayerCursor : MonoBehaviour
         movement.enabled = true;
         mouseLook.enabled = true;
         playerController.enabled = true;
-        rifleManager.enabled = true;
+        // rifleManager.enabled = true;
+        gunProjectile.enabled = true;
+        spawnProjectile.enabled = true;
         crossHair.SetActive(true);
         reticle.SetActive(true);
         isInCursorMode = false;
