@@ -71,4 +71,3 @@ MonoBehaviour:
   minZ: -10.28
   maxZ: -10.27
   yPos: 0.1
-  characterManager: {fileID: 0}
