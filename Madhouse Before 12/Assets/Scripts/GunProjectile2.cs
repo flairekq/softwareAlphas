@@ -86,8 +86,9 @@ public class GunProjectile2 : MonoBehaviour
                 Aim();
             }
             gunAudio.Play();
+            Recoil();
             Shoot();
-            //  Recoil();
+            
 
         }
 
@@ -103,6 +104,13 @@ public class GunProjectile2 : MonoBehaviour
                 Idle();
             }
         }
+
+        if(!AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName("RecoilAK47"))
+        {
+            Aim();
+        }
+
+        /*
         else if (aiming)
         {
 
@@ -113,6 +121,7 @@ public class GunProjectile2 : MonoBehaviour
 
             Idle();
         }
+        */
 
 
 
@@ -215,5 +224,16 @@ public class GunProjectile2 : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         blood.SetActive(false);
+    }
+
+      public bool AnimatorIsPlaying()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).length >
+               anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
+
+    public bool AnimatorIsPlaying(string stateName)
+    {
+        return AnimatorIsPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
 }
