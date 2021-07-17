@@ -115,4 +115,9 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    public Vector3 GetRotation()
+    {
+        return rotation;
+    }
+
 }

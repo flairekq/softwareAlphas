@@ -213,6 +213,7 @@ public class RifleManager : MonoBehaviour
             //     enemy.Attacked(characterCombat);
             // }
         }
+        
     }
 
     IEnumerator DeactivateBlood(GameObject blood)

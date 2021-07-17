@@ -190,6 +190,7 @@ public class GunProjectile2 : MonoBehaviour
             targetPoint = ray.GetPoint(75);
         }
 
+/*
         //calculate direction from attackPoint to targetPoint
         Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
 
@@ -206,6 +207,7 @@ public class GunProjectile2 : MonoBehaviour
 
         //add force to bullet 
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+        */
 
     }
 

@@ -2802,7 +2802,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3241320681340205468}
-  sceneViewId: 4
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3241320681340205468
@@ -7904,6 +7904,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &32382017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3241320683344266477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ccdbe95ba7e85459c7a7bd4072a6c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 100000, guid: b23585e768656574b9986986076db46b, type: 3}
+  firePoint: {fileID: 3241320681681212299}
+  timeToFire: 0
 --- !u!114 &1779977363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7926,30 +7941,9 @@ MonoBehaviour:
   magazineSize: 100
   bulletsPerTap: 1
   allowButtonHold: 1
-  fpsCam: {fileID: 6737413535345888657}
+  fpsCam: {fileID: 5726576020776140956}
   attackPoint: {fileID: 3241320681681212300}
   allowInvoke: 1
-  damage: 10
-  range: 100
-  shootPoint: {fileID: 3241320681681212300}
-  muzzleFlashObject: {fileID: 3241320681552722206}
-  muzzleFlash: {fileID: 3241320681552722193}
-  characterCombat: {fileID: 8357484921941850892}
---- !u!114 &1779977364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3241320683344266477}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1da0af3febe23e48a59c46c18991542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletspermag: 10
-  totalbulletsleft: 70
-  currentBullets: 0
   damage: 10
   range: 100
   shootPoint: {fileID: 3241320681681212300}
@@ -7977,7 +7971,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 7952336024004203794}
   - {fileID: 7952336024004203806}
-  sceneViewId: 3
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &7952336024004203794
@@ -8160,7 +8154,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 2
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &3355085338394822110
@@ -11062,9 +11056,9 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.01
+  m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.1, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5980722068495966753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11131,7 +11125,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 5980722068495966760}
   - {fileID: 2391511637007803588}
-  sceneViewId: 5
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &5980722068495966760
@@ -15504,7 +15498,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &8951062423882978182
