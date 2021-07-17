@@ -25,6 +25,11 @@ public class CharacterManager : MonoBehaviourPun
         Characters[1].SetActive(true);
     }
 
+    public void startingAvatar()
+    {
+         Characters[0].SetActive(true);
+         Characters[1].SetActive(false);
+    }
     public void selectAvatar()
     {
          Characters[0].SetActive(false);

@@ -9,6 +9,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager Instance;
 
+    public CharacterManager CharacterManager;
+    
     void Awake()
     {
         if (Instance) // checks if another room manager already exists
@@ -37,7 +39,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // if (scene.buildIndex == 1) // in the game scene
         if (scene.buildIndex == 2)
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+            if(CharacterManager.chooseAvatar() == 1)
+            {
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager1"), Vector3.zero, Quaternion.identity);
+            }
+            if(CharacterManager.chooseAvatar() == 0)
+            {
+                 PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+            }
+        
         }
     }
 }
