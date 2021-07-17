@@ -27,6 +27,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] int maxPlayerPerRoom;
     private PhotonView PV;
 
+   
+
     void Awake()
     {
         Instance = this;
@@ -56,6 +58,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         // Debug.Log("Joined Lobby");
         // PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
     }
+
 
     public void inputName()
     {

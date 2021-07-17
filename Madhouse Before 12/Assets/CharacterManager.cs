@@ -12,23 +12,30 @@ public class CharacterManager : MonoBehaviourPun
 
     public int selectedCharacter = 0;
     
-    public void NextCharacter()
+    public void ViewMaleAvatar()
     {
-        Characters[selectedCharacter].SetActive(false);
-        selectedCharacter = (selectedCharacter +1) 
-        % Characters.Length;
-        Characters[selectedCharacter].SetActive(true);
+        Characters[1].SetActive(false);
+        Characters[0].SetActive(true);
     }
 
-    public void PreviousCharacter()
+    public void ViewFemaleAvatar()
     {
-        Characters[selectedCharacter].SetActive(false);
-        selectedCharacter--;
-        if(selectedCharacter < 0)
-        {
-            selectedCharacter += Characters.Length;
-        }
-        Characters[selectedCharacter].SetActive(true);
+        selectedCharacter = 1;
+        Characters[0].SetActive(false);
+        Characters[1].SetActive(true);
+    }
+
+    public void selectAvatar()
+    {
+         Characters[0].SetActive(false);
+         Characters[1].SetActive(false);
+    }
+    
+    
+    public int chooseAvatar()
+    {
+        return selectedCharacter;
+
     }
 
     

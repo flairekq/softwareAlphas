@@ -5683,7 +5683,7 @@ GameObject:
   - component: {fileID: 2203601172091196236}
   - component: {fileID: 3420101851511676380}
   m_Layer: 0
-  m_Name: FemaleAvatar(Player)
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
