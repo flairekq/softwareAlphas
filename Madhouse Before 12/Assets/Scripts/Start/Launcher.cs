@@ -190,7 +190,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
         PV.RPC("ShowLoadingScreenToAll", RpcTarget.All);
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(3);
     }
 
     [PunRPC]
