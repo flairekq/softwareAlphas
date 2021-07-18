@@ -1722,7 +1722,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 16
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &1459084889559189200
@@ -5800,7 +5800,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 4249411405943289726}
   - {fileID: 5275792182767563154}
-  sceneViewId: 20
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &4249411405943289726
@@ -7617,7 +7617,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 458071230636130372}
   - {fileID: 458071230636130376}
-  sceneViewId: 18
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &458071230636130372
@@ -12884,7 +12884,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 4970920505966881994}
-  sceneViewId: 19
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &4970920505966881994
@@ -12998,7 +12998,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 17
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &5082473217819512968
