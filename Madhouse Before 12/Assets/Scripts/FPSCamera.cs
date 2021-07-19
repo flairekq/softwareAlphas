@@ -55,7 +55,7 @@ public class FPSCamera : MonoBehaviour
         currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
         float mouseSensitivity = PlayerPrefs.GetFloat("mouse", 3);
         cameraPitch -= currentMouseDelta.y * mouseSensitivity;
-        cameraPitch = Mathf.Clamp(cameraPitch, -50.0f, 73.0f);
+        cameraPitch = Mathf.Clamp(cameraPitch, -30.0f, 73.0f);
         playerCamera.localEulerAngles = Vector3.right * cameraPitch;
         transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity);
     }
