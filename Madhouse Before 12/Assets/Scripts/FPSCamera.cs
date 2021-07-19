@@ -8,7 +8,7 @@ public class FPSCamera : MonoBehaviour
     // Start is called before the first frame update
     private Transform playerCamera;
 
-    [SerializeField] float mouseSensitivity = 3.5f;
+    // [SerializeField] float mouseSensitivity = 3.5f;
 
     [SerializeField] bool lockCursor = true;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
@@ -53,6 +53,7 @@ public class FPSCamera : MonoBehaviour
     {
         Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
+        float mouseSensitivity = PlayerPrefs.GetFloat("mouse", 3);
         cameraPitch -= currentMouseDelta.y * mouseSensitivity;
         cameraPitch = Mathf.Clamp(cameraPitch, -50.0f, 73.0f);
         playerCamera.localEulerAngles = Vector3.right * cameraPitch;

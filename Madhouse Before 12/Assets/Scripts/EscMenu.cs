@@ -12,7 +12,7 @@ public class EscMenu : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject menu;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider effectsSlider;
-    // [SerializeField] private string volumeParameter = "MasterVolume";
+    [SerializeField] private Slider mouseSlider;
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private float multipler = 30f;
 
@@ -30,8 +30,10 @@ public class EscMenu : MonoBehaviourPunCallbacks
         togglePlayerCursor = GetComponent<TogglePlayerCursor>();
         float bgmVol = PlayerPrefs.GetFloat("bgm", 1);
         float effectsVol = PlayerPrefs.GetFloat("effects", 1);
+        float mouseSensitivity = PlayerPrefs.GetFloat("mouse", 3);
         bgmSlider.value = bgmVol;
         effectsSlider.value = effectsVol;
+        mouseSlider.value = mouseSensitivity;
         leaveGameObject = GameObject.FindGameObjectWithTag("LeaveGame");
     }
 
@@ -62,7 +64,7 @@ public class EscMenu : MonoBehaviourPunCallbacks
         }
     }
 
-    public void OnSoundSliderValueChange(int type)
+    public void OnSliderValueChange(int type)
     {
         if (type == 0)
         {
@@ -76,7 +78,7 @@ public class EscMenu : MonoBehaviourPunCallbacks
                 mixer.SetFloat("MusicVolume", -80.0f);
             }
         }
-        else
+        else if (type == 1)
         {
             PlayerPrefs.SetFloat("effects", effectsSlider.value);
             if (effectsSlider.value > 0.001)
@@ -87,6 +89,10 @@ public class EscMenu : MonoBehaviourPunCallbacks
             {
                 mixer.SetFloat("SFXVolume", -80.0f);
             }
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("mouse", mouseSlider.value);
         }
     }
 
