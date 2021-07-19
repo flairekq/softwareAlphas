@@ -39,6 +39,7 @@ public class EController2 : MonoBehaviour
     public int isChasingId;
     public int isPatrollingId;
     public int attackId;
+    private float onMeshThreshold = 1f;
 
     void Awake()
     {
@@ -83,7 +84,9 @@ public class EController2 : MonoBehaviour
         if (!enemyStats.isDead)
         {
             // if (IsPlayerWithinDistance(slotManager))
-            if ((player != null && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius)
+            if ((player != null 
+                    && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius
+                    && IsPlayerOnNavMesh() )
                 || (player != null && isAttacked))
             {
                 #region Attack Slot System
@@ -262,6 +265,25 @@ public class EController2 : MonoBehaviour
             animator.SetBool(isChasingId, isChasing);
             animator.SetBool(isPatrollingId, isPatrolling);
         }
+    }
+
+    public bool IsPlayerOnNavMesh()
+    {
+        NavMeshHit hit;
+
+        // Check for nearest point on navmesh to agent, within onMeshThreshold
+        Vector3 pos = player.transform.position;
+        if (NavMesh.SamplePosition(pos, out hit, onMeshThreshold, NavMesh.AllAreas))
+        {
+            // Check if the positions are vertically aligned
+            if (Mathf.Approximately(pos.x, hit.position.x)
+                && Mathf.Approximately(pos.z, hit.position.z))
+            {
+                // Lastly, check if object is below navmesh
+                return pos.y >= hit.position.y;
+            }
+        }
+        return false;
     }
 
     void FaceTarget()
