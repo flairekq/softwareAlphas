@@ -3120,7 +3120,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3241320681340205468}
-  sceneViewId: 0
+  sceneViewId: 14
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3241320681340205468
@@ -8289,7 +8289,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 7952336024004203794}
   - {fileID: 7952336024004203806}
-  sceneViewId: 0
+  sceneViewId: 13
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &7952336024004203794
@@ -8536,7 +8536,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 0
+  sceneViewId: 12
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &3355085338394822110
@@ -9998,7 +9998,7 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -11507,7 +11507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5980722068495966758
 Transform:
   m_ObjectHideFlags: 0
@@ -11618,7 +11618,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 5980722068495966760}
   - {fileID: 2391511637007803588}
-  sceneViewId: 0
+  sceneViewId: 15
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &5980722068495966760
@@ -16248,7 +16248,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 0
+  sceneViewId: 11
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &8951062423882978182
