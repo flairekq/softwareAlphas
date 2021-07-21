@@ -7,11 +7,11 @@ public class ProjectileMove : MonoBehaviour
     public float speed; 
     public float fireRate;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    // // Start is called before the first frame update
+    // void Start()
+    // {
         
-    }
+    // }
 
     // Update is called once per frame
     void Update()
@@ -27,7 +27,7 @@ public class ProjectileMove : MonoBehaviour
 
     void OnCollisionEnter(Collision co)
     {
-        Debug.Log("bullet hit and destroyed");
+        // Debug.Log("bullet hit and destroyed");
         speed = 0;
         Destroy(gameObject);
     }

@@ -10,7 +10,7 @@ public class SwitchManager : MonoBehaviour
     public static SwitchManager instance;
     [SerializeField] private SwitchController[] switches;
     private bool isPartiallyOn = false;
-    private float timeCounter = 10f;
+    private float timeCounter = 5f;
     private List<SwitchController> switchesThatAreOn = new List<SwitchController>();
 
     void Awake() {
@@ -61,7 +61,7 @@ public class SwitchManager : MonoBehaviour
         if (instance.isPartiallyOn && instance.timeCounter <= 0)
         {
             // Debug.Log("time is up");
-            instance.timeCounter = 10f;
+            instance.timeCounter = 5f;
             foreach (SwitchController sc in instance.switchesThatAreOn)
             {
                 sc.OffSwitch();
