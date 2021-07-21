@@ -8707,7 +8707,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ccdbe95ba7e85459c7a7bd4072a6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 100000, guid: b23585e768656574b9986986076db46b, type: 3}
   firePoint: {fileID: 4970920505751684829}
   timeToFire: 0
 --- !u!114 &7496024014308825541
@@ -16709,7 +16708,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6606908626917410484}
-  - component: {fileID: 6606908626917410481}
   m_Layer: 0
   m_Name: Arisa
   m_TagString: Player
@@ -16732,20 +16730,6 @@ Transform:
   m_Father: {fileID: 4249411405943289712}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6606908626917410481
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6606908626917410494}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.64
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &6606908626932314789
 GameObject:
   m_ObjectHideFlags: 0
