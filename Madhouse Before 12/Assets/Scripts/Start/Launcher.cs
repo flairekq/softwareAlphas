@@ -118,8 +118,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
+        MenuManager.Instance.OpenMenu("create room");
         warningDialogText.text = "Room Creation Failed: " + message;
         ToggleConfirmDialog(true);
+
         // MenuManager.Instance.OpenMenu("error");
     }
 
