@@ -41,6 +41,11 @@ public class TimerManagement : MonoBehaviour
 
     void Update()
     {
+        if (GameController.instance.isGameOver)
+        {
+            this.enabled = false;
+        }
+
         if (!startTimer)
         {
             SetStartTimer();
