@@ -36,11 +36,11 @@ public class SpawnProjectile : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && Time.time >= timeToFire)
         {
             timeToFire = Time.time + 1 / 4;
-            SpawnBullet();
+            PV.RPC("SpawnBullet", RpcTarget.All);
         }
         
     }
-
+    [PunRPC]
     void SpawnBullet()
     {
        // GameObject bullet;

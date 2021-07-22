@@ -57,6 +57,7 @@ MonoBehaviour:
   - TakeDamage
   - RPC_HandleGameOver
   - RPC_HandleAttackedByPlayer
+  - SpawnBullet
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
