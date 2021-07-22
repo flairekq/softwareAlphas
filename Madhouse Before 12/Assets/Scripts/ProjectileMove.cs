@@ -41,21 +41,29 @@ public class ProjectileMove : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision co)
+    // void OnCollisionEnter(Collision co)
+    // {
+    //     if (!PV.IsMine)
+    //     {
+    //         return;
+    //     }
+    //     PV.RPC("deactivateBullet", RpcTarget.All);
+    // }
+
+    public void DeactivateBullet()
     {
-        if (!PV.IsMine)
-        {
-            return;
-        }
-        PV.RPC("deactivateBullet", RpcTarget.All);
+        PV.RPC("RPC_HandleDeactivateBullet", RpcTarget.All);
     }
 
 
     [PunRPC]
-    private void deactivateBullet()
+    private void RPC_HandleDeactivateBullet()
     {
-        rb.isKinematic = true;
-        tr.Clear();
-        gameObject.SetActive(false);
+        if (rb != null && tr != null)
+        {
+            rb.isKinematic = true;
+            tr.Clear();
+            gameObject.SetActive(false);
+        }
     }
 }
