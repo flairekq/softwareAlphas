@@ -8234,7 +8234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ccdbe95ba7e85459c7a7bd4072a6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 100000, guid: b23585e768656574b9986986076db46b, type: 3}
   firePoint: {fileID: 3241320681681212299}
   timeToFire: 0
 --- !u!114 &1779977363
@@ -8308,7 +8307,7 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isIdle
   - Type: 4
     SynchronizeType: 0
@@ -9101,7 +9100,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3835918237847649989}
-  - component: {fileID: 8532282233502636990}
   m_Layer: 0
   m_Name: RigLayers
   m_TagString: Untagged
@@ -9125,25 +9123,6 @@ Transform:
   m_Father: {fileID: 5980722068495966758}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8532282233502636990
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4665277802096337735}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c3d5e54c6be97db4495062ac491bca68, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4845399226263011859
 GameObject:
   m_ObjectHideFlags: 0
