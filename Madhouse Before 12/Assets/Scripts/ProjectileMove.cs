@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ProjectileMove : MonoBehaviour
 {
@@ -12,6 +13,14 @@ public class ProjectileMove : MonoBehaviour
     private TrailRenderer tr;
 
     private MeshRenderer mesh;
+
+    private PhotonView PV;
+
+     private void Awake()
+    {
+        
+        PV = GetComponent<PhotonView>();
+    }
     // // Start is called before the first frame update
      void Start()
      {
@@ -34,18 +43,15 @@ public class ProjectileMove : MonoBehaviour
 
     void OnCollisionEnter(Collision co)
     {
-        // Debug.Log("bullet hit and destroyed");
-       // speed = 0;
-       // rb.velocity = Vector3.zero;
-       // rb.angularVelocity = Vector3.zero;
-        rb.isKinematic = true;
-        tr.Clear();
-       // mesh.enabled = false;
-       // transform.rotation = Quaternion.identity;
-         gameObject.SetActive(false);
+        PV.RPC("deactivateBullet", RpcTarget.All);
     }
-    private void Delay()
+
+
+   [PunRPC]
+    private void deactivateBullet()
     {
+       rb.isKinematic = true;
+        tr.Clear();
        gameObject.SetActive(false);
     }
 }
