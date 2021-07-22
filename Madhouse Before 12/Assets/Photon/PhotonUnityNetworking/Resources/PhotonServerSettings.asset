@@ -37,11 +37,13 @@ MonoBehaviour:
   - DestroyRpc
   - RPC_CallInitialSpawn
   - RPC_HandleAdjustTime
+  - RPC_HandleAttackedByPlayer
   - RPC_HandleDamage
   - RPC_HandleDiaryClue
   - RPC_HandleDoor
   - RPC_HandleDrawer
   - RPC_HandleEnemyKilled
+  - RPC_HandleGameOver
   - RPC_HandleItem
   - RPC_HandlePlayer
   - RPC_HandlePowerGenerator
@@ -54,10 +56,8 @@ MonoBehaviour:
   - RPC_HandleWord
   - RPC_ToggleLockUnlockDoor
   - ShowLoadingScreenToAll
-  - TakeDamage
-  - RPC_HandleGameOver
-  - RPC_HandleAttackedByPlayer
   - SpawnBullet
+  - TakeDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
