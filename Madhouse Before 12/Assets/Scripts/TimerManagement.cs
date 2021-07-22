@@ -43,6 +43,7 @@ public class TimerManagement : MonoBehaviour
     {
         if (GameController.instance.isGameOver)
         {
+            UpdateTimer();
             this.enabled = false;
         }
 
@@ -57,6 +58,7 @@ public class TimerManagement : MonoBehaviour
                 //Timer Completed
                 //Do What Ever You What to Do Here
                 // Debug.Log("time up");
+                UpdateTimer();
                 GameController.instance.GameOver(true);
                 this.enabled = false;
             }
