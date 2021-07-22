@@ -8760,13 +8760,13 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isIdle
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isShooting
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isRecoil
   m_SynchronizeLayers:
   - SynchronizeType: 0
