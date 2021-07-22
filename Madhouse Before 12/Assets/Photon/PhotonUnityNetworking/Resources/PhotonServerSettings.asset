@@ -34,6 +34,7 @@ MonoBehaviour:
   StartInOfflineMode: 0
   RpcList:
   - ClickRpc
+  - deactivateBullet
   - DestroyRpc
   - RPC_CallInitialSpawn
   - RPC_HandleAdjustTime
@@ -58,7 +59,6 @@ MonoBehaviour:
   - ShowLoadingScreenToAll
   - SpawnBullet
   - TakeDamage
-  - deactivateBullet
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
