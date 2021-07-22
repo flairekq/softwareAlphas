@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class SpawnProjectile : MonoBehaviour
 {
@@ -9,8 +10,14 @@ public class SpawnProjectile : MonoBehaviour
 
     public float timeToFire = 0f;
 
+    private PhotonView PV;
+
     
-    //private GameObject effectToSpawn;
+     private void Awake()
+    {
+       
+        PV = GetComponent<PhotonView>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +27,18 @@ public class SpawnProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if(!PV.IsMine)
+        {
+            return;
+        }
+        
         if(Input.GetMouseButtonDown(0) && Time.time >= timeToFire)
         {
             timeToFire = Time.time + 1 / 4;
             SpawnBullet();
         }
+        
     }
 
     void SpawnBullet()
