@@ -76,6 +76,11 @@ public class EController2 : MonoBehaviour
 
     void Update()
     {
+        if (GameController.instance.isGameOver)
+        {
+            this.enabled = false;
+        }
+        
         if (!PV.IsMine)
         {
             return;
@@ -84,9 +89,9 @@ public class EController2 : MonoBehaviour
         if (!enemyStats.isDead)
         {
             // if (IsPlayerWithinDistance(slotManager))
-            if ((player != null 
+            if ((player != null
                     && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius
-                    && IsPlayerOnNavMesh() )
+                    && IsPlayerOnNavMesh())
                 || (player != null && isAttacked))
             {
                 #region Attack Slot System

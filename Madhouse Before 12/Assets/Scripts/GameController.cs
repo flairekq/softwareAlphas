@@ -70,6 +70,7 @@ public class GameController : MonoBehaviour
                 playerPV.GetComponent<TogglePlayerCursor>().GameOver();
             }
         }
+        GameController.instance.isGameOver = true;
         gameOverScreen.Show(isTimeup);
     }
 
