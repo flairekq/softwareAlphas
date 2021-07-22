@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using System.IO;
 
 public class bulletPooling : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class bulletPooling : MonoBehaviour
         GameObject tmp;
         for (int i = 0; i < amountToPool; i++)
         {
-            tmp = Instantiate(objectToPool);
+            tmp = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "bullet"), Vector3.zero, Quaternion.identity);
             tmp.SetActive(false);
             pooledObjects.Add(tmp);
         }
