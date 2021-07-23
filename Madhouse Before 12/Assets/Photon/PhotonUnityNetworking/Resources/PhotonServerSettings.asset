@@ -59,6 +59,7 @@ MonoBehaviour:
   - ShowLoadingScreenToAll
   - SpawnBullet
   - TakeDamage
+  - RPC_HandleDeactivateBullet
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

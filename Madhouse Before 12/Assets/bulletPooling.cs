@@ -22,7 +22,7 @@ public class bulletPooling : MonoBehaviour
         GameObject tmp;
         for (int i = 0; i < amountToPool; i++)
         {
-            tmp = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "bullet"), Vector3.zero, Quaternion.identity);
+            tmp = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "bullet"), Vector3.zero, Quaternion.identity);
             tmp.SetActive(false);
             pooledObjects.Add(tmp);
         }
