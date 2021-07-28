@@ -41,14 +41,16 @@ public class ProjectileMove : MonoBehaviour
 
     }
 
-    // void OnCollisionEnter(Collision co)
-    // {
-    //     if (!PV.IsMine)
-    //     {
-    //         return;
-    //     }
-    //     PV.RPC("deactivateBullet", RpcTarget.All);
-    // }
+    /*
+     void OnCollisionEnter(Collision co)
+     {
+         if (!PV.IsMine)
+         {
+             return;
+        }
+         PV.RPC("deactivateBullet", RpcTarget.All);
+     }
+     */
 
     public void DeactivateBullet()
     {
