@@ -294,12 +294,31 @@ public class EController2 : MonoBehaviour
         return false;
     }
 
-    bool CheckIsNear() {
-        if (Vector3.Distance(player.transform.position, proxy.position) <= lookRadius) {
-            if (Vector3.Dot(proxy.up, player.transform.up) < 0) {
-                return false;
-            } else {
-                return true;
+    bool CheckIsNear()
+    {
+        if (Vector3.Distance(player.transform.position, proxy.position) <= lookRadius)
+        {
+            if (location == 0) // basement
+            {
+                if (player.transform.position.y >= -4.8473 && player.transform.position.y <= -3.756847)
+                {
+                    return true;
+                }
+            }
+            // else if (location.Equals("FirstFloor"))
+            else if (location == 1 || location == 5) // first floor 
+            {
+                if (player.transform.position.y >= 0.09774995 && player.transform.position.y <= 0.1119384)
+                {
+                    return true;
+                }
+            }
+            else if (location >= 2 && location <= 4) // 2nd floor
+            {
+                if (player.transform.position.y >= 3.89 && player.transform.position.y <= 3.9)
+                {
+                    return true;
+                }
             }
         }
         return false;
@@ -333,7 +352,8 @@ public class EController2 : MonoBehaviour
         // Quaternion lookRotation = Quaternion.LookRotation(new Vector3(player.transform.position.x, 0, player.transform.position.z));
         // model.rotation = Quaternion.Slerp(model.rotation, lookRotation, Time.deltaTime * 5f);
         // Vector3 lookAt = new Vector3(player.transform.position.x, , player.transform.position.z);
-        model.LookAt(player.transform);
+        // model.LookAt(player.transform);
+        model.LookAt(new Vector3(player.transform.position.x, model.position.y, player.transform.position.z));
         // Vector3 direction = model.position - player.transform.position;
         // model.LookAt(direction);
         // model.rotation = Quaternion.LookRotation(player.transform.position - model.position, model.up);
