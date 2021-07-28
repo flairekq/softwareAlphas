@@ -19,6 +19,7 @@ public class TimerManagement : MonoBehaviour
     bool startTimer = false;
     double timerIncrementValue;
     [SerializeField] double elapsedTimeForDisplay = 41400;
+    bool isReadyToStart = false;
     double startTime;
     // in seconds
     [SerializeField] double timer = 20;
@@ -39,6 +40,17 @@ public class TimerManagement : MonoBehaviour
         SetStartTimer();
     }
 
+    [PunRPC]
+    private void RPC_HandleReadyToStartTimer()
+    {
+        isReadyToStart = true;
+    }
+
+    public void ReadyToStartTimer()
+    {
+        PV.RPC("RPC_HandleReadyToStartTimer", RpcTarget.All);
+    }
+
     void Update()
     {
         if (GameController.instance.isGameOver)
@@ -47,7 +59,7 @@ public class TimerManagement : MonoBehaviour
             this.enabled = false;
         }
 
-        if (!startTimer)
+        if (!startTimer && isReadyToStart)
         {
             SetStartTimer();
         }

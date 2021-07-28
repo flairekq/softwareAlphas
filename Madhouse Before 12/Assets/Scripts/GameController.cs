@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
             {
                 GameController.instance.PV.RPC("RPC_CallInitialSpawn", RpcTarget.All);
                 GenerateEnemies.instance.InitialSpawnEnemies();
-
+                TimerManagement.instance.ReadyToStartTimer();
             }
         }
     }

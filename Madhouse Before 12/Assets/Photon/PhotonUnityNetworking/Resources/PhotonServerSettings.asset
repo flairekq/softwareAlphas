@@ -60,6 +60,7 @@ MonoBehaviour:
   - SpawnBullet
   - TakeDamage
   - RPC_HandleDeactivateBullet
+  - RPC_HandleReadyToStartTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
