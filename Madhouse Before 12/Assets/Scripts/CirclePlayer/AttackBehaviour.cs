@@ -27,7 +27,10 @@ public class AttackBehaviour : StateMachineBehaviour
         if (currentController.PV.IsMine)
         {
             // currentController.AttackedPlayer();
-            TimerManagement.instance.AdjustTime(5, false);
+            if (Vector3.Distance(currentController.player.transform.position, currentController.proxy.position) <= currentController.agent.stoppingDistance)
+            {
+                TimerManagement.instance.AdjustTime(5, false);
+            }
             currentController.isAttacking = false;
         }
         // CharacterStats targetStats = currentController.player.GetComponent<CharacterStats>();

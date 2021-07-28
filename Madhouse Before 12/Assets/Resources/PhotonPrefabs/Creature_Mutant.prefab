@@ -1511,6 +1511,7 @@ MonoBehaviour:
   model: {fileID: 8246772269986191783}
   proxy: {fileID: 8246772269198625192}
   lookRadius: 4
+  agent: {fileID: 0}
   attacks:
   - {fileID: 7400000, guid: 395a081b1260c8a4daaa4eaa62b6244e, type: 3}
   - {fileID: 7400000, guid: c8b274f2689c03d42befaefd1fcdce28, type: 3}

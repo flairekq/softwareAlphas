@@ -10,7 +10,7 @@ public class EController2 : MonoBehaviour
     public Transform model;
     public Transform proxy;
     public float lookRadius = 3.5f;
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     NavMeshObstacle obstacle;
     Vector3 lastPosition;
     Animator animator;
@@ -80,7 +80,7 @@ public class EController2 : MonoBehaviour
         {
             this.enabled = false;
         }
-        
+
         if (!PV.IsMine)
         {
             return;
@@ -90,8 +90,10 @@ public class EController2 : MonoBehaviour
         {
             // if (IsPlayerWithinDistance(slotManager))
             if ((player != null
-                    && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius
-                    && IsPlayerOnNavMesh())
+                    // && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius
+                    && CheckIsNear()
+                    && (location >= 3 || (location <= 2 && IsPlayerOnNavMesh())))
+                // && IsPlayerOnNavMesh())
                 || (player != null && isAttacked))
             {
                 #region Attack Slot System
@@ -201,6 +203,7 @@ public class EController2 : MonoBehaviour
             }
             else
             {
+                animator.SetInteger(attackId, 0);
                 FindNearestPlayer();
                 isChasing = false;
                 isPatrolling = true;
@@ -291,12 +294,51 @@ public class EController2 : MonoBehaviour
         return false;
     }
 
+    bool CheckIsNear() {
+        if (Vector3.Distance(player.transform.position, proxy.position) <= lookRadius) {
+            if (Vector3.Dot(proxy.up, player.transform.up) < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void FaceTarget()
     {
-        // Vector3 direction = (player.transform.position - model.position).normalized;
+        // // Calculate the orientation based on the velocity of the agent 
+        // Vector3 orientation = model.position - lastPosition;
+        // // Check if the agent has some minimal velocity 
+        // if (orientation.sqrMagnitude > 0.1f)
+        // {
+        //     Vector3 direction = (player.transform.position - model.position).normalized;
+        //     direction.y = 0;
+        //     // We don't want him to look up or down orientation.y = 0;
+        //     // Use Quaternion.LookRotation() to set the model's new rotation and smooth the transition with Quaternion.Lerp();
+        //     model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 8);
+        // }
+        // else
+        // {
+        //     // If the agent is stationary we tell him to assume the players's rotation
+        //     model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(player.transform.up), Time.deltaTime * 8);
+        // }
+        // if (agent.velocity.magnitude <= 0.1)
+        // {
+        // Vector3 direction = player.transform.position - model.position;
+        // direction.y = 0;
+        // Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, model.position.y, direction.z));
+
         // Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        // Quaternion lookRotation = Quaternion.LookRotation(new Vector3(player.transform.position.x, 0, player.transform.position.z));
         // model.rotation = Quaternion.Slerp(model.rotation, lookRotation, Time.deltaTime * 5f);
+        // Vector3 lookAt = new Vector3(player.transform.position.x, , player.transform.position.z);
         model.LookAt(player.transform);
+        // Vector3 direction = model.position - player.transform.position;
+        // model.LookAt(direction);
+        // model.rotation = Quaternion.LookRotation(player.transform.position - model.position, model.up);
+        // model.rotation = Quaternion.RotateTowards(model.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 8);
+        // }
     }
 
     void RandomnizeMoveSpot()
@@ -339,11 +381,11 @@ public class EController2 : MonoBehaviour
         AttackedPlayer();
     }
 
-    // void OnDrawGizmosSelected()
-    // {
-    //     Gizmos.color = Color.blue;
-    //     Gizmos.DrawWireSphere(proxy.position, lookRadius);
-    // }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(proxy.position, lookRadius);
+    }
 
     void FindNearestPlayer()
     {
