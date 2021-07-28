@@ -72,6 +72,7 @@ public class PowerGeneratorController : MonoBehaviour
             // PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, "isOn", false);
             PV.RPC("RPC_HandlePowerGenerator", RpcTarget.All, isOnId, false);
             EnvironmentManager.instance.TogglePower(false);
+            combi = "";
             // EnvironmentManager.instance.isPowerOn = false;
             // animator.SetBool("isOn", false);
             return;
