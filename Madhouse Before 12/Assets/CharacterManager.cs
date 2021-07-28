@@ -14,7 +14,7 @@ public class CharacterManager : MonoBehaviourPun
     
     public void ViewMaleAvatar()
     {
-        selectedCharacter = 1;
+        selectedCharacter = 0;
         Characters[1].SetActive(false);
         Characters[0].SetActive(true);
     }

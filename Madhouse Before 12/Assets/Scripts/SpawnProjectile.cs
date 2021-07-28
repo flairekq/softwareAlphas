@@ -49,6 +49,7 @@ public class SpawnProjectile : MonoBehaviour
         {
             // bullet = Instantiate(projectile, firePoint.transform.position, firePoint.transform.rotation);
             GameObject bullet = bulletPooling.SharedInstance.GetPooledObject();
+            if(bullet != null) {
             bullet.SetActive(true);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             TrailRenderer tr = bullet.GetComponent<TrailRenderer>();
@@ -61,15 +62,19 @@ public class SpawnProjectile : MonoBehaviour
             bullet.transform.position = firePoint.transform.position;
             //bullet.transform.position += transform.forward * (15 * Time.deltaTime);
             bullet.transform.rotation = firePoint.transform.rotation;
+            
             StartCoroutine(DeactivateBullet(bullet));
+            }
         }
     }
+
     IEnumerator DeactivateBullet(GameObject bullet)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         bullet.GetComponent<ProjectileMove>().DeactivateBullet();
         // bullet.SetActive(false);
 
     }
+    
 
 }
