@@ -59,7 +59,7 @@ public class TimerManagement : MonoBehaviour
             this.enabled = false;
         }
 
-        if (!startTimer && isReadyToStart)
+        if (!startTimer)
         {
             SetStartTimer();
         }
@@ -110,21 +110,24 @@ public class TimerManagement : MonoBehaviour
 
     void SetStartTimer()
     {
-        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        if (isReadyToStart)
         {
-            CustomValue = new ExitGames.Client.Photon.Hashtable();
-            startTime = PhotonNetwork.Time;
-            startTimer = true;
-            CustomValue.Add("StartTime", startTime);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(CustomValue);
-        }
-        else
-        {
-            object propsTime;
-            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("StartTime", out propsTime))
+            if (PhotonNetwork.LocalPlayer.IsMasterClient)
             {
-                startTime = (double)propsTime;
+                CustomValue = new ExitGames.Client.Photon.Hashtable();
+                startTime = PhotonNetwork.Time;
                 startTimer = true;
+                CustomValue.Add("StartTime", startTime);
+                PhotonNetwork.CurrentRoom.SetCustomProperties(CustomValue);
+            }
+            else
+            {
+                object propsTime;
+                if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("StartTime", out propsTime))
+                {
+                    startTime = (double)propsTime;
+                    startTimer = true;
+                }
             }
         }
     }
