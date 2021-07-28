@@ -45,7 +45,7 @@ public class TogglePlayerCursor : MonoBehaviour
         }
     }
 
-    public void ChangeToCursor()
+    public void ChangeToCursor(bool isInventoryMode)
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
@@ -58,12 +58,17 @@ public class TogglePlayerCursor : MonoBehaviour
         crossHair.SetActive(false);
         reticle.SetActive(false);
         isInCursorMode = true;
+
+        if (!isInventoryMode)
+        {
+            inventory.enabled = false;
+        }
     }
 
     // this method is for power generator 
     public void ChangeToCursorZoomIn()
     {
-        this.ChangeToCursor();
+        this.ChangeToCursor(false);
         this.OffRenderer();
     }
 
@@ -93,6 +98,7 @@ public class TogglePlayerCursor : MonoBehaviour
         // rifleManager.enabled = true;
         gunProjectile.enabled = true;
         spawnProjectile.enabled = true;
+        inventory.enabled = true;
         crossHair.SetActive(true);
         reticle.SetActive(true);
         isInCursorMode = false;
@@ -109,8 +115,8 @@ public class TogglePlayerCursor : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            this.ChangeToCursor();
-            inventory.enabled = false;
+            this.ChangeToCursor(false);
+            // inventory.enabled = false;
             flashlight.enabled = false;
             escMenu.enabled = false;
         }

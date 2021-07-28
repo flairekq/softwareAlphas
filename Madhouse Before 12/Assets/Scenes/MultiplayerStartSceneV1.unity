@@ -7055,6 +7055,7 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: 712f21899d35b4c1787e981f9590991c, type: 2}
   multipler: 30
   confirmDialog: {fileID: 0}
+  isStartScene: 1
 --- !u!1 &1237867498
 GameObject:
   m_ObjectHideFlags: 0
@@ -8466,7 +8467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 10.993, y: -22.976013}
+  m_AnchoredPosition: {x: 10.993, y: -22.976074}
   m_SizeDelta: {x: 938.558, y: -639.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1495270474

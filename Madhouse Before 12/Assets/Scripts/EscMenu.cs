@@ -20,7 +20,9 @@ public class EscMenu : MonoBehaviourPunCallbacks
 
     private TogglePlayerCursor togglePlayerCursor;
     private bool isAlreadyCursorMode = false;
+    [SerializeField] private bool isStartScene = false;
     private GameObject leaveGameObject;
+    public bool isInEscMode = false;
     // private float bgmVol;
     // private float effectsVol;
 
@@ -45,7 +47,7 @@ public class EscMenu : MonoBehaviourPunCallbacks
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!isStartScene && Input.GetKeyDown(KeyCode.Escape))
         {
             if (menu.activeSelf)
             {
@@ -54,11 +56,13 @@ public class EscMenu : MonoBehaviourPunCallbacks
                     togglePlayerCursor.ChangeToPlayer();
                 }
                 menu.SetActive(false);
+                isInEscMode = false;
             }
             else
             {
+                isInEscMode = true;
                 isAlreadyCursorMode = togglePlayerCursor.IsInCursorMode();
-                togglePlayerCursor.ChangeToCursor();
+                togglePlayerCursor.ChangeToCursor(false);
                 menu.SetActive(true);
             }
         }

@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour
 
     public List<GameObject> items = new List<GameObject>();
     private PhotonView PV;
+    private bool isInExamineMode = false;
 
     public bool Add(GameObject item)
     {
@@ -25,7 +26,17 @@ public class Inventory : MonoBehaviour
             displayInformation.DisplayText("Your inventory is full");
             return false;
         }
+        // check for duplicate
+        foreach (GameObject go in items)
+        {
+            if (item.Equals(go))
+            {
+                return false;
+            }
+        }
+
         items.Add(item);
+
         if (onItemChangedCallback != null)
         {
             onItemChangedCallback.Invoke();
@@ -42,10 +53,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool isItemPicked(string name) {
-        for (int i = 0; i < items.Count; i++) {
+    public bool isItemPicked(string name)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
             Item item = items[i].GetComponent<Item>();
-            if (item.name.Equals(name)) {
+            if (item.name.Equals(name))
+            {
                 return true;
             }
         }
@@ -86,13 +100,16 @@ public class Inventory : MonoBehaviour
 
         if (inventoryPanel.activeSelf)
         {
-
-            togglePlayerCursor.ChangeToCursor();
+            isInExamineMode = togglePlayerCursor.IsInCursorMode();
+            togglePlayerCursor.ChangeToCursor(true);
             inventoryUI.ReloadUI(gameObject);
         }
         else
         {
-            togglePlayerCursor.ChangeToPlayer();
+            if (!isInExamineMode)
+            {
+                togglePlayerCursor.ChangeToPlayer();
+            }
         }
     }
 }

@@ -28,6 +28,7 @@ public class InteractWithItem : MonoBehaviour
     private ZoomingCam zoomingCam;
     private bool isTooCloseOrFar = false;
     private PhotonView PV;
+    private EscMenu escMenu;
 
     // void Awake()
     // {
@@ -44,6 +45,7 @@ public class InteractWithItem : MonoBehaviour
         togglePlayerCursor = gameObject.transform.parent.GetComponent<TogglePlayerCursor>();
         displayInformation = gameObject.transform.parent.GetComponentInChildren<DisplayInformation>();
         zoomingCam = GetComponent<ZoomingCam>();
+        escMenu = gameObject.transform.parent.GetComponent<EscMenu>();
         // }
     }
 
@@ -56,6 +58,11 @@ public class InteractWithItem : MonoBehaviour
         // }
 
         SelectItemToInteractWithFromRay();
+
+        if (escMenu.isInEscMode)
+        {
+            return;
+        }
 
         // examine or use
         if (Input.GetKeyDown(KeyCode.E) && itemDisplayUI != null && (itemDisplayUI.IsMouseOvering() || (itemDisplayUI.type.Equals("PowerGenerator") && zoomingCam.IsZoomedIn())))
@@ -77,7 +84,7 @@ public class InteractWithItem : MonoBehaviour
                     isExaminingItem = note.isExaminingNote();
                     if (isExaminingItem)
                     {
-                        togglePlayerCursor.ChangeToCursor();
+                        togglePlayerCursor.ChangeToCursor(false);
                     }
                     else
                     {
@@ -121,7 +128,7 @@ public class InteractWithItem : MonoBehaviour
                     else
                     {
                         itemDisplayUI.transform.parent.GetComponent<KeyController>().ChangeActiveCharacter(gameObject.transform.parent.gameObject);
-                        togglePlayerCursor.ChangeToCursor();
+                        togglePlayerCursor.ChangeToCursor(false);
                         keypadCanvas.CanvasOn();
                     }
                 }
@@ -184,7 +191,7 @@ public class InteractWithItem : MonoBehaviour
                     isExaminingItem = ia.isExaminingItem();
                     if (isExaminingItem)
                     {
-                        togglePlayerCursor.ChangeToCursor();
+                        togglePlayerCursor.ChangeToCursor(false);
                     }
                     else
                     {
