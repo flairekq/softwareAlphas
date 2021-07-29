@@ -7695,6 +7695,8 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: 712f21899d35b4c1787e981f9590991c, type: 2}
   multipler: 30
   confirmDialog: {fileID: 8774876891340267116}
+  isStartScene: 0
+  isInEscMode: 0
 --- !u!1 &4249411405971284377
 GameObject:
   m_ObjectHideFlags: 0
