@@ -62,7 +62,9 @@ public class EscMenu : MonoBehaviourPunCallbacks
             {
                 isInEscMode = true;
                 isAlreadyCursorMode = togglePlayerCursor.IsInCursorMode();
-                togglePlayerCursor.ChangeToCursor(false);
+                if (!isAlreadyCursorMode) {
+                     togglePlayerCursor.ChangeToCursor(false);
+                }
                 menu.SetActive(true);
             }
         }
