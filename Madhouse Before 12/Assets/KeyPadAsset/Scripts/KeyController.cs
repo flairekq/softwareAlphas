@@ -18,7 +18,7 @@ public class KeyController : MonoBehaviour
     public void KeyPressNum(int keyNumber)
     {
         kpController.SingleBeep();
-        kpController.text.color = Color.black;
+        // kpController.text.color = Color.black;
 
         if (kpController.codeText.characterLimit <= (kpController.characterLim - 1))
         {
