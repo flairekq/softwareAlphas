@@ -4682,7 +4682,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -487.8305, y: -50.44}
+  m_AnchoredPosition: {x: -487.39716, y: -50.44}
   m_SizeDelta: {x: 1117.548, y: 100.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &924619765
@@ -6165,8 +6165,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -487.83057, y: -835.78}
-  m_SizeDelta: {x: 800, y: 1469.8}
+  m_AnchoredPosition: {x: -487.39716, y: -939.78}
+  m_SizeDelta: {x: 800, y: 1677.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149619353
 MonoBehaviour:
@@ -7056,6 +7056,7 @@ MonoBehaviour:
   multipler: 30
   confirmDialog: {fileID: 0}
   isStartScene: 1
+  isInEscMode: 0
 --- !u!1 &1237867498
 GameObject:
   m_ObjectHideFlags: 0
@@ -7271,8 +7272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 650, y: -734.9}
-  m_SizeDelta: {x: 500, y: 1469.842}
+  m_AnchoredPosition: {x: 650, y: -838.9}
+  m_SizeDelta: {x: 500, y: 1690.583}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1280912118
 MonoBehaviour:
@@ -7311,7 +7312,7 @@ MonoBehaviour:
     the end\n3DFRK\nINSTANT ZOOMIES\nNight Forest\nBatewar\nCreation Wasteland\nAleksn09\nMaksim
     Bugrimov \nLukas Bobor\n\nT.C. EDWARDS\nANTHON\nMatthew ANETT\nB.G.M\nBROKEN
     ROBOT AUDIO\n\nPhillmont Muktar\nYong Fu Xiang\nJerryl Seow\nDaniel Goh\nJolene
-    Pek\nForartyy"
+    Pek\nForartyy\nRutes\noUnknown0\nLiong Wen Xuan\nAng Guang Yao\nShi Kexin"
 --- !u!222 &1280912119
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9252,8 +9253,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -734.9}
-  m_SizeDelta: {x: 400, y: 1469.8}
+  m_AnchoredPosition: {x: 200, y: -838.9}
+  m_SizeDelta: {x: 400, y: 1677.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575205659
 MonoBehaviour:

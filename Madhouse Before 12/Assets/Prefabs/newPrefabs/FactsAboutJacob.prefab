@@ -161,9 +161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Facts about me
-  icon: {fileID: 21300000, guid: fa7acf7732a5545f0bbc0e518abd1bbd, type: 3}
+  icon: {fileID: 21300000, guid: 5432c0aea51c04ed5930135ab5cfdc29, type: 3}
   content: 
-  onExpandIcon: {fileID: 21300000, guid: fa7acf7732a5545f0bbc0e518abd1bbd, type: 3}
+  onExpandIcon: {fileID: 21300000, guid: 5432c0aea51c04ed5930135ab5cfdc29, type: 3}
 --- !u!114 &2441224545249497780
 MonoBehaviour:
   m_ObjectHideFlags: 0

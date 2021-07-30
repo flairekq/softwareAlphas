@@ -40,6 +40,7 @@ public class EController2 : MonoBehaviour
     public int isPatrollingId;
     public int attackId;
     private float onMeshThreshold = 1f;
+    [SerializeField] public MeshCollider meshCollider;
 
     void Awake()
     {
@@ -91,8 +92,8 @@ public class EController2 : MonoBehaviour
             // if (IsPlayerWithinDistance(slotManager))
             if ((player != null
                     // && Vector3.Distance(player.transform.position, proxy.position) <= lookRadius
-                    && CheckIsNear()
-                    && (location >= 3 || (location <= 2 && IsPlayerOnNavMesh())))
+                    && CheckIsNear())
+                    // && (location >= 3 || (location <= 2 && IsPlayerOnNavMesh())))
                 // && IsPlayerOnNavMesh())
                 || (player != null && isAttacked))
             {
@@ -300,7 +301,7 @@ public class EController2 : MonoBehaviour
         {
             if (location == 0) // basement
             {
-                if (player.transform.position.y >= -4.8473 && player.transform.position.y <= -3.756847)
+                if (player.transform.position.y >= -4.8473 && player.transform.position.y <= -3.74)
                 {
                     return true;
                 }
@@ -308,7 +309,7 @@ public class EController2 : MonoBehaviour
             // else if (location.Equals("FirstFloor"))
             else if (location == 1 || location == 5) // first floor 
             {
-                if (player.transform.position.y >= 0.09774995 && player.transform.position.y <= 0.1119384)
+                if (player.transform.position.y >= 0.09774995 && player.transform.position.y <= 0.112)
                 {
                     return true;
                 }
