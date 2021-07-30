@@ -1793,6 +1793,7 @@ MonoBehaviour:
   isChasingId: 0
   isPatrollingId: 0
   attackId: 0
+  meshCollider: {fileID: 6299694580586460313}
 --- !u!114 &1385271297762557201
 MonoBehaviour:
   m_ObjectHideFlags: 0

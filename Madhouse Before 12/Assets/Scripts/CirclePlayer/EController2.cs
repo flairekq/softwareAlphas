@@ -40,6 +40,7 @@ public class EController2 : MonoBehaviour
     public int isPatrollingId;
     public int attackId;
     private float onMeshThreshold = 1f;
+    [SerializeField] public MeshCollider meshCollider;
 
     void Awake()
     {

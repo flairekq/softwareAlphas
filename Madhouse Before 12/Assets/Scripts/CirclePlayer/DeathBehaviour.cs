@@ -30,6 +30,7 @@ public class DeathBehaviour : StateMachineBehaviour
             // PhotonNetwork.Destroy(currentController.PV);
             TimerManagement.instance.AdjustTime(-30, true);
             GenerateEnemies.instance.EnemyKilled(currentController.location);
+            currentController.meshCollider.enabled = false;
             currentController.StartDelayDeath();
         }
         // }
