@@ -52,6 +52,11 @@ public class ProjectileMove : MonoBehaviour
      }
      */
 
+     void OnTriggerEnter(Collider collider)
+     {
+         DeactivateBullet();
+     }
+
     public void DeactivateBullet()
     {
         PV.RPC("RPC_HandleDeactivateBullet", RpcTarget.All);
@@ -63,7 +68,7 @@ public class ProjectileMove : MonoBehaviour
     {
         if (rb != null && tr != null)
         {
-            rb.isKinematic = true;
+           // rb.isKinematic = true;
             tr.Clear();
             gameObject.SetActive(false);
         }

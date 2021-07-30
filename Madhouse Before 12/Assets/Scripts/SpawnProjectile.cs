@@ -54,7 +54,7 @@ public class SpawnProjectile : MonoBehaviour
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             TrailRenderer tr = bullet.GetComponent<TrailRenderer>();
             MeshRenderer mesh = GetComponent<MeshRenderer>();
-            rb.isKinematic = false;
+           // rb.isKinematic = false;
             tr.enabled = true;
             // mesh.enabled = true;
 
