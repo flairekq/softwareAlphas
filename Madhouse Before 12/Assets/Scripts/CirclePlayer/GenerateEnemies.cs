@@ -43,7 +43,6 @@ public class GenerateEnemies : MonoBehaviour
     void Start()
     {
         instance = this;
-        // instance.moveSpot = new GameObject();
         instance.envManager = EnvironmentManager.instance;
         instance.PV = GetComponent<PhotonView>();
         instance.noOfRemainingBasementEnemies = noOfBasementEnemies;
@@ -63,19 +62,6 @@ public class GenerateEnemies : MonoBehaviour
         {
             return;
         }
-
-        // if (countdownTimer <= 0 && !generated)
-        // {
-        //     GameController.instance.GetAllPlayers();
-        //     StartCoroutine(EnemyDrop(basementEnemies, noOfBasementEnemies, envManager.basementPositionRange, "Basement"));
-        //     StartCoroutine(EnemyDrop(firstFloorEnemies, noOfFirstFloorEnemies, envManager.firstFloorPositionRange, "FirstFloor"));
-        //     StartCoroutine(EnemyDrop(secondFloorEnemies, noOfSecondFloorEnemies, envManager.secondFloorPositionRange, "SecondFloor"));
-        //     generated = true;
-        // }
-        // else
-        // {
-        //     countdownTimer -= Time.deltaTime;
-        // }
 
         if (GenerateEnemies.instance.noOfRemainingBasementEnemies <= 0)
         {
@@ -264,7 +250,8 @@ public class GenerateEnemies : MonoBehaviour
             // float zPos = Random.Range(positionsRange[rangeIndex].minZ, positionsRange[rangeIndex].maxZ);
             // Vector3 enemyPos = new Vector3(xPos, enemies[i].yPos, zPos);
             bool isNearAnyone = true;
-            while (isNearAnyone)
+            int failureCount = 0;
+            while (isNearAnyone && failureCount < 5)
             {
                 rangeIndex = Random.Range(0, positionsRange.Length);
                 xPos = Random.Range(positionsRange[rangeIndex].minX, positionsRange[rangeIndex].maxX);
@@ -274,8 +261,9 @@ public class GenerateEnemies : MonoBehaviour
                 isNearAnyone = false;
                 foreach (GameObject p in GameController.instance.gameObjectPlayers)
                 {
-                    if (p != null && Vector3.Distance(p.transform.position, enemyPos) < 2)
+                    if (p != null && Vector3.Distance(p.transform.position, enemyPos) <= 2.5)
                     {
+                        failureCount++;
                         isNearAnyone = true;
                         break;
                     }
