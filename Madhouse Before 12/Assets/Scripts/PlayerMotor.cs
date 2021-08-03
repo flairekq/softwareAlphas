@@ -92,7 +92,7 @@ public class PlayerMotor : MonoBehaviour
             else
             {
                 // Debug.Log("notGrounded");
-                verticalVelocity -= gravity * Time.deltaTime;
+                verticalVelocity -= gravity * Time.deltaTime * 14;
             }
 
 
