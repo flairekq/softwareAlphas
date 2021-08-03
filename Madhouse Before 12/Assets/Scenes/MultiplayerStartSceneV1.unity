@@ -6878,7 +6878,7 @@ MonoBehaviour:
   startGameButton: {fileID: 1183196963}
   warningDialog: {fileID: 105440000}
   warningDialogText: {fileID: 1331282897}
-  maxPlayerPerRoom: 4
+  maxPlayerPerRoom: 5
 --- !u!114 &1232496215
 MonoBehaviour:
   m_ObjectHideFlags: 0

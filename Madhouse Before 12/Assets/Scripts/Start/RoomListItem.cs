@@ -14,7 +14,7 @@ public class RoomListItem : MonoBehaviour
     {
         info = _info;
         roomName.text = info.Name;
-        playerCountText.text = info.PlayerCount.ToString() + "/4 players";
+        playerCountText.text = info.PlayerCount.ToString() + "/5 players";
     }
 
     public void OnClick()
