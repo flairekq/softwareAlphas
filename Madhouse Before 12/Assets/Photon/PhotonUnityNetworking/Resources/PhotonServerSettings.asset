@@ -64,6 +64,8 @@ MonoBehaviour:
   - RPC_HandleCheckCode
   - RPC_HandleKeyPadCanvas
   - RPC_HandleKeyPressNum
+  - RPC_HandleKeyPadClear
+  - RPC_HandleMonsterDeath
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
