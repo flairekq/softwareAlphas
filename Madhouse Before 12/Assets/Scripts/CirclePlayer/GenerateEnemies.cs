@@ -35,8 +35,8 @@ public class GenerateEnemies : MonoBehaviour
     GameObject moveSpot;
     EnvironmentManager envManager;
 
-    private float countdownTimer = 3f;
-    private bool generated = false;
+    // private float countdownTimer = 3f;
+    // private bool generated = false;
     private PhotonView PV;
 
     // Start is called before the first frame update

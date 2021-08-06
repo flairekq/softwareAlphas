@@ -112,7 +112,7 @@ public class InteractWithItem : MonoBehaviour
             {
                 if (EnvironmentManager.instance.isPowerOn)
                 {
-                    CanvasInteract keypadCanvas = itemDisplayUI.GetComponent<CanvasInteract>();
+                    CanvasInteract keypadCanvas = itemDisplayUI.transform.parent.GetComponent<CanvasInteract>();
                     if (togglePlayerCursor.IsInCursorMode() && keypadCanvas.IsCanvasOn())
                     {
                         keypadCanvas.CanvasOff();

@@ -405,6 +405,8 @@ GameObject:
   - component: {fileID: 1701668507835895570}
   - component: {fileID: 1701668507835895569}
   - component: {fileID: 1701668507835895572}
+  - component: {fileID: 7299772932914032526}
+  - component: {fileID: 3460056255470650059}
   m_Layer: 0
   m_Name: KeyPadController
   m_TagString: Untagged
@@ -563,6 +565,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7299772932914032526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701668507835895568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &3460056255470650059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701668507835895568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b649f5f2e7bd8be41b834b9a9ee5f590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyPadCanvas: {fileID: 1478811432989553647}
 --- !u!1 &1701806488232338993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4089,7 +4126,6 @@ GameObject:
   - component: {fileID: 5079152094023735631}
   - component: {fileID: 5068888095357605175}
   - component: {fileID: 5111327830963439289}
-  - component: {fileID: 5160275084576475947}
   - component: {fileID: 1701668506247820062}
   m_Layer: 12
   m_Name: KeyPad_Model_Prefab
@@ -4174,19 +4210,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 31.04673, y: 36.307877, z: 14.882666}
   m_Center: {x: 0.00000047683716, y: 0.000061035156, z: 7.441331}
---- !u!114 &5160275084576475947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5046975248939020277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b649f5f2e7bd8be41b834b9a9ee5f590, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyPadCanvas: {fileID: 1478811432989553647}
 --- !u!114 &1701668506247820062
 MonoBehaviour:
   m_ObjectHideFlags: 0

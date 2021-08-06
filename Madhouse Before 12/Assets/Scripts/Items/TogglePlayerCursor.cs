@@ -18,6 +18,7 @@ public class TogglePlayerCursor : MonoBehaviour
     private Flashlight flashlight;
     private Inventory inventory;
     private EscMenu escMenu;
+    private CrosshairDetectItem crosshairDetectItem;
     private PhotonView PV;
     private bool isInCursorMode = false;
 
@@ -39,6 +40,7 @@ public class TogglePlayerCursor : MonoBehaviour
             inventory = GetComponent<Inventory>();
             flashlight = GetComponentInChildren<Flashlight>();
             escMenu = GetComponent<EscMenu>();
+            crosshairDetectItem = crossHair.GetComponent<CrosshairDetectItem>();
 
             GameController.instance.AddPlayer(PV.ViewID);
             ChangeToPlayer();
@@ -57,6 +59,7 @@ public class TogglePlayerCursor : MonoBehaviour
         spawnProjectile.enabled = false;
         crossHair.SetActive(false);
         reticle.SetActive(false);
+        crosshairDetectItem.enabled = false;
         isInCursorMode = true;
 
         if (!isInventoryMode)
@@ -98,6 +101,7 @@ public class TogglePlayerCursor : MonoBehaviour
         // rifleManager.enabled = true;
         gunProjectile.enabled = true;
         spawnProjectile.enabled = true;
+        crosshairDetectItem.enabled = true;
         inventory.enabled = true;
         crossHair.SetActive(true);
         reticle.SetActive(true);
