@@ -491,7 +491,13 @@ public class EController2 : MonoBehaviour
 
     public void StartDelayDeath()
     {
+        PV.RPC("RPC_HandleMonsterDeath", RpcTarget.All);
         StartCoroutine(DelayDeath(this));
+    }
+
+    [PunRPC]
+    private void RPC_HandleMonsterDeath() {
+        meshCollider.enabled = false;
     }
 
     IEnumerator DelayDeath(EController2 currentController)
