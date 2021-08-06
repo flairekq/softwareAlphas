@@ -51,6 +51,14 @@ public class KeyController : MonoBehaviour
     public void KeyPressClr()
     {
         kpController.SingleBeep();
+        // kpController.codeText.characterLimit = 0;
+        // kpController.codeText.text = string.Empty;
+        PV.RPC("RPC_HandleKeyPadClear", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void RPC_HandleKeyPadClear()
+    {
         kpController.codeText.characterLimit = 0;
         kpController.codeText.text = string.Empty;
     }

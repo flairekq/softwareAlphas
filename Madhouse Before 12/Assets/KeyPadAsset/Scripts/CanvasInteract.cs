@@ -10,7 +10,7 @@ public class CanvasInteract : MonoBehaviour
 {
     [SerializeField] private Canvas keyPadCanvas;
     private PhotonView PV;
-
+    private bool isCanvasOn;
     void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -18,24 +18,26 @@ public class CanvasInteract : MonoBehaviour
 
     public void CanvasOn()
     {
-        // keyPadCanvas.enabled = true;
+        keyPadCanvas.enabled = true;
         PV.RPC("RPC_HandleKeyPadCanvas", RpcTarget.All, true);
     }
 
     public void CanvasOff()
     {
-        // keyPadCanvas.enabled = false;
+        keyPadCanvas.enabled = false;
         PV.RPC("RPC_HandleKeyPadCanvas", RpcTarget.All, false);
     }
 
     [PunRPC]
     private void RPC_HandleKeyPadCanvas(bool isEnabled)
     {
-        keyPadCanvas.enabled = isEnabled;
+        isCanvasOn = isEnabled;
+        // keyPadCanvas.enabled = isEnabled;
     }
 
     public bool IsCanvasOn()
     {
-        return keyPadCanvas.enabled;
+        // return keyPadCanvas.enabled;
+        return isCanvasOn;
     }
 }
