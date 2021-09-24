@@ -26,8 +26,8 @@ For the mac version, players can open the game by running the “Madhouse Before
 1. To contribute to this project, you can email us at medievalalphas@gmail.com. We will add you as a collaborator and email you the app-id for the Photon server.
 2. From there, you can clone our project and start editing it on the unity editor. It is recommended to download version **2020.3.13f1** for the unity editor as that is the version that we are using currently. 
 3. Choose the **Madhouse Before 12** folder to edit. On the first load of the project, you will be prompted to enter the Photon app-id which we would have sent you via email.
-4. After completing the PUN setup, locate for the Photon Server Settings and make the following changes:
- i. Enter “asia” in the Fixed Region
- ii. Enter “asia” in the Dev Region.
- iii. Click on the “Refresh RPCs” to regenerate the list of RPCs.
+4. After completing the PUN setup, locate for the Photon Server Settings and make the following changes:  
+ i. Enter “asia” in the Fixed Region  
+ ii. Enter “asia” in the Dev Region.  
+ iii. Click on the “Refresh RPCs” to regenerate the list of RPCs.  
 Congratulations! You are done with the setup, and you can now start contributing to the project.
