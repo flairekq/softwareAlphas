@@ -27,7 +27,7 @@ For the mac version, players can open the game by running the “Madhouse Before
 2. From there, you can clone our project and start editing it on the unity editor. It is recommended to download version **2020.3.13f1** for the unity editor as that is the version that we are using currently. 
 3. Choose the **Madhouse Before 12** folder to edit. On the first load of the project, you will be prompted to enter the Photon app-id which we would have sent you via email.
 4. After completing the PUN setup, locate for the Photon Server Settings and make the following changes:
-    #. Enter “asia” in the Fixed Region
-    #. Enter “asia” in the Dev Region.
-    #. Click on the “Refresh RPCs” to regenerate the list of RPCs.
+ i. Enter “asia” in the Fixed Region
+ ii. Enter “asia” in the Dev Region.
+ iii. Click on the “Refresh RPCs” to regenerate the list of RPCs.
 Congratulations! You are done with the setup, and you can now start contributing to the project.
